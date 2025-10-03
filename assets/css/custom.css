@@ -1,1 +1,10 @@
 /* Add your own custom styles here */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* brand helpers (optional) */
+:root{
+  --w4-brand:#6bd3ff;     /* sky cyan */
+  --w4-accent:#34d399;     /* emerald */
+}

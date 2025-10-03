@@ -1,63 +1,44 @@
-############# English navigation ##############
-
-# main menu
-[[main]]
-name = "Home"
-url = "/"
-weight = 1
-
 [[main]]
 name = "About"
-url = "/about"
-weight = 2
+url  = "/about/"
+weight = 10
 
 [[main]]
-name = "Elements"
-url = "/elements"
-weight = 3
+name = "Activities"
+url  = "/activities/"
+weight = 20
 
 [[main]]
-weight = 4
-name = "Pages"
+name = "Repeaters"
+url  = "/repeaters/"
+weight = 30
 
 [[main]]
-parent = "Pages"
+name = "Nets"
+url  = "/nets/"
+weight = 40
+
+[[main]]
+name = "Events"
+url  = "/events/"
+weight = 50
+
+[[main]]
+name = "Downloads"
+url  = "/downloads/"
+weight = 60
+
+[[main]]
 name = "Blog"
-url = "/blog"
+url  = "/blog/"
+weight = 70
 
 [[main]]
-parent = "Pages"
 name = "Contact"
-url = "/contact"
+url  = "/contact/"
+weight = 80
 
 [[main]]
-parent = "Pages"
-name = "Authors"
-url = "/authors"
-
-[[main]]
-parent = "Pages"
-name = "Categories"
-url = "/categories"
-
-[[main]]
-parent = "Pages"
-name = "404 Page"
-url = "/404"
-
-
-# footer menu
-[[footer]]
-name = "About"
-url = "/about"
-weight = 1
-
-[[footer]]
-name = "Elements"
-url = "/elements"
-weight = 2
-
-[[footer]]
-name = "Privacy Policy"
-url = "/privacy-policy"
-weight = 3
+name = "Join"
+url  = "/join/"
+weight = 90
