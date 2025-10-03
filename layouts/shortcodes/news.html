@@ -1,0 +1,38 @@
+{{/* news shortcode for HugoPlate
+Usage: {{< news count="3" >}}
+Renders the latest posts from sections "news" and "blog".
+*/}}
+
+{{ $n := .Get "count" | default 3 }}
+
+{{/* grab posts from both sections, newest first */}}
+{{ $news := where site.RegularPages "Section" "in" (slice "news" "blog") }}
+{{ $posts := first $n ( sort $news "Date" "desc" ) }}
+
+{{ if gt (len $posts) 0 }}
+  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    {{ range $posts }}
+      <a href="{{ .RelPermalink }}" class="group rounded-2xl border border-white/10 bg-gradient-to-b from-[#12283a] to-[#101f2e] p-5 shadow-xl hover:-translate-y-0.5 transition">
+        {{ with .Params.cover }}
+          <img src="{{ . | relURL }}" alt="" class="rounded-xl mb-4 aspect-[16/9] object-cover">
+        {{ end }}
+        <div class="text-sm text-white/60 mb-1">
+          {{ .Date.Format "Jan 2, 2006" }}
+          {{ with .Params.author }} · {{ . }}{{ end }}
+        </div>
+        <h3 class="text-lg font-semibold text-white group-hover:underline">{{ .Title }}</h3>
+        {{ with .Summary }}
+          <p class="text-white/75 mt-2">{{ . | plainify }}</p>
+        {{ else }}
+          {{ with .Params.description }}
+            <p class="text-white/75 mt-2">{{ . }}</p>
+          {{ end }}
+        {{ end }}
+      </a>
+    {{ end }}
+  </div>
+{{ else }}
+  <div class="rounded-xl border border-white/10 bg-white/5 p-5 text-white/80">
+    No news yet — add a post in <code>content/news/</code> or <code>content/blog/</code>.
+  </div>
+{{ end }}

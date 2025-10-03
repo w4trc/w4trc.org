@@ -1,0 +1,86 @@
+{{ define "main" }}
+  <!-- HERO -->
+  <section class="relative w-full min-h-[72vh] flex items-center bg-cover bg-center"
+    style="background-image:linear-gradient(rgba(4,12,18,.35),rgba(4,12,18,.65)),url('/images/hero-mountains.jpg')">
+    <div class="w-full max-w-[1400px] mx-auto px-6 py-10">
+      <div class="flex items-center justify-between gap-6 mb-6">
+        <img src="/images/w4trc-logo.png" alt="W4TRC" class="h-24 w-auto rounded-full bg-white p-2 shadow-xl">
+        <div class="hidden md:flex gap-4">
+          <img src="/images/arrl-badge.png" alt="ARRL" class="h-16 w-auto drop-shadow">
+          <img src="/images/ares-badge.png" alt="ARES" class="h-16 w-auto drop-shadow">
+        </div>
+      </div>
+
+      <h1 class="text-white text-4xl md:text-6xl font-extrabold leading-tight">
+        Welcome to Kingsport Amateur Radio Club
+      </h1>
+      <p class="text-white/90 text-lg md:text-xl max-w-3xl mt-3">
+        ARRL-affiliated amateur radio club serving the Tri-Cities (Kingsport • Johnson City • Bristol).
+        Public service, education, emergency comms, and plenty of fun on the air.
+      </p>
+
+      <div class="flex flex-wrap gap-3 mt-6">
+        <a class="px-4 py-2 rounded-xl font-semibold bg-emerald-400 text-emerald-950 hover:brightness-105" href="/join/">Join / Renew</a>
+        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/repeaters/">Repeaters</a>
+        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/nets/">Nets</a>
+        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/license/">Get Licensed</a>
+        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/calendar/">Calendar</a>
+        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/contact/">Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT MEETING -->
+  <section class="max-w-[1400px] mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold text-white">Next Meeting<div class="w-16 h-1 bg-sky-300 mt-2"></div></h2>
+    <div class="mt-6 rounded-2xl border border-white/10 bg-gradient-to-b from-[#142a3c] to-[#0f2030] p-6 shadow-xl">
+      <p class="text-xl font-semibold text-white">General Meeting</p>
+      <p id="next-meeting-date" class="text-white/80">Loading…</p>
+      <p class="text-white/75">We meet on the <strong>second Thursday</strong> of each month at 7:00pm.</p>
+      <p class="mt-1 text-white/90"><strong>Location:</strong> 📍 (Update your regular meeting location)</p>
+      <div class="flex flex-wrap gap-3 mt-4">
+        <a class="px-4 py-2 rounded-xl bg-emerald-400 text-emerald-950 font-semibold" href="/calendar/">View Calendar</a>
+        <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90" href="/about/">About W4TRC</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK LINKS -->
+  <section class="max-w-[1400px] mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold text-white">Quick Links<div class="w-16 h-1 bg-sky-300 mt-2"></div></h2>
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
+      <a class="rounded-2xl p-6 border border-white/10 bg-gradient-to-b from-[#12283a] to-[#101f2e] shadow-xl hover:-translate-y-0.5 transition" href="/repeaters/">
+        <p class="text-lg font-semibold text-white">Club Repeaters</p>
+        <p class="text-white/75">Frequencies, tones, coverage notes.</p>
+      </a>
+      <a class="rounded-2xl p-6 border border-white/10 bg-gradient-to-b from-[#12283a] to-[#101f2e] shadow-xl hover:-translate-y-0.5 transition" href="/nets/">
+        <p class="text-lg font-semibold text-white">Weekly Nets</p>
+        <p class="text-white/75">Schedules and scripts.</p>
+      </a>
+      <a class="rounded-2xl p-6 border border-white/10 bg-gradient-to-b from-[#12283a] to-[#101f2e] shadow-xl hover:-translate-y-0.5 transition" href="/license/">
+        <p class="text-lg font-semibold text-white">Get Licensed / Upgrade</p>
+        <p class="text-white/75">Study + test sessions.</p>
+      </a>
+      <a class="rounded-2xl p-6 border border-white/10 bg-gradient-to-b from-[#12283a] to-[#101f2e] shadow-xl hover:-translate-y-0.5 transition" href="/projects/">
+        <p class="text-lg font-semibold text-white">Projects</p>
+        <p class="text-white/75">Club builds, antennas, mesh.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- NEWS (latest blog posts) -->
+  <section class="bg-[#132435]">
+    <div class="max-w-[1400px] mx-auto px-6 py-12">
+      <h2 class="text-3xl font-bold text-white">Latest News<div class="w-16 h-1 bg-sky-300 mt-2"></div></h2>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mt-6">
+        {{ range first 3 (where site.RegularPages "Section" "in" (slice "news" "blog")) }}
+          <a href="{{ .RelPermalink }}" class="group rounded-2xl border border-white/10 bg-gradient-to-b from-[#12283a] to-[#101f2e] p-5 shadow-xl hover:-translate-y-0.5 transition">
+            <div class="text-sm text-white/60 mb-1">{{ .Date.Format "Jan 2, 2006" }}</div>
+            <h3 class="text-lg font-semibold text-white group-hover:underline">{{ .Title }}</h3>
+            <p class="text-white/75 mt-2">{{ .Summary | plainify }}</p>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}
