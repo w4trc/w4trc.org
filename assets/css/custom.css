@@ -8,3 +8,111 @@
   --w4-brand:#6bd3ff;     /* sky cyan */
   --w4-accent:#34d399;     /* emerald */
 }
+
+/* --- W4TRC Homepage Overrides --- */
+
+/* HERO (full bleed, tall, centered) */
+.hero-heroimg {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.hero-heroimg h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+}
+.hero-heroimg p {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(255,255,255,0.9);
+}
+
+/* SECTION rhythm (alternating bands) */
+section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+section:nth-of-type(even) {
+  background: #101f2e; /* subtle alt background */
+}
+
+/* SECTION TITLES with cyan accent underline */
+.section-title,
+h2.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+  position: relative;
+}
+.section-title::after,
+h2.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 60px;
+  height: 4px;
+  background: #6bd3ff; /* brand cyan */
+  border-radius: 2px;
+}
+
+/* QUICK LINK cards */
+.quicklink-card,
+.w4-card {
+  border-radius: 1rem;
+  padding: 2rem;
+  background: linear-gradient(180deg, #12283a, #101f2e);
+  border: 1px solid rgba(255,255,255,.12);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.quicklink-card:hover,
+.w4-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,.3);
+}
+.w4-card p { color: rgba(255,255,255,0.85); }
+
+/* NEXT MEETING box */
+.meeting-box {
+  border-radius: 1rem;
+  padding: 2rem;
+  background: linear-gradient(180deg,#142a3c,#0f2030);
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 12px 24px rgba(0,0,0,.25);
+}
+.meeting-box p { color: rgba(255,255,255,0.85); }
+
+/* NEWS cards */
+.news-card {
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #12283a, #101f2e);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: 1.5rem;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.news-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0,0,0,.25);
+}
+.news-card img {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: .75rem;
+  margin-bottom: .75rem;
+}
+.news-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: .5rem;
+  color: #fff;
+}
+.news-card p {
+  font-size: .95rem;
+  color: rgba(255,255,255,0.75);
+}
