@@ -1,0 +1,10 @@
+upcoming:
+  - date: "2025-10-09"
+    time: "19:00"
+    title: "October General Meeting"
+    location: "Food City – Press Room, 300 Clinchfield, Kingsport"
+    topic: "NBEMS on VHF"
+    desc: "Demo + hands-on."
+    link:
+      url: "https://example.com/rsvp"
+      label: "RSVP"

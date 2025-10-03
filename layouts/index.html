@@ -1,16 +1,14 @@
 {{ define "main" }}
 
+
   <!-- HERO -->
   <section class="hero-heroimg relative w-full bg-cover bg-center"
     style="background-image:linear-gradient(rgba(4,12,18,.35),rgba(4,12,18,.65)),url('/images/hero-mountains.jpg')">
     <div class="w-full max-w-[1400px] mx-auto px-6 py-10">
-      <div class="flex items-center justify-between gap-6 mb-6">
-        <img src="/images/w4trc-logo.png" alt="W4TRC" class="h-24 w-auto rounded-full bg-white p-2 shadow-xl">
-        <div class="hidden md:flex gap-4">
-          <img src="/images/arrl-badge.png" alt="ARRL" class="h-16 w-auto drop-shadow">
-          <img src="/images/ares-badge.png" alt="ARES" class="h-16 w-auto drop-shadow">
-        </div>
+      <div class="flex justify-center mb-6">
+        <img src="/images/w4trc-logo.png" alt="W4TRC" class="hero-logo-big">
       </div>
+
 
       <h1>Welcome to Kingsport Amateur Radio Club</h1>
       <p>
@@ -18,14 +16,12 @@
         Public service, education, emergency comms, and plenty of fun on the air.
       </p>
 
-      <div class="flex flex-wrap gap-3 mt-6">
-        <a class="px-4 py-2 rounded-xl font-semibold bg-emerald-400 text-emerald-950 hover:brightness-105" href="/join/">Join / Renew</a>
-        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/repeaters/">Repeaters</a>
-        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/nets/">Nets</a>
-        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/license/">Get Licensed</a>
-        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/calendar/">Calendar</a>
-        <a class="px-4 py-2 rounded-xl font-semibold border border-white/30 text-white hover:bg-white/10" href="/contact/">Contact</a>
+
+      <div class="hero-ctas">
+        <a class="cta-big cta-primary" href="/join/">Join / Renew</a>
+        <a class="cta-big cta-outline" href="/license/">Get Licensed</a>
       </div>
+
     </div>
   </section>
 
@@ -34,17 +30,52 @@
     <div class="max-w-[1400px] mx-auto px-6">
       <h2 class="section-title">Next Meeting</h2>
       <div class="meeting-box mt-6">
-        <p class="text-xl font-semibold text-white">General Meeting</p>
+        <p id="meeting-title" class="text-xl font-semibold text-white">TBD</p>
         <p id="next-meeting-date" class="text-white/80">Loading…</p>
-        <p class="text-white/75">We meet on the <strong>second Thursday</strong> of each month at 7:00pm.</p>
-        <p class="mt-1 text-white/90"><strong>Location:</strong> 📍 (Update your regular meeting location)</p>
-        <div class="flex flex-wrap gap-3 mt-4">
-          <a class="px-4 py-2 rounded-xl bg-emerald-400 text-emerald-950 font-semibold" href="/calendar/">View Calendar</a>
+
+        <p class="mt-1 text-white/90">
+          <strong>Location:</strong> <span id="meeting-location">TBD</span>
+        </p>
+
+        <p id="meeting-topic" class="text-white/80 hidden"></p>
+        <p id="meeting-desc" class="text-white/80 hidden mt-1"></p>
+
+        <div class="flex flex-wrap gap-3 mt-4" id="meeting-ctas">
+          <!-- signup button injected here if provided -->
+          <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90" href="/calendar/">View Calendar</a>
           <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90" href="/about/">About W4TRC</a>
         </div>
       </div>
     </div>
   </section>
+
+  <script>console.log('MEETINGS JSON →', window.W4TRC_MEETINGS);</script>
+
+<!-- Pass meeting data to JS with robust fallbacks -->
+{{/* Build $m by checking multiple locations; always end with a valid object */}}
+{{- $m := dict -}}
+{{- with site.Data.meetings -}}           {{ $m = . }} {{- end -}}
+{{- with (index site.Data "en") -}}
+  {{- with .meetings -}}                  {{ $m = . }} {{- end -}}
+{{- end -}}
+{{- with (index site.Data "english") -}}
+  {{- with .meetings -}}                  {{ $m = . }} {{- end -}}
+{{- end -}}
+
+<script>
+  window.W4TRC_MEETINGS = {{ $m | jsonify }};
+  console.log("MEETINGS JSON →", window.W4TRC_MEETINGS);
+</script>
+<script defer src="{{ (printf "js/next-meeting.js?v=%d" now.Unix) | relURL }}"></script>
+
+
+
+  <!-- pass Hugo data to JS -->
+
+
+
+
+
 
   <!-- QUICK LINKS -->
   <section>
