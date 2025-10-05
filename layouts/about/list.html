@@ -10,8 +10,19 @@
       <div class="prose max-w-none content">
         {{ .Content }}
       </div>
+
   {{/* Officers partial: second section on the page */}}
   <div class="mt-4">{{ partial "officers.html" . }}</div>
+
+  <section class="mt-4">
+        <h2 id="coordinators" class="section-title">Coordinators</h2>
+  <div class="prose max-w-none mt-1 content">
+          <ul>
+            <li><strong class="text-white font-semibold">VE Coordinator: </strong>Neil Weber (KM4NWH)</li>
+            <li><strong class="text-white font-semibold">Net Coordinator: </strong>David Herron (K4UVU)</li>
+          </ul>
+        </div>
+      </section>
 
       {{/* HISTORY */}}
   <section class="mt-4">
@@ -40,7 +51,6 @@
     </div>
   </section>
 
-  <!-- OFFICERS: rendered via shortcode in page content -->
 
   <!-- QUICK LINKS -->
   <section>
