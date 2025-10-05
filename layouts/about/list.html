@@ -1,0 +1,15 @@
+{{ define "main" }}
+
+  {{/* Hero at top, pulled from partial for consistency */}}
+  {{ $hero := dict "Image" .Params.image "Title" .Title "Subtitle" .Params.description }}
+  {{ partial "hero.html" $hero }}
+
+  <section class="section-md">
+    <div class="max-w-[1100px] mx-auto px-6">
+      <div class="prose max-w-none content">
+        {{ .Content }}
+      </div>
+    </div>
+  </section>
+
+{{ end }}
