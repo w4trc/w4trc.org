@@ -4,10 +4,38 @@
   {{ $hero := dict "Image" .Params.image "Title" .Title "Subtitle" .Params.description }}
   {{ partial "hero.html" $hero }}
 
+  <!-- ABOUT CONTENT -->
   <section class="section-md">
     <div class="max-w-[1100px] mx-auto px-6">
       <div class="prose max-w-none content">
         {{ .Content }}
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- QUICK LINKS -->
+  <section>
+    <div class="max-w-[1400px] mx-auto px-6">
+      <h2 class="section-title">Quick Links</h2>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
+        <a class="quicklink-card" href="/repeaters/">
+          <p class="text-lg font-semibold text-white">Club Repeaters</p>
+          <p>Frequencies, tones, coverage notes.</p>
+        </a>
+        <a class="quicklink-card" href="/nets/">
+          <p class="text-lg font-semibold text-white">Weekly Nets</p>
+          <p>Schedules and scripts.</p>
+        </a>
+        <a class="quicklink-card" href="/license/">
+          <p class="text-lg font-semibold text-white">Get Licensed / Upgrade</p>
+          <p>Study materials and test sessions.</p>
+        </a>
+        <a class="quicklink-card" href="/projects/">
+          <p class="text-lg font-semibold text-white">Projects</p>
+          <p>Club builds, antennas, mesh.</p>
+        </a>
       </div>
     </div>
   </section>

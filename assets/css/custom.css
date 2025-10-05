@@ -62,6 +62,26 @@ h2.section-title::after {
   border-radius: 2px;
 }
 
+/* Ensure standard content headings match the section-title styles
+   so markdown H2s in .content render like homepage section headers */
+.content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+  position: relative;
+}
+.content h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 60px;
+  height: 4px;
+  background: #6bd3ff;
+  border-radius: 2px;
+}
+
 /* QUICK LINK cards */
 .quicklink-card,
 .w4-card {
