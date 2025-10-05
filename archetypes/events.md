@@ -1,12 +1,11 @@
----
-title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}         # start
-end:  {{ .Date }}         # set same day by default; change if multi-day
-location: ""
+—
+title: “{{ replace .Name “-“ “ “ | title }}”
+date: {{ .Date }}                 # publish date
+startDate: {{ .Date }}            # update if different
+endDate: {{ .Date }}              # update for multi-day
+location: “”
 showOnHome: true
-summary: ""
-# image: "cover.jpg"     # uncomment if not using auto "cover*"
+summary: “”
+# image: “cover.jpg”
 draft: false
----
-
-Add details here.
+—
