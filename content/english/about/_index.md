@@ -16,8 +16,6 @@ Brief intro paragraph about the club goes here. Add mission, core activities (pu
 
 List the club officers and roles below. You can replace these placeholders with real names, bios, and photos.
 
-{{< officers >}}
-
 ## History
 
 A short history of the club goes here. Mention founding date, notable milestones, important events, and evolution of activities.

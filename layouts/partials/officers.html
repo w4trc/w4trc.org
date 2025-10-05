@@ -3,10 +3,12 @@
 */}}
 {{ $officers := sort (where site.RegularPages "Section" "officers") "Weight" "asc" }}
 {{ if gt (len $officers) 0 }}
-<section class="section-md">
+<div class="mt-8">
+  <h2 class="section-title">Club Officers</h2>
 
-  <!-- Responsive grid: 1 col (xs), 2 cols (sm), 3 cols (md+) -->
-  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-6">
+  <!-- Responsive grid: mark as not-prose so it doesn't break surrounding typography -->
+  <div class="not-prose mt-6">
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
       {{ range $officers }}
         {{ $p := . }}
         <a class="officer-card group block rounded-lg bg-white/5 p-4 hover:bg-white/7 transition" href="{{ $p.RelPermalink }}">
@@ -27,5 +29,5 @@
       {{ end }}
     </div>
   </div>
-</section>
+</div>
 {{ end }}
