@@ -1,30 +1,30 @@
-{{/* content-driven, startDate/endDate, with debug */}}
+{{/* layouts/partials/upcoming.html — robust startDate/endDate handling */}}
 {{- $now := now -}}
 
-{{/* Be permissive in what we scan */}}
+{{/* Gather event pages in any language; then filter */}}
 {{- $pages := where site.Pages "Section" "events" -}}
 {{- $pages = where $pages "Draft" false -}}
 {{- $pages = where $pages ".Params.showOnHome" true -}}
 
-{{/* Build a list of eligible events (not yet ended) */}}
 {{- $eligible := slice -}}
 {{- range $pages }}
-  {{- $start := cond (and (isset .Params "startDate") .Params.startDate) (time .Params.startDate) .Date -}}
-  {{- $end   := cond (and (isset .Params "endDate")   .Params.endDate)   (time .Params.endDate)   $start -}}
-  {{- if ge $end $now -}}
+  {{- /* Parse start/end safely */ -}}
+  {{- $hasStart := and (isset .Params "startDate") (ne .Params.startDate "") -}}
+  {{- $hasEnd   := and (isset .Params "endDate")   (ne .Params.endDate   "") -}}
+
+  {{- $start := .Date -}}
+  {{- if $hasStart }}{{- $start = time .Params.startDate -}}{{- end -}}
+
+  {{- $end := $start -}}
+  {{- if $hasEnd }}{{- $end = time .Params.endDate -}}{{- end -}}
+
+  {{- /* Include if it hasn’t happened yet: either start in future OR end in future */ -}}
+  {{- if or (ge $start $now) (ge $end $now) -}}
     {{- $eligible = $eligible | append (dict "page" . "start" $start "end" $end) -}}
   {{- end -}}
 {{- end -}}
 
 {{- $upcoming := first 2 (sort $eligible "start" "asc") -}}
-
-{{/* DEBUG: emits a small hidden report to help diagnose */}}
-Upcoming debug:
-found={{ len $pages }} eligible={{ len $eligible }}
-{{- range $pages }}
-  - {{ .RelPermalink }} | showOnHome={{ printf "%v" .Params.showOnHome }} | draft={{ .Draft }} | date={{ .Date }} | publishDate={{ .PublishDate }}
-{{- end }}
-
 
 {{- if gt (len $upcoming) 0 }}
 <section>
@@ -50,14 +50,8 @@ found={{ len $pages }} eligible={{ len $eligible }}
           <div class="text-sm text-white/60 mb-1">{{ $dateLine }}</div>
           <h3 class="text-white"><a href="{{ $p.RelPermalink }}" class="hover:underline">{{ $p.Title }}</a></h3>
           {{- with $p.Params.location }}<p class="text-white/80 mt-1"><strong>Location:</strong> {{ . }}</p>{{- end }}
-          {{- if $p.Params.summary }}
-            <p class="text-white/80 mt-2">{{ $p.Params.summary }}</p>
-          {{- else }}
-            {{- with $p.Summary }}<p class="text-white/80 mt-2">{{ . | plainify }}</p>{{- end }}
-          {{- end }}
-          <div class="mt-4">
-            <a href="{{ $p.RelPermalink }}" class="inline-block px-4 py-2 rounded-xl border border-white/20 text-white/90 hover:bg-white/10">More info</a>
-          </div>
+          {{- if $p.Params.summary }}<p class="text-white/80 mt-2">{{ $p.Params.summary }}</p>{{- else }}{{- with $p.Summary }}<p class="text-white/80 mt-2">{{ . | plainify }}</p>{{- end }}{{- end }}
+          <div class="mt-4"><a href="{{ $p.RelPermalink }}" class="inline-block px-4 py-2 rounded-xl border border-white/20 text-white/90 hover:bg-white/10">More info</a></div>
         </article>
       {{- end }}
     </div>
