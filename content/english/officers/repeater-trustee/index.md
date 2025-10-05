@@ -3,8 +3,6 @@ title: "Joshua Carmack"
 position: "Repeater Trustee"
 weight: 5
 callsign: "N4JHC"
-photo: "/images/avatar.png"
+photo: "/images/officers/n4jhc.jpeg"
 photo_alt: "Joshua Carmack portrait"
 ---
-
-Alex maintains club repeaters and infrastructure.

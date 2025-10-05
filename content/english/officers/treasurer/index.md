@@ -1,10 +1,8 @@
 ---
-title: "William Jacob"
+title: "Rick Curtis"
 position: "Treasurer"
 weight: 3
-callsign: "N4WJ"
-photo: "/images/avatar.png"
-photo_alt: "William Jacob portrait"
+callsign: "W4BXL"
+photo: "/images/officers/w4bxl.png"
+photo_alt: "Rick Curtis portrait"
 ---
-
-William manages club finances.

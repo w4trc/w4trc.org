@@ -1,10 +1,8 @@
 ---
-title: "Jane Smith"
+title: "Christina Compton"
 position: "Secretary"
 weight: 4
-callsign: "KJ4JS"
-photo: "/images/avatar.png"
-photo_alt: "Jane Smith portrait"
+callsign: "KQ4CDM"
+photo: "/images/officers/kq4cdm.png"
+photo_alt: "Christina Compton portrait"
 ---
-
-Jane records meeting minutes. Note: there will be two secretaries next year.

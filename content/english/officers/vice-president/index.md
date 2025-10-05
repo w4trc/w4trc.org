@@ -1,10 +1,10 @@
 ---
-title: "Sam Wilson"
+title: "Justin Compton"
 position: "Vice-President"
 weight: 2
-callsign: "K4SAM"
-photo: "/images/avatar-sm.png"
-photo_alt: "Sam Wilson portrait"
+callsign: "KO4DCD"
+photo: "/images/officers/ko4dcd.png"
+photo_alt: "Justin Compton Image"
 ---
 
-Sam assists the president and runs special projects.
+
