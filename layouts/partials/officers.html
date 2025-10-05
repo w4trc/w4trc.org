@@ -1,0 +1,31 @@
+{{/* Officers partial: read officer pages under content/english/officers and render a grid.
+   Uses site.RegularPages and sorts by .Weight so you can control order with front matter.
+*/}}
+{{ $officers := sort (where site.RegularPages "Section" "officers") "Weight" "asc" }}
+{{ if gt (len $officers) 0 }}
+<section class="section-md">
+
+  <!-- Responsive grid: 1 col (xs), 2 cols (sm), 3 cols (md+) -->
+  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-6">
+      {{ range $officers }}
+        {{ $p := . }}
+        <a class="officer-card group block rounded-lg bg-white/5 p-4 hover:bg-white/7 transition" href="{{ $p.RelPermalink }}">
+          <div class="flex items-center gap-4">
+            {{ with $p.Params.photo }}
+              {{ $alt := default (printf "%s photo" $p.Title) $p.Params.photo_alt }}
+              <img alt="{{ $alt }}" src="{{ . }}" class="w-20 h-20 rounded-full object-cover" />
+            {{ else }}
+              <div class="w-20 h-20 rounded-full bg-gray-700 flex items-center justify-center text-xl text-white">{{ substr $p.Title 0 1 }}</div>
+            {{ end }}
+            <div>
+              <p class="font-semibold text-lg">{{ $p.Title }}</p>
+              {{ with $p.Params.callsign }}<p class="text-sm text-gray-300">{{ . }}</p>{{ end }}
+              {{ with $p.Params.position }}<p class="text-sm text-gray-400">{{ . }}</p>{{ end }}
+            </div>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

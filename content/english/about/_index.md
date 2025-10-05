@@ -16,13 +16,7 @@ Brief intro paragraph about the club goes here. Add mission, core activities (pu
 
 List the club officers and roles below. You can replace these placeholders with real names, bios, and photos.
 
-- President — Name Surname
-- Vice President — Name Surname
-- Secretary — Name Surname
-- Treasurer — Name Surname
-- Trustee — Name Surname
-
-You can also include links to officer profiles or contact emails.
+{{< officers >}}
 
 ## History
 
