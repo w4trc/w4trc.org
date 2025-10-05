@@ -1,6 +1,5 @@
 {{ define "main" }}
 
-
   <!-- HERO -->
   <section class="hero-heroimg relative w-full bg-cover bg-center"
     style="background-image:linear-gradient(rgba(4,12,18,.35),rgba(4,12,18,.65)),url('/images/hero-mountains.jpg')">
@@ -69,13 +68,7 @@
 <script defer src="{{ (printf "js/next-meeting.js?v=%d" now.Unix) | relURL }}"></script>
 
 
-
-  <!-- pass Hugo data to JS -->
-
-
-
-
-
+  {{ partial "upcoming.html" . }}
 
   <!-- QUICK LINKS -->
   <section>
