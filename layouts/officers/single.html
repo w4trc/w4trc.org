@@ -1,0 +1,45 @@
+{{ define "main" }}
+
+  {{/* Use hero partial for consistent header — pass title and position as subtitle */}}
+  {{ $hero := dict "Image" .Site.Params.hero_image "Title" .Title "Subtitle" (or .Params.position) }}
+  {{/* Prefer position if set */}}
+  {{ if .Params.position }}
+    {{ $hero = dict "Image" .Site.Params.hero_image "Title" .Title "Subtitle" .Params.position }}
+  {{ end }}
+  {{ partial "hero.html" $hero }}
+
+  <section class="section-sm">
+    <div class="max-w-[1100px] mx-auto px-6">
+      <div class="grid gap-6 md:grid-cols-3 items-start">
+        {{/* Profile image & quick info */}}
+        <div class="md:col-span-1">
+          <div class="rounded-lg bg-white/5 p-6">
+            <div class="flex flex-col items-center text-center">
+              {{ $photo := "." }}
+              {{ with .Params.photo }}
+                {{ $photo = . }}
+              {{ else }}
+                {{ $photo = "/images/avatar.png" }}
+              {{ end }}
+              <img src="{{ $photo | relURL }}" alt="{{ with .Params.photo_alt }}{{ . }}{{ else }}{{ .Title }}{{ end }}" class="w-36 h-36 md:w-44 md:h-44 rounded-full object-cover">
+
+              <div class="mt-4">
+                <p class="font-semibold text-lg">{{ .Title }}</p>
+                {{ with .Params.callsign }}<p class="text-sm text-gray-300">{{ . }}</p>{{ end }}
+                {{ with .Params.position }}<p class="text-sm text-gray-400">{{ . }}</p>{{ end }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{/* Bio/content area */}}
+        <div class="md:col-span-2">
+          <div class="prose max-w-none content">
+            {{ .Content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{{ end }}
