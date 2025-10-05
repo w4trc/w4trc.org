@@ -1,10 +1,10 @@
 {{ define "main" }}
 {{- $now := now -}}
 
-{{/* Grab all event pages in this section */}}
+{{/* All non-draft event pages in this section */}}
 {{- $all := where .Pages "Draft" false -}}
 
-{{/* Build normalized structs: { page, start, end, img } */}}
+{{/* Normalize: { page, start, end, img } */}}
 {{- $norm := slice -}}
 {{- range $all }}
   {{- $start := .Date -}}
@@ -19,8 +19,12 @@
   {{- $norm = $norm | append (dict "page" . "start" $start "end" $end "img" $img) -}}
 {{- end -}}
 
-{{- $upcoming := where $norm "end" "ge" $now | sort "start" "asc" -}}
-{{- $past     := where $norm "end" "lt" $now  | sort "start" "desc" -}}
+{{/* Stepwise filters & sorts (no pipes) */}}
+{{- $upcoming := where $norm "end" "ge" $now -}}
+{{- $upcoming = sort $upcoming "start" "asc" -}}
+
+{{- $past := where $norm "end" "lt" $now -}}
+{{- $past = sort $past "start" "desc" -}}
 
 <section class="mt-8">
   <div class="max-w-[1400px] mx-auto px-6">
