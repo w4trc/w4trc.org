@@ -1,10 +1,10 @@
 ---
-title: "Alex Taylor"
+title: "Joshua Carmack"
 position: "Repeater Trustee"
 weight: 5
-callsign: "W4RTX"
+callsign: "N4JHC"
 photo: "/images/avatar.png"
-photo_alt: "Alex Taylor portrait"
+photo_alt: "Joshua Carmack portrait"
 ---
 
 Alex maintains club repeaters and infrastructure.

@@ -1,10 +1,10 @@
 ---
-title: "John Doe"
+title: "Neil Weber"
 position: "President"
 weight: 1
-callsign: "W4TRC"
-photo: "/images/avatar.png"
-photo_alt: "John Doe portrait"
+callsign: "KM4NWH"
+photo: "/images/officers/ProfileImage_KM4NWH.png"
+photo_alt: "Neil Weber portrait"
 ---
 
 John is the current club president. Bio goes here.
