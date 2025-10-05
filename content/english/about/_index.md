@@ -11,31 +11,7 @@ slug: "about"
 ## About the Club
 
 Brief intro paragraph about the club goes here. Add mission, core activities (public service, training, emergency comms, nets, and projects). This is placeholder content — we'll replace it with the final copy later.
-
-## Officers
-
-List the club officers and roles below. You can replace these placeholders with real names, bios, and photos.
-
-## History
-
-A short history of the club goes here. Mention founding date, notable milestones, important events, and evolution of activities.
-
-## Meetings & Events
-
-We meet monthly and run regular events. Link to the calendar and include any meeting location or format notes here.
-
-- Meeting schedule: Second Tuesday, 7:00 PM (example)
-- Typical location: Kingsport Public Library (replace with actual)
-
-## Get Involved
-
-How to join, renew membership, volunteer, or learn more. Add links to the Join / Renew and Get Licensed pages.
-
-[Join / Renew](/join/) • [Get Licensed](/license/) • [View Calendar](/calendar/)
-
-## Contact
-
-Add club contact details or a contact form link.
+ 
 
 ---
 

@@ -10,8 +10,33 @@
       <div class="prose max-w-none content">
         {{ .Content }}
       </div>
-      {{/* Officers partial inside same container to keep layout consistent */}}
-      {{ partial "officers.html" . }}
+  {{/* Officers partial: second section on the page */}}
+  <div class="mt-4">{{ partial "officers.html" . }}</div>
+
+      {{/* HISTORY */}}
+  <section class="mt-4">
+        <h2 id="history" class="section-title">History</h2>
+  <div class="prose max-w-none mt-1 content">
+          <p>A short history of the club goes here. Mention founding date, notable milestones, important events, and evolution of activities.</p>
+        </div>
+      </section>
+
+      {{/* GET INVOLVED */}}
+  <section class="mt-4">
+        <h2 id="get-involved" class="section-title">Get Involved</h2>
+  <div class="prose max-w-none mt-1 content">
+          <p>How to join, renew membership, volunteer, or learn more. Add links to the Join / Renew and Get Licensed pages.</p>
+          <p><a href="/join/">Join / Renew</a> • <a href="/license/">Get Licensed</a> • <a href="/calendar/">View Calendar</a></p>
+        </div>
+      </section>
+
+      {{/* CONTACT */}}
+  <section class="mt-4">
+        <h2 id="contact" class="section-title">Contact</h2>
+  <div class="prose max-w-none mt-1 content">
+          <p>Add club contact details or a contact form link.</p>
+        </div>
+      </section>
     </div>
   </section>
 
