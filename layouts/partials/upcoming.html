@@ -1,29 +1,34 @@
-{{/* layouts/partials/upcoming.html — robust startDate/endDate handling */}}
+{{/* TEMP DEBUG: show how each event is parsed & filtered */}}
 {{- $now := now -}}
 
-{{/* Gather event pages in any language; then filter */}}
 {{- $pages := where site.Pages "Section" "events" -}}
-{{- $pages = where $pages "Draft" false -}}
 {{- $pages = where $pages ".Params.showOnHome" true -}}
+{{- $pages = where $pages "Draft" false -}}
 
 {{- $eligible := slice -}}
+upcoming-debug-all: pages={{ len $pages }} now={{ time.Format "2006-01-02 15:04 -0700" $now }}
 {{- range $pages }}
-  {{- /* Parse start/end safely */ -}}
-  {{- $hasStart := and (isset .Params "startDate") (ne .Params.startDate "") -}}
-  {{- $hasEnd   := and (isset .Params "endDate")   (ne .Params.endDate   "") -}}
+  {{- $startRaw := cond (and (isset .Params "startDate") (not (or (eq .Params.startDate nil) (eq .Params.startDate "")))) .Params.startDate .Date -}}
+  {{- $endRaw   := cond (and (isset .Params "endDate")   (not (or (eq .Params.endDate   nil) (eq .Params.endDate   "")))) .Params.endDate   $startRaw -}}
 
-  {{- $start := .Date -}}
-  {{- if $hasStart }}{{- $start = time .Params.startDate -}}{{- end -}}
+  {{/* Coerce to strings before time(); also try a fallback without timezone if needed */}}
+  {{- $startStr := printf "%v" $startRaw -}}
+  {{- $endStr   := printf "%v" $endRaw   -}}
+  {{- $start := time $startStr -}}
+  {{- $end   := time $endStr   -}}
 
-  {{- $end := $start -}}
-  {{- if $hasEnd }}{{- $end = time .Params.endDate -}}{{- end -}}
+  {{- $include := or (ge $start $now) (ge $end $now) -}}
 
-  {{- /* Include if it hasn’t happened yet: either start in future OR end in future */ -}}
-  {{- if or (ge $start $now) (ge $end $now) -}}
+  page={{ .RelPermalink }}
+       startRaw={{ $startStr }} | parsedStart={{ time.Format "2006-01-02 15:04 -0700" $start }}
+       endRaw={{ $endStr }} | parsedEnd={{ time.Format "2006-01-02 15:04 -0700" $end }}
+       include={{ $include }} 
+  {{- if $include -}}
     {{- $eligible = $eligible | append (dict "page" . "start" $start "end" $end) -}}
   {{- end -}}
-{{- end -}}
+{{- end }}
 
+upcoming-debug-summary: eligible={{ len $eligible }} 
 {{- $upcoming := first 2 (sort $eligible "start" "asc") -}}
 
 {{- if gt (len $upcoming) 0 }}
@@ -55,6 +60,13 @@
         </article>
       {{- end }}
     </div>
+  </div>
+</section>
+{{- else }}
+<section>
+  <div class="max-w-[1400px] mx-auto px-6">
+    <h2 class="section-title">Upcoming Events</h2>
+    <p class="text-white/80 mt-2">No eligible events (see HTML source for debug lines).</p>
   </div>
 </section>
 {{- end }}
