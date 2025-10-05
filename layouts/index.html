@@ -67,17 +67,6 @@
 </script>
 <script defer src="{{ (printf "js/next-meeting.js?v=%d" now.Unix) | relURL }}"></script>
 
-{{/* TEMP DEBUG — remove after */}}
-{{- $now := now -}}
-{{- $all := site.Pages -}}
-{{- $events := where $all "Section" "events" -}}
-DEBUG Upcoming:
-pages_total={{ len $all }} events_found={{ len $events }} now={{ $now }}
-{{- range $events }}
-  - path={{ .File.Path }} | url={{ .RelPermalink }} | lang={{ .Lang }} | draft={{ .Draft }} | date={{ .Date }} | publishDate={{ .PublishDate }} | showOnHome={{ printf "%v" .Params.showOnHome }} | startDate={{ .Params.startDate }} | endDate={{ .Params.endDate }}
-{{- end }}
-
-
   {{ partial "upcoming.html" . }}
 
   <!-- QUICK LINKS -->

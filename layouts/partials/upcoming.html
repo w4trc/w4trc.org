@@ -1,35 +1,36 @@
-{{/* TEMP DEBUG: show how each event is parsed & filtered */}}
+{{/* Upcoming Events — simplest, reliable parsing using `with` */}}
 {{- $now := now -}}
 
+{{- /* same selection as smoke test */ -}}
 {{- $pages := where site.Pages "Section" "events" -}}
 {{- $pages = where $pages ".Params.showOnHome" true -}}
 {{- $pages = where $pages "Draft" false -}}
 
 {{- $eligible := slice -}}
-upcoming-debug-all: pages={{ len $pages }} now={{ time.Format "2006-01-02 15:04 -0700" $now }}
 {{- range $pages }}
-  {{- $startRaw := cond (and (isset .Params "startDate") (not (or (eq .Params.startDate nil) (eq .Params.startDate "")))) .Params.startDate .Date -}}
-  {{- $endRaw   := cond (and (isset .Params "endDate")   (not (or (eq .Params.endDate   nil) (eq .Params.endDate   "")))) .Params.endDate   $startRaw -}}
+  {{- /* default to page .Date, then override if startDate exists */ -}}
+  {{- $start := .Date -}}
+  {{- with .Params.startDate }}
+    {{- $start = time (printf "%v" .) -}}
+  {{- end -}}
 
-  {{/* Coerce to strings before time(); also try a fallback without timezone if needed */}}
-  {{- $startStr := printf "%v" $startRaw -}}
-  {{- $endStr   := printf "%v" $endRaw   -}}
-  {{- $start := time $startStr -}}
-  {{- $end   := time $endStr   -}}
+  {{- /* default end to start, override if endDate exists */ -}}
+  {{- $end := $start -}}
+  {{- with .Params.endDate }}
+    {{- $end = time (printf "%v" .) -}}
+  {{- end -}}
 
-  {{- $include := or (ge $start $now) (ge $end $now) -}}
-
-  page={{ .RelPermalink }}
-       startRaw={{ $startStr }} | parsedStart={{ time.Format "2006-01-02 15:04 -0700" $start }}
-       endRaw={{ $endStr }} | parsedEnd={{ time.Format "2006-01-02 15:04 -0700" $end }}
-       include={{ $include }} 
-  {{- if $include -}}
+  {{- /* include if event hasn't finished yet */ -}}
+  {{- if ge $end $now -}}
     {{- $eligible = $eligible | append (dict "page" . "start" $start "end" $end) -}}
   {{- end -}}
 {{- end }}
 
-upcoming-debug-summary: eligible={{ len $eligible }} 
 {{- $upcoming := first 2 (sort $eligible "start" "asc") -}}
+
+<!-- upcoming-debug: pages={{ len $pages }} eligible={{ len $eligible }} now={{ time.Format "2006-01-02 15:04" $now }}
+{{- range $eligible }} • {{ .page.RelPermalink }} start={{ time.Format "2006-01-02 15:04" .start }} end={{ time.Format "2006-01-02 15:04" .end }} {{ end -}}
+-->
 
 {{- if gt (len $upcoming) 0 }}
 <section>
@@ -60,13 +61,6 @@ upcoming-debug-summary: eligible={{ len $eligible }}
         </article>
       {{- end }}
     </div>
-  </div>
-</section>
-{{- else }}
-<section>
-  <div class="max-w-[1400px] mx-auto px-6">
-    <h2 class="section-title">Upcoming Events</h2>
-    <p class="text-white/80 mt-2">No eligible events (see HTML source for debug lines).</p>
   </div>
 </section>
 {{- end }}
