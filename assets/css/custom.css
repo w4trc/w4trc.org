@@ -102,6 +102,50 @@ h2.section-title::after {
   border-radius: 2px;
 }
 
+/* Ensure markdown H3s and H4s visually harmonize with H2s */
+.content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #f3f4f6;
+  position: relative;
+}
+
+.content h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.4rem;
+  width: 36px;
+  height: 3px;
+  background: var(--w4-accent);
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+.content h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--w4-ink);
+  position: relative;
+}
+
+.content h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 24px;
+  height: 2px;
+  background: var(--w4-accent);
+  border-radius: 1px;
+  opacity: 0.7;
+}
+
+
 /* Universal card base */
 .w4-card,
 .quicklink-card,
