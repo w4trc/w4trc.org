@@ -8,5 +8,5 @@ location: "Kingsport Public Library – Room B"
 showOnHome: true
 draft: false
 summary: "Walk-ins welcome with photo ID. $15 exam fee."
-image: "cover.jpg"
+image: "/images/VETESTING.png"
 ---
