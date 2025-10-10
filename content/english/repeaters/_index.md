@@ -16,12 +16,14 @@ All of our repeaters are on top of Bay's Mountain
 ## 2 Meters - 146.970
 
 Output: 146.970
+
 Input: Something
 
 
 ## 70 Centimeters - 44...something?
 
 Output: Exists
+
 Input: Yeah
 
 
