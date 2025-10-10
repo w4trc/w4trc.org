@@ -1,0 +1,60 @@
+{{ define "main" }}
+
+{{/* --- Load & normalize newsletter/minutes data safely --- */}}
+{{ $newsraw := site.Data.downloads.newsletters }}
+{{ $minsraw := site.Data.downloads.minutes }}
+
+{{/* Force to empty slice if nil or wrong type */}}
+{{ $news := cond (eq (printf "%T" $newsraw) "[]interface {}") $newsraw (slice) }}
+{{ $mins := cond (eq (printf "%T" $minsraw) "[]interface {}") $minsraw (slice) }}
+
+{{/* Sort newest first; ISO-date strings sort correctly */}}
+{{ $news = sort $news "date" "desc" }}
+{{ $mins = sort $mins "date" "desc" }}
+
+  {{/* Hero at top, pulled from partial for consistency */}}
+  {{ $hero := dict "Image" .Params.image "Title" .Title "Subtitle" .Params.description }}
+  {{ partial "hero.html" $hero }}
+
+
+<section class="section">
+  <div class="container">
+    <div class="content">  {{/* <- ensures typography & alignment match other pages */}}
+      <h1 class="section-title">Downloads</h1>
+      <p class="text-[color:var(--w4-ink-muted)]">Newsletters & meeting minutes (newest first).</p>
+
+    
+      <h2 class="section-title" style="margin-top:2rem;">Meeting Minutes</h2>
+      {{ if gt (len $mins) 0 }}
+        <ul class="list-none m-0 p-0">
+          {{ range $mins }}
+            {{ $t := time .date }}
+            <li class="py-2 border-b" style="border-color:var(--w4-border);">
+              <a href="{{ .file }}" class="underline">{{ .title }}</a>
+              {{ with .size }}<span class="ml-2 text-xs opacity-60">({{ . }})</span>{{ end }}
+            </li>
+          {{ end }}
+        </ul>
+      {{ else }}
+        <p class="opacity-70">No minutes yet.</p>
+      {{ end }}
+
+      <h2 class="section-title" style="margin-top:2rem;">ZeroBeat Newsletters</h2>
+      {{ if gt (len $news) 0 }}
+        <ul class="list-none m-0 p-0">
+          {{ range $news }}
+            {{ $t := time .date }}
+            <li class="py-2 border-b" style="border-color:var(--w4-border);">
+              <a href="{{ .file }}" class="underline">{{ .title }}</a>
+              {{ with .size }}<span class="ml-2 text-xs opacity-60">({{ . }})</span>{{ end }}
+            </li>
+          {{ end }}
+        </ul>
+      {{ else }}
+        <p class="opacity-70">No newsletters yet.</p>
+      {{ end }}
+
+    </div>
+  </div>
+</section>
+{{ end }}

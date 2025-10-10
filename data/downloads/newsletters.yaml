@@ -1,0 +1,5 @@
+# data/downloads/newsletters.yaml
+- date: "2025-10-01"
+  title: "Newsletter — October 2025"
+  file: "/downloads/newsletters/2025/Newsletter-2025-10.pdf"
+  size: "1.2 MB"
