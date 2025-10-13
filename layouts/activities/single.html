@@ -1,0 +1,70 @@
+{{ define "main" }}
+{{- $p := . -}}
+
+{{/* Resolve times safely */}}
+{{- $start := $p.Date -}}
+{{- with $p.Params.startDate }}{{- $start = time (printf "%v" .) -}}{{- end -}}
+{{- $end := $start -}}
+{{- with $p.Params.endDate }}{{- $end = time (printf "%v" .) -}}{{- end -}}
+
+{{/* Find image: front matter or cover* in bundle */}}
+{{- $img := "" -}}
+{{- with $p.Params.image }}{{- $img = . -}}{{- end -}}
+{{- if not $img }}{{- with $p.Resources.GetMatch "cover*" }}{{- $img = .RelPermalink -}}{{- end }}{{- end -}}
+
+{{/* Date line for display */}}
+{{- $sameDay := eq (time.Format "2006-01-02" $start) (time.Format "2006-01-02" $end) -}}
+{{- $dateLine := cond $sameDay
+    (printf "%s, %s, %s–%s" (time.Format "Mon" $start) (time.Format "Jan 2" $start) (time.Format "3:04 PM" $start) (time.Format "3:04 PM" $end))
+    (printf "%s – %s" (time.Format "Jan 2, 3:04 PM" $start) (time.Format "Jan 2, 3:04 PM" $end))
+-}}
+
+{{/* ---------- ICS generation (args order fixed) ---------- */}}
+{{- $uid     := sha1 $p.RelPermalink -}}
+{{- $stamp   := time.Format "20060102T150405Z" (time.In "UTC" (now)) -}}
+{{- $dtstart := time.Format "20060102T150405Z" (time.In "UTC" $start) -}}
+{{- $dtend   := time.Format "20060102T150405Z" (time.In "UTC" $end) -}}
+
+{{- $icsTitle := $p.Title | htmlUnescape | plainify -}}
+{{- $icsDesc  := (cond (and (isset $p.Params "summary") $p.Params.summary) $p.Params.summary $p.Title) | htmlUnescape | plainify -}}
+{{- $icsLoc   := $p.Params.location | default "" -}}
+
+{{- $ics := printf "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//W4TRC//Events//EN\r\nBEGIN:VEVENT\r\nUID:%s@w4trc.org\r\nDTSTAMP:%s\r\nDTSTART:%s\r\nDTEND:%s\r\nSUMMARY:%s\r\nDESCRIPTION:%s\r\nLOCATION:%s\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n" $uid $stamp $dtstart $dtend $icsTitle $icsDesc $icsLoc -}}
+{{- $icsFile := printf "event-%s.ics" (substr (sha1 $p.RelPermalink) 0 8) -}}
+{{- $icsRes := resources.FromString $icsFile $ics | resources.ExecuteAsTemplate $icsFile $p -}}
+{{/* ------------------------------------------------------- */}}
+
+<section class="w-full">
+  {{- with $img }}
+    <div class="w-full bg-cover bg-center h-64 md:h-80" style="background-image:linear-gradient(rgba(4,12,18,.35),rgba(4,12,18,.65)),url('{{ . | relURL }}')"></div>
+  {{- end }}
+
+  <div class="max-w-[1400px] mx-auto px-6 py-8">
+    <h1>{{ $p.Title }}</h1>
+    <p class="text-white/70 mt-2">{{ $dateLine }}</p>
+    {{- with $p.Params.location }}<p class="text-white/80 mt-1"><strong>Location:</strong> {{ . }}</p>{{- end }}
+
+    <div class="flex flex-wrap gap-3 mt-4">
+  <!-- Universal .ics download -->
+  <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90 hover:bg-white/10" href="{{ $icsRes.RelPermalink }}">Add to Calendar (.ics)</a>
+
+  <!-- Google Calendar link -->
+  {{- $googleURL := printf "https://www.google.com/calendar/render?action=TEMPLATE&text=%s&dates=%s/%s&details=%s&location=%s"
+      (urlquery $icsTitle)
+      (time.Format "20060102T150405Z" (time.In "UTC" $start))
+      (time.Format "20060102T150405Z" (time.In "UTC" $end))
+      (urlquery $icsDesc)
+      (urlquery $icsLoc)
+  -}}
+  <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90 hover:bg-white/10" target="_blank" rel="noopener" href="{{ $googleURL }}">Add to Google Calendar</a>
+
+  <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90 hover:bg-white/10" href="/events/">All Events</a>
+</div>
+
+
+    <article class="prose prose-invert mt-8 max-w-none">
+      {{ .Content }}
+    </article>
+  </div>
+</section>
+{{ end }}
