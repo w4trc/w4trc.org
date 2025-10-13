@@ -1,0 +1,67 @@
+{{ define "main" }}
+  {{/* Hero at top, pulled from partial for consistency */}}
+  {{ $hero := dict "Image" .Params.image "Title" .Title "Subtitle" .Params.description }}
+  {{ partial "hero.html" $hero }}
+
+  <section class="section-md">
+    <div class="max-w-[1100px] mx-auto px-6">
+
+      <section class="mt-6">
+        <h2 id="coordinators" class="section-title">Parks on the Air (POTA)</h2>
+        <div class="prose max-w-none mt-1 content">
+          
+            <p>We regularly activate local parks as part of the Parks on the Air (POTA) program. These activations provide an opportunity for club members to practice portable operations, improve their operating skills, and enjoy the outdoors while promoting amateur radio.</p>
+
+            <div class="mt-4"><a href="/activities/pota" class="inline-block px-4 py-2 rounded-xl border border-white/20 text-white/90 hover:bg-white/10">More info</a></div>
+        </div>
+      </section>
+
+      <section class="mt-6">
+        <h2 id="coordinators" class="section-title">Summits on the Air (SOTA)</h2>
+        <div class="prose max-w-none mt-1 content">
+          
+            <p>Club members also participate in Summits on the Air (SOTA) activations, where they hike to mountain summits and operate portable stations. SOTA activations challenge operators to adapt to varying terrain and conditions while fostering camaraderie among participants.</p>
+
+            <div class="mt-4"><a href="/activities/sota" class="inline-block px-4 py-2 rounded-xl border border-white/20 text-white/90 hover:bg-white/10">More info</a></div>
+        </div>
+      </section>
+
+      <section class="mt-6">
+        <h2 id="coordinators" class="section-title">Fox Hunting</h2>
+        <div class="prose max-w-none mt-1 content">
+          
+            <p>Fox hunting, or amateur radio direction finding, is another exciting activity that our club members engage in. This activity involves using radio receivers and directional antennas to locate hidden transmitters (the "fox"). Fox hunts are both fun and educational, helping participants hone their technical skills and teamwork.</p>
+
+            <div class="mt-4"><a href="/activities/fox-hunting" class="inline-block px-4 py-2 rounded-xl border border-white/20 text-white/90 hover:bg-white/10">More info</a></div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+      
+
+  <!-- QUICK LINKS -->
+  <section>
+    <div class="max-w-[1400px] mx-auto px-6">
+      <h2 class="section-title">Quick Links</h2>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
+        <a class="quicklink-card" href="/repeaters/">
+          <p class="text-lg font-semibold text-white">Club Repeaters</p>
+          <p>Frequencies, tones, coverage notes.</p>
+        </a>
+        <a class="quicklink-card" href="/nets/">
+          <p class="text-lg font-semibold text-white">Weekly Nets</p>
+          <p>Schedules and scripts.</p>
+        </a>
+        <a class="quicklink-card" href="/license/">
+          <p class="text-lg font-semibold text-white">Get Licensed / Upgrade</p>
+          <p>Study materials and test sessions.</p>
+        </a>
+        <a class="quicklink-card" href="/projects/">
+          <p class="text-lg font-semibold text-white">Projects</p>
+          <p>Club builds, antennas, mesh.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+{{ end }}
