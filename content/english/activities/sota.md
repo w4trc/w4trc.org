@@ -1,7 +1,7 @@
 ---
 title: "Summits on the Air (SOTA)"
 description: "SOTA is...."
-image: "/images/Sota.jpg"
+image: "/images/activities/SOTA_Logo.png"
 ---
 ## What is Summits on the Air?
 Full Markdown goes here…
