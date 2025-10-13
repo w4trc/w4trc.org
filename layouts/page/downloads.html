@@ -46,7 +46,6 @@
             {{ $t := time .date }}
             <li class="py-2 border-b" style="border-color:var(--w4-border);">
               <a href="{{ .file }}" class="underline">{{ .title }}</a>
-              {{ with .size }}<span class="ml-2 text-xs opacity-60">({{ . }})</span>{{ end }}
             </li>
           {{ end }}
         </ul>
