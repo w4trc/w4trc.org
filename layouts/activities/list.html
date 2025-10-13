@@ -1,4 +1,9 @@
 {{ define "main" }}
+
+  {{/* Hero at top, pulled from partial for consistency */}}
+  {{ $hero := dict "Image" .Params.image "Title" .Title "Subtitle" .Params.description }}
+  {{ partial "hero.html" $hero }}
+
 <section>
   <div class="max-w-[1400px] mx-auto px-6">
     <h1 class="section-title">{{ .Title }}</h1>
@@ -8,12 +13,19 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {{ range .Pages.ByTitle }}
-        <article class="w4-card">
-          <h2 class="text-xl font-bold mb-2">{{ .Title }}</h2>
-          <p class="mb-4">{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}</p>
-          <a class="cta-big cta-outline inline-block" href="{{ .RelPermalink }}" aria-label="About {{ .Title }}">
-            About {{ .Title }}
-          </a>
+        <article class="w4-card overflow-hidden">
+          {{ with .Params.image }}
+            <img src="{{ . | relURL }}" alt="{{ $.Title }} image"
+                 class="w-full aspect-[16/9] object-cover rounded-t-xl mb-3 border-b border-white/10">
+          {{ end }}
+
+          <div class="p-4">
+            <h2 class="text-xl font-bold mb-2">{{ .Title }}</h2>
+            <p class="text-white/80 mb-4">{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}</p>
+            <a class="cta-big cta-outline inline-block" href="{{ .RelPermalink }}" aria-label="About {{ .Title }}">
+              About {{ .Title }}
+            </a>
+          </div>
         </article>
       {{ end }}
     </div>
