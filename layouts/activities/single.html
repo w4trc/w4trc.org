@@ -6,15 +6,7 @@
 
 <section>
   <div class="max-w-[1400px] mx-auto px-6">
-    <header class="mb-6">
-      <h1 class="section-title">{{ .Title }}</h1>
-      {{ with .Params.description }}
-        <p class="text-white/80 max-w-prose">{{ . }}</p>
-      {{ end }}
-      {{ with .Params.image }}
-        <img src="{{ . | relURL }}" alt="" class="rounded-2xl border border-white/10 shadow mt-4 max-h-[420px] w-full object-cover" loading="lazy">
-      {{ end }}
-    </header>
+    
 
     <article class="content prose prose-invert max-w-none">
       {{ .Content }}
