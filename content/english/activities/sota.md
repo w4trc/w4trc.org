@@ -1,6 +1,6 @@
 ---
 title: "Summits on the Air (SOTA)"
-description: "SOTA is...."
+description: "Summits on the Air (SOTA) is a worldwide, points-based award program that promotes portable amateur radio from mountain summits. It’s designed for everyone — not just mountaineers."
 image: "/images/activities/SOTA_Logo.png"
 ---
 ## Summits on the Air (SOTA)
@@ -73,3 +73,6 @@ We typically choose approachable summits in the **Northeast Tennessee / Southwes
 📧 ronliz1998@gmail.com
 
 Want to cross-train? You might also enjoy our **[Parks on the Air (POTA)](/activities/pota/)** and **[Fox Hunting](/activities/fox-hunting/)** pages.
+
+## Photo Gallery
+{{< gallery dir="images/activities/sota" class="" height="400" width="400" webp="true" command="Fit" option="" zoomable="true" >}}
