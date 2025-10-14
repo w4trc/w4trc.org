@@ -11,3 +11,6 @@ Members of the W4TRC radio club participate in POTA as both Activators and Hunte
 Activators must set up in a registered POTA location. (Visit pota.app for a list and map of locations) A successful activation consists at least 10 contacts. These contacts can be made on any band or mode of operation (except for terrestrial repeaters). 
 
 To learn more, you can visit parksontheair.com, or reach out to the W4TRC POTA Coordinator, Justin Compton (KO4DCD). 
+
+## Photo Gallery
+{{< gallery dir="images/activities/pota" class="" height="400" width="400" webp="true" command="Fit" option="" zoomable="true" >}}
