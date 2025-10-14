@@ -256,3 +256,23 @@ h2.section-title::after {
   .meeting-box,
   .cta-big { transition: none; }
 }
+
+/* --- Better table alignment and spacing --- */
+.content table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+}
+
+.content table th,
+.content table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.content table thead th {
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid var(--w4-border);
+}
