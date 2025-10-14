@@ -1,0 +1,85 @@
+{{/* layouts/partials/alertbar.html — with level colors */}}
+{{- $p := .Site.Params.alertbar -}}
+{{- if and $p $p.enabled $p.message -}}
+
+  {{/* schedule (optional) */}}
+  {{- $.Scratch.Set "w4_show_alert" true -}}
+  {{- $now := now -}}
+  {{- if and (isset $p "start") (ne (printf "%v" $p.start) "") -}}
+    {{- if lt $now (time $p.start) -}}{{ $.Scratch.Set "w4_show_alert" false }}{{- end -}}
+  {{- end -}}
+  {{- if and (isset $p "end") (ne (printf "%v" $p.end) "") -}}
+    {{- if gt $now (time $p.end) -}}{{ $.Scratch.Set "w4_show_alert" false }}{{- end -}}
+  {{- end -}}
+
+  {{- if $.Scratch.Get "w4_show_alert" -}}
+
+  {{/* map level -> hex (no Tailwind/vars needed) */}}
+  {{- $level := lower (default "info" $p.level) -}}
+  {{- $bg := "#0284c7" -}}  {{/* info (sky-600-ish) */}}
+  {{- if eq $level "warning" -}}{{ $bg = "#f59e0b" }}{{ end -}}
+  {{- if eq $level "success" -}}{{ $bg = "#059669" }}{{ end -}}
+  {{- if eq $level "danger"  -}}{{ $bg = "#dc2626" }}{{ end -}}
+
+  <div
+    id="w4-alertbar"
+    data-id="{{ or $p.id "global-alert" }}"
+    data-dismissible="{{ if $p.dismissible }}1{{ else }}0{{ end }}"
+    role="status" aria-live="polite"
+    style="
+      position:fixed; left:0; right:0; top:0;
+      z-index:1000;
+      background: {{ $bg }};
+      color:#fff; font-size:14px; line-height:1.4;
+    "
+    hidden
+  >
+    <div
+      style="
+        max-width:1400px; margin:0 auto;
+        padding:8px 12px;
+        text-align:center; font-weight:700;
+        display:block; position:relative;
+      "
+    >
+      <span>{{ $p.message | safeHTML }}</span>
+      {{ with $p.linkUrl }}
+        <a href="{{ . }}" style="color:#fff; text-decoration:underline; font-weight:700; margin-left:.5rem;">
+          {{ $p.linkText | default "Details" }}
+        </a>
+      {{ end }}
+      {{ if $p.dismissible }}
+        <button
+          type="button" aria-label="Dismiss"
+          onclick="(function(bar){localStorage.setItem('alert:'+bar.dataset.id,'dismissed'); bar.remove(); document.documentElement.style.setProperty('--w4-alert-h','0px'); var hdr=document.querySelector('header.header.sticky'); if(hdr){hdr.style.top='0px';}})(document.getElementById('w4-alertbar'))"
+          style="
+            position:absolute; right:8px; top:50%; transform:translateY(-50%);
+            width:28px; height:28px; border:0; border-radius:6px;
+            background:rgba(255,255,255,.12); color:#fff; font-weight:700; cursor:pointer;
+          "
+        >×</button>
+      {{ end }}
+    </div>
+  </div>
+
+  <div id="w4-alertbar-spacer" style="height:var(--w4-alert-h,0px)"></div>
+
+  <script>
+  (function () {
+    var bar = document.getElementById('w4-alertbar');
+    if (!bar) return;
+    var id = bar.dataset.id || 'global-alert';
+    if (bar.dataset.dismissible === '1' && localStorage.getItem('alert:' + id) === 'dismissed') return;
+
+    bar.hidden = false;
+    requestAnimationFrame(function () {
+      var h = bar.offsetHeight || 0;
+      document.documentElement.style.setProperty('--w4-alert-h', h + 'px');
+      var hdr = document.querySelector('header.header.sticky');
+      if (hdr) hdr.style.top = 'var(--w4-alert-h,0px)';
+    });
+  })();
+  </script>
+
+  {{- end -}}
+{{- end -}}

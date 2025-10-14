@@ -110,3 +110,14 @@ enable = false
 # mailchimp subsciption
 mailchimp_form_action = "https://gmail.us4.list-manage.com/subscribe/post?u=463ee871f45d2d93748e77cad&amp;id=a0a2c6d074" # replace this url with yours
 mailchimp_form_name = "b_463ee871f45d2d93748e77cad_a0a2c6d074"
+
+[alertbar]
+enabled     = true
+id          = "nov-meeting-20251"         # change each new alert so dismissal resets
+message     = "The November club meeting will be at Eastman’s Toy F Reid building room 225 at 6:30pm on 11/13."
+linkText    = "Details"
+linkUrl     = "/events/november-meeting/"
+level       = "warning"                   # info | success | warning | danger
+dismissible = true
+start       = "2025-10-01T00:00:00-04:00"
+end         = "2025-11-20T23:59:59-04:00"

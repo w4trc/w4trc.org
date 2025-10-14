@@ -276,3 +276,9 @@ h2.section-title::after {
   background: rgba(255,255,255,0.05);
   border-bottom: 1px solid var(--w4-border);
 }
+
+/* Make sure it sits above any sticky header */
+#w4-alertbar{ box-shadow: 0 2px 0 rgba(0,0,0,.08); }
+
+/* If your site header is fixed, push it down by the bar height */
+.site-header.is-fixed { top: var(--w4-alert-h, 0px); }
