@@ -68,6 +68,12 @@ If you were one of the hiders, please submit the event details and results using
 
 ---
 
+## Upcoming Fox Hunts
+{{< foxhunts-upcoming file="foxhunts/2025" limit="12" >}}
+
+
+---
+
 ### Contact
 **W4TRC Fox Hunting Coordinator:**  
 📡 **Joshua Carmack (N4JHC)**  

@@ -1,0 +1,29 @@
+{{ $items := .items | default (slice) }}
+
+{{ if not (len $items) }}
+  <div class="w4-card p-4">
+    <p class="text-white/80">No upcoming fox hunts scheduled.</p>
+  </div>
+{{ else }}
+  <div class="w4-card overflow-x-auto">
+    <table class="min-w-full text-left">
+      <thead class="border-b border-white/10">
+        <tr>
+          <th class="py-3 px-4">Date</th>
+          <th class="py-3 px-4">Time</th>
+          <th class="py-3 px-4">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $items }}
+          {{ $t := .t }}
+          <tr class="border-t border-white/10">
+            <td class="py-3 px-4 whitespace-nowrap">{{ $t | time.Format "Mon, Jan 2, 2006" }}</td>
+            <td class="py-3 px-4 whitespace-nowrap">{{ $t | time.Format "3:04 PM" }}</td>
+            <td class="py-3 px-4">{{ .notes }}</td>
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+{{ end }}

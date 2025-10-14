@@ -1,0 +1,84 @@
+{{/* Usage: {{< foxhunts-upcoming file="foxhunts/2025" limit="12" >}} */}}
+
+{{ $file  := .Get "file"  | default "foxhunts/2025" }}
+{{ $limit := (cond (isset .Params "limit") (int (.Get "limit")) 12) }}
+
+{{/* Resolve data under /data */}}
+{{ $parts := split $file "/" }}
+{{ $data  := site.Data }}
+{{ range $parts }}
+  {{ $data = index $data . }}
+{{ end }}
+
+{{ if not $data }}
+  <div class="w4-card p-4"><p class="text-white/80">
+    No data found for <code>{{ $file }}</code>.
+  </p></div>
+{{ else }}
+  {{ $now := now }}
+  {{ $normalized := slice }}
+
+  {{/* Accept entries as:
+        - map with date, time, notes   (preferred)
+        - map with dt, notes           (RFC3339)
+        - string (RFC3339)
+      Build RFC3339 before AsTime: YYYY-MM-DDTHH:MM[:SS][±HH:MM|Z]
+  */}}
+
+  {{ $reRFC := `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(Z|[+\-]\d{2}:\d{2})$` }}
+  {{ $reYMD := `^\d{4}-\d{2}-\d{2}$` }}
+
+  {{ range $data }}
+    {{ $t := false }}
+    {{ $notes := "" }}
+
+    {{ $type := printf "%T" . }}
+    {{ if eq $type "string" }}
+      {{ $s := . }}
+      {{ if gt (len (findRE $reRFC $s)) 0 }}
+        {{ $t = time.AsTime $s }}
+      {{ end }}
+    {{ else if eq $type "map[string]interface {}" }}
+      {{/* Prefer dt if present and valid RFC3339 */}}
+      {{ with .dt }}
+        {{ $s := . }}
+        {{ if gt (len (findRE $reRFC $s)) 0 }}
+          {{ $t = time.AsTime $s }}
+        {{ end }}
+      {{ end }}
+
+      {{/* Otherwise build from date + time */}}
+      {{ if not $t }}
+        {{ $d := "" }}{{ with .date }}{{ $d = . }}{{ end }}
+        {{ $tm := "" }}{{ with .time }}{{ $tm = . }}{{ end }}
+        {{ if and (gt (len $d) 0) (gt (len $tm) 0) (gt (len (findRE $reYMD $d)) 0) }}
+          {{/* Strip spaces from time so "10:00 -04:00" => "10:00-04:00" */}}
+          {{ $tm = replace $tm " " "" }}
+          {{/* Add seconds if missing (optional) */}}
+          {{ if eq (len (findRE `^\d{2}:\d{2}$` $tm)) 1 }}
+            {{ $tm = printf "%s:00" $tm }}
+          {{ end }}
+          {{ $candidate := printf "%sT%s" $d $tm }}
+          {{ if gt (len (findRE $reRFC $candidate)) 0 }}
+            {{ $t = time.AsTime $candidate }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      {{ with .notes }}{{ $notes = . }}{{ end }}
+    {{ end }}
+
+    {{/* Keep only valid future times */}}
+    {{ if and $t (ge $t $now) }}
+      {{ $normalized = $normalized | append (dict "t" $t "notes" $notes) }}
+    {{ end }}
+  {{ end }}
+
+  {{ $sorted := sort $normalized "t" }}
+  {{ $shown  := $sorted }}
+  {{ if ge (len $sorted) $limit }}
+    {{ $shown = first $limit $sorted }}
+  {{ end }}
+
+  {{ partial "foxhunts/table.html" (dict "items" $shown) }}
+{{ end }}
