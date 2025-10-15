@@ -237,13 +237,17 @@ h2.section-title::after {
 
 /* Bigger hero logo */
 .hero-logo-big {
-  height: 140px;
-  width: auto;
-  border-radius: 999px;
-  background: #fff;
-  padding: 10px;
+  height: 180px;
+  width: 180px;
+  border-radius: 50%;
+  background: none;
+  object-fit: cover;
+  object-position: center;
+  padding: 0; /* ensure full fill */
   box-shadow: var(--w4-shadow-lg);
 }
+
+
 @media(min-width: 768px){
   .hero-logo-big { height: 180px; }
 }
