@@ -10,6 +10,7 @@ import { FaCheck } from "react-icons/fa";
 // NEW: meetings data + latest posts
 import NextMeeting from "@/components/NextMeeting.astro";
 import meetings from "@/data/meetings.json";
+import Upcoming from "@/layouts/components/Upcoming.astro";
 import { getCollection } from "astro:content";
 
 const homepage = await getListPage("homepage", "-index");
@@ -75,6 +76,9 @@ try {
   
   <!-- Next Meeting (component) -->
   <NextMeeting meeting={meetings} />
+
+  <!-- Upcoming (auto-loads from content collection or JSON fallback) -->
+  <Upcoming limit={4} title="Upcoming Events" showCalendarCta={true} calendarHref="/calendar/" />
 
 
   <!-- ===================== -->

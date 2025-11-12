@@ -1,0 +1,157 @@
+---
+import { getCollection } from "astro:content";
+
+type EventItem = {
+  title: string;
+  date?: string;            // ISO (preferred) or YYYY-MM-DD
+  endDate?: string;         // optional for multi-day
+  location?: string;
+  summary?: string;
+  cover?: string;
+  url?: string;             // optional: override generated href
+};
+
+interface Props {
+  /** Optional: provide events directly (already filtered/sorted) */
+  events?: EventItem[];
+  /** Maximum cards to show */
+  limit?: number;
+  /** Section title */
+  title?: string;
+  /** Show “View Calendar” CTA */
+  showCalendarCta?: boolean;
+  /** Calendar href */
+  calendarHref?: string;
+  /** Extra wrapper classes (keeps your layout look) */
+  containerClass?: string;
+}
+
+const {
+  events: propEvents,
+  limit = 4,
+  title = "Upcoming Events",
+  showCalendarCta = true,
+  calendarHref = "/calendar/",
+  containerClass = "container px-6 max-w-[1400px] mx-auto",
+} = Astro.props;
+
+// 1) Source: events content collection (preferred)
+let items: EventItem[] = [];
+try {
+  const coll = await getCollection("events");
+  items = coll.map((e) => {
+    const data = e.data as any;
+    // Build a friendly URL if not provided
+    const href = e.slug ? `/${e.collection}/${e.slug}/` : undefined;
+    return {
+      title: data.title,
+      date: data.date,           // ISO or string
+      endDate: data.endDate,
+      location: data.location,
+      summary: data.summary || data.description,
+      cover: data.cover,
+      url: data.url || href,
+    };
+  });
+} catch {
+  items = [];
+}
+
+// 2) If propEvents is provided, let it override the collection
+if (propEvents?.length) {
+  items = propEvents;
+}
+
+// 3) Fallback: JSON data file if nothing else (e.g., src/data/events.json)
+if (!items.length) {
+  try {
+    const mod = await import("@/data/events.json");
+    items = (mod.default || mod) as EventItem[];
+  } catch {
+    items = [];
+  }
+}
+
+// Helpers
+const now = new Date();
+function parseDate(s?: string) {
+  if (!s) return undefined;
+  const d = new Date(s);
+  return isNaN(+d) ? undefined : d;
+}
+function isInFutureOrOngoing(ev: EventItem) {
+  const start = parseDate(ev.date);
+  const end = parseDate(ev.endDate);
+  if (start && start >= now) return true;
+  if (start && end && end >= now) return true; // ongoing multi-day
+  return false;
+}
+function fmtRange(ev: EventItem) {
+  const start = parseDate(ev.date);
+  const end = parseDate(ev.endDate);
+  if (!start) return "TBD";
+  if (!end || start.toDateString() === end.toDateString()) {
+    return start.toLocaleString(undefined, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      timeZoneName: "short",
+    });
+  }
+  // Multi-day
+  const s = start.toLocaleString(undefined, {
+    month: "short",
+    day: "numeric",
+  });
+  const e = end.toLocaleString(undefined, {
+    month: "short",
+    day: "numeric",
+  });
+  return `${s}–${e}`;
+}
+
+// Filter future/ongoing, sort ascending, cap to limit
+const upcoming = items
+  .filter(isInFutureOrOngoing)
+  .sort((a, b) => {
+    const da = parseDate(a.date)?.getTime() ?? 0;
+    const db = parseDate(b.date)?.getTime() ?? 0;
+    return da - db;
+  })
+  .slice(0, limit);
+---
+
+{upcoming.length > 0 && (
+  <section>
+    <div class={containerClass}>
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="section-title">{title}</h2>
+        {showCalendarCta && (
+          <a class="px-3 py-2 rounded-lg border border-white/20 text-white/90" href={calendarHref}>
+            View Calendar
+          </a>
+        )}
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
+        {upcoming.map((ev) => (
+          <a href={ev.url ?? "#"} class="w4-card block">
+            {ev.cover && (
+              <img src={ev.cover} alt="" class="mb-3 rounded-lg" style="aspect-ratio:16/9;object-fit:cover;" />
+            )}
+            <div class="text-sm text-white/60 mb-1">{fmtRange(ev)}</div>
+            <h3 class="text-white font-semibold text-lg leading-snug">{ev.title}</h3>
+            {ev.location && (
+              <p class="mt-1 text-white/80">
+                <strong>Location:</strong> {ev.location}
+              </p>
+            )}
+            {ev.summary && <p class="mt-2 text-white/80">{ev.summary}</p>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
