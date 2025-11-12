@@ -140,6 +140,19 @@ const testimonialSectionCollection = defineCollection({
   }),
 });
 
+const events = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    date: z.string().or(z.date()),     // start
+    endDate: z.string().or(z.date()).optional(),
+    location: z.string().optional(),
+    summary: z.string().optional(),
+    cover: z.string().optional(),
+    url: z.string().optional(),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -149,6 +162,7 @@ export const collections = {
   pages: pagesCollection,
   about: aboutCollection,
   contact: contactCollection,
+  events: events,
 
   // sections
   ctaSection: ctaSectionCollection,
