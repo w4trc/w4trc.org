@@ -1,0 +1,288 @@
+/* Add your own custom styles here */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Brand tokens (updated) =====
+   Deep navy surfaces + warm accent
+   Accessible contrast across sections
+*/
+:root{
+  --w4-brand:#2b6cb0;      /* brand blue */
+  --w4-accent:#f59e0b;     /* warm amber accent */
+  --w4-ink:#e5e7eb;        /* light text */
+  --w4-ink-muted:rgba(229,231,235,.85);
+
+  --w4-bg:#0b1220;         /* page background */
+  --w4-surface:#111a2c;    /* primary card surface */
+  --w4-surface-2:#0e1728;  /* secondary surface */
+  --w4-border:rgba(255,255,255,.10);
+  --w4-shadow:0 10px 24px rgba(0,0,0,.28);
+  --w4-shadow-lg:0 16px 36px rgba(0,0,0,.35);
+}
+
+/* ===== Page background ===== */
+html, body { background: var(--w4-bg); color: var(--w4-ink); }
+
+/* --- W4TRC Homepage Overrides --- */
+
+/* HERO (full bleed, tall, centered) */
+.hero-heroimg {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  isolation: isolate;
+}
+.hero-heroimg::before{
+  /* darken busy photos for legible type */
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(8,12,22,.55), rgba(8,12,22,.75));
+  z-index:-1;
+}
+.hero-heroimg h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: .2px;
+  color:#f3f4f6;
+}
+.hero-heroimg p {
+  font-size: 1.125rem;
+  margin-top: 1rem;
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--w4-ink-muted);
+}
+
+/* SECTION rhythm (alternating bands) */
+section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+section:nth-of-type(even) { background: var(--w4-surface-2); }
+
+/* SECTION TITLES with accent underline */
+.section-title,
+h2.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  color: #f3f4f6;
+  position: relative;
+}
+.section-title::after,
+h2.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.6rem;
+  width: 48px;
+  height: 4px;
+  background: var(--w4-accent);
+  border-radius: 2px;
+}
+
+/* Ensure markdown H2s match homepage section headers */
+.content h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  color: #f3f4f6;
+  position: relative;
+}
+.content h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.6rem;
+  width: 48px;
+  height: 4px;
+  background: var(--w4-accent);
+  border-radius: 2px;
+}
+
+/* Ensure markdown H3s and H4s visually harmonize with H2s */
+.content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #f3f4f6;
+  position: relative;
+}
+
+.content h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.4rem;
+  width: 36px;
+  height: 3px;
+  background: var(--w4-accent);
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+.content h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--w4-ink);
+  position: relative;
+}
+
+.content h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 24px;
+  height: 2px;
+  background: var(--w4-accent);
+  border-radius: 1px;
+  opacity: 0.7;
+}
+
+
+/* Universal card base */
+.w4-card,
+.quicklink-card,
+.news-card,
+.meeting-box {
+  border-radius: 1rem;
+  background: var(--w4-surface);
+  border: 1px solid var(--w4-border);
+  box-shadow: var(--w4-shadow);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.w4-card:hover,
+.quicklink-card:hover,
+.news-card:hover,
+.meeting-box:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--w4-shadow-lg);
+  border-color: rgba(255,255,255,.18);
+}
+
+/* QUICK LINK cards */
+.quicklink-card,
+.w4-card { padding: 1.75rem; }
+.w4-card p,
+.quicklink-card p { color: var(--w4-ink-muted); }
+
+/* NEXT MEETING box (slight brand tint) */
+.meeting-box {
+  padding: 2rem;
+  background:
+    linear-gradient(180deg, rgba(43,108,176,.10), rgba(17,26,44,1)),
+    var(--w4-surface);
+}
+.meeting-box p { color: var(--w4-ink-muted); }
+
+/* NEWS cards */
+.news-card { padding: 1.25rem; }
+.news-card img {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: .75rem;
+  margin-bottom: .75rem;
+}
+.news-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: .35rem;
+  color: #f3f4f6;
+}
+.news-card p {
+  font-size: .96rem;
+  color: rgba(229,231,235,.78);
+}
+
+/* big hero CTAs */
+.hero-ctas{
+  display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;
+}
+.cta-big{
+  display:inline-block; padding:14px 22px; border-radius:14px;
+  font-weight:700; font-size:1.02rem; line-height:1; text-decoration:none;
+  border:1px solid var(--w4-border); color:#f3f4f6; background:rgba(255,255,255,.04);
+  box-shadow: var(--w4-shadow);
+  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+}
+.cta-big:hover{ transform:translateY(-1px); filter:brightness(1.04); border-color: rgba(255,255,255,.18); }
+
+/* Primary & outline styles (brand + warm accent on hover) */
+.cta-primary{
+  background: var(--w4-brand);
+  color: #eef6ff;
+  border-color: rgba(0,0,0,.18);
+}
+.cta-primary:hover{
+  background: #275ea6; /* slightly darker brand hover */
+}
+
+.cta-outline{
+  background: transparent;
+  border-color: rgba(255,255,255,.28);
+  color: #f3f4f6;
+}
+.cta-outline:hover{
+  background: rgba(255,255,255,.06);
+}
+
+/* optional: make hero copy a touch wider for balance with 2 buttons */
+.hero-heroimg p{ max-width: 72ch; }
+
+/* Bigger hero logo */
+.hero-logo-big {
+  height: 180px;
+  width: 180px;
+  border-radius: 50%;
+  background: none;
+  object-fit: cover;
+  object-position: center;
+  padding: 0; /* ensure full fill */
+  box-shadow: var(--w4-shadow-lg);
+}
+
+
+@media(min-width: 768px){
+  .hero-logo-big { height: 180px; }
+}
+
+/* Accessibility + motion */
+@media (prefers-reduced-motion: reduce) {
+  .w4-card,
+  .quicklink-card,
+  .news-card,
+  .meeting-box,
+  .cta-big { transition: none; }
+}
+
+/* --- Better table alignment and spacing --- */
+.content table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+}
+
+.content table th,
+.content table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.content table thead th {
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid var(--w4-border);
+}
+
+/* Make sure it sits above any sticky header */
+#w4-alertbar{ box-shadow: 0 2px 0 rgba(0,0,0,.08); }
+
+/* If your site header is fixed, push it down by the bar height */
+.site-header.is-fixed { top: var(--w4-alert-h, 0px); }
