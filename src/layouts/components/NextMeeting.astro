@@ -1,0 +1,81 @@
+---
+interface Meeting {
+  title?: string;
+  datetime?: string;   // ISO string recommended
+  location?: string;
+  topic?: string;
+  desc?: string;
+  signupUrl?: string;
+}
+
+interface Props {
+  meeting?: Meeting;   // pass from index.astro; falls back to data file if omitted
+  containerClass?: string; // optional: override container wrapper classes
+}
+
+// Fallback to data file if no prop given
+let source: Meeting | undefined = Astro.props.meeting;
+if (!source) {
+  try {
+    const m = await import("@/data/meetings.json");
+    source = (m.default || m) as Meeting;
+  } catch {
+    source = {};
+  }
+}
+
+// Helpers
+const title = source?.title || "Club Meeting";
+const location = source?.location || "TBD";
+const hasTopic = !!source?.topic;
+const hasDesc = !!source?.desc;
+
+function formatDate(dt?: string) {
+  if (!dt) return "TBD";
+  const d = new Date(dt);
+  if (isNaN(d.getTime())) return "TBD";
+  return d.toLocaleString(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZoneName: "short",
+  });
+}
+
+const when = formatDate(source?.datetime);
+const signupUrl = source?.signupUrl;
+const containerClass = Astro.props.containerClass ?? "container px-6 max-w-[1400px] mx-auto";
+---
+
+<section>
+  <div class={containerClass}>
+    <h2 class="section-title">Next Meeting</h2>
+    <div class="meeting-box mt-6">
+      <p class="text-xl font-semibold text-white">{title}</p>
+      <p class="text-white/80">{when}</p>
+
+      <p class="mt-1 text-white/90">
+        <strong>Location:</strong> <span>{location}</span>
+      </p>
+
+      {hasTopic && <p class="text-white/80">Topic: {source!.topic}</p>}
+      {hasDesc && <p class="text-white/80 mt-1">{source!.desc}</p>}
+
+      <div class="flex flex-wrap gap-3 mt-4">
+        {signupUrl && (
+          <a
+            class="px-4 py-2 rounded-xl border border-white/20 text-white/90"
+            href={signupUrl}
+          >
+            RSVP
+          </a>
+        )}
+        <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90" href="/calendar/">
+          View Calendar
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
