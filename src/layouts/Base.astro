@@ -14,6 +14,7 @@ import { AstroFont } from "astro-font";
 import { ClientRouter } from "astro:transitions";
 import Announcement from "./helpers/Announcement";
 import SearchModal from "./helpers/SearchModal";
+import "@/styles/global.css";
 
 // font families
 const pf = theme.fonts.font_family.primary;
@@ -188,7 +189,7 @@ const { title, meta_title, description, image, noindex, canonical } =
         <GoogleTagmanagerNoscript id={config.google_tag_manager.gtm_id} />
       )
     }
-    <link rel="stylesheet" href="/src/styles/custom.css" />
+    
     
     <TwSizeIndicator />
     <Announcement client:load />
