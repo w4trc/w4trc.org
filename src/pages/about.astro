@@ -3,13 +3,14 @@ import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import { getListPage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import { render } from "astro:content";
+import OfficersGrid from "@/components/OfficersGrid.astro";
+import { render } from "astro:content";  
 
 const aboutIndex = await getListPage("about", "-index");
-const { Content } = await render(aboutIndex);
-const { title, description, meta_title, image } = aboutIndex.data;
+const { Content } = await render(aboutIndex); 
+const { title, description, meta_title, image, draft } = aboutIndex.data;
 
-if (aboutIndex.data.draft) {
+if (draft) {
   return Astro.redirect("/404");
 }
 ---
@@ -20,27 +21,113 @@ if (aboutIndex.data.draft) {
   description={description}
   image={image}
 >
-  <section class="section-sm">
-    <div class="container">
-      <div class="row justify-center">
-        <div class="text-center md:col-10 lg:col-7">
-          {
-            image && (
-              <ImageMod
-                class="mx-auto mb-6 rounded-lg"
-                src={image}
-                width={200}
-                height={200}
-                alt={title}
-                format="webp"
-              />
-            )
-          }
-          <h2 set:html={markdownify(title)} class="h3 mb-6" />
-          <div class="content">
-            <Content />
-          </div>
+  <!-- HERO -->
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      {image && (
+        <div aria-hidden="true" class="absolute inset-0 -z-10">
+          <ImageMod
+            src={image}
+            width={1200}
+            height={380}
+            alt={title}
+            format="webp"
+            class="w-full h-full object-cover opacity-60"
+          />
         </div>
+      )}
+      <h1 class="text-4xl font-extrabold mb-4">{title}</h1>
+      {description && <p class="text-lg max-w-2xl mx-auto">{description}</p>}
+    </div>
+  </section>
+
+  <!-- ABOUT CONTENT -->
+  <section class="section-md">
+    <div class="max-w-[1100px] mx-auto px-6">
+      <div class="prose max-w-none content mb-0">
+        <Content />
+      </div>
+
+      <!-- Officers Section -->
+      <div class="mt-10">
+        <OfficersGrid />
+      </div>
+
+      <!-- Coordinators -->
+      <section class="mt-6">
+        <h2 id="coordinators" class="section-title">Coordinators</h2>
+        <div class="prose max-w-none mt-1 content">
+          <ul>
+            <li>
+              <strong class="text-white font-semibold">VE Coordinator:</strong>
+              Neil Weber (KM4NWH)
+            </li>
+            <li>
+              <strong class="text-white font-semibold">Net Coordinator:</strong>
+              David Herron (K4UVU)
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- History -->
+      <section class="mt-6">
+        <h2 id="history" class="section-title">History</h2>
+        <div class="prose max-w-none mt-1 content">
+          <p>
+            A short history of the club goes here. Mention founding date,
+            notable milestones, important events, and evolution of activities.
+          </p>
+        </div>
+      </section>
+
+      <!-- Get Involved -->
+      <section class="mt-6">
+        <h2 id="get-involved" class="section-title">Get Involved</h2>
+        <div class="prose max-w-none mt-1 content">
+          <p>
+            How to join, renew membership, volunteer, or learn more. Add links
+            to the Join / Renew and Get Licensed pages.
+          </p>
+          <p>
+            <a href="/join/">Join / Renew</a> •
+            <a href="/license/">Get Licensed</a> •
+            <a href="/calendar/">View Calendar</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="mt-6">
+        <h2 id="contact" class="section-title">Contact</h2>
+        <div class="prose max-w-none mt-1 content">
+          <p>Add club contact details or a contact form link.</p>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section>
+    <div class="max-w-[1400px] mx-auto px-6">
+      <h2 class="section-title">Quick Links</h2>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
+        <a class="quicklink-card" href="/repeaters/">
+          <p class="text-lg font-semibold text-white">Club Repeaters</p>
+          <p>Frequencies, tones, coverage notes.</p>
+        </a>
+        <a class="quicklink-card" href="/nets/">
+          <p class="text-lg font-semibold text-white">Weekly Nets</p>
+          <p>Schedules and scripts.</p>
+        </a>
+        <a class="quicklink-card" href="/license/">
+          <p class="text-lg font-semibold text-white">Get Licensed / Upgrade</p>
+          <p>Study materials and test sessions.</p>
+        </a>
+        <a class="quicklink-card" href="/projects/">
+          <p class="text-lg font-semibold text-white">Projects</p>
+          <p>Club builds, antennas, mesh.</p>
+        </a>
       </div>
     </div>
   </section>

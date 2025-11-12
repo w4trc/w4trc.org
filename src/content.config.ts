@@ -153,6 +153,19 @@ const events = defineCollection({
   }),
 });
 
+export const officers = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),                 // Officer name (used as page title too)
+    position: z.string().optional(),   // President, VP, etc.
+    callsign: z.string().optional(),
+    photo: z.string().optional(),
+    photo_alt: z.string().optional(),
+    weight: z.number().default(0),     // sort asc
+    draft: z.boolean().optional(),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -163,6 +176,7 @@ export const collections = {
   about: aboutCollection,
   contact: contactCollection,
   events: events,
+  officers: officers,
 
   // sections
   ctaSection: ctaSectionCollection,

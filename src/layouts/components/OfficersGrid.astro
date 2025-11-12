@@ -1,0 +1,42 @@
+---
+// src/components/OfficersGrid.astro
+import { getCollection } from "astro:content";
+
+const officers = (await getCollection("officers"))
+  .filter(o => !o.data.draft)
+  .sort((a, b) => (a.data.weight ?? 0) - (b.data.weight ?? 0));
+---
+
+{officers.length > 0 && (
+  <div class="mt-8">
+    <h2 class="section-title">Club Officers</h2>
+
+    <div class="not-prose mt-6">
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        {officers.map(({ slug, data }) => {
+          const href = `/officers/${slug}/`; // assumes route at /officers/[slug]
+          const alt = data.photo_alt ?? `${data.title} photo`;
+          return (
+            <a class="officer-card group block rounded-lg bg-white/5 p-4 hover:bg-white/7 transition"
+               href={href}>
+              <div class="flex items-center gap-4">
+                {data.photo ? (
+                  <img alt={alt} src={data.photo} class="w-20 h-20 rounded-full object-cover" />
+                ) : (
+                  <div class="w-20 h-20 rounded-full bg-gray-700 flex items-center justify-center text-xl text-white">
+                    {data.title?.[0] ?? "?"}
+                  </div>
+                )}
+                <div>
+                  <p class="font-semibold text-lg">{data.title}</p>
+                  {data.callsign && <p class="text-sm text-gray-300">{data.callsign}</p>}
+                  {data.position && <p class="text-sm text-gray-400">{data.position}</p>}
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+)}
