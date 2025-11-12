@@ -188,7 +188,8 @@ const { title, meta_title, description, image, noindex, canonical } =
         <GoogleTagmanagerNoscript id={config.google_tag_manager.gtm_id} />
       )
     }
-
+    <link rel="stylesheet" href="/src/styles/custom.css" />
+    
     <TwSizeIndicator />
     <Announcement client:load />
     <Header />
