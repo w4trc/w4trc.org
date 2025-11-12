@@ -6,4 +6,5 @@ location: Warriors’ Path State Park, Shelter 3
 summary: Portable ops, logging, food. Dress warm!
 cover: /images/events/wfd.jpg
 ---
+
 Bring your radios, batteries, and enthusiasm.
