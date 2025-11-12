@@ -1,0 +1,16 @@
+upcoming:
+  - date: "2025-11-09"
+    time: "19:00"
+    title: "November General Meeting"
+    location: "Food City – Press Room, 300 Clinchfield, Kingsport"
+    topic: "Round Table Discussion"
+    desc: "Anything in radio, antennas, digital modes, club events, etc."
+  - date: "2025-12-09"
+    time: "19:00"
+    title: "December General Meeting"
+    location: "Food City – Press Room, 300 Clinchfield, Kingsport"
+    topic: "Trivia Night"
+    desc: "Join us for a fun evening of trivia and prizes!"
+    link:
+      url: "https://w4trc.org"
+      label: "RSVP"
