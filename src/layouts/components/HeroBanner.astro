@@ -1,0 +1,40 @@
+---
+const hero = {
+  background: "/images/hero-mountains.jpg",
+  logo: "/images/KARC-LOGO-AlphaBG.png",
+  title: "Welcome to Kingsport Amateur Radio Club",
+  subtitle:
+    "ARRL-affiliated amateur radio club serving the Tri-Cities (Kingsport • Johnson City • Bristol). Public service, education, emergency comms, and plenty of fun on the air.",
+  buttons: [
+    { label: "Join / Renew", link: "/join/", primary: true },
+    { label: "Get Licensed", link: "/license/", primary: false },
+  ],
+};
+---
+
+<!-- HERO -->
+<section
+  class="hero-heroimg relative w-full bg-cover bg-center"
+  style={`background-image:linear-gradient(rgba(4,12,18,.35),rgba(4,12,18,.65)),url('${hero.background}')`}
+>
+  <div class="w-full max-w-[1400px] mx-auto px-6 py-10">
+    <div class="flex justify-center mb-6">
+      <img src={hero.logo} alt="W4TRC" class="hero-logo-big" />
+    </div>
+
+    <h1>{hero.title}</h1>
+    <p>{hero.subtitle}</p>
+
+    <div class="hero-ctas">
+      {hero.buttons.map((btn) => (
+        <a
+          class={`cta-big ${btn.primary ? "cta-primary" : "cta-outline"}`}
+          href={btn.link}
+        >
+          {btn.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+<!-- /HERO -->
