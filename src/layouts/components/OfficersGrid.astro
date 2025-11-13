@@ -12,7 +12,7 @@ const officers = (await getCollection("officers"))
     <h2 class="section-title">Club Officers</h2>
 
     <div class="not-prose mt-6">
-      <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+      <div class="grid gap-6 grid-cols-1 md:grid-cols-2">
         {officers.map(({ slug, data }) => {
           const href = `/officers/${slug}/`; // assumes route at /officers/[slug]
           const alt = data.photo_alt ?? `${data.title} photo`;
