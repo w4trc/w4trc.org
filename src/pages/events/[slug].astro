@@ -1,0 +1,59 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Layout from "@/layouts/Base.astro";
+
+export const prerender = true;
+
+// Build-time: enumerate all event slugs
+export async function getStaticPaths() {
+  const events = await getCollection("events");
+  return events.map((e) => ({ params: { slug: e.slug } }));
+}
+
+// Per-page render
+const { slug } = Astro.params;
+if (!slug) throw new Error("Missing slug.");
+
+const event = await getEntry("events", slug);
+if (!event) throw new Error(`Event not found: ${slug}`);
+
+const { data } = event;
+const { Content } = await event.render();
+
+// Simple date/time formatters (no deps)
+const fmtDate = (iso) =>
+  new Date(iso).toLocaleDateString(undefined, {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+const fmtTime = (iso) =>
+  new Date(iso).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+
+const dateLine = data.endDate
+  ? `${fmtDate(data.date)} • ${fmtTime(data.date)}–${fmtTime(data.endDate)}`
+  : `${fmtDate(data.date)} • ${fmtTime(data.date)}`;
+---
+<Layout title={data.title}>
+    <section class="container mx-auto px-6 py-12">
+    <div class="max-w-3xl mx-auto">
+        {data.cover && (
+        <img src={data.cover} alt={data.title} class="w-2/3 mx-auto rounded-lg shadow mb-6" loading="eager" decoding="async" />
+        )}
+
+        <h1 class="text-4xl font-bold mb-2">{data.title}</h1>
+        {data.summary && <p class="text-gray-400 mb-4">{data.summary}</p>}
+
+        <div class="mb-6 text-sm text-gray-300 space-y-1">
+        <p><strong>Date:</strong> {dateLine}</p>
+        {data.location && <p><strong>Location:</strong> {data.location}</p>}
+        </div>
+
+        <article class="prose prose-invert max-w-none">
+        <Content />
+        </article>
+    </div>
+    </section>
+</Layout>
