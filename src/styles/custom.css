@@ -280,3 +280,13 @@ h2.section-title::after {
   /* force-hide the mobile toggler on desktop */
   label[for="nav-toggle"] { display: none !important; }
 }
+
+a,
+a:visited {
+  color: #ffffff !important;
+}
+
+a:hover,
+a:focus {
+  color: var(--w4-accent) !important;
+}
