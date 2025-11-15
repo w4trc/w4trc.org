@@ -3,7 +3,7 @@
     "title": "KARC",
     "base_url": "https://w4trc.org",
     "base_path": "/",
-    "trailing_slash": false,
+    "trailing_slash": true,
     "favicon": "/images/favicon.png",
     "logo": "",
     "logo_darkmode": "",
