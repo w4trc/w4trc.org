@@ -9,49 +9,111 @@
       "url": "/about/"
     },
     {
-      "name": "Elements",
-      "url": "/elements/"
-    },
-    {
-      "name": "Pages",
+      "name": "Activities",
       "url": "",
       "hasChildren": true,
       "children": [
         {
-          "name": "Contact",
-          "url": "/contact/"
+          "name": "POTA",
+          "url": "/activities/pota/"
         },
         {
-          "name": "Blog",
-          "url": "/blog/"
+          "name": "SOTA",
+          "url": "/activities/sota/"
         },
         {
-          "name": "Authors",
-          "url": "/authors/"
+          "name": "Fox Hunting",
+          "url": "/activities/fox-hunting/"
         },
         {
-          "name": "Categories",
-          "url": "/categories/"
-        },
-        {
-          "name": "Tags",
-          "url": "/tags/"
-        },
-        {
-          "name": "404 Page",
-          "url": "/404/"
+          "name": "Nets",
+          "url": "/activities/nets/"
         }
       ]
+    },
+    {
+      "name": "Repeaters",
+      "url": "",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "Club Repeaters (Bays Mountain)",
+          "url": "/repeaters/club/"
+        },
+        {
+          "name": "Local Repeaters & Nets",
+          "url": "/repeaters/local/"
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "url": "/events/"
+    },
+    {
+      "name": "Resources",
+      "url": "",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "Meeting Minutes",
+          "url": "/resources/minutes/"
+        },
+        {
+          "name": "Newsletter",
+          "url": "/resources/newsletter/"
+        },
+        {
+          "name": "Documents & Downloads",
+          "url": "/resources/downloads/"
+        },
+        {
+          "name": "License Testing",
+          "url": "/resources/license-testing/"
+        },
+        {
+          "name": "Helpful Links",
+          "url": "/resources/links/"
+        },
+        {
+          "name": "Silent Keys",
+          "url": "/resources/silent-keys/"
+        },
+        {
+          "name": "Member Articles & Bios",
+          "url": "/resources/articles/"
+        }
+      ]
+    },
+    {
+      "name": "News",
+      "url": "/news/"
+    },
+    {
+      "name": "Contact",
+      "url": "/contact/"
     }
   ],
   "footer": [
     {
-      "name": "Elements",
-      "url": "/elements/"
+      "name": "Join / Contact",
+      "url": "/contact/"
     },
     {
-      "name": "Privacy Policy",
-      "url": "/privacy-policy/"
+      "name": "Meshtastic",
+      "url": "https://meshtastic.w4trc.org"
+    },
+    {
+      "name": "ARRL",
+      "url": "https://www.arrl.org/"
+    },
+    {
+      "name": "Band Plans",
+      "url": "https://bandplan.amsat.org/"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://facebook.com/w4trc"
     }
   ]
 }
