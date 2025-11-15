@@ -290,3 +290,7 @@ a:hover,
 a:focus {
   color: var(--w4-accent) !important;
 }
+
+strong {
+  color: #ffffff;
+}
