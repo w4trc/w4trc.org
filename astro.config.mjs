@@ -35,4 +35,9 @@ export default defineConfig({
     shikiConfig: { theme: "one-dark-pro", wrap: true },
     extendDefaultPlugins: true,
   },
+  redirects: {
+    '/nets': '/activities/nets/',  // handles both /nets and /nets/
+    '/pota': '/activities/pota/',
+    '/sota': '/activities/sota/',
+  },
 });
