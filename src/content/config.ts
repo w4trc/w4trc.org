@@ -33,4 +33,5 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { events, blog, news };
+
+export const collections = { events, blog, news, };

@@ -166,6 +166,51 @@ export const officers = defineCollection({
   }),
 });
 
+const activities = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    meta_title: z.string().optional(),
+    image: z.string().optional(),
+    draft: z.boolean().default(false),
+
+    // Optional sections used by some activities (rendered conditionally)
+    // Nets (simple rows)
+    nets: z.array(z.object({
+      name: z.string(),
+      day: z.string(),          // e.g., "Tuesday"
+      time_local: z.string(),   // e.g., "8:00 PM"
+      frequency: z.string(),    // e.g., "146.970 (-) PL 123.0"
+    })).optional(),
+
+    // Nets (ordinal rules, e.g., "1st Sunday: XYZ")
+    net_rules: z.array(z.object({
+      rule: z.string(),         // e.g., "1st Sunday"
+      name: z.string(),         // e.g., "Ares Training Net"
+      time_local: z.string(),   // e.g., "8:00 PM"
+      frequency: z.string(),    // e.g., "146.970 (-) PL 123.0"
+    })).optional(),
+
+    // Net scripts / downloads
+    scripts: z.array(z.object({
+      label: z.string(),
+      url: z.string(),
+    })).optional(),
+
+    // Fox Hunt yearly schedule
+    foxhunts: z.object({
+      year: z.number(),
+      events: z.array(z.object({
+        date: z.string(),        // ISO (YYYY-MM-DD) recommended
+        time_local: z.string(),  // e.g., "10:00 AM"
+        location: z.string().optional(),
+        notes: z.string().optional(),
+      }))
+    }).optional(),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -177,6 +222,7 @@ export const collections = {
   contact: contactCollection,
   events: events,
   officers: officers,
+  activities: activities,
 
   // sections
   ctaSection: ctaSectionCollection,

@@ -1,0 +1,162 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+import { render, getEntry, getCollection } from "astro:content";
+
+// 1) Tell Astro which slugs to prerender from /content/activities/*.md
+export async function getStaticPaths() {
+  const pages = await getCollection("activities");
+  return pages
+    .filter((p) => !p.data.draft)
+    .map((p) => ({ params: { slug: p.slug } }));
+}
+
+// 2) Load the requested entry (same as you had)
+const { slug } = Astro.params;
+
+let page;
+try {
+  page = await getEntry("activities", slug!);
+} catch {
+  return Astro.redirect("/404");
+}
+if (!page) return Astro.redirect("/404");
+if (page.data?.draft) return Astro.redirect("/404");
+
+// Render markdown body component
+const { Content } = await render(page);
+
+// Convenience shorthands
+const { title, description, meta_title, image } = page.data;
+
+// Optional sections
+const nets = page.data.nets ?? [];
+const net_rules = page.data.net_rules ?? [];
+const scripts = page.data.scripts ?? [];
+const foxhunts = page.data.foxhunts ?? null;
+
+// Helpers
+const fmtDate = (iso: string) =>
+  new Date(iso + (iso.match(/T/) ? "" : "T00:00:00")).toLocaleDateString(
+    "en-US",
+    { weekday: "long", month: "long", day: "numeric", year: "numeric" }
+  );
+---
+
+<Base title={title} meta_title={meta_title} description={description} image={image}>
+  <!-- HERO -->
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      {image && (
+        <div aria-hidden="true" class="absolute inset-0 -z-10">
+          <ImageMod
+            src={image}
+            width={1600}
+            height={600}
+            alt={title}
+            format="webp"
+            class="w-full h-full object-cover opacity-60"
+          />
+        </div>
+      )}
+      <h1 class="text-4xl font-extrabold mb-4">{title}</h1>
+      {description && <p class="text-lg max-w-2xl mx-auto">{description}</p>}
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="section-md">
+    <div class="max-w-[1100px] mx-auto px-6">
+      <div class="prose max-w-none content mb-0">
+        <Content />
+      </div>
+
+      {/* Nets: simple weekly rows */}
+      {nets.length > 0 && (
+        <div class="mt-10 w4-card p-6">
+          <h3 class="text-xl font-bold mb-4">Net Schedule</h3>
+          <ul class="space-y-3">
+            {nets.map((n) => (
+              <li>
+                <p class="font-semibold">{n.name}</p>
+                <p class="text-sm opacity-80">{n.day} · {n.time_local} · {n.frequency}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Nets: ordinal rules (e.g., “1st Sunday: …”) */}
+      {net_rules.length > 0 && (
+        <div class="mt-6 w4-card p-6">
+          <h3 class="text-xl font-bold mb-4">Weekly Pattern</h3>
+          <ul class="space-y-3">
+            {net_rules.map((r) => (
+              <li>
+                <p class="font-semibold">{r.rule}: {r.name}</p>
+                <p class="text-sm opacity-80">{r.time_local} · {r.frequency}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Net scripts / downloads */}
+      {scripts.length > 0 && (
+        <div class="mt-6 w4-card p-6">
+          <h3 class="text-xl font-bold mb-4">Net Scripts</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            {scripts.map((s) => (<li><a class="underline" href={s.url}>{s.label}</a></li>))}
+          </ul>
+        </div>
+      )}
+
+      {/* Fox Hunts yearly schedule */}
+      {foxhunts && foxhunts.events?.length > 0 && (
+        <div class="mt-10 w4-card p-6">
+          <h3 class="text-xl font-bold mb-4">{foxhunts.year} Fox Hunt Schedule</h3>
+          <ul class="space-y-3">
+            {foxhunts.events.map((e) => (
+              <li>
+                <p class="font-semibold">{fmtDate(e.date)} · {e.time_local}</p>
+                <p class="text-sm opacity-80">
+                  {e.location ? `${e.location}` : ""}{e.location && e.notes ? " — " : ""}{e.notes ?? ""}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Placeholder for future DB metrics (check-ins). Add later. */}
+      {/* Example toggle:
+          {page.data.metrics_source && <div id="net-metrics" class="mt-6 w4-card p-6">...</div>}
+      */}
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section>
+    <div class="max-w-[1400px] mx-auto px-6">
+      <h2 class="section-title">Quick Links</h2>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
+        <a class="quicklink-card" href="/repeaters/">
+          <p class="text-lg font-semibold text-white">Club Repeaters</p>
+          <p>Frequencies, tones, coverage notes.</p>
+        </a>
+        <a class="quicklink-card" href="/nets/">
+          <p class="text-lg font-semibold text-white">Weekly Nets</p>
+          <p>Schedules and scripts.</p>
+        </a>
+        <a class="quicklink-card" href="/license/">
+          <p class="text-lg font-semibold text-white">Get Licensed / Upgrade</p>
+          <p>Study materials and test sessions.</p>
+        </a>
+        <a class="quicklink-card" href="/projects/">
+          <p class="text-lg font-semibold text-white">Projects</p>
+          <p>Club builds, antennas, mesh.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
