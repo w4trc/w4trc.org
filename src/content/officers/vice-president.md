@@ -2,7 +2,7 @@
 title: "Justin Compton"
 position: "Vice-President"
 callsign: "KO4DCD"
-photo: "/images/officers/placeholder.png"
+photo: "/images/officers/ko4dcd.png"
 photo_alt: "Justin Compton headshot"
 weight: 2
 ---
