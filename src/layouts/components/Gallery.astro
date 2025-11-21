@@ -1,0 +1,42 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+const {
+  dir = "images/activities/pota",
+  height = 400,
+  width = 400,
+  zoomable = true,
+} = Astro.props;
+
+// Correctly point to your public directory
+const publicDir = path.join(process.cwd(), "public", dir);
+
+let files: string[] = [];
+try {
+  files = fs.readdirSync(publicDir)
+    .filter((f) => /\.(jpe?g|png|webp|gif)$/i.test(f))
+    .sort((a, b) => a.localeCompare(b));
+} catch (e) {
+  console.error("Gallery directory not found:", publicDir);
+  files = [];
+}
+---
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  {files.map((file) => (
+    <div class="overflow-hidden rounded-lg shadow-md">
+      <img
+        src={`/${dir}/${file}`}
+        alt={file}
+        width={width}
+        height={height}
+        class:list={[
+          "object-cover w-full h-auto transition-transform duration-200",
+          zoomable && "hover:scale-105"
+        ]}
+        loading="lazy"
+      />
+    </div>
+  ))}
+</div>
