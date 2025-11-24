@@ -8,12 +8,13 @@
       "location": "Bays Mountain, Kingsport TN",
       "features": [
         "Primary club machine for meetings and the Sunday net",
-        "See /activities/nets/ for scripts and check-in details"
+        "Emergency power backup (solar and battery)",
+        "EchoLink node W4TRC-R"
       ],
-      "notes": "Update coverage notes, Echolink/DV info, and any link/remote details."
+      "notes": "Coverage across the whole Tri-Cities area, including Kingsport, Johnson City, and Bristol."
     },
     {
-      "name": "Club Repeater #2",
+      "name": "UHF #1",
       "callsign": "W4TRC",
       "frequency": "Add frequency / offset",
       "mode": "Add mode",
@@ -24,7 +25,7 @@
       "notes": "Replace these placeholder fields with the live repeater details."
     },
     {
-      "name": "Club Repeater #3",
+      "name": "UHF #2",
       "callsign": "W4TRC",
       "frequency": "Add frequency / offset",
       "mode": "Add mode",
