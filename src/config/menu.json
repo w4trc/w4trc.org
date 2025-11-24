@@ -33,18 +33,7 @@
     },
     {
       "name": "Repeaters",
-      "url": "",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "Club Repeaters (Bays Mountain)",
-          "url": "/repeaters/club/"
-        },
-        {
-          "name": "Local Repeaters & Nets",
-          "url": "/repeaters/local/"
-        }
-      ]
+      "url": "/repeaters/"
     },
     {
       "name": "Events",

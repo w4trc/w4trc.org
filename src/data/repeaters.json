@@ -1,0 +1,75 @@
+{
+  "clubOnAir": [
+    {
+      "name": "Bays Mountain VHF (Primary)",
+      "callsign": "W4TRC",
+      "frequency": "146.970 MHz (-0.6) PL 123.0",
+      "mode": "Analog FM",
+      "location": "Bays Mountain, Kingsport TN",
+      "features": [
+        "Primary club machine for meetings and the Sunday net",
+        "See /activities/nets/ for scripts and check-in details"
+      ],
+      "notes": "Update coverage notes, Echolink/DV info, and any link/remote details."
+    },
+    {
+      "name": "Club Repeater #2",
+      "callsign": "W4TRC",
+      "frequency": "Add frequency / offset",
+      "mode": "Add mode",
+      "location": "Add site",
+      "features": [
+        "Placeholder for a second on-air machine"
+      ],
+      "notes": "Replace these placeholder fields with the live repeater details."
+    },
+    {
+      "name": "Club Repeater #3",
+      "callsign": "W4TRC",
+      "frequency": "Add frequency / offset",
+      "mode": "Add mode",
+      "location": "Add site",
+      "features": [
+        "Placeholder for a third on-air machine"
+      ],
+      "notes": "Replace these placeholder fields with the live repeater details."
+    }
+  ],
+  "comingSoon": [
+    {
+      "name": "Upcoming Repeater #1",
+      "callsign": "W4TRC",
+      "frequency": "TBD",
+      "mode": "TBD",
+      "location": "TBD",
+      "notes": "Add ETA/status, coverage goals, and planned features."
+    },
+    {
+      "name": "Upcoming Repeater #2",
+      "callsign": "W4TRC",
+      "frequency": "TBD",
+      "mode": "TBD",
+      "location": "TBD",
+      "notes": "Add ETA/status, coverage goals, and planned features."
+    }
+  ],
+  "areaRepeaters": [
+    {
+      "location": "Example / Placeholder",
+      "frequency": "147.000 MHz (+) PL 100.0",
+      "mode": "FM",
+      "callsign": "CALLSIGN",
+      "notes": "Replace this row with a real nearby repeater."
+    }
+  ],
+  "areaNets": [
+    {
+      "name": "Example Area Net",
+      "day": "Monday",
+      "time_local": "8:00 PM",
+      "frequency": "147.000 MHz (+) PL 100.0",
+      "mode": "FM",
+      "notes": "Replace this row with a real area net."
+    }
+  ]
+}
