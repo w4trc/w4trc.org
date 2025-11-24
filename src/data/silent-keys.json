@@ -1,0 +1,20 @@
+[
+  {
+    "name": "John Doe",
+    "callsign": "W4ABC",
+    "years": "1948-2023",
+    "description": "Past club president, Elmer to many new operators, and long-time Field Day organizer."
+  },
+  {
+    "name": "Sarah Lee",
+    "callsign": "K4XYZ",
+    "years": "1955-2022",
+    "description": "Led education nights and helped launch the club's first digital repeater."
+  },
+  {
+    "name": "Michael Tran",
+    "callsign": "N4MJT",
+    "years": "1961-2021",
+    "description": "Active net control, public service volunteer, and avid contest operator."
+  }
+]
