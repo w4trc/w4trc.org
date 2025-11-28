@@ -1,0 +1,153 @@
+---
+import Base from "@/layouts/Base.astro";
+import meetingsData from "@/data/meetings.json";
+import { getCollection } from "astro:content";
+
+// Normalize meetings whether data is a single object or an array
+const normalizeMeeting = (m: any) => ({
+  title: m?.title || "Club Meeting",
+  date: m?.datetime || m?.date,
+  endDate: m?.endDate ?? null,
+  location: m?.location ?? "",
+  summary: m?.summary || m?.desc || (m?.topic ? `Topic: ${m.topic}` : ""),
+  link: m?.signupUrl || m?.link || "",
+  type: "Meeting",
+});
+
+const meetingItems = Array.isArray(meetingsData)
+  ? meetingsData.map(normalizeMeeting)
+  : meetingsData && typeof meetingsData === "object"
+    ? [normalizeMeeting(meetingsData)]
+    : [];
+
+const events = await getCollection("events");
+const eventItems = events.map((e) => ({
+  title: e.data.title,
+  date: e.data.date as string,
+  endDate: (e.data as any).endDate ?? null,
+  location: e.data.location ?? "",
+  summary: e.data.summary ?? "",
+  image: (e.data as any).cover ?? "",
+  link: `/events/${e.slug}/`,
+  type: "Event",
+}));
+
+const parsedItems = [...meetingItems, ...eventItems]
+  .filter((item) => {
+    if (!item.date) return false;
+    const d = new Date(item.date);
+    return !Number.isNaN(d.getTime());
+  })
+  .map((item) => ({
+    ...item,
+    dateObj: new Date(item.date),
+  }));
+
+const merged = parsedItems.sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
+
+const now = new Date();
+const upcoming = merged.filter((item) => item.dateObj.getTime() >= now.getTime());
+
+const fmtDate = (iso: string) => {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+};
+const fmtTime = (iso: string) => {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+};
+---
+
+<Base
+  title="Upcoming Events"
+  meta_title="W4TRC - Upcoming Events"
+  description="One view of club meetings and events pulled from multiple sources."
+>
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-4">Upcoming Events</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        Club meetings plus special events, merged into a single feed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-md">
+    <div class="max-w-[1200px] mx-auto px-6 space-y-6">
+      {upcoming.length > 0 ? (
+        <div class="grid gap-6 md:grid-cols-2">
+          {upcoming.map((item) => (
+            <article class="w4-card overflow-hidden h-full flex flex-col">
+              {item.image && (
+                <img
+                  src={item.image}
+                  alt=""
+                  class="w-full h-36 object-cover border-b border-white/10"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <div class="p-6 flex flex-col gap-3 flex-1">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <p class="text-xs uppercase tracking-wide text-white/60">{item.type}</p>
+                    {item.link && item.type !== "Meeting" ? (
+                      <a
+                        href={item.link}
+                        class="text-xl font-bold text-white leading-snug hover:underline"
+                      >
+                        {item.title}
+                      </a>
+                    ) : (
+                      <h2 class="text-xl font-bold text-white leading-snug">{item.title}</h2>
+                    )}
+                  </div>
+                  <div class="flex flex-col items-end text-right gap-1">
+                    <span class="text-xs px-3 py-1 rounded-full bg-white/10 text-white/80 border border-white/15 whitespace-nowrap">
+                      {fmtDate(item.date)}
+                    </span>
+                    <span class="text-xs text-white/70">
+                      {fmtTime(item.date)}
+                      {item.endDate ? ` - ${fmtTime(item.endDate)}` : ""}
+                    </span>
+                  </div>
+                </div>
+                {item.location && (
+                  <p class="text-sm text-white/75">
+                    <span class="font-semibold text-white/85">Location:</span> {item.location}
+                  </p>
+                )}
+                {item.summary && <p class="text-sm text-white/75">{item.summary}</p>}
+                <div class="mt-auto pt-2">
+                  {item.type === "Meeting" ? null : item.link ? (
+                    <a class="button inline-flex items-center justify-center px-4 py-2 text-sm font-semibold" href={item.link}>
+                      Details
+                    </a>
+                  ) : (
+                    <p class="text-xs text-white/55">No link provided yet.</p>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="w4-card p-6">
+          <p class="text-sm text-white/75">
+            No upcoming items found. Add meetings in <code>src/data/meetings.json</code> or events in the <code>events</code> collection.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
