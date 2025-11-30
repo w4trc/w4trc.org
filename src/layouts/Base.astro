@@ -15,6 +15,7 @@ import { ClientRouter } from "astro:transitions";
 import Announcement from "./helpers/Announcement";
 import SearchModal from "./helpers/SearchModal";
 import "@/styles/global.css";
+import { WebVitals } from '@casoon/astro-webvitals';
 
 // font families
 const pf = theme.fonts.font_family.primary;
@@ -190,7 +191,7 @@ const { title, meta_title, description, image, noindex, canonical } =
       )
     }
     
-    
+    <WebVitals debug={import.meta.env.DEV} />
     <TwSizeIndicator />
     <Announcement client:load />
     <Header />
