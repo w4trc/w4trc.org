@@ -104,5 +104,60 @@ try {
     </section>
   )}
 
+  <!-- ===================== -->
+  <!-- Conditions (Solar + Weather) -->
+  <!-- ===================== -->
+  <section>
+    <div class="container px-6 max-w-[1400px] mx-auto">
+      <h2 class="section-title">Conditions</h2>
+      <div class="grid gap-8 lg:grid-cols-2 mt-6 items-start">
+        <div class="rounded-2xl border border-border dark:border-darkmode-border bg-white/5 dark:bg-darkmode-light/20 p-6 text-center">
+          <a href="https://www.hamqsl.com/solar.html" class="inline-block" title="Solar-Terrestrial Data from N0NBH">
+            <img src="https://www.hamqsl.com/solar101pic.php" alt="Solar-Terrestrial data panel" class="mx-auto" loading="lazy" />
+          </a>
+          <p class="mt-4 text-sm text-text-light dark:text-darkmode-text-light">
+            Solar Weather provided by <a href="https://www.hamqsl.com/solar.html" class="underline">N0NBH</a>.{" "}
+            <a href="https://www.hamqsl.com/solar2.html#glossary" class="underline">What do these numbers mean?</a>
+          </p>
+        </div>
+        <div class="rounded-2xl border border-border dark:border-darkmode-border bg-white/5 dark:bg-darkmode-light/20 p-6 text-center">
+          <a
+            class="weatherwidget-io"
+            href="https://forecast7.com/en/36d55n82d56/kingsport/?unit=us"
+            data-label_1="KINGSPORT"
+            data-label_2="WEATHER"
+            data-theme="pure"
+          >
+            KINGSPORT WEATHER
+          </a>
+          <script is:inline>
+            {`
+              if (typeof window !== "undefined") {
+                const id = "weatherwidget-io-js";
+                const existing = document.getElementById(id);
+
+                const init = () => {
+                  if (window.__weatherwidget_init) {
+                    window.__weatherwidget_init();
+                  }
+                };
+
+                if (existing) {
+                  init();
+                } else {
+                  const js = document.createElement("script");
+                  js.id = id;
+                  js.src = "https://weatherwidget.io/js/widget.min.js";
+                  js.onload = init;
+                  document.body.appendChild(js);
+                }
+              }
+            `}
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <CallToAction call_to_action={call_to_action} />
 </Base>
