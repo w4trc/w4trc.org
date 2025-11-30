@@ -3,55 +3,56 @@
     {
       "name": "Bays Mountain VHF (Primary)",
       "callsign": "W4TRC",
-      "frequency": "146.970 MHz (-0.6) PL 123.0",
-      "mode": "Analog FM",
+      "frequency": "146.970 MHz (-0.6 MHz offset) PL 123.0 Hz PL Tone",
+      "mode": "Analog or Yaesu System Fusion (C4FM) Input / Analog Only Output",
       "location": "Bays Mountain, Kingsport TN",
       "features": [
         "Primary club machine for meetings and the Sunday net",
         "Emergency power backup (solar and battery)",
         "EchoLink node W4TRC-R"
       ],
-      "notes": "Coverage across the whole Tri-Cities area, including Kingsport, Johnson City, and Bristol."
+      "notes": "Coverage across the whole Tri-Cities area, including Kingsport, Johnson City, and Bristol. Supports both analog FM and Yaesu System Fusion (C4FM) digital modes as input, will only output analog FM."
     },
     {
       "name": "UHF #1",
       "callsign": "W4TRC",
-      "frequency": "Add frequency / offset",
-      "mode": "Add mode",
-      "location": "Add site",
+      "frequency": "443.325 MHz (+5.0 MHz offset) PL 123.0 Hz PL Tone",
+      "mode": "Automatic Mode Select (AMS) for Yaesu System Fusion (C4FM) and Analog FM",
+      "location": "Bays Mountain, Kingsport TN",
       "features": [
-        "Placeholder for a second on-air machine"
+        "Emergency power backup (solar and battery)",
+        "Supports both analog FM and Yaesu System Fusion (C4FM) digital modes as input and output"
       ],
-      "notes": "Replace these placeholder fields with the live repeater details."
+      "notes": ""
     },
     {
       "name": "UHF #2",
       "callsign": "W4TRC",
-      "frequency": "Add frequency / offset",
-      "mode": "Add mode",
-      "location": "Add site",
+      "frequency": "443.175 MHz (+5.0 MHz offset)",
+      "mode": "Yaesu System Fusion (C4FM) Only",
+      "location": "Bays Mountain, Kingsport TN",
       "features": [
-        "Placeholder for a third on-air machine"
+        ""
       ],
-      "notes": "Replace these placeholder fields with the live repeater details."
+      "notes": "This repeater will be used for digital including Wires-X coming soon."
     }
   ],
   "comingSoon": [
     {
-      "name": "Upcoming Repeater #1",
+      "name": "6 Meter (50 MHz) Repeater",
       "callsign": "W4TRC",
       "frequency": "TBD",
       "mode": "TBD",
       "location": "TBD",
-      "notes": "Add ETA/status, coverage goals, and planned features."
+      "notes": "Coming Soon"
     },
     {
-      "name": "Upcoming Repeater #2",
+      "name": "33 Centimeter (900 MHz) Repeater",
       "callsign": "W4TRC",
       "frequency": "TBD",
       "mode": "TBD",
       "location": "TBD",
-      "notes": "Add ETA/status, coverage goals, and planned features."
+      "notes": "Coming Soon"
     }
   ],
   "areaRepeaters": [
