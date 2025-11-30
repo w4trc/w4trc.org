@@ -22,6 +22,20 @@ const testimonial = await getListPage("testimonialSection", "testimonial");
 
 const { banner, features } = homepage.data;
 
+// Raw weather widget markup (kept as-is so the third-party script can bootstrap itself)
+const weatherWidgetMarkup = `<a class="weatherwidget-io" href="https://forecast7.com/en/36d55n82d56/kingsport/?unit=us" data-label_1="KINGSPORT" data-label_2="WEATHER" data-theme="pure">KINGSPORT WEATHER</a>
+<script>
+!function(d,s,id){
+  var js,fjs=d.getElementsByTagName(s)[0];
+  if(!d.getElementById(id)){
+    js=d.createElement(s);
+    js.id=id;
+    js.src='https://weatherwidget.io/js/widget.min.js';
+    fjs.parentNode.insertBefore(js,fjs);
+  }
+}(document,'script','weatherwidget-io-js');
+</script>`;
+
 // NEW: fetch last 3 items across `news` + `blog`
 let newsPosts: any[] = [];
 try {
@@ -121,39 +135,7 @@ try {
           </p>
         </div>
         <div class="rounded-2xl border border-border dark:border-darkmode-border bg-white/5 dark:bg-darkmode-light/20 p-6 text-center">
-          <a
-            class="weatherwidget-io"
-            href="https://forecast7.com/en/36d55n82d56/kingsport/?unit=us"
-            data-label_1="KINGSPORT"
-            data-label_2="WEATHER"
-            data-theme="pure"
-          >
-            KINGSPORT WEATHER
-          </a>
-          <script is:inline>
-            {`
-              if (typeof window !== "undefined") {
-                const id = "weatherwidget-io-js";
-                const existing = document.getElementById(id);
-
-                const init = () => {
-                  if (window.__weatherwidget_init) {
-                    window.__weatherwidget_init();
-                  }
-                };
-
-                if (existing) {
-                  init();
-                } else {
-                  const js = document.createElement("script");
-                  js.id = id;
-                  js.src = "https://weatherwidget.io/js/widget.min.js";
-                  js.onload = init;
-                  document.body.appendChild(js);
-                }
-              }
-            `}
-          </script>
+          <div set:html={weatherWidgetMarkup}></div>
         </div>
       </div>
     </div>
