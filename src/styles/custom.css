@@ -1,66 +1,43 @@
-/* ============================================================
-   Kingsport Amateur Radio Club – Custom Theme
-   With Mountain Texture Background
-   ============================================================ */
-
-/* ===== Brand tokens (improved contrast version) ===== */
-html, body {
-  background: url("/images/mountaintexture.png") center top repeat-y fixed !important;
-  background-size: cover !important;
-}
-
+/* ===== Brand tokens (updated) =====
+   Deep navy surfaces + warm accent
+   Accessible contrast across sections
+*/
 :root{
   --w4-brand:#2b6cb0;      /* brand blue */
   --w4-accent:#f59e0b;     /* warm amber accent */
+  --w4-ink:#e5e7eb;        /* light text */
+  --w4-ink-muted:rgba(229,231,235,.85);
 
-  --w4-ink:#f1f3f8;        /* main text */
-  --w4-ink-muted:rgba(241,243,248,.80);
-
-  /* backgrounds slightly lifted for clarity */
-  --w4-bg:#0f1523;         /* page background */
-  --w4-surface:#182235;    /* card surface */
-  --w4-surface-2:#141d2e;  /* alternating bands */
-
-  --w4-border:rgba(255,255,255,.14);
-
+  --w4-bg:#0b1220;         /* page background */
+  --w4-surface:#111a2c;    /* primary card surface */
+  --w4-surface-2:#0e1728;  /* secondary surface */
+  --w4-border:rgba(255,255,255,.10);
   --w4-shadow:0 10px 24px rgba(0,0,0,.28);
   --w4-shadow-lg:0 16px 36px rgba(0,0,0,.35);
-
-  /* Mountain texture */
-  --w4-bg-img:url("/images/mountaintexture.png");
-  --w4-bg-opacity:0.18; /* adjust between .10 – .28 */
 }
 
-/* ===== Textured Background Layer ===== */
+/* ===== Page background ===== */
+html,
+body {
+  background-color: var(--w4-bg);
 
-html, body {
-  position: relative;
-  min-height: 100%;
-  background:
-    linear-gradient(180deg, rgba(10,15,25,0.90), rgba(10,15,25,0.96)),
-    linear-gradient(135deg, rgba(20,28,40,0.40), rgba(15,20,30,0.10)),
-    var(--w4-bg);
-  color: var(--w4-ink);
-  background-attachment: fixed;
-}
+  /* mountain texture — darkened and blended */
+  background-image:
+    linear-gradient(180deg, rgba(8,12,22,0.80), rgba(8,12,22,0.80)),
+    url("/images/mountaintexture.png");
 
-/* Mountain texture overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  background: var(--w4-bg-img);
   background-size: cover;
+  background-repeat: repeat-y;
   background-position: center top;
-  opacity: var(--w4-bg-opacity);
+  background-attachment: fixed;
+
+  color: var(--w4-ink);
 }
 
-/* ============================================================
-   HERO
-   ============================================================ */
 
+/* --- W4TRC Homepage Overrides --- */
+
+/* HERO (full bleed, tall, centered) */
 .hero-heroimg {
   position: relative;
   min-height: 78vh;
@@ -71,88 +48,43 @@ body::before {
   isolation: isolate;
 }
 .hero-heroimg::before{
+  /* darken busy photos for legible type */
   content:"";
   position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(12,17,29,.40), rgba(12,17,29,.70));
+  background: linear-gradient(180deg, rgba(8,12,22,.55), rgba(8,12,22,.75));
   z-index:-1;
 }
 .hero-heroimg h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  color:#f8f9fb;
+  letter-spacing: .2px;
+  color:#f3f4f6;
 }
 .hero-heroimg p {
   font-size: 1.125rem;
   margin-top: 1rem;
-  max-width: 72ch;
+  max-width: 60ch;
   margin-left: auto;
   margin-right: auto;
   color: var(--w4-ink-muted);
 }
 
-/* Hero CTAs */
-.hero-ctas{
-  display:flex; gap:14px; justify-content:center;
-  margin-top:26px; flex-wrap:wrap;
-}
-.cta-big{
-  display:inline-block; padding:14px 22px;
-  border-radius:14px; font-weight:700; 
-  font-size:1.02rem; line-height:1; text-decoration:none;
-  border:1px solid var(--w4-border);
-  color:#f8f9fb; background:rgba(255,255,255,.05);
-  box-shadow: var(--w4-shadow);
-  transition: transform .12s ease, filter .12s ease,
-             box-shadow .12s ease, background .12s ease,
-             border-color .12s ease;
-}
-.cta-big:hover{
-  transform:translateY(-1px); 
-  filter:brightness(1.05);
-  border-color: rgba(255,255,255,.22);
-}
-
-.cta-primary{
-  background: var(--w4-brand);
-  color: #eef6ff;
-}
-.cta-primary:hover{
-  background: #275ea6;
-}
-
-.cta-outline{
-  background: transparent;
-  border-color: rgba(255,255,255,.32);
-}
-.cta-outline:hover{
-  background: rgba(255,255,255,.08);
-}
-
-/* Hero logo */
-.hero-logo-big {
-  height: 180px; width: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: var(--w4-shadow-lg);
-}
-
-/* ============================================================
-   SECTION STYLING
-   ============================================================ */
-
-section { 
-  padding-top: 4.5rem; 
+/* SECTION rhythm */
+section {
+  padding-top: 4.5rem;
   padding-bottom: 4.5rem;
 }
 
+/* (REMOVED) section:nth-of-type(even) background so texture shows through */
+/* section:nth-of-type(even) { background: var(--w4-surface-2); } */
 
-/* Section Titles */
+/* SECTION TITLES with accent underline */
 .section-title,
 h2.section-title {
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 1.25rem;
-  color: #f8f9fb;
+  color: #f3f4f6;
   position: relative;
 }
 .section-title::after,
@@ -161,54 +93,76 @@ h2.section-title::after {
   position: absolute;
   left: 0;
   bottom: -0.6rem;
-  width: 48px; height: 4px;
+  width: 48px;
+  height: 4px;
   background: var(--w4-accent);
   border-radius: 2px;
 }
 
-/* Markdown h2/h3/h4 */
-.content h2,
-.content h3,
-.content h4 {
-  color: #f8f9fb;
-}
-
+/* Ensure markdown H2s match homepage section headers */
 .content h2 {
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 1.25rem;
+  color: #f3f4f6;
   position: relative;
 }
-.content h2::after{
-  content:""; position:absolute; left:0; bottom:-0.6rem;
-  width:48px; height:4px; background:var(--w4-accent);
+.content h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.6rem;
+  width: 48px;
+  height: 4px;
+  background: var(--w4-accent);
+  border-radius: 2px;
 }
 
+/* Ensure markdown H3s and H4s visually harmonize with H2s */
 .content h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  margin: 2rem 0 .75rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #f3f4f6;
   position: relative;
 }
+
 .content h3::after {
-  content:""; position:absolute; left:0; bottom:-0.4rem;
-  width:36px; height:3px; background:var(--w4-accent);
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.4rem;
+  width: 36px;
+  height: 3px;
+  background: var(--w4-accent);
+  border-radius: 2px;
+  opacity: 0.9;
 }
 
 .content h4 {
-  font-size:1.25rem; font-weight:600;
-  margin-top:1.5rem; margin-bottom:0.5rem;
-  position:relative; color:var(--w4-ink);
-}
-.content h4::after{
-  content:""; position:absolute; left:0; bottom:-0.35rem;
-  width:24px; height:2px; background:var(--w4-accent);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--w4-ink);
+  position: relative;
 }
 
-/* ============================================================
-   CARDS, NEWS, QUICK LINKS, MEETING BOX
-   ============================================================ */
+.content h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 24px;
+  height: 2px;
+  background: var(--w4-accent);
+  border-radius: 1px;
+  opacity: 0.7;
+}
 
+
+/* Universal card base */
 .w4-card,
 .quicklink-card,
 .news-card,
@@ -224,32 +178,27 @@ h2.section-title::after {
 .news-card:hover,
 .meeting-box:hover {
   transform: translateY(-2px);
-  border-color: rgba(255,255,255,.22);
   box-shadow: var(--w4-shadow-lg);
+  border-color: rgba(255,255,255,.18);
 }
 
+/* QUICK LINK cards */
 .quicklink-card,
 .w4-card { padding: 1.75rem; }
-
 .w4-card p,
-.quicklink-card p {
-  color: var(--w4-ink-muted);
-}
+.quicklink-card p { color: var(--w4-ink-muted); }
 
-/* Meeting Box */
+/* NEXT MEETING box (slight brand tint) */
 .meeting-box {
   padding: 2rem;
   background:
-    linear-gradient(180deg, rgba(43,108,176,.12), rgba(24,34,53,1)),
+    linear-gradient(180deg, rgba(43,108,176,.10), rgba(17,26,44,1)),
     var(--w4-surface);
 }
-.meeting-box p {
-  color: var(--w4-ink-muted);
-}
+.meeting-box p { color: var(--w4-ink-muted); }
 
-/* News Cards */
+/* NEWS cards */
 .news-card { padding: 1.25rem; }
-
 .news-card img {
   aspect-ratio: 16/9;
   object-fit: cover;
@@ -259,17 +208,76 @@ h2.section-title::after {
 .news-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #f8f9fb;
+  margin-top: .35rem;
+  color: #f3f4f6;
 }
 .news-card p {
   font-size: .96rem;
-  color: rgba(241,243,248,.75);
+  color: rgba(229,231,235,.78);
 }
 
-/* ============================================================
-   TABLES
-   ============================================================ */
+/* big hero CTAs */
+.hero-ctas{
+  display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;
+}
+.cta-big{
+  display:inline-block; padding:14px 22px; border-radius:14px;
+  font-weight:700; font-size:1.02rem; line-height:1; text-decoration:none;
+  border:1px solid var(--w4-border); color:#f3f4f6; background:rgba(255,255,255,.04);
+  box-shadow: var(--w4-shadow);
+  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+}
+.cta-big:hover{ transform:translateY(-1px); filter:brightness(1.04); border-color: rgba(255,255,255,.18); }
 
+/* Primary & outline styles (brand + warm accent on hover) */
+.cta-primary{
+  background: var(--w4-brand);
+  color: #eef6ff;
+  border-color: rgba(0,0,0,.18);
+}
+.cta-primary:hover{
+  background: #275ea6; /* slightly darker brand hover */
+}
+
+.cta-outline{
+  background: transparent;
+  border-color: rgba(255,255,255,.28);
+  color: #f3f4f6;
+}
+.cta-outline:hover{
+  background: rgba(255,255,255,.06);
+}
+
+/* optional: make hero copy a touch wider for balance with 2 buttons */
+.hero-heroimg p{ max-width: 72ch; }
+
+/* Bigger hero logo */
+.hero-logo-big {
+  height: 180px;
+  width: 180px;
+  border-radius: 50%;
+  background: none;
+  object-fit: cover;
+  object-position: center;
+  padding: 0; /* ensure full fill */
+  box-shadow: var(--w4-shadow-lg);
+}
+
+
+@media(min-width: 768px){
+  .hero-logo-big { height: 180px; }
+}
+
+/* Accessibility + motion */
+@media (prefers-reduced-motion: reduce) {
+  .w4-card,
+  .quicklink-card,
+  .news-card,
+  .meeting-box,
+  .cta-big { transition: none; }
+}
+
+/* --- Better table alignment and spacing --- */
 .content table {
   margin-left: auto;
   margin-right: auto;
@@ -277,50 +285,37 @@ h2.section-title::after {
   width: 100%;
   max-width: 800px;
 }
+
 .content table th,
 .content table td {
   padding: 0.75rem 1rem;
   text-align: left;
 }
+
 .content table thead th {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.05);
   border-bottom: 1px solid var(--w4-border);
 }
 
-/* ============================================================
-   NAVIGATION CLEANUP
-   ============================================================ */
-
 @media (min-width: 1024px) {
+  /* force-hide the mobile toggler on desktop */
   label[for="nav-toggle"] { display: none !important; }
 }
-
-/* ============================================================
-   LINKS / TEXT
-   ============================================================ */
 
 a,
 a:visited {
   color: #ffffff !important;
 }
+
 a:hover,
 a:focus {
   color: var(--w4-accent) !important;
 }
 
-strong,
-th {
+strong {
   color: #ffffff;
 }
 
-/* ============================================================
-   Reduced Motion
-   ============================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  .w4-card,
-  .quicklink-card,
-  .news-card,
-  .meeting-box,
-  .cta-big { transition: none; }
+th {
+  color: #ffffff;
 }
