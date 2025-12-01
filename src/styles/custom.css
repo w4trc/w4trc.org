@@ -1,28 +1,61 @@
+/* ============================================================
+   Kingsport Amateur Radio Club – Custom Theme
+   With Mountain Texture Background
+   ============================================================ */
+
 /* ===== Brand tokens (improved contrast version) ===== */
 :root{
   --w4-brand:#2b6cb0;      /* brand blue */
   --w4-accent:#f59e0b;     /* warm amber accent */
 
-  --w4-ink:#f1f3f8;        /* main text – brighter */
+  --w4-ink:#f1f3f8;        /* main text */
   --w4-ink-muted:rgba(241,243,248,.80);
 
   /* backgrounds slightly lifted for clarity */
-  --w4-bg:#0f1523;         /* page background (was #0b1220) */
-  --w4-surface:#182235;    /* card surface (was #111a2c) */
-  --w4-surface-2:#141d2e;  /* alternating section (was #0e1728) */
+  --w4-bg:#0f1523;         /* page background */
+  --w4-surface:#182235;    /* card surface */
+  --w4-surface-2:#141d2e;  /* alternating bands */
 
-  --w4-border:rgba(255,255,255,.14); /* slightly stronger */
+  --w4-border:rgba(255,255,255,.14);
+
   --w4-shadow:0 10px 24px rgba(0,0,0,.28);
   --w4-shadow-lg:0 16px 36px rgba(0,0,0,.35);
+
+  /* Mountain texture */
+  --w4-bg-img:url("/images/mountaintexture.png");
+  --w4-bg-opacity:0.18; /* adjust between .10 – .28 */
 }
 
-/* ===== Page background ===== */
-html, body { 
-  background: var(--w4-bg); 
-  color: var(--w4-ink); 
+/* ===== Textured Background Layer ===== */
+
+html, body {
+  position: relative;
+  min-height: 100%;
+  background:
+    linear-gradient(180deg, rgba(10,15,25,0.90), rgba(10,15,25,0.96)),
+    linear-gradient(135deg, rgba(20,28,40,0.40), rgba(15,20,30,0.10)),
+    var(--w4-bg);
+  color: var(--w4-ink);
+  background-attachment: fixed;
 }
 
-/* HERO */
+/* Mountain texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: var(--w4-bg-img);
+  background-size: cover;
+  background-position: center top;
+  opacity: var(--w4-bg-opacity);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
 .hero-heroimg {
   position: relative;
   min-height: 78vh;
@@ -33,7 +66,6 @@ html, body {
   isolation: isolate;
 }
 .hero-heroimg::before{
-  /* slightly lighter overlay for cleaner photo contrast */
   content:"";
   position:absolute; inset:0;
   background: linear-gradient(180deg, rgba(12,17,29,.40), rgba(12,17,29,.70));
@@ -42,7 +74,6 @@ html, body {
 .hero-heroimg h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  letter-spacing: .2px;
   color:#f8f9fb;
 }
 .hero-heroimg p {
@@ -54,16 +85,65 @@ html, body {
   color: var(--w4-ink-muted);
 }
 
-/* SECTION rhythm (light contrast banding) */
-section { 
-  padding-top: 4.5rem; 
-  padding-bottom: 4.5rem; 
+/* Hero CTAs */
+.hero-ctas{
+  display:flex; gap:14px; justify-content:center;
+  margin-top:26px; flex-wrap:wrap;
 }
-section:nth-of-type(even) { 
-  background: var(--w4-surface-2); 
+.cta-big{
+  display:inline-block; padding:14px 22px;
+  border-radius:14px; font-weight:700; 
+  font-size:1.02rem; line-height:1; text-decoration:none;
+  border:1px solid var(--w4-border);
+  color:#f8f9fb; background:rgba(255,255,255,.05);
+  box-shadow: var(--w4-shadow);
+  transition: transform .12s ease, filter .12s ease,
+             box-shadow .12s ease, background .12s ease,
+             border-color .12s ease;
+}
+.cta-big:hover{
+  transform:translateY(-1px); 
+  filter:brightness(1.05);
+  border-color: rgba(255,255,255,.22);
 }
 
-/* SECTION TITLES */
+.cta-primary{
+  background: var(--w4-brand);
+  color: #eef6ff;
+}
+.cta-primary:hover{
+  background: #275ea6;
+}
+
+.cta-outline{
+  background: transparent;
+  border-color: rgba(255,255,255,.32);
+}
+.cta-outline:hover{
+  background: rgba(255,255,255,.08);
+}
+
+/* Hero logo */
+.hero-logo-big {
+  height: 180px; width: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--w4-shadow-lg);
+}
+
+/* ============================================================
+   SECTION STYLING
+   ============================================================ */
+
+section { 
+  padding-top: 4.5rem; 
+  padding-bottom: 4.5rem;
+}
+section:nth-of-type(even) { 
+  background: var(--w4-surface-2);
+}
+
+/* Section Titles */
 .section-title,
 h2.section-title {
   font-size: 2rem;
@@ -78,72 +158,54 @@ h2.section-title::after {
   position: absolute;
   left: 0;
   bottom: -0.6rem;
-  width: 48px;
-  height: 4px;
+  width: 48px; height: 4px;
   background: var(--w4-accent);
   border-radius: 2px;
 }
 
-/* Markdown H2/H3/H4 */
+/* Markdown h2/h3/h4 */
+.content h2,
+.content h3,
+.content h4 {
+  color: #f8f9fb;
+}
+
 .content h2 {
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 1.25rem;
-  color: #f8f9fb;
   position: relative;
 }
-.content h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.6rem;
-  width: 48px;
-  height: 4px;
-  background: var(--w4-accent);
-  border-radius: 2px;
+.content h2::after{
+  content:""; position:absolute; left:0; bottom:-0.6rem;
+  width:48px; height:4px; background:var(--w4-accent);
 }
 
 .content h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-  color: #f8f9fb;
+  margin: 2rem 0 .75rem;
   position: relative;
 }
 .content h3::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.4rem;
-  width: 36px;
-  height: 3px;
-  background: var(--w4-accent);
-  border-radius: 2px;
-  opacity: 0.9;
+  content:""; position:absolute; left:0; bottom:-0.4rem;
+  width:36px; height:3px; background:var(--w4-accent);
 }
 
 .content h4 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--w4-ink);
-  position: relative;
+  font-size:1.25rem; font-weight:600;
+  margin-top:1.5rem; margin-bottom:0.5rem;
+  position:relative; color:var(--w4-ink);
 }
-.content h4::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.35rem;
-  width: 24px;
-  height: 2px;
-  background: var(--w4-accent);
-  border-radius: 1px;
-  opacity: 0.7;
+.content h4::after{
+  content:""; position:absolute; left:0; bottom:-0.35rem;
+  width:24px; height:2px; background:var(--w4-accent);
 }
 
-/* Universal card base */
+/* ============================================================
+   CARDS, NEWS, QUICK LINKS, MEETING BOX
+   ============================================================ */
+
 .w4-card,
 .quicklink-card,
 .news-card,
@@ -159,27 +221,32 @@ h2.section-title::after {
 .news-card:hover,
 .meeting-box:hover {
   transform: translateY(-2px);
-  box-shadow: var(--w4-shadow-lg);
   border-color: rgba(255,255,255,.22);
+  box-shadow: var(--w4-shadow-lg);
 }
 
-/* QUICK LINK cards */
 .quicklink-card,
 .w4-card { padding: 1.75rem; }
-.w4-card p,
-.quicklink-card p { color: var(--w4-ink-muted); }
 
-/* NEXT MEETING box */
+.w4-card p,
+.quicklink-card p {
+  color: var(--w4-ink-muted);
+}
+
+/* Meeting Box */
 .meeting-box {
   padding: 2rem;
   background:
     linear-gradient(180deg, rgba(43,108,176,.12), rgba(24,34,53,1)),
     var(--w4-surface);
 }
-.meeting-box p { color: var(--w4-ink-muted); }
+.meeting-box p {
+  color: var(--w4-ink-muted);
+}
 
-/* NEWS cards */
+/* News Cards */
 .news-card { padding: 1.25rem; }
+
 .news-card img {
   aspect-ratio: 16/9;
   object-fit: cover;
@@ -189,7 +256,6 @@ h2.section-title::after {
 .news-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
-  margin-top: .35rem;
   color: #f8f9fb;
 }
 .news-card p {
@@ -197,77 +263,10 @@ h2.section-title::after {
   color: rgba(241,243,248,.75);
 }
 
-/* HERO CTAs */
-.hero-ctas{
-  display:flex; 
-  gap:14px; 
-  justify-content:center; 
-  margin-top:26px; 
-  flex-wrap:wrap;
-}
-.cta-big{
-  display:inline-block; 
-  padding:14px 22px; 
-  border-radius:14px;
-  font-weight:700; 
-  font-size:1.02rem; 
-  line-height:1; 
-  text-decoration:none;
-  border:1px solid var(--w4-border); 
-  color:#f8f9fb; 
-  background:rgba(255,255,255,.05);
-  box-shadow: var(--w4-shadow);
-  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
-}
-.cta-big:hover{
-  transform:translateY(-1px); 
-  filter:brightness(1.05); 
-  border-color: rgba(255,255,255,.22); 
-}
+/* ============================================================
+   TABLES
+   ============================================================ */
 
-/* Primary & outline styles */
-.cta-primary{
-  background: var(--w4-brand);
-  color: #eef6ff;
-  border-color: rgba(0,0,0,.18);
-}
-.cta-primary:hover{
-  background: #275ea6;
-}
-
-.cta-outline{
-  background: transparent;
-  border-color: rgba(255,255,255,.32);
-  color: #f8f9fb;
-}
-.cta-outline:hover{
-  background: rgba(255,255,255,.08);
-}
-
-/* Hero logo */
-.hero-logo-big {
-  height: 180px;
-  width: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
-  padding: 0;
-  box-shadow: var(--w4-shadow-lg);
-}
-@media(min-width: 768px){
-  .hero-logo-big { height: 180px; }
-}
-
-/* Motion */
-@media (prefers-reduced-motion: reduce) {
-  .w4-card,
-  .quicklink-card,
-  .news-card,
-  .meeting-box,
-  .cta-big { transition: none; }
-}
-
-/* Tables */
 .content table {
   margin-left: auto;
   margin-right: auto;
@@ -285,12 +284,18 @@ h2.section-title::after {
   border-bottom: 1px solid var(--w4-border);
 }
 
-/* Hide mobile toggler on desktop */
+/* ============================================================
+   NAVIGATION CLEANUP
+   ============================================================ */
+
 @media (min-width: 1024px) {
   label[for="nav-toggle"] { display: none !important; }
 }
 
-/* Links */
+/* ============================================================
+   LINKS / TEXT
+   ============================================================ */
+
 a,
 a:visited {
   color: #ffffff !important;
@@ -303,4 +308,16 @@ a:focus {
 strong,
 th {
   color: #ffffff;
+}
+
+/* ============================================================
+   Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .w4-card,
+  .quicklink-card,
+  .news-card,
+  .meeting-box,
+  .cta-big { transition: none; }
 }
