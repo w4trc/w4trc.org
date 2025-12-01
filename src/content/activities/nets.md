@@ -42,7 +42,7 @@ scripts:
 **Time:** Sundays at **8:30 PM**  
 **Repeater:** **W4TRC 146.970 MHz** (Analog)  
 **Offset:** **–600 kHz**  
-**CTCSS/PL Tone:** **123.0 Hz**
+**PL Tone:** **123.0 Hz**
 
 We host an informational net covering:
 - Club news & activities  
