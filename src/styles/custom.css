@@ -4,6 +4,11 @@
    ============================================================ */
 
 /* ===== Brand tokens (improved contrast version) ===== */
+html, body {
+  background: url("/images/mountaintexture.png") center top repeat-y fixed !important;
+  background-size: cover !important;
+}
+
 :root{
   --w4-brand:#2b6cb0;      /* brand blue */
   --w4-accent:#f59e0b;     /* warm amber accent */
@@ -139,9 +144,7 @@ section {
   padding-top: 4.5rem; 
   padding-bottom: 4.5rem;
 }
-section:nth-of-type(even) { 
-  background: var(--w4-surface-2);
-}
+
 
 /* Section Titles */
 .section-title,
