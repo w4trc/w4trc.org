@@ -1,28 +1,43 @@
-/* ===== Brand tokens (improved contrast version) ===== */
+/* ===== Brand tokens (updated) =====
+   Deep navy surfaces + warm accent
+   Accessible contrast across sections
+*/
 :root{
   --w4-brand:#2b6cb0;      /* brand blue */
   --w4-accent:#f59e0b;     /* warm amber accent */
+  --w4-ink:#e5e7eb;        /* light text */
+  --w4-ink-muted:rgba(229,231,235,.85);
 
-  --w4-ink:#f1f3f8;        /* main text – brighter */
-  --w4-ink-muted:rgba(241,243,248,.80);
-
-  /* backgrounds slightly lifted for clarity */
-  --w4-bg:#0f1523;         /* page background (was #0b1220) */
-  --w4-surface:#182235;    /* card surface (was #111a2c) */
-  --w4-surface-2:#141d2e;  /* alternating section (was #0e1728) */
-
-  --w4-border:rgba(255,255,255,.14); /* slightly stronger */
+  --w4-bg:#0b1220;         /* page background */
+  --w4-surface:#111a2c;    /* primary card surface */
+  --w4-surface-2:#0e1728;  /* secondary surface */
+  --w4-border:rgba(255,255,255,.10);
   --w4-shadow:0 10px 24px rgba(0,0,0,.28);
   --w4-shadow-lg:0 16px 36px rgba(0,0,0,.35);
 }
 
 /* ===== Page background ===== */
-html, body { 
-  background: var(--w4-bg); 
-  color: var(--w4-ink); 
+html,
+body {
+  background-color: var(--w4-bg);
+
+  /* mountain texture — darkened and blended */
+  background-image:
+    linear-gradient(180deg, rgba(8,12,22,0.80), rgba(8,12,22,0.80)),
+    url("/images/mountaintexture.png");
+
+  background-size: cover;
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-attachment: fixed;
+
+  color: var(--w4-ink);
 }
 
-/* HERO */
+
+/* --- W4TRC Homepage Overrides --- */
+
+/* HERO (full bleed, tall, centered) */
 .hero-heroimg {
   position: relative;
   min-height: 78vh;
@@ -33,43 +48,43 @@ html, body {
   isolation: isolate;
 }
 .hero-heroimg::before{
-  /* slightly lighter overlay for cleaner photo contrast */
+  /* darken busy photos for legible type */
   content:"";
   position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(12,17,29,.40), rgba(12,17,29,.70));
+  background: linear-gradient(180deg, rgba(8,12,22,.55), rgba(8,12,22,.75));
   z-index:-1;
 }
 .hero-heroimg h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
   letter-spacing: .2px;
-  color:#f8f9fb;
+  color:#f3f4f6;
 }
 .hero-heroimg p {
   font-size: 1.125rem;
   margin-top: 1rem;
-  max-width: 72ch;
+  max-width: 60ch;
   margin-left: auto;
   margin-right: auto;
   color: var(--w4-ink-muted);
 }
 
-/* SECTION rhythm (light contrast banding) */
-section { 
-  padding-top: 4.5rem; 
-  padding-bottom: 4.5rem; 
-}
-section:nth-of-type(even) { 
-  background: var(--w4-surface-2); 
+/* SECTION rhythm */
+section {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
 }
 
-/* SECTION TITLES */
+/* (REMOVED) section:nth-of-type(even) background so texture shows through */
+/* section:nth-of-type(even) { background: var(--w4-surface-2); } */
+
+/* SECTION TITLES with accent underline */
 .section-title,
 h2.section-title {
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 1.25rem;
-  color: #f8f9fb;
+  color: #f3f4f6;
   position: relative;
 }
 .section-title::after,
@@ -84,12 +99,12 @@ h2.section-title::after {
   border-radius: 2px;
 }
 
-/* Markdown H2/H3/H4 */
+/* Ensure markdown H2s match homepage section headers */
 .content h2 {
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 1.25rem;
-  color: #f8f9fb;
+  color: #f3f4f6;
   position: relative;
 }
 .content h2::after {
@@ -103,14 +118,16 @@ h2.section-title::after {
   border-radius: 2px;
 }
 
+/* Ensure markdown H3s and H4s visually harmonize with H2s */
 .content h3 {
   font-size: 1.5rem;
   font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
-  color: #f8f9fb;
+  color: #f3f4f6;
   position: relative;
 }
+
 .content h3::after {
   content: "";
   position: absolute;
@@ -131,6 +148,7 @@ h2.section-title::after {
   color: var(--w4-ink);
   position: relative;
 }
+
 .content h4::after {
   content: "";
   position: absolute;
@@ -142,6 +160,7 @@ h2.section-title::after {
   border-radius: 1px;
   opacity: 0.7;
 }
+
 
 /* Universal card base */
 .w4-card,
@@ -160,7 +179,7 @@ h2.section-title::after {
 .meeting-box:hover {
   transform: translateY(-2px);
   box-shadow: var(--w4-shadow-lg);
-  border-color: rgba(255,255,255,.22);
+  border-color: rgba(255,255,255,.18);
 }
 
 /* QUICK LINK cards */
@@ -169,11 +188,11 @@ h2.section-title::after {
 .w4-card p,
 .quicklink-card p { color: var(--w4-ink-muted); }
 
-/* NEXT MEETING box */
+/* NEXT MEETING box (slight brand tint) */
 .meeting-box {
   padding: 2rem;
   background:
-    linear-gradient(180deg, rgba(43,108,176,.12), rgba(24,34,53,1)),
+    linear-gradient(180deg, rgba(43,108,176,.10), rgba(17,26,44,1)),
     var(--w4-surface);
 }
 .meeting-box p { color: var(--w4-ink-muted); }
@@ -190,75 +209,66 @@ h2.section-title::after {
   font-size: 1.05rem;
   font-weight: 700;
   margin-top: .35rem;
-  color: #f8f9fb;
+  color: #f3f4f6;
 }
 .news-card p {
   font-size: .96rem;
-  color: rgba(241,243,248,.75);
+  color: rgba(229,231,235,.78);
 }
 
-/* HERO CTAs */
+/* big hero CTAs */
 .hero-ctas{
-  display:flex; 
-  gap:14px; 
-  justify-content:center; 
-  margin-top:26px; 
-  flex-wrap:wrap;
+  display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;
 }
 .cta-big{
-  display:inline-block; 
-  padding:14px 22px; 
-  border-radius:14px;
-  font-weight:700; 
-  font-size:1.02rem; 
-  line-height:1; 
-  text-decoration:none;
-  border:1px solid var(--w4-border); 
-  color:#f8f9fb; 
-  background:rgba(255,255,255,.05);
+  display:inline-block; padding:14px 22px; border-radius:14px;
+  font-weight:700; font-size:1.02rem; line-height:1; text-decoration:none;
+  border:1px solid var(--w4-border); color:#f3f4f6; background:rgba(255,255,255,.04);
   box-shadow: var(--w4-shadow);
   transition: transform .12s ease, filter .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
 }
-.cta-big:hover{
-  transform:translateY(-1px); 
-  filter:brightness(1.05); 
-  border-color: rgba(255,255,255,.22); 
-}
+.cta-big:hover{ transform:translateY(-1px); filter:brightness(1.04); border-color: rgba(255,255,255,.18); }
 
-/* Primary & outline styles */
+/* Primary & outline styles (brand + warm accent on hover) */
 .cta-primary{
   background: var(--w4-brand);
   color: #eef6ff;
   border-color: rgba(0,0,0,.18);
 }
 .cta-primary:hover{
-  background: #275ea6;
+  background: #275ea6; /* slightly darker brand hover */
 }
 
 .cta-outline{
   background: transparent;
-  border-color: rgba(255,255,255,.32);
-  color: #f8f9fb;
+  border-color: rgba(255,255,255,.28);
+  color: #f3f4f6;
 }
 .cta-outline:hover{
-  background: rgba(255,255,255,.08);
+  background: rgba(255,255,255,.06);
 }
 
-/* Hero logo */
+/* optional: make hero copy a touch wider for balance with 2 buttons */
+.hero-heroimg p{ max-width: 72ch; }
+
+/* Bigger hero logo */
 .hero-logo-big {
   height: 180px;
   width: 180px;
   border-radius: 50%;
+  background: none;
   object-fit: cover;
   object-position: center;
-  padding: 0;
+  padding: 0; /* ensure full fill */
   box-shadow: var(--w4-shadow-lg);
 }
+
+
 @media(min-width: 768px){
   .hero-logo-big { height: 180px; }
 }
 
-/* Motion */
+/* Accessibility + motion */
 @media (prefers-reduced-motion: reduce) {
   .w4-card,
   .quicklink-card,
@@ -267,7 +277,7 @@ h2.section-title::after {
   .cta-big { transition: none; }
 }
 
-/* Tables */
+/* --- Better table alignment and spacing --- */
 .content table {
   margin-left: auto;
   margin-right: auto;
@@ -275,32 +285,37 @@ h2.section-title::after {
   width: 100%;
   max-width: 800px;
 }
+
 .content table th,
 .content table td {
   padding: 0.75rem 1rem;
   text-align: left;
 }
+
 .content table thead th {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.05);
   border-bottom: 1px solid var(--w4-border);
 }
 
-/* Hide mobile toggler on desktop */
 @media (min-width: 1024px) {
+  /* force-hide the mobile toggler on desktop */
   label[for="nav-toggle"] { display: none !important; }
 }
 
-/* Links */
 a,
 a:visited {
   color: #ffffff !important;
 }
+
 a:hover,
 a:focus {
   color: var(--w4-accent) !important;
 }
 
-strong,
+strong {
+  color: #ffffff;
+}
+
 th {
   color: #ffffff;
 }
