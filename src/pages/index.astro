@@ -1,28 +1,14 @@
 ---
-import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
-import { getListPage } from "@/lib/contentParser.astro";
-import { markdownify } from "@/lib/utils/textConverter";
-import CallToAction from "@/partials/CallToAction.astro";
-import Testimonial from "@/partials/Testimonial.astro";
-import { FaCheck } from "react-icons/fa";
-import hero from "@/config/hero.json";
-
-
-// NEW: meetings data + latest posts
-import NextMeeting from "@/components/NextMeeting.astro";
-import meetings from "@/data/meetings.json";
-import Upcoming from "@/layouts/components/Upcoming.astro";
-import { getCollection } from "astro:content";
 import HeroBanner from "@/components/HeroBanner.astro";
 
-const homepage = await getListPage("homepage", "-index");
-const call_to_action = await getListPage("ctaSection", "call-to-action");
-const testimonial = await getListPage("testimonialSection", "testimonial");
+import NextMeeting from "@/components/NextMeeting.astro";
+import meetings from "@/data/meetings.json";
 
-const { banner, features } = homepage.data;
+import Upcoming from "@/layouts/components/Upcoming.astro";
+import { getCollection } from "astro:content";
 
-// Raw weather widget markup (kept as-is so the third-party script can bootstrap itself)
+// Weather widget
 const weatherWidgetMarkup = `<a class="weatherwidget-io" href="https://forecast7.com/en/36d55n82d56/kingsport/?unit=us" data-label_1="KINGSPORT" data-label_2="WEATHER" data-theme="pure">KINGSPORT WEATHER</a>
 <script>
 !function(d,s,id){
@@ -36,110 +22,170 @@ const weatherWidgetMarkup = `<a class="weatherwidget-io" href="https://forecast7
 }(document,'script','weatherwidget-io-js');
 </script>`;
 
-// NEW: fetch last 3 items across `news` + `blog`
-let newsPosts: any[] = [];
+// News (still included for future work)
+let newsPosts = [];
 try {
   const blog = await getCollection("blog");
   newsPosts = [...blog]
     .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date))
     .slice(0, 3);
-} catch (e) {
-  // collections might not exist yet; render nothing gracefully
-  newsPosts = [];
-}
+} catch {}
 ---
 
 <Base>
-  
+
+  <!-- ================================= -->
+  <!-- HERO (no changes requested) -->
+  <!-- ================================= -->
   <HeroBanner />
-  
-  <!-- Next Meeting (component) -->
+
+  <!-- ================================= -->
+  <!-- ABOUT THE CLUB -->
+  <!-- ================================= -->
+  <section>
+  <div class="container max-w-[1400px] px-6 mx-auto grid gap-10 lg:grid-cols-2 items-center">
+
+    <!-- Left column (copy) wrapped in card -->
+    <div class="w4-card p-8">
+      <h2 class="section-title">About the Club</h2>
+      <p class="text-text-light mb-4">
+        Placeholder content describing the Kingsport Amateur Radio Club and its mission.
+      </p>
+      <p class="text-text-muted">
+        Additional details about history, activities, or community involvement.
+      </p>
+    </div>
+
+    <!-- Right column (image) wrapped in card for consistency -->
+    <div class="w4-card p-4">
+      <img 
+        src="/images/about-photo.jpg"
+        alt="Club members"
+        class="rounded-xl w-full object-cover"
+      />
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- ================================= -->
+  <!-- NEXT MEETING -->
+  <!-- ================================= -->
   <NextMeeting meeting={meetings} />
 
-  <!-- Upcoming (auto-loads from content collection or JSON fallback) -->
-  <Upcoming limit={4} title="Upcoming Events" showCalendarCta={true} calendarHref="/calendar/" />
+  <!-- ================================= -->
+  <!-- UPCOMING EVENTS -->
+  <!-- ================================= -->
+  <Upcoming 
+    limit={4}
+    title="Upcoming Events"
+    showCalendarCta={true}
+    calendarHref="/calendar/"
+  />
 
-
-  <!-- ===================== -->
-  <!-- Quick Links (NEW)    -->
-  <!-- ===================== -->
+  <!-- ================================= -->
+  <!-- WHAT WE DO (4 CARDS) -->
+  <!-- ================================= -->
   <section>
-    <div class="container px-6 max-w-[1400px] mx-auto">
+    <div class="container max-w-[1400px] px-6 mx-auto">
+      <h2 class="section-title">What We Do</h2>
+
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mt-8">
+
+        <!-- Meetings -->
+        <div class="w4-card">
+          <img src="/images/wwd-meetings.jpg" class="rounded-xl mb-4 object-cover w-full h-40" alt="" />
+          <h3 class="text-xl font-semibold text-white mb-1">Meetings</h3>
+          <p class="text-sm text-text-muted">Monthly club gatherings and presentations.</p>
+        </div>
+
+        <!-- Nets -->
+        <div class="w4-card">
+          <img src="/images/wwd-nets.jpg" class="rounded-xl mb-4 object-cover w-full h-40" alt="" />
+          <h3 class="text-xl font-semibold text-white mb-1">Nets</h3>
+          <p class="text-sm text-text-muted">Weekly nets across our repeater system.</p>
+        </div>
+
+        <!-- Special Events -->
+        <div class="w4-card">
+          <img src="/images/wwd-events.jpg" class="rounded-xl mb-4 object-cover w-full h-40" alt="" />
+          <h3 class="text-xl font-semibold text-white mb-1">Special Events</h3>
+          <p class="text-sm text-text-muted">Field Day, POTA, public service, and more.</p>
+        </div>
+
+        <!-- Activities -->
+        <div class="w4-card">
+          <img src="/images/wwd-activities.jpg" class="rounded-xl mb-4 object-cover w-full h-40" alt="" />
+          <h3 class="text-xl font-semibold text-white mb-1">Activities</h3>
+          <p class="text-sm text-text-muted">Hands-on workshops, antennas, testing sessions.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- QUICK LINKS -->
+  <!-- ================================= -->
+  <section>
+    <div class="container max-w-[1400px] px-6 mx-auto">
       <h2 class="section-title">Quick Links</h2>
+
       <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
+
         <a class="quicklink-card" href="/repeaters/">
           <p class="text-lg font-semibold text-white">Club Repeaters</p>
           <p>Frequencies, tones, coverage notes.</p>
         </a>
+
         <a class="quicklink-card" href="/nets/">
           <p class="text-lg font-semibold text-white">Weekly Nets</p>
           <p>Schedules and scripts.</p>
         </a>
+
         <a class="quicklink-card" href="/license/">
           <p class="text-lg font-semibold text-white">Get Licensed / Upgrade</p>
           <p>Study materials and test sessions.</p>
         </a>
+
         <a class="quicklink-card" href="/projects/">
           <p class="text-lg font-semibold text-white">Projects</p>
           <p>Club builds, antennas, mesh.</p>
         </a>
+
       </div>
     </div>
   </section>
 
-  <!-- ===================== -->
-  <!-- Latest News (NEW)    -->
-  <!-- ===================== -->
-  {newsPosts.length > 0 && (
-    <section>
-      <div class="container px-6 max-w-[1400px] mx-auto">
-        <h2 class="section-title">Latest News</h2>
-        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mt-6">
-          {newsPosts.map((post) => {
-            const href = post.slug ? `/${post.collection}/${post.slug}/` : "#";
-            const cover = post.data.cover;
-            const date = new Date(post.data.date);
-            const dateStr = date.toLocaleDateString(undefined, {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            });
-            return (
-              <a href={href} class="news-card group">
-                {cover && <img src={cover} alt="" class="mb-3" />}
-                <div class="text-sm text-white/60 mb-1">{dateStr}</div>
-                <h3>{post.data.title}</h3>
-                <p>{post.data.summary || ""}</p>
-              </a>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- ===================== -->
-  <!-- Conditions (Solar + Weather) -->
-  <!-- ===================== -->
+  <!-- ================================= -->
+  <!-- CONDITIONS -->
+  <!-- ================================= -->
   <section>
-    <div class="container px-6 max-w-[1400px] mx-auto">
+    <div class="container max-w-[1400px] px-6 mx-auto">
       <h2 class="section-title">Conditions</h2>
+
       <div class="grid gap-8 lg:grid-cols-2 mt-6 items-start">
-        <div class="rounded-2xl border border-border dark:border-darkmode-border bg-white/5 dark:bg-darkmode-light/20 p-6 text-center">
-          <a href="https://www.hamqsl.com/solar.html" class="inline-block" title="Solar-Terrestrial Data from N0NBH">
-            <img src="https://www.hamqsl.com/solar101pic.php" alt="Solar-Terrestrial data panel" class="mx-auto" loading="lazy" />
+
+        <!-- Solar -->
+        <div class="rounded-2xl bg-white/5 p-6 text-center w4-card">
+          <a href="https://www.hamqsl.com/solar.html" class="inline-block">
+            <img 
+              src="https://www.hamqsl.com/solar101pic.php" 
+              alt="Solar Data"
+              class="mx-auto"
+              loading="lazy"
+            />
           </a>
-          <p class="mt-4 text-sm text-text-light dark:text-darkmode-text-light">
-            Solar Weather provided by <a href="https://www.hamqsl.com/solar.html" class="underline">N0NBH</a>.{" "}
-            <a href="https://www.hamqsl.com/solar2.html#glossary" class="underline">What do these numbers mean?</a>
-          </p>
         </div>
-        <div class="rounded-2xl border border-border dark:border-darkmode-border bg-white/5 dark:bg-darkmode-light/20 p-6 text-center">
+
+        <!-- Weather -->
+        <div class="rounded-2xl bg-white/5 p-6 text-center w4-card">
           <div set:html={weatherWidgetMarkup}></div>
         </div>
+
       </div>
     </div>
   </section>
-
 
 </Base>
