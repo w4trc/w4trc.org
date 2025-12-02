@@ -3,6 +3,7 @@ title: "Weekly Nets"
 description: "Times, frequencies, and scripts for our on-air nets."
 meta_title: "W4TRC Weekly Nets"
 draft: false
+image: "/images/ic-705.jpg"
 
 nets:
   - name: "KARC Weekly Net"
