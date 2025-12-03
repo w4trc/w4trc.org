@@ -1,0 +1,33 @@
+---
+// Lightweight wrapper for weatherwidget.io that re-initializes on client navigation.
+const scriptId = "weatherwidget-io-js";
+---
+
+<div class="weather-widget">
+  <a
+    class="weatherwidget-io"
+    href="https://forecast7.com/en/36d55n82d56/kingsport/?unit=us"
+    data-label_1="KINGSPORT"
+    data-label_2="WEATHER"
+    data-theme="pure"
+  >
+    KINGSPORT WEATHER
+  </a>
+</div>
+
+<script>
+  if (typeof window !== "undefined") {
+    const ensureScript = () => {
+      if (!document.getElementById(scriptId)) {
+        const js = document.createElement("script");
+        js.id = scriptId;
+        js.src = "https://weatherwidget.io/js/widget.min.js";
+        document.head.appendChild(js);
+        js.onload = () => window.__weatherwidget_init?.();
+      } else {
+        window.__weatherwidget_init?.();
+      }
+    };
+    ensureScript();
+  }
+</script>

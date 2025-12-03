@@ -1,26 +1,13 @@
 ---
 import Base from "@/layouts/Base.astro";
 import HeroBanner from "@/components/HeroBanner.astro";
+import WeatherWidget from "@/components/WeatherWidget.astro";
 
 import NextMeeting from "@/components/NextMeeting.astro";
 import meetings from "@/data/meetings.json";
 
 import Upcoming from "@/layouts/components/Upcoming.astro";
 import { getCollection } from "astro:content";
-
-// Weather widget
-const weatherWidgetMarkup = `<a class="weatherwidget-io" href="https://forecast7.com/en/36d55n82d56/kingsport/?unit=us" data-label_1="KINGSPORT" data-label_2="WEATHER" data-theme="pure">KINGSPORT WEATHER</a>
-<script>
-!function(d,s,id){
-  var js,fjs=d.getElementsByTagName(s)[0];
-  if(!d.getElementById(id)){
-    js=d.createElement(s);
-    js.id=id;
-    js.src='https://weatherwidget.io/js/widget.min.js';
-    fjs.parentNode.insertBefore(js,fjs);
-  }
-}(document,'script','weatherwidget-io-js');
-</script>`;
 
 // News (still included for future work)
 let newsPosts = [];
@@ -181,7 +168,7 @@ try {
 
         <!-- Weather -->
         <div class="rounded-2xl bg-white/5 p-6 text-center w4-card">
-          <div set:html={weatherWidgetMarkup}></div>
+          <WeatherWidget />
         </div>
 
       </div>
