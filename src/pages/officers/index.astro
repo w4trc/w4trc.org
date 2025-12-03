@@ -1,0 +1,5 @@
+---
+// Officers are already presented on the About page; keep /officers/ alive but forward visitors there.
+export const prerender = true;
+return Astro.redirect("/about/");
+---

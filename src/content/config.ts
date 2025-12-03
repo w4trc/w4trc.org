@@ -33,5 +33,16 @@ const news = defineCollection({
   }),
 });
 
+const officers = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    position: z.string(),
+    callsign: z.string().optional(),
+    photo: z.string().optional(),
+    photo_alt: z.string().optional(),
+    weight: z.number().optional(),
+  }),
+});
 
-export const collections = { events, blog, news, };
+export const collections = { events, blog, news, officers, };

@@ -1,0 +1,72 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection, getEntry } from "astro:content";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const officers = await getCollection("officers");
+  return officers.map((officer) => ({ params: { slug: officer.slug } }));
+}
+
+const { slug } = Astro.params;
+
+let officer;
+try {
+  officer = await getEntry("officers", slug!);
+} catch {
+  return Astro.redirect("/404");
+}
+
+if (!officer) return Astro.redirect("/404");
+
+const { data } = officer;
+const { Content } = await officer.render();
+---
+
+<Base
+  title={`${data.position}: ${data.title}`}
+  meta_title={`${data.position} - ${data.title}`}
+  description={data.callsign ? `${data.callsign} — ${data.position}` : data.position}
+  image={data.photo}
+>
+  <section class="section-md">
+    <div class="max-w-[900px] mx-auto px-6">
+      <nav class="mb-6">
+        <a
+          href="/about/#club-officers"
+          class="text-gray-300 hover:text-white underline underline-offset-4"
+        >
+          ← Back to Officers
+        </a>
+      </nav>
+
+      <div class="w4-card p-8 text-center">
+        {data.photo && (
+          <img
+            src={data.photo}
+            alt={data.photo_alt || data.title}
+            class="w-36 h-36 mx-auto rounded-full object-cover mb-4 border border-white/10 shadow-lg"
+            loading="eager"
+            decoding="async"
+          />
+        )}
+
+        <p class="text-sm uppercase tracking-[0.12em] text-[var(--w4-accent)] mb-1">
+          {data.position}
+        </p>
+
+        <h1 class="text-3xl font-bold text-white mb-1">
+          {data.title}
+          {data.callsign && (
+            <span class="text-[var(--w4-accent)]"> · {data.callsign}</span>
+          )}
+        </h1>
+      </div>
+
+      <div class="prose prose-invert max-w-none mt-8">
+        <Content />
+      </div>
+    </div>
+  </section>
+</Base>
