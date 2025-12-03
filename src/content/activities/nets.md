@@ -40,7 +40,7 @@ scripts:
 
 ## Sunday Evening Net
 
-**Time:** Sundays at **8:30 PM**  
+**Time:** Sundays at **8:30 PM** EST 
 **Repeater:** **W4TRC 146.970 MHz** (Analog)  
 **Offset:** **–600 kHz**  
 **PL Tone:** **123.0 Hz**
@@ -68,15 +68,16 @@ For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
 | 4th Sunday    | K4UVU  | David Herron   |
 | 5th Sunday    | KM4NWH | Neil Weber     |
 
+**Net Control Coordinator**: David Herron (K4UVU)
 
 > **Net Control Operators:** Please submit your weekly net logs here:  
-> 📝 **[Net Log Submission Form](https://forms.gle/rPPfLQDxzkrr1KPz9)**
+> 📝 **[Net Log Submission Form](https://nets.w4trc.org/submit)**
 
 ---
 
 ## How to Check In
 
-- When invited by NCS, give: **callsign, name, and location** (and “no traffic” or a brief announcement).  
+- When invited by the Net Control Station (NCS), give: **callsign, name, and location** (and “no traffic” or a brief announcement).  
 - Keep transmissions concise; let NCS manage the roster.  
 - If you have an announcement, indicate “with traffic” when checking in.  
 - New hams and visitors are always welcome!
@@ -94,9 +95,8 @@ For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
 ## Net Control Resources
 
 - 📄 **Net Control Script (PDF):**  
-  **[Download the Net Control Script](/files/net-control-script.pdf)**
+  **[Download the Net Control Script](/files/KARC-Net-Script-20190410.pdf)**
 
-> _Site editors:_ place your PDF at `static/files/net-control-script.pdf` (or update the link above if you prefer a different path). You can also add a versioned filename like `/files/net-control-script-v2025-10.pdf`.
 
 ---
 
