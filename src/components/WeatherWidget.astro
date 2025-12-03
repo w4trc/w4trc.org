@@ -15,19 +15,31 @@ const scriptId = "weatherwidget-io-js";
   </a>
 </div>
 
-<script>
-  if (typeof window !== "undefined") {
-    const ensureScript = () => {
-      if (!document.getElementById(scriptId)) {
-        const js = document.createElement("script");
-        js.id = scriptId;
-        js.src = "https://weatherwidget.io/js/widget.min.js";
-        document.head.appendChild(js);
-        js.onload = () => window.__weatherwidget_init?.();
+<script is:inline>
+  (() => {
+    const scriptId = "weatherwidget-io-js";
+    const init = () => window.__weatherwidget_init && window.__weatherwidget_init();
+    const load = () => {
+      const existing = document.getElementById(scriptId);
+      if (existing) {
+        init();
+        return;
+      }
+      const js = document.createElement("script");
+      js.id = scriptId;
+      js.src = "https://weatherwidget.io/js/widget.min.js";
+      js.onload = init;
+      document.body.appendChild(js);
+    };
+    const run = () => {
+      if (document.readyState === "complete" || document.readyState === "interactive") {
+        load();
       } else {
-        window.__weatherwidget_init?.();
+        document.addEventListener("DOMContentLoaded", load, { once: true });
       }
     };
-    ensureScript();
-  }
+    run();
+    window.addEventListener("astro:page-load", run);
+    window.addEventListener("astro:after-swap", run);
+  })();
 </script>
