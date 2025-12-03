@@ -31,9 +31,6 @@
       "frequency": "443.175 MHz (+5.0 MHz offset)",
       "mode": "Yaesu System Fusion (C4FM) Only",
       "location": "Bays Mountain, Kingsport TN",
-      "features": [
-        ""
-      ],
       "notes": "This repeater will be used for digital including Wires-X coming soon."
     }
   ],
@@ -57,21 +54,43 @@
   ],
   "areaRepeaters": [
     {
-      "location": "Example / Placeholder",
-      "frequency": "147.000 MHz (+) PL 100.0",
+      "location": "Bristol, TN - Holston Mountain",
+      "frequency": "145.110 MHz (-0.6 MHz offset)",
       "mode": "FM",
-      "callsign": "CALLSIGN",
-      "notes": "Replace this row with a real nearby repeater."
+      "callsign": "KG4VBS",
+      "notes": ""
+    },
+    {
+      "location": "Gate City, VA - Clinch Mountain",
+      "frequency": "146.820 MHz (-0.6 MHz offset) PL 103.5 Hz",
+      "mode": "FM",
+      "callsign": "KF4VTM",
+      "notes": ""
+    },
+    {
+      "location": "Greenville, TN - Bald Mountain",
+      "frequency": "145.410 MHz (-0.6 MHz offset) PL 127.3 Hz",
+      "mode": "FM",
+      "callsign": "W4KEV",
+      "notes": "Linked system from Greenville to Knoxville and beyond. Home of the popular 'Lunch Bunch' net every weekday."
     }
   ],
   "areaNets": [
     {
-      "name": "Example Area Net",
+      "name": "Boone Trail ARES/RACES Net",
       "day": "Monday",
-      "time_local": "8:00 PM",
-      "frequency": "147.000 MHz (+) PL 100.0",
+      "time_local": "20:30",
+      "frequency": "146.820 MHz (-0.6 MHz offset) PL 103.5 Hz",
       "mode": "FM",
-      "notes": "Replace this row with a real area net."
+      "notes": ""
+    },
+    {
+      "name": "Lunch Bunch Net",
+      "day": "Monday - Friday",
+      "time_local": "12:00 - 14:00",
+      "frequency": "145.410 MHz (-0.6 MHz offset) PL 127.3 Hz",
+      "mode": "FM",
+      "notes": "On the W4KEV repeater system."
     }
   ]
 }
