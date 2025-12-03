@@ -1,0 +1,56 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection, getEntry, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+let project;
+try {
+  project = await getEntry("projects", slug!);
+} catch {
+  return Astro.redirect("/404");
+}
+if (!project) return Astro.redirect("/404");
+
+const { Content } = await render(project);
+const data = project.data;
+---
+
+<Base
+  title={data.title}
+  meta_title={data.title}
+  description={data.summary}
+  image={data.image}
+>
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-3">{data.title}</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">{data.summary}</p>
+    </div>
+  </section>
+
+<section class="section-md">
+  <div class="max-w-[1100px] mx-auto px-6 space-y-10">
+    {data.image && (
+      <div class="w4-card overflow-hidden">
+        <img
+          src={data.image}
+          alt={data.title}
+          class="w-full h-72 object-cover"
+          loading="lazy"
+        />
+      </div>
+    )}
+
+    <article class="w4-card p-6">
+      <div class="prose prose-invert max-w-none">
+        <Content />
+      </div>
+    </article>
+  </div>
+</section>
+</Base>

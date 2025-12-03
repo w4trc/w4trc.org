@@ -153,6 +153,17 @@ const events = defineCollection({
   }),
 });
 
+const projects = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    summary: z.string().optional(),
+    image: z.string().optional(),
+    weight: z.number().optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
 export const officers = defineCollection({
   type: "content",
   schema: z.object({
@@ -223,6 +234,7 @@ export const collections = {
   events: events,
   officers: officers,
   activities: activities,
+  projects: projects,
 
   // sections
   ctaSection: ctaSectionCollection,

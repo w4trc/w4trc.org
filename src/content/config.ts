@@ -45,4 +45,14 @@ const officers = defineCollection({
   }),
 });
 
-export const collections = { events, blog, news, officers, };
+const projects = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    summary: z.string().optional(),
+    image: z.string().optional(),
+    weight: z.number().optional(),
+  }),
+});
+
+export const collections = { events, blog, news, officers, projects, };

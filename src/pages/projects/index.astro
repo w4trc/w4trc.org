@@ -1,0 +1,72 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects"))
+  .sort(
+    (a, b) =>
+      (a.data.weight ?? Number.MAX_SAFE_INTEGER) -
+        (b.data.weight ?? Number.MAX_SAFE_INTEGER) ||
+      a.slug.localeCompare(b.slug)
+  );
+---
+
+<Base
+  title="Projects"
+  meta_title="KARC Projects"
+  description="Club builds and how-to guides from past workshops and events."
+>
+  <!-- HERO -->
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-3">Club Projects</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        Builds we have tackled together—direction-finding antennas, NVIS experiments, and balun/choke kits.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROJECT LIST -->
+  <section class="section-md">
+    <div class="max-w-[1200px] mx-auto px-6 space-y-8">
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {projects.map((project) => (
+          <article class="w4-card p-6 flex flex-col gap-3">
+            <h2 class="text-2xl font-bold text-white">{project.data.title}</h2>
+            <p class="text-white/75 text-sm">{project.data.summary}</p>
+            {project.data.image && (
+              <img
+                src={project.data.image}
+                alt={project.data.title}
+                class="w-full h-36 object-cover rounded-lg border border-white/10"
+                loading="lazy"
+              />
+            )}
+            {project.slug && (
+              <a
+                class="inline-flex items-center gap-2 text-[var(--w4-accent)] font-semibold mt-auto hover:underline underline-offset-4"
+                href={`/projects/${project.slug}/`}
+              >
+                Learn more
+                <span aria-hidden="true">→</span>
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+
+      <div class="w4-card p-6 text-center">
+        <h3 class="text-xl font-semibold mb-2 text-white">Want to add a project?</h3>
+        <p class="text-white/70 text-sm">
+          Have build notes, photos, or a write-up to share? Send them to the club officers and we’ll add them here.
+        </p>
+        <a
+          class="button inline-flex items-center justify-center px-4 py-2 mt-4 text-sm font-semibold"
+          href="/contact/"
+        >
+          Contact the club
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
