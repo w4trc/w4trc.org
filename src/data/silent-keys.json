@@ -1,20 +1,30 @@
 [
   {
-    "name": "John Doe",
-    "callsign": "W4ABC",
-    "years": "1948-2023",
-    "description": "Past club president, Elmer to many new operators, and long-time Field Day organizer."
+    "name": "Gary Smith",
+    "callsign": "K4VZZ"
   },
   {
-    "name": "Sarah Lee",
-    "callsign": "K4XYZ",
-    "years": "1955-2022",
-    "description": "Led education nights and helped launch the club's first digital repeater."
+    "name": "Russ Richard",
+    "callsign": "KA4RJR",
+    "description": "One of our club members who championed Net Control.  He was very active and loved doing the Sunday Night Net and leading the team of Net Controllers."
   },
   {
-    "name": "Michael Tran",
-    "callsign": "N4MJT",
-    "years": "1961-2021",
-    "description": "Active net control, public service volunteer, and avid contest operator."
+    "name": "Liz Burns",
+    "callsign": "K1LIZ",
+    "description": "She did public speaking and enjoyed quilt making, piecing together quilts with thousands of pieces. She passed her Extra test in January 2018. She activated 348 SOTA summits with her husband Ron (NR3E) and loved to activate and chase. She also liked using the Icom IC-7300 with the G5RV antenna to search for special events. She was both inspirational and warm , piecing the hearts of many together, as she did her quilts."
+  },
+  {
+    "name": "Eddie Palmer",
+    "callsign": "K4JP"
+  },
+  {
+    "name": "Robert 'Bob' Allen Warden",
+    "callsign": "KU4R",
+    "years": "1945-2024",
+    "description": "His main interest was being an avid Amateur Ham Radio Operator which he did for over 40 yrs. He had many accomplishments in the field of Ham Radio including awards for Summits On The Air (SOTA), Parks On The Air (POTA), Worked All States (WAS), Worked All Continents (WAC), bouncing signals off the moon, and many other awards. His main form of communication in Ham Radio was Morse Code. Bob’s friends from the Amateur Radio community, especially the Kingsport Amateur Radio Club and participants in Summits On The Air will miss him as he was very well respected."
+  },
+  {
+    "name": "Norm Green",
+    "callsign": "N5EES"
   }
 ]
