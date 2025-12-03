@@ -8,6 +8,7 @@ const comingSoon = repeaters.comingSoon ?? [];
 const areaRepeaters = repeaters.areaRepeaters ?? [];
 const areaNets = repeaters.areaNets ?? [];
 const heroImage = "/images/IMG_2781.jpg";
+const historyImage = "/images/winterfieldday.png";
 ---
 
 <Base
@@ -100,6 +101,40 @@ const heroImage = "/images/IMG_2781.jpg";
             </div>
           </div>
         )}
+      </div>
+
+      <!-- REPEATER HISTORY TEASER -->
+      <div>
+        <div class="w4-card overflow-hidden grid gap-0 lg:grid-cols-[2fr_1fr]">
+          <div class="p-6 lg:p-8">
+            <p class="text-sm uppercase tracking-[0.12em] text-[var(--w4-accent)] mb-2">
+              Repeater History
+            </p>
+            <h2 class="text-2xl font-bold text-white mb-3">How the W4TRC machines came to be</h2>
+            <p class="text-white/75">
+              From the first club machine on Bays Mountain to today’s multi-site coverage, read the story,
+              upgrades, and people who built the system we rely on.
+            </p>
+            <a
+              class="inline-flex items-center gap-2 text-[var(--w4-accent)] font-semibold mt-5 hover:underline underline-offset-4"
+              href="/repeaters/history/"
+            >
+              Read the full history
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+          <div class="relative min-h-[200px]">
+            <ImageMod
+              src={historyImage}
+              alt="Field day tent and radio gear"
+              width={800}
+              height={500}
+              format="webp"
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent lg:bg-none"></div>
+          </div>
+        </div>
       </div>
 
       <!-- AREA REPEATERS TABLE -->

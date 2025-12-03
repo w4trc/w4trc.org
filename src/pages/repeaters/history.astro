@@ -1,0 +1,74 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+
+const heroImage = "/images/winterfieldday.png";
+---
+
+<Base
+  title="Repeater History"
+  meta_title="W4TRC Repeater History"
+  description="How the W4TRC machines grew from a single site into the coverage we rely on today."
+  image={heroImage}
+>
+  <!-- HERO -->
+  <section class="hero-heroimg relative">
+    <div aria-hidden="true" class="absolute inset-0 -z-10">
+      <ImageMod
+        src={heroImage}
+        alt="Club repeater and field setup"
+        width={1600}
+        height={600}
+        format="webp"
+        class="w-full h-full object-cover opacity-55"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-black/70"></div>
+    </div>
+    <div class="container mx-auto px-6 py-16 text-center">
+      <p class="text-sm uppercase tracking-[0.14em] text-[var(--w4-accent)] mb-2">
+        W4TRC Repeaters
+      </p>
+      <h1 class="text-4xl font-extrabold mb-3">History of the Club Machines</h1>
+      <p class="text-lg text-white/75 max-w-2xl mx-auto">
+        A look back at the people, projects, and upgrades that built our coverage across the region.
+      </p>
+    </div>
+  </section>
+
+  <!-- ARTICLE -->
+  <section class="section-md">
+    <div class="max-w-[900px] mx-auto px-6 prose prose-invert max-w-none content">
+      <p class="text-sm text-white/60 mb-6">
+        Have more details, photos, or dates to add? Send them to the club historian or repeater trustee.
+      </p>
+
+      <h2>Early Days</h2>
+      <p>
+        The first W4TRC repeater went on the air in the 19XX era, with a modest power budget and a
+        simple antenna setup. Volunteers hauled equipment up the mountain and kept it running with spare
+        parts and a lot of ingenuity.
+      </p>
+
+      <h2>Growth & Coverage</h2>
+      <p>
+        As membership grew, the club added additional sites to extend coverage. Coordinating frequencies,
+        building cavities, and installing link radios became recurring projects supported by countless
+        workdays and member donations.
+      </p>
+
+      <h2>Modern Upgrades</h2>
+      <p>
+        Today the system includes improvements like better filtering, internet links, and weather-hardened
+        enclosures. Each upgrade builds on decades of hands-on knowledge from operators and engineers in
+        the club.
+      </p>
+
+      <h2>Thanks to Our Volunteers</h2>
+      <p>
+        Every milestone in our repeater history was powered by volunteers: climbers, installers, RF
+        techs, coordinators, and the people who keep the paperwork straight. Thank you for keeping W4TRC
+        on the air.
+      </p>
+    </div>
+  </section>
+</Base>
