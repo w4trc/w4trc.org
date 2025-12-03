@@ -1,20 +1,248 @@
 [
   {
-    "title": "October 2024 Club Meeting Minutes",
-    "date": "2024-10-15",
-    "summary": "Highlights from the October business meeting, projects update, and repeater maintenance notes.",
-    "link": "https://example.com/minutes/2024-10.pdf"
+    "title": "June 2025 Meeting Minutes",
+    "date": "2025-06-12",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-06-12-25.pdf"
   },
   {
-    "title": "September 2024 Club Meeting Minutes",
-    "date": "2024-09-17",
-    "summary": "Officer reports, upcoming events, and budget approvals.",
-    "link": "https://example.com/minutes/2024-09.pdf"
+    "title": "May 2025 Meeting Minutes",
+    "date": "2025-05-08",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-05-08-2025.pdf"
   },
   {
-    "title": "August 2024 Club Meeting Minutes",
-    "date": "2024-08-20",
-    "summary": "Field Day recap, new member introductions, and training schedule planning.",
-    "link": "https://example.com/minutes/2024-08.pdf"
+    "title": "April 2025 Meeting Minutes",
+    "date": "2025-04-10",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-04-10-2025.pdf"
+  },
+  {
+    "title": "March 2025 Meeting Minutes",
+    "date": "2025-03-13",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-03-13-2025.pdf"
+  },
+  {
+    "title": "January 2025 Meeting Minutes",
+    "date": "2025-01-09",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-01-09-25.pdf"
+  },
+  {
+    "title": "December 2024 Meeting Minutes",
+    "date": "2024-12-12",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-12-12-24.pdf"
+  },
+  {
+    "title": "November 2024 Meeting Minutes",
+    "date": "2024-11-14",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-11-14-24.pdf"
+  },
+  {
+    "title": "October 2024 Meeting Minutes",
+    "date": "2024-10-10",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-10-10-24.pdf"
+  },
+  {
+    "title": "September 2024 Meeting Minutes",
+    "date": "2024-09-12",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-09-12-24-1.pdf"
+  },
+  {
+    "title": "July 2024 Meeting Minutes",
+    "date": "2024-07-11",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-07-11-24.pdf"
+  },
+  {
+    "title": "June 2024 Meeting Minutes",
+    "date": "2024-06-13",
+    "summary": "",
+    "link": "/files/minutes/meeting-minutes-06-13-24.pdf"
+  },
+  {
+    "title": "May 2024 Meeting Minutes",
+    "date": "2024-05-09",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-05-09-24.pdf"
+  },
+  {
+    "title": "April 2024 Meeting Minutes",
+    "date": "2024-04-11",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-04-11-2024.pdf"
+  },
+  {
+    "title": "March 2024 Meeting Minutes",
+    "date": "2024-03-14",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-03-14-2024.pdf"
+  },
+  {
+    "title": "February 2024 Meeting Minutes",
+    "date": "2024-02-08",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-02-8-2024.pdf"
+  },
+  {
+    "title": "January 2024 Meeting Minutes",
+    "date": "2024-01-11",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-01-11-2024-2.pdf"
+  },
+  {
+    "title": "December 2023 Meeting Minutes",
+    "date": "2023-12-14",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-12-14-2023.pdf"
+  },
+  {
+    "title": "November 2023 Meeting Minutes",
+    "date": "2023-11-09",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-11-9-2023.pdf"
+  },
+  {
+    "title": "October 2023 Meeting Minutes",
+    "date": "2023-10-12",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-10-12-2023.pdf"
+  },
+  {
+    "title": "September 2023 Meeting Minutes",
+    "date": "2023-09-14",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-9-14-2023.pdf"
+  },
+  {
+    "title": "July 2023 Meeting Minutes",
+    "date": "2023-07-13",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-7-13-2023.pdf"
+  },
+  {
+    "title": "June 2023 Meeting Minutes",
+    "date": "2023-06-08",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-6-8-2023.pdf"
+  },
+  {
+    "title": "May 2023 Meeting Minutes",
+    "date": "2023-05-11",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-5-11-2023.pdf"
+  },
+  {
+    "title": "April 2023 Meeting Minutes",
+    "date": "2023-04-13",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-4-13-2023.pdf"
+  },
+  {
+    "title": "November 2022 Meeting Minutes",
+    "date": "2022-11-10",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-11-10-2022.pdf"
+  },
+  {
+    "title": "October 2022 Meeting Minutes",
+    "date": "2022-10-13",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-10-13-2022.pdf"
+  },
+  {
+    "title": "September 2022 Meeting Minutes",
+    "date": "2022-09-08",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-9-8-2022.pdf"
+  },
+  {
+    "title": "July 2022 Meeting Minutes",
+    "date": "2022-07-14",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-7-14-2022.pdf"
+  },
+  {
+    "title": "June 2022 Meeting Minutes",
+    "date": "2022-06-09",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-6-9-2022.pdf"
+  },
+  {
+    "title": "May 2022 Meeting Minutes",
+    "date": "2022-05-12",
+    "summary": "",
+    "link": "/files/minutes/KARC-Meeting-Minutes-5-12-2022.pdf"
+  },
+  {
+    "title": "April 2022 Meeting Minutes",
+    "date": "2022-04-10",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-4-10-2022.pdf"
+  },
+  {
+    "title": "March 2022 Meeting Minutes",
+    "date": "2022-03-10",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-3-10-2022.pdf"
+  },
+  {
+    "title": "February 2022 Meeting Minutes",
+    "date": "2022-02-10",
+    "summary": "",
+    "link": "/files/minutes/Meeting-Minutes-2-10-2022.pdf"
+  },
+  {
+    "title": "January 2022 Meeting Minutes",
+    "date": "2022-01-01",
+    "summary": "",
+    "link": "/files/minutes/Minutes-Jan-2022.pdf"
+  },
+  {
+    "title": "November 2021 Meeting Minutes",
+    "date": "2021-11-01",
+    "summary": "",
+    "link": "/files/minutes/Minutes-Nov-2021.pdf"
+  },
+  {
+    "title": "September 2021 Meeting Minutes",
+    "date": "2021-09-01",
+    "summary": "",
+    "link": "/files/minutes/Minutes-Sep-2021.pdf"
+  },
+  {
+    "title": "July 2021 Meeting Minutes",
+    "date": "2021-07-01",
+    "summary": "",
+    "link": "/files/minutes/Minutes-Jul-2021.pdf"
+  },
+  {
+    "title": "June 2021 Meeting Minutes",
+    "date": "2021-06-10",
+    "summary": "",
+    "link": "/files/minutes/KARC-6_10_21.pdf"
+  },
+  {
+    "title": "May 2021 Meeting Minutes",
+    "date": "2021-05-13",
+    "summary": "",
+    "link": "/files/minutes/KARC-5_13_21.pdf"
+  },
+  {
+    "title": "April 2021 Meeting Minutes",
+    "date": "2021-04-08",
+    "summary": "",
+    "link": "/files/minutes/KARC-4_8_21.pdf"
+  },
+  {
+    "title": "March 2021 Meeting Minutes",
+    "date": "2021-03-11",
+    "summary": "",
+    "link": "/files/minutes/KARC-3_11_21.pdf"
   }
 ]
