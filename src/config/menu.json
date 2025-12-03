@@ -79,6 +79,10 @@
       "url": "/news/"
     },
     {
+      "name": "Gallery",
+      "url": "https://gallery.w4trc.org/"
+    },
+    {
       "name": "Contact",
       "url": "/contact/"
     }
