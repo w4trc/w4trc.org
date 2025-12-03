@@ -1,20 +1,38 @@
 [
   {
-    "issue": "December 2024",
-    "date": "2024-12-01",
-    "summary": "Year-end highlights, winter operating tips, and upcoming January meeting preview.",
-    "link": "https://example.com/newsletters/2024-12.pdf"
+    "title": "June 2025 Zero-Beat",
+    "date": "2025-06-01",
+    "summary": "",
+    "link": "/files/zero-beat/ZeroBeat-June-2025.pdf"
   },
   {
-    "issue": "November 2024",
-    "date": "2024-11-01",
-    "summary": "Club project updates, VE testing notes, and photos from recent events.",
-    "link": "https://example.com/newsletters/2024-11.pdf"
+    "title": "May 2025 Zero-Beat",
+    "date": "2025-05-01",
+    "summary": "",
+    "link": "/files/zero-beat/ZeroBeat-May-2025.pdf"
   },
   {
-    "issue": "October 2024",
-    "date": "2024-10-01",
-    "summary": "Fall operating plans, repeater improvements, and member spotlight.",
-    "link": "https://example.com/newsletters/2024-10.pdf"
+    "title": "April 2025 Zero-Beat",
+    "date": "2025-04-01",
+    "summary": "",
+    "link": "/files/zero-beat/ZeroBeat-April-2025.pdf"
+  },
+  {
+    "title": "March 2020 Zero-Beat",
+    "date": "2020-03-01",
+    "summary": "",
+    "link": "/files/zero-beat/zerobeatmar2020.pdf"
+  },
+  {
+    "title": "February 2020 Zero-Beat",
+    "date": "2020-02-01",
+    "summary": "",
+    "link": "/files/zero-beat/zerobeatfeb2020.pdf"
+  },
+  {
+    "title": "January 2020 Zero-Beat",
+    "date": "2020-01-01",
+    "summary": "",
+    "link": "/files/zero-beat/zerobeatjan2020.pdf"
   }
 ]
