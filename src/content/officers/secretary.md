@@ -4,6 +4,6 @@ position: "Secretary"
 callsign: "KQ4CDM"
 photo: "/images/officers/kq4cdm.png"
 photo_alt: "Christina Compton headshot"
-weight: 3
+weight: 4
 ---
 Short bio here if you want it to render on a detail page.
