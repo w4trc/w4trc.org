@@ -1,0 +1,43 @@
+---
+import Base from "@/layouts/Base.astro";
+
+const roles = [
+  { title: "President", bullets: ["TBD", "TBD", "TBD"] },
+  { title: "Vice President", bullets: ["TBD", "TBD", "TBD"] },
+  { title: "Secretary", bullets: ["TBD", "TBD", "TBD"] },
+  { title: "Treasurer", bullets: ["TBD", "TBD", "TBD"] },
+  { title: "Trustee", bullets: ["TBD", "TBD", "TBD"] },
+];
+---
+
+<Base
+  title="Officer Responsibilities"
+  meta_title="Officer Responsibilities"
+  description="Outline of duties for elected officers. Replace placeholders with official descriptions."
+>
+  <!-- HERO -->
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-3">Officer Responsibilities</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        Bulleted duties for each elected role. Update these placeholders with the official responsibilities.
+      </p>
+    </div>
+  </section>
+
+  <!-- RESPONSIBILITIES -->
+  <section class="section-md">
+    <div class="max-w-[1100px] mx-auto px-6 space-y-6">
+      <div class="grid gap-6 md:grid-cols-2">
+        {roles.map((role) => (
+          <article class="w4-card p-6">
+            <h2 class="text-2xl font-bold text-white mb-3">{role.title}</h2>
+            <ul class="list-disc list-inside text-white/75 space-y-2">
+              {role.bullets.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
