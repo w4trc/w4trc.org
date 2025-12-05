@@ -164,6 +164,19 @@ const projects = defineCollection({
   }),
 });
 
+const meetings = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    datetime: z.string().or(z.date()),
+    location: z.string().optional(),
+    topic: z.string().optional(),
+    desc: z.string().optional(),
+    signupUrl: z.string().optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
 export const officers = defineCollection({
   type: "content",
   schema: z.object({
@@ -235,6 +248,7 @@ export const collections = {
   officers: officers,
   activities: activities,
   projects: projects,
+  meetings: meetings,
 
   // sections
   ctaSection: ctaSectionCollection,

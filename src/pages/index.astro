@@ -4,7 +4,6 @@ import HeroBanner from "@/components/HeroBanner.astro";
 import WeatherWidget from "@/components/WeatherWidget.astro";
 
 import NextMeeting from "@/components/NextMeeting.astro";
-import meetings from "@/data/meetings.json";
 
 import Upcoming from "@/layouts/components/Upcoming.astro";
 import { getCollection } from "astro:content";
@@ -56,7 +55,7 @@ try {
   <!-- ================================= -->
   <!-- NEXT MEETING -->
   <!-- ================================= -->
-  <NextMeeting meeting={meetings} />
+  <NextMeeting />
 
   <!-- ================================= -->
   <!-- UPCOMING EVENTS -->

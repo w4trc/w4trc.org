@@ -1,24 +1,29 @@
 ---
 import Base from "@/layouts/Base.astro";
-import meetingsData from "@/data/meetings.json";
 import { getCollection } from "astro:content";
 
 // Normalize meetings whether data is a single object or an array
-const normalizeMeeting = (m: any) => ({
-  title: m?.title || "Club Meeting",
-  date: m?.datetime || m?.date,
-  endDate: m?.endDate ?? null,
-  location: m?.location ?? "",
-  summary: m?.summary || m?.desc || (m?.topic ? `Topic: ${m.topic}` : ""),
-  link: m?.signupUrl || m?.link || "",
-  type: "Meeting",
-});
+const normalizeMeeting = (m: any) => {
+  const dt = m?.datetime || m?.date;
+  const iso = dt instanceof Date ? dt.toISOString() : dt;
+  return {
+    title: m?.title || "Club Meeting",
+    date: iso,
+    endDate: m?.endDate ?? null,
+    location: m?.location ?? "",
+    summary: m?.summary || m?.desc || (m?.topic ? `Topic: ${m.topic}` : ""),
+    link: m?.signupUrl || m?.link || "",
+    type: "Meeting",
+  };
+};
 
-const meetingItems = Array.isArray(meetingsData)
-  ? meetingsData.map(normalizeMeeting)
-  : meetingsData && typeof meetingsData === "object"
-    ? [normalizeMeeting(meetingsData)]
-    : [];
+let meetingItems = [];
+try {
+  const meetingCollection = await getCollection("meetings");
+  meetingItems = meetingCollection
+    .filter((m) => !m.data.draft && m.data.datetime)
+    .map((m) => normalizeMeeting(m.data));
+} catch {}
 
 const events = await getCollection("events");
 const eventItems = events.map((e) => ({
@@ -144,7 +149,7 @@ const fmtTime = (iso: string) => {
       ) : (
         <div class="w4-card p-6">
           <p class="text-sm text-white/75">
-            No upcoming items found. Add meetings in <code>src/data/meetings.json</code> or events in the <code>events</code> collection.
+            No upcoming items found. Add meetings in <code>src/content/meetings</code> or events in the <code>events</code> collection.
           </p>
         </div>
       )}

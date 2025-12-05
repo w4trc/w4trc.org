@@ -1,26 +1,46 @@
 ---
+import { getCollection } from "astro:content";
+
 interface Meeting {
   title?: string;
-  datetime?: string;   // ISO string recommended
+  datetime?: string | Date;   // ISO string recommended
   location?: string;
   topic?: string;
   desc?: string;
   signupUrl?: string;
+  draft?: boolean;
 }
 
 interface Props {
-  meeting?: Meeting;   // pass from index.astro; falls back to data file if omitted
+  meeting?: Meeting;   // optional override
   containerClass?: string; // optional: override container wrapper classes
 }
 
-// Fallback to data file if no prop given
+// If a meeting prop is passed, use it; otherwise pull the next meeting from the collection.
 let source: Meeting | undefined = Astro.props.meeting;
 if (!source) {
   try {
-    const m = await import("@/data/meetings.json");
-    source = (m.default || m) as Meeting;
-  } catch {
-    source = {};
+    const meetings = await getCollection("meetings");
+    const now = Date.now();
+    const parsed = meetings
+      .filter((m) => !m.data.draft && m.data.datetime)
+      .map((m) => {
+        const raw = m.data.datetime as any;
+        const iso = raw instanceof Date ? raw.toISOString() : String(raw);
+        return { ...m.data, datetime: iso };
+      })
+      .filter((m) => !Number.isNaN(new Date(m.datetime!).getTime()))
+      .sort((a, b) => new Date(a.datetime!).getTime() - new Date(b.datetime!).getTime());
+
+    const upcoming = parsed.find((m) => new Date(m.datetime!).getTime() >= now);
+    source = upcoming || parsed[parsed.length - 1];
+  } catch (e) {
+    try {
+      const m = await import("@/data/meetings.json");
+      source = (m.default || m) as Meeting;
+    } catch {
+      source = {};
+    }
   }
 }
 
@@ -30,7 +50,7 @@ const location = source?.location || "TBD";
 const hasTopic = !!source?.topic;
 const hasDesc = !!source?.desc;
 
-function formatDate(dt?: string) {
+function formatDate(dt?: string | Date) {
   if (!dt) return "TBD";
   const d = new Date(dt);
   if (isNaN(d.getTime())) return "TBD";
