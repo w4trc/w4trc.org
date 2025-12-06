@@ -77,7 +77,7 @@ content:
     type: collection
     path: src/content/silentKeys
     view:
-      fields: [ callsign, name ]
+      fields: [ callsign, name, years ]
     fields:
       - { name: name, label: Name, type: string, required: true }
       - { name: callsign, label: Callsign, type: string, required: true}
