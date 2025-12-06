@@ -1,6 +1,7 @@
 media:
   input: public/images
   output: /
+
 content:
   - name: posts
     label: Posts
@@ -20,6 +21,7 @@ content:
       - { name: tags, label: Tags, type: string, list: true }
       - { name: description, label: Description, type: string }
       - { name: body, label: Body, type: rich-text }
+
   - name: events
     label: Events
     type: collection
@@ -38,6 +40,7 @@ content:
       - { name: tags, label: Tags, type: string, list: true }
       - { name: description, label: Description, type: string }
       - { name: body, label: Body, type: rich-text }
+
   - name: meetings
     label: Meetings
     type: collection
@@ -45,20 +48,21 @@ content:
     view:
       fields: [ title, datetime, topic ]
       sort:
-      - { field: datetime, order: asc }
-      - { field: date, order: asc }
-      - { field: title, order: asc }
+        - { field: datetime, order: asc }
+        - { field: date, order: asc }
+        - { field: title, order: asc }
     default:
       sort:
         - { field: datetime, order: asc }
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: datetime, label: Date, type: date, required: true, options: { time: true } }
-      - { name: location, label: Location, type: string, required: true  }
+      - { name: location, label: Location, type: string, required: true }
       - { name: topic, label: Topic, type: string }
       - { name: desc, label: Description, type: string }
       - { name: signupUrl, label: Sign Up URL, type: string }
       - { name: body, label: Body, type: rich-text }
+
   - name: about
     label: About page
     type: file
@@ -67,3 +71,17 @@ content:
       - { name: layout, type: string, hidden: true, default: "../layouts/AboutLayout.astro" }
       - { name: title, label: Title, type: string }
       - { name: body, label: Body, type: rich-text, options: { input: public/assets, output: /assets } }
+
+  - name: silentKeys
+    label: Silent Keys
+    type: file
+    path: data/silent-keys.json
+    fields:
+      - name: items
+        label: Silent Keys
+        type: list
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: callsign, label: Callsign, type: string, required: true }
+          - { name: years, label: Years, type: string }
+          - { name: description, label: Description, type: text }
