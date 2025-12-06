@@ -38,6 +38,21 @@ content:
       - { name: tags, label: Tags, type: string, list: true }
       - { name: description, label: Description, type: string }
       - { name: body, label: Body, type: rich-text }
+  - name: meetings
+    label: Meetings
+    type: collection
+    path: src/content/meetings
+    view:
+      fields: [ title, datetime ]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: datetime, label: Date, type: date, required: true }
+      - { name: slug, label: Slug, type: string }
+      - { name: location, label: Location, type: string, required: true  }
+      - { name: topic, label: Topic, type: string }
+      - { name: desc, label: Description, type: string }
+      - { name: signupUrl, label: Sign Up URL, type: string }
+      - { name: body, label: Body, type: rich-text }
   - name: about
     label: About page
     type: file
