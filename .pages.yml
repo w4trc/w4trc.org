@@ -74,14 +74,13 @@ content:
 
   - name: silentKeys
     label: Silent Keys
-    type: file
-    path: src/data/silent-keys.json
+    type: collection
+    path: src/content/silentKeys
+    view:
+      fields: [ name, callsign ]
     fields:
-      - name: items
-        label: Silent Keys
-        type: list
-        fields:
-          - { name: name, label: Name, type: string, required: true }
-          - { name: callsign, label: Callsign, type: string, required: true }
-          - { name: years, label: Years, type: string }
-          - { name: description, label: Description, type: text }
+      - { name: name, label: Name, type: string, required: true }
+      - { name: callsign, label: Callsign, type: string, required: true}
+      - { name: years, label: Years, type: string, required: false }
+      - { name: description, label: Description, type: string }
+      - { name: obituaryUrl, label: Obituary URL, type: string }
