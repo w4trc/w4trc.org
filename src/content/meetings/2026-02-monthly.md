@@ -1,6 +1,6 @@
 ---
 title: February Club Meeting
-datetime: 2026-02-08T17:08
+datetime: 2026-02-12T18:00
 location: The Press Room at Food City
 topic: TBD
 desc: Monthly business meeting and program.
