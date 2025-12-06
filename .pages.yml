@@ -43,7 +43,7 @@ content:
     type: collection
     path: src/content/meetings
     view:
-      fields: [ title, datetime ]
+      fields: [ title, datetime, topic ]
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: datetime, label: Date, type: date, required: true, options: { time: true } }
