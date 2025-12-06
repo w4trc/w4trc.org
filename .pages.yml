@@ -45,6 +45,7 @@ content:
     view:
       fields: [ title, datetime, topic ]
       sort: [ datetime, date, title ]
+    default: { sort: datetime, order: asc }
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: datetime, label: Date, type: date, required: true, options: { time: true } }
