@@ -44,7 +44,7 @@ content:
     path: src/content/meetings
     view:
       fields: [ title, datetime, topic ]
-      sort: [ datetime: asc ]
+      sort: [ datetime ]
     fields:
       - { name: title, label: Title, type: string, required: true }
       - { name: datetime, label: Date, type: date, required: true, options: { time: true } }
