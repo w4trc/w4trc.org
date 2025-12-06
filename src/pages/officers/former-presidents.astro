@@ -1,0 +1,48 @@
+---
+import Base from "@/layouts/Base.astro";
+import presidents from "@/data/former-presidents.json";
+
+// Stable sort: newest years first if a year can be parsed, otherwise keep as-is.
+const parsed = presidents.map((p) => {
+  const start = Number(String(p.years).match(/[0-9]{4}/)?.[0] ?? 0);
+  return { ...p, _start: start };
+});
+const entries = parsed.sort((a, b) => b._start - a._start);
+---
+
+<Base
+  title="Former Presidents"
+  meta_title="Former Presidents"
+  description="Past presidents of the Kingsport Amateur Radio Club."
+>
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-3">Former Presidents</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        A list of past leaders who have served the Kingsport Amateur Radio Club.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-md">
+    <div class="max-w-[800px] mx-auto px-6">
+      <ul class="divide-y divide-white/10 border border-white/10 rounded-xl overflow-hidden">
+        {entries.map((p) => (
+          <li class="flex items-center gap-3 px-4 py-3">
+            <span class="text-sm text-white/60 w-24">{p.years}</span>
+            <span class="text-sm text-white/75 w-28">{p.callsign ?? ""}</span>
+            <span class="text-base font-semibold text-white flex-1">{p.name}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="w4-card p-5 text-sm text-center text-white/80 mt-6">
+        Need to update this list? Email{" "}
+        <a class="text-[var(--w4-accent)] font-semibold hover:underline underline-offset-4" href="mailto:contact@w4trc.org">
+          contact@w4trc.org
+        </a>{" "}
+        with the year(s) and president’s name.
+      </div>
+    </div>
+  </section>
+</Base>
