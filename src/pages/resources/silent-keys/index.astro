@@ -1,8 +1,10 @@
 ---
 import Base from "@/layouts/Base.astro";
-import silentKeys from "@/data/silent-keys.json";
+import { getCollection } from "astro:content";
 
-const entries = [...silentKeys].sort((a, b) => a.name.localeCompare(b.name));
+const entries = (await getCollection("silentKeys"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => (a.data.weight ?? 0) - (b.data.weight ?? 0) || a.data.name.localeCompare(b.data.name));
 ---
 
 <Base
@@ -26,16 +28,21 @@ const entries = [...silentKeys].sort((a, b) => a.name.localeCompare(b.name));
           <article class="w4-card p-6 flex flex-col gap-2">
             <div class="flex items-center justify-between gap-3">
               <div>
-                <p class="text-xs uppercase tracking-wide text-white/60">{person.callsign}</p>
-                <h2 class="text-xl font-bold text-white leading-snug">{person.name}</h2>
+                <p class="text-xs uppercase tracking-wide text-white/60">{person.data.callsign}</p>
+                <h2 class="text-xl font-bold text-white leading-snug">{person.data.name}</h2>
               </div>
-              {person.years && (
+              {person.data.years && (
                 <span class="text-xs px-3 py-1 rounded-full bg-white/10 text-white/80 border border-white/15 whitespace-nowrap flex-shrink-0">
-                  {person.years}
+                  {person.data.years}
                 </span>
               )}
             </div>
-            {person.description && <p class="text-sm text-white/75">{person.description}</p>}
+            {person.data.description && <p class="text-sm text-white/75">{person.data.description}</p>}
+            {person.data.obituaryUrl && (
+              <a class="text-[var(--w4-accent)] text-sm font-semibold hover:underline underline-offset-4" href={person.data.obituaryUrl} target="_blank" rel="noreferrer">
+                Obituary / Memorial →
+              </a>
+            )}
           </article>
         ))}
       </div>

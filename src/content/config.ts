@@ -55,6 +55,18 @@ const projects = defineCollection({
   }),
 });
 
+const silentKeys = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    callsign: z.string().optional(),
+    years: z.string().optional(),
+    description: z.string().optional(),
+    obituaryUrl: z.string().url().optional(),
+    weight: z.number().optional(),
+  }),
+});
+
 const meetings = defineCollection({
   type: "content",
   schema: z.object({
@@ -68,4 +80,4 @@ const meetings = defineCollection({
   }),
 });
 
-export const collections = { events, blog, news, officers, projects, meetings, };
+export const collections = { events, blog, news, officers, projects, meetings, silentKeys, };
