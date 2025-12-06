@@ -75,7 +75,7 @@ content:
   - name: silentKeys
     label: Silent Keys
     type: file
-    path: data/silent-keys.json
+    path: src/data/silent-keys.json
     fields:
       - name: items
         label: Silent Keys
