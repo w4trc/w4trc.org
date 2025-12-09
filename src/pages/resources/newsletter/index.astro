@@ -22,7 +22,10 @@ const fmtDate = (iso: string) =>
     <div class="container mx-auto px-6 py-16 text-center">
       <h1 class="text-4xl font-extrabold mb-4">Zero-Beat</h1>
       <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        Catch up on recent issues or download past editions of the Zero-Beat newsletter. Add new releases in <code>src/data/newsletters.json</code>.
+        Catch up on recent issues or download past editions of the Zero-Beat newsletter.
+      </p>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        Current Zero-Beat Editor: <strong>Erik WX4ET</strong>
       </p>
     </div>
   </section>
@@ -38,9 +41,7 @@ const fmtDate = (iso: string) =>
                   {issue.title ?? issue.issue ?? fmtDate(issue.date)}
                 </h2>
               </div>
-              <span class="text-xs px-3 py-1 rounded-full bg-white/10 text-white/80 border border-white/15 whitespace-nowrap flex-shrink-0">
-                {fmtDate(issue.date)}
-              </span>
+              
             </div>
             {issue.summary && <p class="text-sm text-white/75">{issue.summary}</p>}
             {issue.link ? (
