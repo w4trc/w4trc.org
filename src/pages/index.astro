@@ -9,13 +9,13 @@ import Upcoming from "@/layouts/components/Upcoming.astro";
 import { getCollection } from "astro:content";
 
 // News (still included for future work)
-let newsPosts = [];
-try {
-  const blog = await getCollection("blog");
-  newsPosts = [...blog]
-    .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date))
-    .slice(0, 3);
-} catch {}
+//let newsPosts = [];
+//try {
+//  const blog = await getCollection("blog");
+//  newsPosts = [...blog]
+//    .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date))
+//    .slice(0, 3);
+//} catch {}
 ---
 
 <Base>
