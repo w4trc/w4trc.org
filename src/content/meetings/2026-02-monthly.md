@@ -1,7 +1,7 @@
 ---
 title: February Club Meeting
 datetime: 2026-02-12T18:00
-location: The Press Room at Food City
+location: Eastman's Toy F. Reid Employee Center
 topic: TBD
 desc: Monthly business meeting and program.
 ---
