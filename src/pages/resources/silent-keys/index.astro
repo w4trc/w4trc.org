@@ -32,14 +32,14 @@ const entries = (await getCollection("silentKeys"))
                 <h2 class="text-xl font-bold text-white leading-snug">{person.data.name}</h2>
               </div>
               {person.data.years && (
-                <span class="text-xs px-3 py-1 rounded-full bg-white/10 text-white/80 border border-white/15 whitespace-nowrap flex-shrink-0">
+                <span class="text-xs px-3 py-1 rounded-full bg-white/10 text-white/80 border border-white/15 whitespace-nowrap shrink-0">
                   {person.data.years}
                 </span>
               )}
             </div>
             {person.data.description && <p class="text-sm text-white/75">{person.data.description}</p>}
             {person.data.obituaryUrl && (
-              <a class="text-[var(--w4-accent)] text-sm font-semibold hover:underline underline-offset-4" href={person.data.obituaryUrl} target="_blank" rel="noreferrer">
+              <a class="text-(--w4-accent) text-sm font-semibold hover:underline underline-offset-4" href={person.data.obituaryUrl} target="_blank" rel="noreferrer">
                 Obituary / Memorial →
               </a>
             )}
@@ -50,10 +50,10 @@ const entries = (await getCollection("silentKeys"))
       <div class="w4-card p-6 mt-8 text-center">
         <p class="text-white/80 text-sm">
           To submit a silent key or provide more information, email{" "}
-          <a class="text-[var(--w4-accent)] font-semibold hover:underline underline-offset-4" href="mailto:contact@w4trc.org">
+          <a class="text-(--w4-accent) font-semibold hover:underline underline-offset-4" href="mailto:contact@w4trc.org">
             contact@w4trc.org
           </a>{" "}
-          or use our <a class="text-[var(--w4-accent)] font-semibold hover:underline underline-offset-4" href="/contact/">contact form</a>.
+          or use our <a class="text-(--w4-accent) font-semibold hover:underline underline-offset-4" href="/contact/">contact form</a>.
         </p>
       </div>
     </div>
