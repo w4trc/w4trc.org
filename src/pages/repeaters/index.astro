@@ -8,7 +8,7 @@ const comingSoon = repeaters.comingSoon ?? [];
 const areaRepeaters = repeaters.areaRepeaters ?? [];
 const areaNets = repeaters.areaNets ?? [];
 const heroImage = "/images/IMG_2781.jpg";
-const historyImage = "/images/winterfieldday.png";
+const historyImage = "/images/history/RPT06-scaled.jpg";
 ---
 
 <Base
@@ -27,7 +27,7 @@ const historyImage = "/images/winterfieldday.png";
         format="webp"
         class="w-full h-full object-cover opacity-50"
       />
-      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/55 to-black/70"></div>
+      <div class="absolute inset-0 bg-linear-to-b from-black/60 via-black/55 to-black/70"></div>
     </div>
 
     <div class="container mx-auto px-6 py-16 text-center">
@@ -55,7 +55,7 @@ const historyImage = "/images/winterfieldday.png";
                     <p class="text-xs uppercase tracking-wide text-white/60">{r.callsign}</p>
                     <h3 class="text-xl font-bold text-white leading-tight">{r.name}</h3>
                   </div>
-                  <span class="text-xs px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-200 border border-emerald-500/30 whitespace-nowrap flex-shrink-0">
+                  <span class="text-xs px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-200 border border-emerald-500/30 whitespace-nowrap shrink-0">
                     On Air
                   </span>
                 </div>
@@ -107,16 +107,15 @@ const historyImage = "/images/winterfieldday.png";
       <div>
         <div class="w4-card overflow-hidden grid gap-0 lg:grid-cols-[2fr_1fr]">
           <div class="p-6 lg:p-8">
-            <p class="text-sm uppercase tracking-[0.12em] text-[var(--w4-accent)] mb-2">
+            <p class="text-sm uppercase tracking-[0.12em] text-(--w4-accent) mb-2">
               Repeater History
             </p>
             <h2 class="text-2xl font-bold text-white mb-3">How the W4TRC machines came to be</h2>
             <p class="text-white/75">
-              From the first club machine on Bays Mountain to today’s multi-site coverage, read the story,
-              upgrades, and people who built the system we rely on.
+              From the first club machine on Bays Mountain to today wide area coverage, read the story, upgrades, and people who built the system we rely on.
             </p>
             <a
-              class="inline-flex items-center gap-2 text-[var(--w4-accent)] font-semibold mt-5 hover:underline underline-offset-4"
+              class="inline-flex items-center gap-2 text-(--w4-accent) font-semibold mt-5 hover:underline underline-offset-4"
               href="/repeaters/history/"
             >
               Read the full history
@@ -126,13 +125,13 @@ const historyImage = "/images/winterfieldday.png";
           <div class="relative min-h-[200px]">
             <ImageMod
               src={historyImage}
-              alt="Field day tent and radio gear"
+              alt="Ken working on repeater cabinet"
               width={800}
               height={500}
               format="webp"
               class="w-full h-full object-cover"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent lg:bg-none"></div>
+            <div class="absolute inset-0 bg-linear-to-t from-black/40 to-transparent lg:bg-none"></div>
           </div>
         </div>
       </div>
