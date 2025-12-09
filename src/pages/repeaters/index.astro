@@ -7,6 +7,7 @@ const clubOnAir = repeaters.clubOnAir ?? [];
 const comingSoon = repeaters.comingSoon ?? [];
 const areaRepeaters = repeaters.areaRepeaters ?? [];
 const areaNets = repeaters.areaNets ?? [];
+const siteMapImage = repeaters.siteMapImage ?? "";
 const heroImage = "/images/IMG_2781.jpg";
 const historyImage = "/images/history/RPT06-scaled.jpg";
 ---
@@ -61,7 +62,6 @@ const historyImage = "/images/history/RPT06-scaled.jpg";
                 </div>
                 <p class="text-sm font-semibold text-white">{r.frequency}</p>
                 {r.mode && <p class="text-sm text-white/70">Mode: {r.mode}</p>}
-                {r.location && <p class="text-sm text-white/70">Site: {r.location}</p>}
                 {Array.isArray(r.features) && r.features.length > 0 && (
                   <ul class="mt-2 space-y-1 text-sm text-white/70 list-disc list-inside">
                     {r.features.map((item) => (
@@ -94,13 +94,51 @@ const historyImage = "/images/history/RPT06-scaled.jpg";
                   </div>
                   {r.frequency && <p class="text-sm font-semibold text-white">{r.frequency}</p>}
                   {r.mode && <p class="text-sm text-white/70">Mode: {r.mode}</p>}
-                  {r.location && <p class="text-sm text-white/70">Planned site: {r.location}</p>}
                   {r.notes && <p class="text-sm text-white/70">{r.notes}</p>}
                 </div>
               ))}
             </div>
           </div>
         )}
+      </div>
+
+      <!-- REPEATER SITE DETAILS -->
+      <div>
+        <div class="w4-card grid gap-6 p-6 lg:p-8 items-start lg:grid-cols-[1.15fr,1fr]">
+          <div class="space-y-3">
+            <h3 class="text-xl font-semibold text-white">Repeater Site</h3>
+            <p class="text-white/75">
+              All active W4TRC machines transmit from the shared amateur site on Bays Mountain / Holston River
+              Mountain above Kingsport, roughly a thousand feet above downtown.
+            </p>
+            <ul class="space-y-2 text-white/80 list-disc list-inside">
+              <li><span class="font-semibold text-white">Location:</span> Bays Mountain ridge near Bays Knob, Kingsport, TN</li>
+              <li><span class="font-semibold text-white">Tower:</span> 65-foot structure added in 2021 to push antennas above the treeline</li>
+              <li><span class="font-semibold text-white">Power:</span> Commercial mains with solar + battery backup for emergency operation</li>
+              <li><span class="font-semibold text-white">Access:</span> Secure shared site that also hosts regional broadcast services</li>
+            </ul>
+          </div>
+          <div class="overflow-hidden rounded-xl border border-white/10 bg-black/30">
+            {siteMapImage ? (
+              <img
+                src={siteMapImage}
+                alt="Map to the W4TRC repeater site on Bays Mountain"
+                class="h-full w-full min-h-[260px] object-cover"
+                loading="lazy"
+              />
+            ) : (
+              <div class="flex h-full min-h-[260px] items-center justify-center bg-linear-to-br from-blue-900/60 via-slate-800/60 to-emerald-800/60 p-6 text-center text-white/80">
+                <div class="space-y-2">
+                  <p class="text-white font-semibold">Site map coming soon</p>
+                  <p class="text-sm">
+                    Add a map image at <code>/public/images/repeaters/site-map.png</code> and set
+                    <code>siteMapImage</code> in <code>src/data/repeaters.json</code> to display it here.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       <!-- REPEATER HISTORY TEASER -->
