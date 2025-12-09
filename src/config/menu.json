@@ -75,10 +75,6 @@
       ]
     },
     {
-      "name": "News",
-      "url": "/news/"
-    },
-    {
       "name": "Gallery",
       "url": "https://gallery.w4trc.org/"
     },
