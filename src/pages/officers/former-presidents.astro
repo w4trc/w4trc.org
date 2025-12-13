@@ -1,5 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
+import ImageMod from "@/components/ImageMod.astro";
 import presidents from "@/data/former-presidents.json";
 
 // Stable sort: newest years first if a year can be parsed, otherwise keep as-is.
@@ -16,6 +17,17 @@ const entries = parsed.sort((a, b) => b._start - a._start);
   description="Past presidents of the Kingsport Amateur Radio Club."
 >
   <section class="hero-heroimg relative">
+    <div aria-hidden="true" class="absolute inset-0 -z-10">
+      <ImageMod
+        src="/images/previous-presidents-gavel.png"
+        alt="Kingsport Amateur Radio Club history"
+        width={1600}
+        height={600}
+        format="webp"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-linear-to-b from-black/60 via-black/55 to-black/70"></div>
+    </div>
     <div class="container mx-auto px-6 py-16 text-center">
       <h1 class="text-4xl font-extrabold mb-3">Former Presidents</h1>
       <p class="text-lg text-white/80 max-w-2xl mx-auto">
