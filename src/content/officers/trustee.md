@@ -2,7 +2,7 @@
 title: "Joshua Carmack"
 position: "Repeater Trustee/Webmaster"
 callsign: "N4JHC"
-photo: "/images/officers/n4jhc.jpeg"
+photo: "/images/officers/n4jhc.jpg"
 photo_alt: "Joshua Carmack headshot"
 weight: 5
 ---
