@@ -1,7 +1,7 @@
 ---
 title: "Contact"
-description: "this is meta description"
+description: "Send us a message below!"
 meta_title: ""
-image: ""
+image: "/images/hero-mountains.jpg"
 draft: false
 ---

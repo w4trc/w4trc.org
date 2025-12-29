@@ -2,7 +2,7 @@
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import { getListPage } from "@/lib/contentParser.astro";
-import PageHeader from "@/partials/PageHeader.astro";
+import ImageMod from "@/components/ImageMod.astro";
 
 const contactIndex = await getListPage("contact", "-index");
 const { contact_form_action }: { contact_form_action: string } = config.params;
@@ -19,7 +19,24 @@ if (contactIndex.data.draft) {
   description={description}
   image={image}
 >
-  <PageHeader title={title} />
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      {image && (
+        <div aria-hidden="true" class="absolute inset-0 -z-10">
+          <ImageMod
+            src={image}
+            width={1200}
+            height={380}
+            alt={title}
+            format="webp"
+            class="w-full h-full object-cover opacity-60"
+          />
+        </div>
+      )}
+      <h1 class="text-4xl font-extrabold mb-4">{title}</h1>
+      {description && <p class="text-lg max-w-2xl mx-auto">{description}</p>}
+    </div>
+  </section>
   <section class="section-sm">
     <div class="container">
       <div class="row">
