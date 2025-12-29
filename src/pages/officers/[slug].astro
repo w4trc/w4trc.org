@@ -26,8 +26,8 @@ const { Content } = await officer.render();
 
 <Base
   title={`${data.position}: ${data.title}`}
-  meta_title={`${data.position} - ${data.title}`}
-  description={data.callsign ? `${data.callsign} — ${data.position}` : data.position}
+  meta_title={`KARC - ${data.position}: ${data.title}`}
+  description={data.callsign ? `${data.callsign} - ${data.position}` : data.position}
   image={data.photo}
 >
   <section class="section-md">
