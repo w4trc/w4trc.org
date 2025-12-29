@@ -1,26 +1,42 @@
 ---
 import Base from "@/layouts/Base.astro";
+import ImageMod from "@/components/ImageMod.astro";
 
 const roles = [
-  { title: "President", bullets: ["TBD", "TBD", "TBD"] },
-  { title: "Vice President", bullets: ["TBD", "TBD", "TBD"] },
-  { title: "Secretary", bullets: ["TBD", "TBD", "TBD"] },
-  { title: "Treasurer", bullets: ["TBD", "TBD", "TBD"] },
-  { title: "Trustee", bullets: ["TBD", "TBD", "TBD"] },
+  { title: "President", bullets: ["Provide overall leadership and direction for the club", "Preside over club meetings and board meetings", "Ensure the club constitution and bylaws are followed", "Appoint committees as needed, including the nominating committee", "Sign official and legal documents on behalf of the club"] },
+  { title: "Vice President", bullets: ["Coordinate and schedule club programs and presentations", "Assist the President and assume duties when the President is unavailable", "Support the board in carrying out club goals", "Help ensure the club constitution and bylaws are followed"] },
+  { title: "Secretary", bullets: ["Record and maintain minutes of club meetings", "Handle routine club correspondence", "Maintain official club records and documents", "Provide meeting summaries for publications in the club newsletter"] },
+  { title: "Treasurer", bullets: ["Manage club finances, including dues, bills, and reimbursements", "Maintain accurate financial records and reconcile bank statements", "Prepare and present a monthly treasurer's report", "Handle required state filings and officer updates", "Maintain the paid-members email and financial records"] },
+  { title: "Trustee", bullets: ["Obersee operation and maintenance of club repeaters", "Coordinate repeater frequencies and compliance with SERA and ARRL", "Maintain FCC, RepeaterBook, and EchoLink listings", "Manage EchoLink operations", "Keep records of repeater site, access, issues, and complaints"] },
 ];
+
+const heroImage = "/images/hero-mountains.jpg";
 ---
 
 <Base
   title="Officer Responsibilities"
   meta_title="Officer Responsibilities"
   description="Outline of duties for elected officers. Replace placeholders with official descriptions."
+  image={heroImage}
 >
   <!-- HERO -->
   <section class="hero-heroimg relative">
     <div class="container mx-auto px-6 py-16 text-center">
+      {heroImage && (
+        <div aria-hidden="true" class="absolute inset-0 -z-10">
+          <ImageMod
+            src={heroImage}
+            width={1200}
+            height={380}
+            alt="Smoky Mountain sunrise with radio towers"
+            format="webp"
+            class="w-full h-full object-cover opacity-60"
+          />
+        </div>
+      )}
       <h1 class="text-4xl font-extrabold mb-3">Officer Responsibilities</h1>
       <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        Bulleted duties for each elected role. Update these placeholders with the official responsibilities.
+        Bulleted duties for each elected role.
       </p>
     </div>
   </section>
