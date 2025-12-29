@@ -29,7 +29,7 @@
   },
 
   "params": {
-    "contact_form_action": "#",
+    "contact_form_action": "https://formsubmit.co/contact@w4trc.org",
     "copyright": "© 2025 Kingsport Amateur Radio Club. All rights reserved."
   },
 
@@ -56,3 +56,4 @@
     "meta_description": "Amateur Radio Club in Kingsport, TN"
   }
 }
+
