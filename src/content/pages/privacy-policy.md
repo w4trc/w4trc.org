@@ -1,6 +1,6 @@
 ---
 title: "Privacy"
-meta_title: ""
+meta_title: "KARC - Privacy"
 description: "this is meta description"
 draft: false
 ---

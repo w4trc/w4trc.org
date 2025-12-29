@@ -23,6 +23,7 @@ export async function getStaticPaths() {
 
 const { author } = Astro.props;
 const { title, social, meta_title, description, image } = author.data;
+const formattedMetaTitle = meta_title || `KARC - ${title}`;
 const { Content } = await render(author);
 
 // get all posts by author
@@ -35,7 +36,7 @@ const postFilterByAuthor = posts.filter(
 
 <Base
   title={title}
-  meta_title={meta_title}
+  meta_title={formattedMetaTitle}
   description={description}
   image={image}
 >

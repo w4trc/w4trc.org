@@ -28,7 +28,7 @@ const filterByCategories = taxonomyFilter(posts, "categories", category!);
 const sortedPosts = sortByDate(filterByCategories);
 ---
 
-<Base title={category}>
+<Base title={category} meta_title={`KARC - ${category}`}>
   <PageHeader title={category} />
   <div class="section-sm pb-0">
     <div class="container">

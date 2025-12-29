@@ -31,7 +31,12 @@ const dateLine = data.endDate
   : `${fmtDate(data.date)} • ${fmtTime(data.date)}`;
 ---
 
-<Base title={data.title} meta_title={data.title} description={data.summary} image={data.cover}>
+<Base
+  title={data.title}
+  meta_title={`KARC - ${data.title}`}
+  description={data.summary}
+  image={data.cover}
+>
   <!-- Breadcrumb -->
 <nav class="py-4">
   <div class="max-w-[1100px] mx-auto px-6 text-sm">

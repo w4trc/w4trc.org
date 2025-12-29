@@ -13,7 +13,10 @@ if (authorIndex.data.draft) {
 const authors = await getSinglePage("authors");
 ---
 
-<Base title={authorIndex.data.title}>
+<Base
+  title={authorIndex.data.title}
+  meta_title={authorIndex.data.meta_title || "KARC - Authors"}
+>
   <PageHeader title={authorIndex.data.title} />
   <section class="section-sm pb-0">
     <div class="container">

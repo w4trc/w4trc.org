@@ -1,7 +1,7 @@
 ---
 title: "Fox Hunting"
-description: "Monthly hidden-transmitter hunts—learn radio direction finding, antennas, and teamwork."
-meta_title: "Fox Hunting — W4TRC"
+description: "Monthly hidden-transmitter hunts-learn radio direction finding, antennas, and teamwork."
+meta_title: "KARC - Fox Hunting"
 draft: false
 image: "/images/activities/fox-hunting/20220320_154046_hu_e6975830e6efc8b2.jpg"
 
