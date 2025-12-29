@@ -1,19 +1,36 @@
 ---
 import Base from "@/layouts/Base.astro";
+import ImageMod from "@/components/ImageMod.astro";
+
+const title = "Join W4TRC";
+const description = "Become a member to support the repeaters, events, and training that keep W4TRC active.";
+const meta_title = title;
+const image = "/images/hero-mountains.jpg";
 ---
 
 <Base
-  title="Join W4TRC"
-  meta_title="Join W4TRC"
-  description="Become a member to support the repeaters, events, and training that keep W4TRC active."
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  image={image}
 >
   <!-- HERO -->
   <section class="hero-heroimg relative">
     <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl font-extrabold mb-4">Join W4TRC</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        Membership keeps our repeaters on the air and powers club events, training, and outreach.
-      </p>
+      {image && (
+        <div aria-hidden="true" class="absolute inset-0 -z-10">
+          <ImageMod
+            src={image}
+            width={1200}
+            height={380}
+            alt={title}
+            format="webp"
+            class="w-full h-full object-cover opacity-60"
+          />
+        </div>
+      )}
+      <h1 class="text-4xl font-extrabold mb-4">{title}</h1>
+      {description && <p class="text-lg max-w-2xl mx-auto">{description}</p>}
     </div>
   </section>
 
