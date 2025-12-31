@@ -10,8 +10,6 @@ foxhunts:
   events:
     - date: "2026-01-10"
       time_local: "3:00 PM"
-      location: "Warriors' Path State Park – Main Lot"
-      notes: "Beginner-friendly. Bring a 2m HT and attenuator if you have one."
     - date: "2026-02-14"
       time_local: "3:00 PM"
     - date: "2026-03-14"
