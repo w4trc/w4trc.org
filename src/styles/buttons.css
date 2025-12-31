@@ -10,6 +10,10 @@
   @apply border-primary bg-primary text-white dark:border-primary dark:bg-primary dark:text-white;
 }
 
+.btn-white {
+  @apply border-white bg-white text-dark hover:bg-white/90;
+}
+
 .btn-outline-primary {
   @apply border-dark text-text-dark hover:bg-dark dark:hover:text-text-dark bg-transparent hover:text-white dark:border-darkmode-primary dark:text-white dark:hover:bg-darkmode-primary;
 }
