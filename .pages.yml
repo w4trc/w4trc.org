@@ -86,5 +86,4 @@ content:
       - { name: position, label: Position, type: string, required: true }
       - { name: title, label: Name, type: string, required: true }
       - { name: callsign, label: Callsign, type: string, required: true}
-      - { name: photo, label: Photo, type: image, options: { path: officers}}
       - { name: body, label: Biography, type: rich-text }
