@@ -150,6 +150,7 @@ const events = defineCollection({
     summary: z.string().optional(),
     cover: z.string().optional(),
     url: z.string().optional(),
+    rsvpUrl: z.string().optional(),
   }),
 });
 

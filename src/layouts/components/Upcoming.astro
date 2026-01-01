@@ -89,8 +89,9 @@ const upcoming = coll
           const location = (ev.data as any).location as string | undefined;
           const summary = (ev.data as any).summary as string | undefined;
           const url = (ev.data as any).url ?? `/${ev.collection}/${ev.slug}/`;
+          const rsvpUrl = (ev.data as any).rsvpUrl as string | undefined;
           return (
-            <a href={url} class="w4-card block">
+            <div class="w4-card block">
               {cover && (
                 <img
                   src={cover}
@@ -107,10 +108,23 @@ const upcoming = coll
                 </p>
               )}
               {summary && <p class="mt-2 text-white/80">{summary}</p>}
-              <span class="mt-3 inline-flex items-center gap-1 text-(--w4-accent) font-semibold text-sm">
-                More info →
-              </span>
-            </a>
+              <div class="mt-3 flex flex-wrap gap-3">
+                {rsvpUrl && (
+                  <a
+                    class="inline-flex items-center gap-1 text-(--w4-accent) font-semibold text-sm underline underline-offset-4"
+                    href={rsvpUrl}
+                  >
+                    RSVP
+                  </a>
+                )}
+                <a
+                  class="inline-flex items-center gap-1 text-(--w4-accent) font-semibold text-sm underline underline-offset-4"
+                  href={url}
+                >
+                  More info
+                </a>
+              </div>
+            </div>
           );
         })}
       </div>
