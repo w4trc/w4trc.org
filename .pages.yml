@@ -63,15 +63,6 @@ content:
       - { name: signupUrl, label: Sign Up URL, type: string }
       - { name: body, label: Body, type: rich-text }
 
-  - name: about
-    label: About page
-    type: file
-    path: src/pages/about.md
-    fields:
-      - { name: layout, type: string, hidden: true, default: "../layouts/AboutLayout.astro" }
-      - { name: title, label: Title, type: string }
-      - { name: body, label: Body, type: rich-text, options: { input: public/assets, output: /assets } }
-
   - name: silentKeys
     label: Silent Keys
     type: collection
@@ -84,3 +75,15 @@ content:
       - { name: years, label: Years, type: string, required: false }
       - { name: description, label: Description, type: string }
       - { name: obituaryUrl, label: Obituary URL, type: string }
+
+  - name: officers
+    label: Officers
+    type: collection
+    path: src/content/officers
+    view:
+      fields: [ position, callsign, name ]
+    fields:
+      - { name: title, label: Name, type: string, required: true }
+      - { name: callsign, label: Callsign, type: string, required: true}
+      - { name: photo, label: Photo, type: image,}
+      - { name: bio, label: Biography, type: Body }
