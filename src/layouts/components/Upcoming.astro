@@ -33,6 +33,11 @@ const parseDate = (v: unknown) => {
   return undefined;
 };
 
+const isFeatured = (ev: EventEntry) => {
+  const flag = (ev.data as any).featured;
+  return flag === true || flag === "true" || flag === 1 || flag === "1";
+};
+
 function inFutureOrOngoing(e: EventEntry) {
   const start = parseDate(e.data.date);
   const end = parseDate((e.data as any).endDate);
@@ -63,11 +68,11 @@ const upcomingAll = coll
   .filter(inFutureOrOngoing)
   .sort((a, b) => {
     const da = parseDate(a.data.date)?.getTime() ?? 0;
-    const db = parseDate(b.data.date)?.getTime() ?? 0;
-    return da - db;
-  });
+  const db = parseDate(b.data.date)?.getTime() ?? 0;
+  return da - db;
+});
 
-const featuredByFlag = upcomingAll.find((ev) => (ev.data as any).featured === true);
+const featuredByFlag = upcomingAll.find(isFeatured);
 const featuredBySlug = featuredSlug
   ? upcomingAll.find((ev) => ev.slug === featuredSlug)
   : undefined;
@@ -133,7 +138,10 @@ const remaining = (featured ? upcomingAll.filter((ev) => ev.slug !== featured.sl
             const summary = (ev.data as any).summary as string | undefined;
             const url = (ev.data as any).url ?? `/${ev.collection}/${ev.slug}/`;
             return (
-              <a href={url} class="w4-card block">
+              <a
+                href={url}
+                class={`w4-card block ${isFeatured(ev) ? "border border-orange-300/70 bg-orange-500/5" : ""}`}
+              >
                 {cover && (
                   <img
                     src={cover}
@@ -141,6 +149,11 @@ const remaining = (featured ? upcomingAll.filter((ev) => ev.slug !== featured.sl
                     class="mb-3 rounded-lg"
                     style="aspect-ratio:16/9;object-fit:cover;"
                   />
+                )}
+                {isFeatured(ev) && (
+                  <div class="mb-2 inline-flex items-center gap-2 rounded-full bg-orange-500/15 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-orange-100">
+                    Featured
+                  </div>
                 )}
                 <div class="text-sm text-white/60 mb-1">{fmtRange(ev)}</div>
                 <h3 class="text-white font-semibold text-lg leading-snug">{ev.data.title}</h3>
