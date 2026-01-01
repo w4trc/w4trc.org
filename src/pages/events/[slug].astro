@@ -82,6 +82,16 @@ const dateLine = data.endDate
           </li>
         )}
       </ul>
+      {data.rsvpUrl && (
+        <div class="mt-6 flex flex-wrap gap-3 justify-center">
+          <a
+            class="px-4 py-2 rounded-xl border border-white/20 text-white/90"
+            href={data.rsvpUrl}
+          >
+            RSVP
+          </a>
+        </div>
+      )}
     </div>
 
     <!-- Markdown Content (no box) -->
