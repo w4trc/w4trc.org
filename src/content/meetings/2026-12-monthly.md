@@ -1,8 +1,8 @@
 ---
 title: December Club Meeting
-datetime: 2026-12-10T18:00
+datetime: 2026-12-10T19:00
 location: Eastman's Toy F. Reid Employee Center
 topic: TBD
 desc: Monthly business meeting and program.
 ---
-Add agenda, presenter, and any reminders here. Update the frontmatter date/time to the correct meeting night each month.
+
