@@ -1,5 +1,10 @@
 ---
 import { getCollection } from "astro:content";
+import {
+  formatFloatingDateTime,
+  getEasternNow,
+  parseFloatingIso,
+} from "@/lib/utils/floatingDate";
 
 interface Meeting {
   title?: string;
@@ -21,18 +26,20 @@ let source: Meeting | undefined = Astro.props.meeting;
 if (!source) {
   try {
     const meetings = await getCollection("meetings");
-    const now = Date.now();
     const parsed = meetings
       .filter((m) => !m.data.draft && m.data.datetime)
       .map((m) => {
-        const raw = m.data.datetime as any;
-        const iso = raw instanceof Date ? raw.toISOString() : String(raw);
-        return { ...m.data, datetime: iso };
+        return { ...m.data, datetime: m.data.datetime };
       })
-      .filter((m) => !Number.isNaN(new Date(m.datetime!).getTime()))
-      .sort((a, b) => new Date(a.datetime!).getTime() - new Date(b.datetime!).getTime());
+      .filter((m) => !!parseFloatingIso(m.datetime))
+      .sort((a, b) => {
+        const da = parseFloatingIso(a.datetime)?.getTime() ?? 0;
+        const db = parseFloatingIso(b.datetime)?.getTime() ?? 0;
+        return da - db;
+      });
 
-    const upcoming = parsed.find((m) => new Date(m.datetime!).getTime() >= now);
+    const now = getEasternNow().getTime();
+    const upcoming = parsed.find((m) => (parseFloatingIso(m.datetime)?.getTime() ?? 0) >= now);
     source = upcoming || parsed[parsed.length - 1];
   } catch (e) {
     try {
@@ -52,16 +59,7 @@ const hasDesc = !!source?.desc;
 
 function formatDate(dt?: string | Date) {
   if (!dt) return "TBD";
-  const d = new Date(dt);
-  if (isNaN(d.getTime())) return "TBD";
-  return d.toLocaleString(undefined, {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    timeZoneName: "short",
-  });
+  return formatFloatingDateTime(dt);
 }
 
 const when = formatDate(source?.datetime);

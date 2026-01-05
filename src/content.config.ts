@@ -144,8 +144,8 @@ const events = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    date: z.string().or(z.date()),     // start
-    endDate: z.string().or(z.date()).optional(),
+    date: z.string(),     // start (ET wall time; keep quoted)
+    endDate: z.string().optional(),
     location: z.string().optional(),
     summary: z.string().optional(),
     cover: z.string().optional(),
@@ -182,7 +182,7 @@ const meetings = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    datetime: z.string().or(z.date()),
+    datetime: z.string(), // ET wall time; keep quoted
     location: z.string().optional(),
     topic: z.string().optional(),
     desc: z.string().optional(),

@@ -1,5 +1,12 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
+import {
+  formatFloatingDateTime,
+  formatFloatingMonthDay,
+  getEasternNow,
+  isSameFloatingDay,
+  parseFloatingIso,
+} from "@/lib/utils/floatingDate";
 
 type EventEntry = CollectionEntry<"events">;
 
@@ -23,16 +30,8 @@ const {
 const coll: EventEntry[] = await getCollection("events");
 
 // Helpers
-const now = new Date();
-const parseDate = (v: unknown) => {
-  // entries may be Date or string depending on schema; normalize to Date
-  if (v instanceof Date) return v;
-  if (typeof v === "string") {
-    const d = new Date(v);
-    return isNaN(+d) ? undefined : d;
-  }
-  return undefined;
-};
+const now = getEasternNow();
+const parseDate = (v: unknown) => parseFloatingIso(v as string | Date | null | undefined) ?? undefined;
 
 function inFutureOrOngoing(e: EventEntry) {
   const start = parseDate(e.data.date);
@@ -45,18 +44,11 @@ function fmtRange(e: EventEntry) {
   const s = parseDate(e.data.date);
   const end = parseDate((e.data as any).endDate);
   if (!s) return "TBD";
-  if (!end || s.toDateString() === end.toDateString()) {
-    return s.toLocaleString(undefined, {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      timeZoneName: "short",
-    });
+  if (!end || isSameFloatingDay(s, end)) {
+    return formatFloatingDateTime(s);
   }
-  const S = s.toLocaleString(undefined, { month: "short", day: "numeric" });
-  const E = end.toLocaleString(undefined, { month: "short", day: "numeric" });
+  const S = formatFloatingMonthDay(s);
+  const E = formatFloatingMonthDay(end);
   return `${S}-${E}`;
 }
 
