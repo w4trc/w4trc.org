@@ -1,6 +1,12 @@
 ---
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
+import {
+  formatFloatingDate,
+  formatFloatingTime,
+  getEasternNow,
+  parseFloatingIso,
+} from "@/lib/utils/floatingDate";
 
 const meetingCover = "/images/clubmeetings2025.jpg";
 
@@ -10,7 +16,7 @@ const meetingsRaw = await getCollection("meetings");
 const normalizeEvent = (e: any) => ({
   type: "Event" as const,
   title: e.data.title,
-  date: e.data.date as string,
+  date: e.data.date,
   endDate: (e.data as any).endDate ?? null,
   location: e.data.location ?? "",
   summary: e.data.summary ?? "",
@@ -19,12 +25,10 @@ const normalizeEvent = (e: any) => ({
 });
 
 const normalizeMeeting = (m: any) => {
-  const dt = m.data.datetime as any;
-  const date = dt instanceof Date ? dt.toISOString() : String(dt);
   return {
     type: "Meeting" as const,
     title: m.data.title ?? "Club Meeting",
-    date,
+    date: m.data.datetime,
     endDate: (m.data as any).endDate ?? null,
     location: m.data.location ?? "",
     summary: m.data.desc ?? m.data.topic ?? "",
@@ -37,25 +41,30 @@ const combined = [
   ...eventsRaw.map(normalizeEvent),
   ...meetingsRaw.filter((m) => !m.data.draft && m.data.datetime).map(normalizeMeeting),
 ].filter((item) => {
-  const d = new Date(item.date);
-  return !Number.isNaN(d.getTime());
+  const d = parseFloatingIso(item.date);
+  return !!d;
 });
 
-combined.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+combined.sort((a, b) => {
+  const da = parseFloatingIso(a.date)?.getTime() ?? 0;
+  const db = parseFloatingIso(b.date)?.getTime() ?? 0;
+  return da - db;
+});
 
-const now = new Date();
-const upcoming = combined.filter((e) => new Date(e.date).getTime() >= now.getTime());
-const past = combined.filter((e) => new Date(e.date).getTime() < now.getTime()).reverse();
+const now = getEasternNow();
+const upcoming = combined.filter((e) => {
+  const d = parseFloatingIso(e.date);
+  return d ? d.getTime() >= now.getTime() : false;
+});
+const past = combined
+  .filter((e) => {
+    const d = parseFloatingIso(e.date);
+    return d ? d.getTime() < now.getTime() : false;
+  })
+  .reverse();
 
-const fmtDate = (iso: string) =>
-  new Date(iso).toLocaleDateString(undefined, {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-const fmtTime = (iso: string) =>
-  new Date(iso).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+const fmtDate = (value: string | Date) => formatFloatingDate(value);
+const fmtTime = (value: string | Date) => formatFloatingTime(value);
 ---
 
 <Base

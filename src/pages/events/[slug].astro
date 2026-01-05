@@ -1,6 +1,10 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import Base from "@/layouts/Base.astro";
+import {
+  formatFloatingDate,
+  formatFloatingTime,
+} from "@/lib/utils/floatingDate";
 
 export const prerender = true;
 
@@ -16,15 +20,8 @@ if (!event) throw new Error(`Event not found: ${slug}`);
 const { data } = event;
 const { Content } = await event.render();
 
-const fmtDate = (iso) =>
-  new Date(iso).toLocaleDateString(undefined, {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-const fmtTime = (iso) =>
-  new Date(iso).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+const fmtDate = (value) => formatFloatingDate(value);
+const fmtTime = (value) => formatFloatingTime(value);
 
 const dateLine = data.endDate
   ? `${fmtDate(data.date)} • ${fmtTime(data.date)}–${fmtTime(data.endDate)}`
