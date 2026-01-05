@@ -4,6 +4,8 @@ import Base from "@/layouts/Base.astro";
 import {
   formatFloatingDate,
   formatFloatingTime,
+  isSameFloatingDay,
+  parseFloatingIso,
 } from "@/lib/utils/floatingDate";
 
 export const prerender = true;
@@ -23,9 +25,14 @@ const { Content } = await event.render();
 const fmtDate = (value) => formatFloatingDate(value);
 const fmtTime = (value) => formatFloatingTime(value);
 
-const dateLine = data.endDate
-  ? `${fmtDate(data.date)} • ${fmtTime(data.date)}–${fmtTime(data.endDate)}`
-  : `${fmtDate(data.date)} • ${fmtTime(data.date)}`;
+const startDate = parseFloatingIso(data.date);
+const endDate = data.endDate ? parseFloatingIso(data.endDate) : null;
+const sameDay = startDate && endDate ? isSameFloatingDay(startDate, endDate) : false;
+const dateLine = endDate
+  ? sameDay
+    ? `${fmtDate(data.date)} | ${fmtTime(data.date)}-${fmtTime(data.endDate)}`
+    : `${fmtDate(data.date)} ${fmtTime(data.date)}–${fmtDate(data.endDate)} ${fmtTime(data.endDate)}`
+  : `${fmtDate(data.date)} | ${fmtTime(data.date)}`;
 ---
 
 <Base
@@ -113,3 +120,6 @@ const dateLine = data.endDate
 </style>
 
 </Base>
+
+
+
