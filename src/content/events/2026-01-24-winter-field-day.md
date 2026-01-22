@@ -2,13 +2,16 @@
 title: Winter Field Day
 date: "2026-01-24T11:00:00"
 endDate: "2026-01-25T17:00:00"
-location: Warriors’ Path State Park, Shelter 3
-summary: Portable ops, logging, food. Dress warm!
-cover: /images/winterfieldday.png
-rsvpUrl: https://docs.google.com/forms/d/e/1FAIpQLSfPYy0l8wTVU90oOVP9fyXAImyhi1T2ona2UOdUKqEejdnFjA/viewform
+location: N/A
+summary: Canceled due to weather.
+cover: /images/winterfieldday-canceled.png
 featured: true
 ---
 
-Bring your radios, batteries, and enthusiasm.
+Due to the possibility of severe weather this weekend, the club has decided not to participate in Winter Field Day as an organized group. For the safety of our members, we will not be setting up or operating a club station this year.
 
-We will be setting up on Saturday at 10:00am and starting operating at 11:00am and will continue throughout the day until everyone stops participating and operating. We will then pick back up on Sunday from around 1:00 until 5:00pm.
+That said, Winter Field Day is still a great opportunity to operate, test your equipment, and enjoy amateur radio, and members are encouraged to participate from home if you wish and if conditions allow. Operating from a home station, mobile setup, or other safe location still counts toward Winter Field Day participation and can be a valuable operating experience.
+
+If you are interested in learning more about Winter Field Day rules, operating categories, or logging requirements, please visit the official Winter Field Day website at: [https://winterfieldday.org/](https://winterfieldday.org/)
+
+We appreciate everyone’s understanding and encourage all members to prioritize safety. We look forward to getting back together at our next club activity.
