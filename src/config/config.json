@@ -23,7 +23,7 @@
   },
 
   "announcement": {
-    "enable": true,
+    "enable": false,
     "content": "<span class='text-center block'>Due to inclement weather, we will not be setting up for Winter Field Day as a group. <u><a href='/events/2026-01-24-winter-field-day/'>Click here for more info.</a></u></span>",
     "expire_days": 7
   },
