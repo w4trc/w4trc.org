@@ -1,7 +1,7 @@
 ---
 title: February Club Meeting
 datetime: "2026-02-12T19:00"
-location: Eastman's Toy F. Reid Employee Center
+location: Eastman's Toy F. Reid Employee Center Room 219 (400 South Wilcox Drive, Kingsport, TN  37660)
 topic: ARRL Tennessee Section Manager Dave Thomas (KM4NYI) and ARRL Affiliated Club Coordinator Dudley Pitts (KM4IYQ)
 desc: Monthly business meeting and program.
 ---
