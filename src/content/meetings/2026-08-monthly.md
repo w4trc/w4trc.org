@@ -1,8 +1,8 @@
 ---
-title: August Club Meeting
+title: Club Picnic
 datetime: "2026-08-13T19:00"
-location: Eastman's Toy F. Reid Employee Center Room 219 (400 South Wilcox Drive, Kingsport, TN  37660)
-topic: TBD
-desc: Monthly business meeting and program.
+location: Eastman's Bays Mountain Recreation Center (Eastman Cabins) (406 Bays Mountain Park Road, Kingsport, TN  37660)
+topic: N/A
+desc: Club potluck picnic and fellowship. 
 ---
 
