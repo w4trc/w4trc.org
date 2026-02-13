@@ -62,13 +62,13 @@ For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
 
 | Week of Month | Callsign | Name           |
 | :-- | :----------: | ----------: |
-| 1st Sunday    | KM4NWH | Neil Weber     |
+| 1st Sunday    |  |      |
 | 2nd Sunday    | W3KPT  | George DeVault |
 | 3rd Sunday    | KM4DCK | Kevin Morrell  |
-| 4th Sunday    | K4UVU  | David Herron   |
-| 5th Sunday    | KM4NWH | Neil Weber     |
+| 4th Sunday    |   |    |
+| 5th Sunday    |  |      |
 
-**Net Control Coordinator**: David Herron (K4UVU)
+**Net Control Coordinator**: Position Vacant
 
 > **Net Control Operators:** Please submit your weekly net logs here:  
 > 📝 **[Net Log Submission Form](https://nets.w4trc.org/submit)**
