@@ -63,8 +63,8 @@ For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
 | Week of Month | Callsign | Name           |
 | :-- | :----------: | ----------: |
 | 1st Sunday    |  |      |
-| 2nd Sunday    | W3KPT  | George DeVault |
-| 3rd Sunday    | KM4DCK | Kevin Morrell  |
+| 2nd Sunday    |   |  |
+| 3rd Sunday    |  |   |
 | 4th Sunday    |   |    |
 | 5th Sunday    |  |      |
 
