@@ -40,6 +40,10 @@ scripts:
 
 ## Sunday Evening Net
 
+:::note
+As of February 14, 2026, we have suspended our Sunday Night Net for now.
+:::
+
 **Time:** Sundays at **8:30 PM** EST 
 **Repeater:** **W4TRC 146.970 MHz** (Analog)  
 **Offset:** **–600 kHz**  
