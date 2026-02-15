@@ -40,21 +40,7 @@ scripts:
 
 ## Sunday Evening Net
 
-**Time:** Sundays at **8:30 PM** EST 
-**Repeater:** **W4TRC 146.970 MHz** (Analog)  
-**Offset:** **–600 kHz**  
-**PL Tone:** **123.0 Hz**
-
-We host an informational net covering:
-- Club news & activities  
-- General announcements and quick informals  
-- Local VE test sessions  
-- Area swap shops & hamfest listings
-
-> **First-Sunday Simplex Net:**  
-> After the regular repeater net on the **first Sunday**, we hold a brief **2-meter simplex net**. The frequency is announced at the end of the repeater net.
-
-For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
+<Notice type="warning">Our Sunday Evening Net is currently suspended due to low participation.</Notice>
 
 ---
 
@@ -62,13 +48,13 @@ For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
 
 | Week of Month | Callsign | Name           |
 | :-- | :----------: | ----------: |
-| 1st Sunday    | KM4NWH | Neil Weber     |
-| 2nd Sunday    | W3KPT  | George DeVault |
-| 3rd Sunday    | KM4DCK | Kevin Morrell  |
-| 4th Sunday    | K4UVU  | David Herron   |
-| 5th Sunday    | KM4NWH | Neil Weber     |
+| 1st Sunday    |  |      |
+| 2nd Sunday    |   |  |
+| 3rd Sunday    |  |   |
+| 4th Sunday    |   |    |
+| 5th Sunday    |  |      |
 
-**Net Control Coordinator**: David Herron (K4UVU)
+**Net Control Coordinator**: Position Vacant
 
 > **Net Control Operators:** Please submit your weekly net logs here:  
 > 📝 **[Net Log Submission Form](https://nets.w4trc.org/submit)**
@@ -103,5 +89,3 @@ For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
 ## Contact / Updates
 
 If you spot an error in the schedule or would like to volunteer as NCS, please **contact a club officer** or email the site team at **contact@w4trc.org**.
-
-See you on **146.970 MHz** this Sunday at **8:30 PM**!
