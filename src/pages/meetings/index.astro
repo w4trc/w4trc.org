@@ -1,0 +1,220 @@
+---
+import Base from "@/layouts/Base.astro";
+import ImageMod from "@/components/ImageMod.astro";
+import { getCollection } from "astro:content";
+
+const allMeetings = await getCollection("meetings");
+const now = new Date();
+
+const upcoming = allMeetings
+  .filter((m) => new Date(m.data.datetime) >= now)
+  .sort((a, b) => new Date(a.data.datetime).getTime() - new Date(b.data.datetime).getTime())
+  .slice(0, 6);
+
+const fmtDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "America/New_York",
+  });
+
+const fmtTime = (iso: string) =>
+  new Date(iso).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "America/New_York",
+  });
+---
+
+<Base
+  title="Club Meetings"
+  meta_title="KARC - Club Meetings"
+  description="Kingsport Amateur Radio Club meets the second Thursday of every month at Eastman's Toy F. Reid Employee Center in Kingsport, TN."
+  image="/images/clubmeetings2025.jpg"
+>
+  <!-- HERO -->
+  <section class="hero-heroimg relative">
+    <div aria-hidden="true" class="absolute inset-0 -z-10">
+      <ImageMod
+        src="/images/clubmeetings2025.jpg"
+        alt="KARC club meeting"
+        width={1600}
+        height={600}
+        format="webp"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-linear-to-b from-black/55 via-black/55 to-black/70"></div>
+    </div>
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-4">Club Meetings</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        We meet the <strong class="text-white">second Thursday of every month</strong> at 7:00 PM.
+        All licensed amateurs and interested guests are welcome.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-md">
+    <div class="max-w-[1100px] mx-auto px-6 space-y-12">
+
+      <!-- WHEN & WHERE -->
+      <div class="grid gap-6 md:grid-cols-2">
+
+        <div class="w4-card p-6 space-y-4">
+          <div>
+            <p class="text-xs uppercase tracking-wide text-white/60">When</p>
+            <h2 class="text-2xl font-bold text-white">Second Thursday, Monthly</h2>
+          </div>
+          <ul class="space-y-2 text-sm text-white/80">
+            <li><span class="font-semibold text-white">Time:</span> 7:00 PM Eastern</li>
+            <li><span class="font-semibold text-white">Day:</span> Second Thursday of each month</li>
+            <li><span class="font-semibold text-white">Format:</span> Business meeting followed by a program or presentation</li>
+          </ul>
+          <p class="text-sm text-white/60">
+            Meetings typically last 60–90 minutes. A brief social period often follows.
+          </p>
+        </div>
+
+        <div class="w4-card p-6 space-y-4">
+          <div>
+            <p class="text-xs uppercase tracking-wide text-white/60">Where</p>
+            <h2 class="text-2xl font-bold text-white">Toy F. Reid Employee Center</h2>
+          </div>
+          <ul class="space-y-2 text-sm text-white/80">
+            <li><span class="font-semibold text-white">Building:</span> Eastman's Toy F. Reid Employee Center</li>
+            <li><span class="font-semibold text-white">Room:</span> Room 219</li>
+            <li><span class="font-semibold text-white">Address:</span> 400 South Wilcox Drive, Kingsport, TN 37660</li>
+          </ul>
+          <a
+            class="inline-flex items-center gap-1 text-sm text-(--w4-accent) underline underline-offset-4 font-semibold"
+            href="https://maps.google.com/?q=400+South+Wilcox+Drive,+Kingsport,+TN+37660"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open in Google Maps →
+          </a>
+        </div>
+
+      </div>
+
+      <!-- MAP -->
+      <div>
+        <h2 class="section-title">Location</h2>
+        <div class="w4-card overflow-hidden p-0 rounded-2xl">
+          <iframe
+            title="Toy F. Reid Employee Center map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3208.7!2d-82.5695!3d36.5324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x885a4f7f4f0a0001%3A0x0!2s400+S+Wilcox+Dr%2C+Kingsport%2C+TN+37660!5e0!3m2!1sen!2sus!4v1700000000000"
+            width="100%"
+            height="380"
+            style="border:0;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <p class="text-sm text-white/60 mt-2">
+          Enter the main parking lot off South Wilcox Drive. The center is the large building at the rear of the lot.
+          Room 219 is on the second floor.
+        </p>
+      </div>
+
+      <!-- UPCOMING MEETINGS -->
+      {upcoming.length > 0 && (
+        <div>
+          <h2 class="section-title">Upcoming Meetings</h2>
+          <div class="grid gap-4 md:grid-cols-2">
+            {upcoming.map((m) => (
+              <div class="w4-card p-5 flex flex-col gap-2">
+                <div class="flex items-start justify-between gap-3">
+                  <h3 class="text-lg font-bold text-white leading-snug">{m.data.title}</h3>
+                  <span class="text-xs px-3 py-1 rounded-full bg-white/10 text-white/80 border border-white/15 whitespace-nowrap shrink-0">
+                    {fmtTime(m.data.datetime)}
+                  </span>
+                </div>
+                <p class="text-sm text-white/60">{fmtDate(m.data.datetime)}</p>
+                {m.data.topic && (
+                  <p class="text-sm text-white/80">
+                    <span class="font-semibold text-white">Program:</span> {m.data.topic}
+                  </p>
+                )}
+                {m.data.location && (
+                  <p class="text-xs text-white/50">{m.data.location}</p>
+                )}
+              </div>
+            ))}
+          </div>
+          <p class="text-sm text-white/60 mt-3">
+            Meeting minutes from past meetings are available in the{" "}
+            <a class="underline underline-offset-4" href="/resources/minutes/">Meeting Minutes archive</a>.
+          </p>
+        </div>
+      )}
+
+      <!-- WHAT TO EXPECT -->
+      <div>
+        <h2 class="section-title">What to Expect</h2>
+        <div class="grid gap-4 md:grid-cols-3">
+
+          <div class="w4-card p-5 space-y-2">
+            <h3 class="text-base font-bold text-white">Business Meeting</h3>
+            <p class="text-sm text-white/75">
+              We open with a brief roll call, treasurer's report, and club business — usually 20–30 minutes.
+            </p>
+          </div>
+
+          <div class="w4-card p-5 space-y-2">
+            <h3 class="text-base font-bold text-white">Program or Presentation</h3>
+            <p class="text-sm text-white/75">
+              Each month a member or guest presents on a radio-related topic — antennas, operating techniques, digital modes, and more.
+            </p>
+          </div>
+
+          <div class="w4-card p-5 space-y-2">
+            <h3 class="text-base font-bold text-white">Open Q&A and Fellowship</h3>
+            <p class="text-sm text-white/75">
+              After the program we open the floor for questions, announcements, and informal chatting. A great time to meet other hams.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PHOTOS -->
+      <div>
+        <h2 class="section-title">Meeting Photos</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="w4-card overflow-hidden p-0 rounded-2xl">
+            <img
+              src="/images/clubmeetings2025.jpg"
+              alt="KARC club meeting 2025"
+              class="w-full h-52 object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Add more meeting photos here as they become available -->
+        </div>
+        <p class="text-sm text-white/60 mt-3">
+          More photos from club meetings and events are in the{" "}
+          <a class="underline underline-offset-4" href="https://gallery.w4trc.org" target="_blank" rel="noopener noreferrer">
+            club gallery
+          </a>.
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="w4-card p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <h2 class="text-xl font-bold text-white">Ready to join us?</h2>
+          <p class="text-sm text-white/75">Meetings are open to all licensed amateurs. Guests and prospective members are always welcome.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a class="btn btn-primary" href="/join/">Join the Club</a>
+          <a class="btn btn-outline" href="/contact/">Get in Touch</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Base>
