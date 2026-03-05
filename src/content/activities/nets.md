@@ -5,9 +5,6 @@ meta_title: "KARC - Weekly Nets"
 draft: false
 image: "/images/ic-705.jpg"
 
-scripts:
-  - label: "KARC Net Script (PDF)"
-    url: "/downloads/nets/karc-net-script.pdf"
 ---
 
 ## Sunday Evening Net
