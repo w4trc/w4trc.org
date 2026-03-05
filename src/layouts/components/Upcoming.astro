@@ -52,13 +52,27 @@ function fmtRange(e: EventEntry) {
   return `${S}-${E}`;
 }
 
-// Filter, sort, limit
+// Derive a base title by stripping leading/trailing month names so recurring
+// events like "January Fox Hunt" and "February Fox Hunt" share the same key.
+const MONTHS = /^(january|february|march|april|may|june|july|august|september|october|november|december)\s+/i;
+function baseTitle(title: string) {
+  return title.replace(MONTHS, "").trim().toLowerCase();
+}
+
+// Filter, sort, deduplicate recurring series, then limit
+const seen = new Set<string>();
 const upcoming = coll
   .filter(inFutureOrOngoing)
   .sort((a, b) => {
     const da = parseDate(a.data.date)?.getTime() ?? 0;
     const db = parseDate(b.data.date)?.getTime() ?? 0;
     return da - db;
+  })
+  .filter((e) => {
+    const key = baseTitle(e.data.title);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
   })
   .slice(0, limit);
 ---
