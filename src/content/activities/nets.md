@@ -5,13 +5,6 @@ meta_title: "KARC - Weekly Nets"
 draft: false
 image: "/images/ic-705.jpg"
 
-nets:
-  - name: "KARC Weekly Net"
-    day: "Tuesday"
-    time_local: "8:00 PM"
-    frequency: "146.970 (-) PL 123.0"
-
-
 scripts:
   - label: "KARC Net Script (PDF)"
     url: "/downloads/nets/karc-net-script.pdf"
