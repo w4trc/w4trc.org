@@ -10,28 +10,7 @@ nets:
     day: "Tuesday"
     time_local: "8:00 PM"
     frequency: "146.970 (-) PL 123.0"
-  - name: "Simplex Social"
-    day: "Thursday"
-    time_local: "7:30 PM"
-    frequency: "146.520 Simplex"
 
-net_rules:
-  - rule: "1st Sunday"
-    name: "ARES Training Net"
-    time_local: "8:30 PM"
-    frequency: "146.970 (-) PL 123.0"
-  - rule: "2nd Sunday"
-    name: "Digital Mode Net"
-    time_local: "8:30 PM"
-    frequency: "146.970 (-) PL 123.0"
-  - rule: "3rd Sunday"
-    name: "Elmer/Tech Net"
-    time_local: "8:30 PM"
-    frequency: "146.970 (-) PL 123.0"
-  - rule: "4th Sunday"
-    name: "New Operators Net"
-    time_local: "8:30 PM"
-    frequency: "146.970 (-) PL 123.0"
 
 scripts:
   - label: "KARC Net Script (PDF)"
@@ -40,24 +19,26 @@ scripts:
 
 ## Sunday Evening Net
 
-<Notice type="warning">Our Sunday Evening Net is currently suspended due to low participation.</Notice>
+The Sunday Evening Net is **back!** We meet every Sunday night at **8:30 PM** on **146.970 (-) PL 123.0**.
 
 ---
 
-## Net Control Rotation
+## Volunteer as Net Control
 
-| Week of Month | Callsign | Name           |
-| :-- | :----------: | ----------: |
-| 1st Sunday    |  |      |
-| 2nd Sunday    |   |  |
-| 3rd Sunday    |  |   |
-| 4th Sunday    |   |    |
-| 5th Sunday    |  |      |
+We need **Primary** and **Backup Net Control Operators** for each Sunday night. Net control is a great way to build confidence on the air and contribute to the club.
 
-**Net Control Coordinator**: Position Vacant
-
-> **Net Control Operators:** Please submit your weekly net logs here:  
-> 📝 **[Net Log Submission Form](https://nets.w4trc.org/submit)**
+<div class="my-8 rounded-2xl border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 p-8 text-center">
+  <p class="text-2xl font-bold mb-2">Sign Up to Be Net Control</p>
+  <p class="text-base opacity-75 mb-6">We need a <strong>Primary</strong> and a <strong>Backup</strong> net control operator for each Sunday night at 8:30 PM.</p>
+  <a
+    href="https://nets.w4trc.org/signup"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn btn-primary text-xl px-10 py-4 rounded-xl font-bold shadow-lg hover:opacity-90"
+  >
+    Sign Up as Net Control &rarr;
+  </a>
+</div>
 
 ---
 
@@ -67,14 +48,6 @@ scripts:
 - Keep transmissions concise; let NCS manage the roster.  
 - If you have an announcement, indicate “with traffic” when checking in.  
 - New hams and visitors are always welcome!
-
----
-
-## First-Sunday Simplex Tips
-
-- Bring your **simplex-ready** settings (low/med power to start, adjust as needed).  
-- Use a **good 2m antenna** (mobile or base) and note your **signal reports** to gauge local coverage.  
-- The simplex frequency will be announced by NCS before net close.
 
 ---
 
