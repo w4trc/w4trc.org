@@ -1,132 +1,107 @@
-<h1 align=center>Astro + Tailwind CSS + TypeScript Starter and Boilerplate</h1>
+# W4TRC.org — Kingsport Amateur Radio Club Website
 
-<p align=center>Astroplate is a free starter template built with Astro, TailwindCSS & TypeScript, providing everything you need to jumpstart your Astro project and save valuable time.</p>
+The official website for the **Kingsport Amateur Radio Club (KARC)**, callsign **W4TRC**, located in Kingsport, Tennessee. Built with [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/), and TypeScript.
 
-<p align=center>Made with ♥ by <a href="https://zeon.studio/">Zeon Studio</a></p>
+Live site: [https://w4trc.org](https://w4trc.org)
 
-<p align=center> If you find this project useful, please give it a ⭐ to show your support. </p>
+---
 
-<h2 align="center"> <a target="_blank" href="https://astroplate.netlify.app/" rel="nofollow">👀 Demo</a> | <a target="_blank" href="https://astroplate-multilang.netlify.app/" rel="nofollow">👀 Demo Multilang</a> | <a  target="_blank" href="https://pagespeed.web.dev/analysis/https-astroplate-netlify-app/yzx3foum3w?form_factor=desktop">Page Speed (100%)🚀</a>
-</h2>
+## About the Club
 
-<p align=center>
-  <a href="https://github.com/withastro/astro/releases/tag/astro%405.15.3">
-    <img src="https://img.shields.io/static/v1?label=ASTRO&message=5.15&color=000&logo=astro"  alt="Astro Version 5.15"/>
-  </a>
+The Kingsport Amateur Radio Club was affiliated with the American Radio Relay League (ARRL) on October 2, 1947. Founded by veteran amateur radio operators with a mission to advance the art of radio and welcome all who wanted to learn and grow.
 
-  <a href="https://github.com/zeon-studio/astroplate/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/zeon-studio/astroplate" alt="license"></a>
+Over the decades, KARC built a close relationship with Eastman Corporation, and club members working there helped establish a sister organization — the Bays Mountain Radio Club (BMRC) — in 1953. The two clubs later merged in the 1970s to become KARC/BMRC.
 
-  <img src="https://img.shields.io/github/languages/code-size/zeon-studio/astroplate" alt="code size">
+Today, KARC continues its mission with monthly meetings, on-air nets, fox hunts, POTA/SOTA activations, Field Day, and ongoing technical projects.
 
-  <a href="https://github.com/zeon-studio/astroplate/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/zeon-studio/astroplate" alt="contributors"></a>
-</p>
+---
 
-## 📌 Key Features
+## Tech Stack
 
-- 👥 Multi-Authors
-- 🌐 Multilingual
-- 🎯 Similar Posts Suggestion
-- 🔍 Search Functionality
-- 🌑 Dark Mode
-- 🏷️ Tags & Categories
-- 🔗 Netlify setting pre-configured
-- 📞 Support contact form
-- 📱 Fully responsive
-- 📝 Write and update content in Markdown / MDX
-- 📎 Google Tag Manager
-- 💬 Disqus Comment
-- 🔳 Syntax Highlighting
+- **Framework:** [Astro](https://astro.build/) v5+
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) v4+
+- **Language:** TypeScript
+- **Content:** Markdown / MDX
 
-### 📄 15+ Pre-designed Pages
+---
 
-- 🏠 Homepage
-- 👤 About
-- 📞 Contact
-- 👥 Authors
-- 👤 Author Single
-- 📝 Blog
-- 📝 Blog Single
-- 🚫 Custom 404
-- 💡 Elements
-- 📄 Privacy Policy
-- 🏷️ Tags
-- 🏷️ Tag Single
-- 🗂️ Categories
-- 🗂️ Category Single
-- 🔍 Search
+## Getting Started
 
-## 🔗 Integrations
+### Prerequisites
 
-- astro/react
-- astro/sitemap
-- astro/tailwind
+- Node.js v20.10+
+- Yarn v1.22+
 
-## 🚀 Getting Started
-
-### 📦 Dependencies
-
-- astro v5.15+
-- node v20.10+
-- yarn v1.22+
-- tailwind v4+
-
-### 👉 Install Dependencies
+### Install dependencies
 
 ```bash
 yarn install
 ```
 
-### 👉 Development Command
+### Run the development server
 
 ```bash
-yarn run dev
+yarn dev
 ```
 
-### 👉 Build Command
+### Build for production
 
 ```bash
-yarn run build
+yarn build
 ```
 
-### 👉 Build and Run With Docker
+---
 
-```bash
-docker build -t astroplate .
-# or
-# docker --build-arg INSTALLER=npm build -t astroplate .
-# or
-# docker --build-arg INSTALLER=pnpm build -t astroplate .
+## Project Structure
 
-docker run -p 3000:80 astroplate
-# or
-# docker run --rm -p 3000:80 astroplate
+```
+src/
+  content/       # Markdown/MDX content (blog, events, meetings, officers, etc.)
+  layouts/       # Astro layout components
+  pages/         # Astro page routes
+  config/        # Site configuration (config.json)
+  lib/           # Utility functions
 ```
 
-To access the shell within the container:
+Most site content lives in `src/content/`. Adding or editing a blog post, event, meeting recap, or officer profile is as simple as creating or editing a Markdown file in the appropriate subdirectory.
 
-```bash
-docker run -it --rm astroplate ash
-```
+---
 
-<!-- reporting issue -->
+## Contributing
 
-## 🐞 Reporting Issues
+Contributions are welcome, especially from club members. Here are some ways to help:
 
-We use GitHub Issues as the official bug tracker for this Template. Please Search [existing issues](https://github.com/zeon-studio/astroplate/issues). It’s possible someone has already reported the same problem.
-If your problem or idea has not been addressed yet, feel free to [open a new issue](https://github.com/zeon-studio/astroplate/issues).
+- **Write content:** Add blog posts, meeting recaps, event announcements, or project writeups in `src/content/`
+- **Fix bugs:** Open an issue or submit a pull request
+- **Improve the site:** UI improvements, accessibility fixes, new features
 
-<!-- licence -->
+### How to contribute
 
-## 📝 License
+1. Fork the repository and create a branch from `main`
+2. Make your changes
+3. Test locally with `yarn dev`
+4. Open a pull request with a clear description of what you changed and why
 
-Copyright (c) 2023 - Present, Designed & Developed by [Zeon Studio](https://zeon.studio/)
+### Content guidelines
 
-**Code License:** Released under the [MIT](https://github.com/zeon-studio/astroplate/blob/main/LICENSE) license.
+- Keep content relevant to amateur radio and club activities
+- Use proper Markdown formatting
+- Include a date in event/meeting filenames (e.g., `2026-06-24-field-day.md`)
+- Do not include personal contact information (phone numbers, home addresses) in public content files
 
-**Image license:** The images are only for demonstration purposes. They have their license, we don't have permission to share those images.
+---
 
-## 💻 Need Custom Development Services?
+## Contact
 
-If you need a custom theme, theme customization, or complete website development services from scratch you can [Hire Us](https://zeon.studio/).
+For questions about the website or to report an issue:
+
+**Joshua Carmack, N4JHC**
+[n4jhc@w4trc.org](mailto:n4jhc@w4trc.org)
+
+For general club inquiries, use the contact form at [w4trc.org/contact](https://w4trc.org/contact/).
+
+---
+
+## License
+
+Site code is open source under the [MIT License](LICENSE). Content (text, images) is copyright the Kingsport Amateur Radio Club unless otherwise noted.
