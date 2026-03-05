@@ -24,7 +24,7 @@
 
   "announcement": {
     "enable": true,
-    "content": "<span class='text-center block'>Our Sunday Night Net is suspended until further notice.</span>",
+    "content": "<span class='text-center block'>The Sunday Night Net is back at 8:30 PM! <a href='https://nets.w4trc.org/signup' class='underline font-semibold'>Sign up to be a Net Control Operator &rarr;</a></span>",
     "expire_days": 7
   },
 
