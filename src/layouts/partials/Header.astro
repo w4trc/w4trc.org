@@ -182,9 +182,10 @@ const { pathname } = Astro.url;
       applyDesktop();
 
       // Dropdown handling for touch devices (e.g. iPad) in desktop layout.
-      // CSS hover is unreliable on touch; use click to toggle an is-open class instead.
-      const isDesktop = () => window.matchMedia("(min-width: 1024px)").matches;
-      const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+      // CSS :hover is unreliable on touch; use click to toggle an is-open class instead.
+      // Note: we do NOT gate on a hover/pointer media query because iPadOS can report
+      // hover: hover in some modes, which would bypass the fix.
+      const isDesktop = () => mql.matches;
 
       const closeAllDropdowns = () => {
         document.querySelectorAll(".nav-dropdown-list.is-open").forEach((list) => {
@@ -198,16 +199,22 @@ const { pathname } = Astro.url;
         if (!label || !list) return;
 
         label.addEventListener("click", (e) => {
-          // Only intercept in desktop layout on touch/non-hover devices
-          if (!isDesktop() || canHover.matches) return;
+          // Mobile (<1024px) uses the checkbox hack — let it work normally.
+          if (!isDesktop()) return;
           e.preventDefault();
           const isOpen = list.classList.contains("is-open");
           closeAllDropdowns();
           if (!isOpen) list.classList.add("is-open");
         });
+
+        // For mouse users: remove is-open when the cursor leaves the dropdown so
+        // CSS hover and click-toggle don't conflict.
+        dropdown.addEventListener("mouseleave", () => {
+          list.classList.remove("is-open");
+        });
       });
 
-      // Close open dropdowns when tapping outside
+      // Close open dropdowns when tapping/clicking outside any dropdown
       document.addEventListener("click", (e) => {
         if (!e.target.closest(".nav-dropdown")) closeAllDropdowns();
       });
