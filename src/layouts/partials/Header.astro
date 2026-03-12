@@ -180,6 +180,40 @@ const { pathname } = Astro.url;
       };
       mql.addEventListener?.("change", applyDesktop);
       applyDesktop();
+
+      // Dropdown handling for touch devices (e.g. iPad) in desktop layout.
+      // CSS hover is unreliable on touch; use click to toggle an is-open class instead.
+      const isDesktop = () => window.matchMedia("(min-width: 1024px)").matches;
+      const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+      const closeAllDropdowns = () => {
+        document.querySelectorAll(".nav-dropdown-list.is-open").forEach((list) => {
+          list.classList.remove("is-open");
+        });
+      };
+
+      document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
+        const label = dropdown.querySelector("label.nav-link");
+        const list = dropdown.querySelector(".nav-dropdown-list");
+        if (!label || !list) return;
+
+        label.addEventListener("click", (e) => {
+          // Only intercept in desktop layout on touch/non-hover devices
+          if (!isDesktop() || canHover.matches) return;
+          e.preventDefault();
+          const isOpen = list.classList.contains("is-open");
+          closeAllDropdowns();
+          if (!isOpen) list.classList.add("is-open");
+        });
+      });
+
+      // Close open dropdowns when tapping outside
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".nav-dropdown")) closeAllDropdowns();
+      });
+
+      // Close open dropdowns when layout switches to mobile (e.g. orientation change)
+      mql.addEventListener?.("change", () => { if (!mql.matches) closeAllDropdowns(); });
     });
   </script>
 </header>

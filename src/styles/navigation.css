@@ -42,6 +42,14 @@
   @apply text-text-dark hover:text-primary dark:text-darkmode-text dark:hover:text-darkmode-primary block py-1 font-semibold transition;
 }
 
+/* iPad / touch devices in desktop layout: show dropdown on JS-toggled is-open class */
+@media (min-width: 1024px) {
+  .nav-dropdown-list.is-open {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
 /* theme-switcher */
 .theme-switcher {
   @apply inline-flex;
