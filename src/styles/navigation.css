@@ -42,16 +42,6 @@
   @apply text-text-dark hover:text-primary dark:text-darkmode-text dark:hover:text-darkmode-primary block py-1 font-semibold transition;
 }
 
-/* At desktop breakpoint, show dropdown when its peer checkbox is checked.
-   This makes the existing mobile checkbox-hack work on touch devices (e.g.
-   iPad) in desktop layout, where CSS :hover is unreliable on tap.
-   Specificity 0-3-0 beats Tailwind's lg:invisible / lg:opacity-0 (0-1-0). */
-@media (min-width: 1024px) {
-  .peer:checked ~ .nav-dropdown-list {
-    visibility: visible;
-    opacity: 1;
-  }
-}
 
 /* theme-switcher */
 .theme-switcher {

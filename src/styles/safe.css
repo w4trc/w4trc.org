@@ -1,3 +1,13 @@
+/* nav dropdown: show when peer checkbox is checked at desktop width.
+   Must be OUTSIDE any @layer so it beats @layer utilities (lg:invisible,
+   lg:opacity-0). Unlayered CSS always wins over layered CSS in Tailwind v4. */
+@media (min-width: 1024px) {
+  .peer:checked ~ .nav-dropdown-list {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
 /* navbar toggler */
 input#nav-toggle:checked + label #show-button {
   @apply hidden;
