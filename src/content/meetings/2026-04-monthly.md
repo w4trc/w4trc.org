@@ -2,7 +2,7 @@
 title: April Club Meeting
 datetime: "2026-04-09T19:00"
 location: Eastman's Toy F. Reid Employee Center Room 219 (400 South Wilcox Drive, Kingsport, TN  37660)
-topic: "I'm licensed, now what?" - John Williams
+topic: "\"I'm licensed, now what?\" by John Williams"
 desc: Monthly business meeting and program.
 ---
 
