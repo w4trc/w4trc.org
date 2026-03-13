@@ -182,14 +182,16 @@ const { pathname } = Astro.url;
       applyDesktop();
 
       // Dropdown handling for touch devices (e.g. iPad) in desktop layout.
-      // CSS :hover is unreliable on touch; use click to toggle an is-open class instead.
-      // Note: we do NOT gate on a hover/pointer media query because iPadOS can report
-      // hover: hover in some modes, which would bypass the fix.
+      // Strategy: intercept touchstart (not click) on the label so we can call
+      // preventDefault() before the browser generates mouse-compat / click events
+      // and activates the associated checkbox. Use inline styles (not CSS classes)
+      // so nothing in Tailwind's cascade can override the show/hide.
       const isDesktop = () => mql.matches;
 
       const closeAllDropdowns = () => {
-        document.querySelectorAll(".nav-dropdown-list.is-open").forEach((list) => {
-          list.classList.remove("is-open");
+        document.querySelectorAll(".nav-dropdown .nav-dropdown-list").forEach((l) => {
+          l.style.visibility = "";
+          l.style.opacity = "";
         });
       };
 
@@ -198,26 +200,37 @@ const { pathname } = Astro.url;
         const list = dropdown.querySelector(".nav-dropdown-list");
         if (!label || !list) return;
 
-        label.addEventListener("click", (e) => {
-          // Mobile (<1024px) uses the checkbox hack — let it work normally.
-          if (!isDesktop()) return;
+        // touchstart fires before any mouse-compat events.
+        // preventDefault() here suppresses the subsequent click, so the checkbox
+        // is never toggled and we have full control over the dropdown.
+        label.addEventListener("touchstart", (e) => {
+          if (!isDesktop()) return; // mobile (<1024px) uses the checkbox hack
           e.preventDefault();
-          const isOpen = list.classList.contains("is-open");
+          const isOpen = list.style.visibility === "visible";
           closeAllDropdowns();
-          if (!isOpen) list.classList.add("is-open");
+          if (!isOpen) {
+            list.style.visibility = "visible";
+            list.style.opacity = "1";
+          }
+        }, { passive: false });
+
+        // Safety net for stylus / other non-mouse pointer that doesn't fire touchstart.
+        label.addEventListener("click", (e) => {
+          if (isDesktop()) e.preventDefault(); // keep checkbox from toggling on desktop
         });
 
-        // For mouse users: remove is-open when the cursor leaves the dropdown so
-        // CSS hover and click-toggle don't conflict.
+        // Mouse users: CSS :hover handles display; wipe any leftover inline styles
+        // when the cursor leaves so hover and the touch path don't conflict.
         dropdown.addEventListener("mouseleave", () => {
-          list.classList.remove("is-open");
+          list.style.visibility = "";
+          list.style.opacity = "";
         });
       });
 
-      // Close open dropdowns when tapping/clicking outside any dropdown
-      document.addEventListener("click", (e) => {
+      // Close open dropdowns when the user touches outside any dropdown
+      document.addEventListener("touchstart", (e) => {
         if (!e.target.closest(".nav-dropdown")) closeAllDropdowns();
-      });
+      }, { passive: true });
 
       // Close open dropdowns when layout switches to mobile (e.g. orientation change)
       mql.addEventListener?.("change", () => { if (!mql.matches) closeAllDropdowns(); });
