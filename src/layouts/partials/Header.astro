@@ -180,6 +180,36 @@ const { pathname } = Astro.url;
       };
       mql.addEventListener?.("change", applyDesktop);
       applyDesktop();
+
+      // Dropdown handling for touch devices (e.g. iPad) in desktop layout.
+      //
+      // Root cause: iOS/iPadOS tap does NOT propagate :hover to the parent .group
+      // li, so `lg:group-hover:visible` never fires on touch. The fix lives in CSS:
+      // `.peer:checked ~ .nav-dropdown-list` in navigation.css overrides
+      // lg:invisible/lg:opacity-0 so the existing checkbox-hack works at desktop
+      // width too. All we need from JS is cleanup: uncheck the boxes when the
+      // user moves away (mouse) or taps outside (touch).
+
+      const closeSubmenus = () => {
+        document.querySelectorAll(".nav-dropdown input[type='checkbox']").forEach((cb) => {
+          cb.checked = false;
+        });
+      };
+
+      // Mouse users: CSS :hover still shows the dropdown; unchecking on mouseleave
+      // ensures any checkbox toggled by clicking the label doesn't keep it open
+      // after the cursor leaves.
+      document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
+        dropdown.addEventListener("mouseleave", closeSubmenus);
+      });
+
+      // Touch: close dropdowns when the user taps outside any nav-dropdown
+      document.addEventListener("touchstart", (e) => {
+        if (!e.target.closest(".nav-dropdown")) closeSubmenus();
+      }, { passive: true });
+
+      // Close on layout change (e.g. orientation change crosses the lg breakpoint)
+      mql.addEventListener?.("change", closeSubmenus);
     });
   </script>
 </header>
