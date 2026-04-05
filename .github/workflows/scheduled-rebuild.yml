@@ -8,9 +8,9 @@ on:
     - cron: '0 23 * * 0'
 
 jobs:
-  trigger-netlify-build:
+  trigger-cloudflare-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Netlify build hook
+      - name: Trigger Cloudflare Pages deploy hook
         run: |
-          curl -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK_URL }}"
+          curl -X POST "${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}"
