@@ -75,6 +75,10 @@
         {
           "name": "Member Articles & Bios",
           "url": "/resources/articles/"
+        },
+        {
+          "name": "Presentations",
+          "url": "/presentations/"
         }
       ]
     },
