@@ -1,0 +1,139 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection, getEntry, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const all = await getCollection("presentations", ({ data }) => !data.draft);
+  return all.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+let pres;
+try {
+  pres = await getEntry("presentations", slug!);
+} catch {
+  return Astro.redirect("/404");
+}
+if (!pres) return Astro.redirect("/404");
+
+const { Content } = await render(pres);
+const d = pres.data;
+
+const fmtDate = (iso: string) =>
+  new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+const hasVideo  = !!d.youtubeId;
+const hasSlides = !!(d.slidesUrl || d.slidesEmbed);
+---
+
+<Base
+  title={d.title}
+  meta_title={`KARC - ${d.title}`}
+  description={d.description}
+  image={d.cover}
+>
+  <!-- HERO -->
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <p class="text-sm text-white/60 mb-2 font-mono">
+        <time datetime={d.date}>{fmtDate(d.date)}</time>
+      </p>
+      <h1 class="text-4xl font-extrabold mb-3">{d.title}</h1>
+      <p class="text-lg text-[var(--w4-accent)] font-semibold">{d.presenter}</p>
+      {d.description && (
+        <p class="text-base text-white/75 max-w-2xl mx-auto mt-3">{d.description}</p>
+      )}
+      <div class="flex justify-center gap-2 mt-4">
+        {hasVideo && (
+          <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded bg-red-700/70 text-white">
+            Video
+          </span>
+        )}
+        {hasSlides && (
+          <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded bg-blue-700/70 text-white">
+            Slides
+          </span>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-md">
+    <div class="max-w-[1100px] mx-auto px-6 space-y-8">
+
+      <!-- YouTube embed -->
+      {hasVideo && (
+        <div class="w4-card overflow-hidden">
+          <div class="relative w-full" style="padding-bottom: 56.25%;">
+            <iframe
+              class="absolute inset-0 w-full h-full"
+              src={`https://www.youtube-nocookie.com/embed/${d.youtubeId}`}
+              title={d.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            />
+          </div>
+        </div>
+      )}
+
+      <!-- Slides embed (Canva, Google Slides, etc.) -->
+      {d.slidesEmbed && (
+        <div class="w4-card overflow-hidden">
+          <div class="relative w-full" style="padding-bottom: 56.25%;">
+            <iframe
+              class="absolute inset-0 w-full h-full"
+              src={d.slidesEmbed}
+              title={`${d.title} slides`}
+              allowfullscreen
+              loading="lazy"
+            />
+          </div>
+        </div>
+      )}
+
+      <!-- Slides link (when no embed is available) -->
+      {!d.slidesEmbed && d.slidesUrl && (
+        <div class="w4-card p-6 flex items-center gap-4">
+          <div>
+            <p class="text-sm text-white/60 mb-1">Presentation Slides</p>
+            <a
+              class="button inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold"
+              href={d.slidesUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              View slides
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      )}
+
+      <!-- Markdown body -->
+      {pres.body && pres.body.trim() !== "" && (
+        <article class="w4-card p-6">
+          <div class="prose prose-invert max-w-none">
+            <Content />
+          </div>
+        </article>
+      )}
+
+      <!-- Back link -->
+      <div>
+        <a
+          class="inline-flex items-center gap-2 text-[var(--w4-accent)] font-semibold hover:underline underline-offset-4"
+          href="/presentations/"
+        >
+          <span aria-hidden="true">←</span>
+          All presentations
+        </a>
+      </div>
+
+    </div>
+  </section>
+</Base>
