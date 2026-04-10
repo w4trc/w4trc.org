@@ -6,7 +6,7 @@ description: "An overview of popular HF digital modes including FT8, JS8Call, an
 youtubeId: ""
 slidesUrl: ""
 slidesEmbed: ""
-draft: false
+draft: true
 ---
 
 This presentation covered the most common digital modes used on HF today, with a focus on getting started without a lot of extra hardware. We looked at WSJT-X for FT8, JS8Call for keyboard-to-keyboard messaging, and Winlink for email over radio.

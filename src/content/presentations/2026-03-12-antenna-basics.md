@@ -6,7 +6,7 @@ description: "A beginner-friendly look at how antennas work, why length matters,
 youtubeId: "dQw4w9WgXcQ"
 slidesUrl: "https://docs.google.com/presentation/d/example"
 slidesEmbed: ""
-draft: false
+draft: true
 ---
 
 ## Overview
