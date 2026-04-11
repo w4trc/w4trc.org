@@ -28,7 +28,7 @@ One of John's biggest points — too many new (and not-so-new) hams stand around
 New hams don't need to spend big to get started. A budget HT gets you on the air and lets you learn the hobby before investing in higher-end gear. The club even has a couple of loaner radios available.
  
 ### The Elmer Relationship
-John emphasized the importance of experienced operators actively mentoring newcomers — not just being available, but seeking out new hams and building real relationships with them. He referenced a West Coast club that held a dedicated 1–2 hour "welcome to radio" session for every new tech licensee, which he credited with getting him excited about HF.
+John emphasized the importance of experienced operators actively mentoring newcomers — not just being available, but seeking out new hams and building real relationships with them. Another member shared that a West Coast club they had previously joined held a dedicated 1–2 hour "welcome to radio" session for every new tech licensee — something that got them excited about HF and sparked a discussion about doing something similar at KARC.
  
 ### Bridging the Gap
 There's a divide between longtime members and newer, younger operators. John's challenge to the room: be the Elmer you needed when you started. Talk to people at events, invite them into conversations, and make the hobby feel welcoming.
