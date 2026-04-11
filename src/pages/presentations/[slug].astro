@@ -34,7 +34,7 @@ const hasSlides = !!(d.slidesUrl || d.slidesEmbed);
   title={d.title}
   meta_title={`KARC - ${d.title}`}
   description={d.description}
-  image={d.cover}
+  image={d.cover ?? "/images/KARC-SEOImage.png"}
 >
   <!-- HERO -->
   <section class="hero-heroimg relative">
