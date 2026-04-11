@@ -24,7 +24,7 @@
 
   "announcement": {
     "enable": true,
-    "content": "<span class='text-center block'>The Sunday Night Net is back at 8:30 PM! <a href='https://nets.w4trc.org/signup' class='underline font-semibold'>Sign up to be a Net Control Operator &rarr;</a></span>",
+    "content": "<span class='text-center block'>Our net is moving to <strong>Wednesday nights at 8:00 PM</strong>! <a href='/activities/nets' class='underline font-semibold'>More info &rarr;</a></span>",
     "expire_days": 7
   },
 

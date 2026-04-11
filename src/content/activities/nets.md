@@ -7,28 +7,31 @@ image: "/images/ic-705.jpg"
 
 ---
 
-## Sunday Evening Net
+<div class="my-8 rounded-2xl border-2 border-amber-400 dark:border-amber-500 bg-amber-50 dark:bg-amber-900/30 p-8">
+  <p class="text-2xl font-bold mb-2">Net Schedule Change</p>
+  <p class="text-base mb-4">Our Sunday night net is moving to <strong>Wednesday nights at 8:00 PM</strong> on <strong>146.970 (-) PL 123.0</strong>.</p>
+  <p class="text-base mb-4">We are currently taking suggestions for net times — let us know what works best for you!</p>
+  <a
+    href="https://forms.w4trc.org/2m-net-suggestions"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn btn-primary text-base px-6 py-3 rounded-xl font-bold shadow hover:opacity-90"
+  >
+    Submit Net Time Suggestions &rarr;
+  </a>
+</div>
 
-The Sunday Evening Net is **back!** We meet every Sunday night at **8:30 PM** on **146.970 (-) PL 123.0**.
+---
+
+## Wednesday Evening Net
+
+The Wednesday Evening Net meets every Wednesday night at **8:00 PM** on **146.970 (-) PL 123.0**.
 
 ---
 
 ## Volunteer as Net Control
 
-We need **Primary** and **Backup Net Control Operators** for each Sunday night. Net control is a great way to build confidence on the air and contribute to the club.
-
-<div class="my-8 rounded-2xl border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 p-8 text-center">
-  <p class="text-2xl font-bold mb-2">Sign Up to Be Net Control</p>
-  <p class="text-base opacity-75 mb-6">We need a <strong>Primary</strong> and a <strong>Backup</strong> net control operator for each Sunday night at 8:30 PM.</p>
-  <a
-    href="https://nets.w4trc.org/signup"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="btn btn-primary text-xl px-10 py-4 rounded-xl font-bold shadow-lg hover:opacity-90"
-  >
-    Sign Up as Net Control &rarr;
-  </a>
-</div>
+We need **Primary** and **Backup Net Control Operators** for each Wednesday night. Net control is a great way to build confidence on the air and contribute to the club.
 
 ---
 
@@ -51,4 +54,4 @@ We need **Primary** and **Backup Net Control Operators** for each Sunday night. 
 
 ## Contact / Updates
 
-If you spot an error in the schedule or would like to volunteer as NCS, please **contact a club officer** or email the site team at **contact@w4trc.org**.
+If you spot an error in the schedule or would like to volunteer as NCS, please **contact a club officer** or email the site team at **[contact@w4trc.org](mailto:contact@w4trc.org)**.
