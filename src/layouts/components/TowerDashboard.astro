@@ -1,0 +1,302 @@
+---
+// TowerDashboard.astro
+// Kingsport Amateur Radio Club - Bays Mountain Tower Site
+// Live monitoring dashboard via MQTT over WebSockets
+---
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@400;500;600&display=swap');
+
+  .tower-dash {
+    font-family: 'Barlow', sans-serif;
+    background: transparent;
+    padding: 1.5rem 0;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .td-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  }
+
+  .td-callsign {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .td-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: inherit;
+    margin: 0;
+  }
+
+  .td-site {
+    font-size: 13px;
+    color: #666;
+    margin-top: 2px;
+  }
+
+  .td-status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.05em;
+    border: 0.5px solid;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .td-status-badge.online  { background: #EAF3DE; color: #3B6D11; border-color: #97C459; }
+  .td-status-badge.offline { background: #FCEBEB; color: #A32D2D; border-color: #F09595; }
+  .td-status-badge.connecting { background: #FAEEDA; color: #854F0B; border-color: #EF9F27; }
+
+  .td-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .td-dot.pulse { animation: pulse 2s infinite; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .td-section-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin: 1rem 0 6px;
+  }
+
+  .td-grid {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .td-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .td-card {
+    background: #f7f7f5;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .td-card-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .td-card-value {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 22px;
+    color: inherit;
+    line-height: 1.1;
+  }
+
+  .td-card-unit {
+    font-size: 13px;
+    color: #888;
+    margin-left: 3px;
+    font-family: 'Barlow', sans-serif;
+  }
+
+  .td-card-sub {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 4px;
+    font-family: 'Barlow', sans-serif;
+  }
+
+  .td-signal-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 16px;
+  }
+
+  .td-bar {
+    width: 4px;
+    border-radius: 1px;
+    background: #ddd;
+    transition: background 0.5s;
+  }
+
+  .td-bar.active { background: #639922; }
+
+  .td-footer {
+    margin-top: 1.2rem;
+    padding-top: 0.8rem;
+    border-top: 0.5px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .td-footer-text {
+    font-size: 11px;
+    color: #aaa;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  @media (max-width: 600px) {
+    .td-grid-3 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .td-header { flex-direction: column; gap: 12px; }
+  }
+</style>
+
+<div class="tower-dash">
+  <div class="td-header">
+    <div>
+      <div class="td-callsign">W4TRC / KARC</div>
+      <div class="td-title">Bays Mountain Tower Site</div>
+      <div class="td-site">Kingsport Amateur Radio Club — Live Monitoring</div>
+    </div>
+    <div id="statusBadge" class="td-status-badge connecting">
+      <div class="td-dot pulse" id="statusDot"></div>
+      <span id="statusText">Connecting</span>
+    </div>
+  </div>
+
+  <div class="td-section-label">System</div>
+  <div class="td-grid td-grid-3">
+    <div class="td-card">
+      <div class="td-card-label">Pi Uptime</div>
+      <div class="td-card-value" id="uptime">—<span class="td-card-unit">hrs</span></div>
+      <div class="td-card-sub" id="lastSeen">Last heartbeat: —</div>
+    </div>
+    <div class="td-card">
+      <div class="td-card-label">Operator</div>
+      <div class="td-card-value" id="operator" style="font-size:16px;padding-top:4px;">—</div>
+      <div class="td-card-sub" id="accessTech">Access: —</div>
+    </div>
+    <div class="td-card">
+      <div class="td-card-label">Signal</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:2px;">
+        <div class="td-card-value" id="signal">—<span class="td-card-unit">%</span></div>
+        <div class="td-signal-bar">
+          <div class="td-bar" id="b1" style="height:4px"></div>
+          <div class="td-bar" id="b2" style="height:7px"></div>
+          <div class="td-bar" id="b3" style="height:10px"></div>
+          <div class="td-bar" id="b4" style="height:13px"></div>
+          <div class="td-bar" id="b5" style="height:16px"></div>
+        </div>
+      </div>
+      <div class="td-card-sub" id="cellState">State: —</div>
+    </div>
+  </div>
+
+  <div class="td-section-label">Environment</div>
+  <div class="td-grid td-grid-3">
+    <div class="td-card">
+      <div class="td-card-label">Temperature</div>
+      <div class="td-card-value" id="temp">—<span class="td-card-unit">°F</span></div>
+    </div>
+    <div class="td-card">
+      <div class="td-card-label">Humidity</div>
+      <div class="td-card-value" id="humidity">—<span class="td-card-unit">%</span></div>
+    </div>
+    <div class="td-card">
+      <div class="td-card-label">Pressure</div>
+      <div class="td-card-value" id="pressure" style="font-size:18px;padding-top:4px;">—<span class="td-card-unit" style="font-size:12px;">hPa</span></div>
+    </div>
+  </div>
+
+  <div class="td-footer">
+    <div class="td-footer-text" id="footerTime">Waiting for data...</div>
+    <div class="td-footer-text">W4TRC · KARC</div>
+  </div>
+</div>
+
+<script>
+  import mqtt from 'https://cdn.jsdelivr.net/npm/mqtt@5/dist/mqtt.esm.js';
+
+  const BROKER = 'wss://mqtt.jclab.xyz/mqtt';
+  const USER = 'karc-public-dashboard';
+  const PASS = '146970';
+
+  function setStatus(state: string) {
+    const badge = document.getElementById('statusBadge')!;
+    const dot = document.getElementById('statusDot')!;
+    const text = document.getElementById('statusText')!;
+    badge.className = 'td-status-badge ' + state;
+    dot.className = 'td-dot' + (state === 'online' ? ' pulse' : '');
+    text.textContent = state.charAt(0).toUpperCase() + state.slice(1);
+  }
+
+  function updateSignalBars(pct: number) {
+    const bars = ['b1','b2','b3','b4','b5'];
+    const thresholds = [10, 30, 50, 70, 90];
+    bars.forEach((id, i) => {
+      const el = document.getElementById(id)!;
+      el.className = 'td-bar' + (pct >= thresholds[i] ? ' active' : '');
+    });
+  }
+
+  function formatTime(isoStr: string) {
+    try {
+      return new Date(isoStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } catch { return '—'; }
+  }
+
+  const client = mqtt.connect(BROKER, {
+    username: USER,
+    password: PASS,
+    clientId: 'karc-web-' + Math.random().toString(16).substr(2, 8),
+    clean: true,
+  });
+
+  client.on('connect', () => {
+    client.subscribe('tower/heartbeat');
+    client.subscribe('tower/environment');
+  });
+
+  client.on('error', () => setStatus('offline'));
+  client.on('offline', () => setStatus('offline'));
+
+  client.on('message', (topic: string, payload: Buffer) => {
+    try {
+      const d = JSON.parse(payload.toString());
+      if (topic === 'tower/heartbeat') {
+        setStatus(d.status || 'online');
+        document.getElementById('uptime')!.innerHTML = parseFloat(d.uptime_hours || 0).toFixed(1) + '<span class="td-card-unit">hrs</span>';
+        document.getElementById('lastSeen')!.textContent = 'Last heartbeat: ' + formatTime(d.timestamp);
+        document.getElementById('operator')!.textContent = d.operator || '—';
+        document.getElementById('accessTech')!.textContent = 'Access: ' + (d.access_tech || '—').toUpperCase();
+        document.getElementById('signal')!.innerHTML = (d.signal_quality || '—') + '<span class="td-card-unit">%</span>';
+        document.getElementById('cellState')!.textContent = 'State: ' + (d.state || '—');
+        document.getElementById('footerTime')!.textContent = 'Updated ' + formatTime(d.timestamp);
+        if (d.signal_quality) updateSignalBars(parseInt(d.signal_quality));
+      }
+      if (topic === 'tower/environment') {
+        document.getElementById('temp')!.innerHTML = parseFloat(d.temperature_f).toFixed(1) + '<span class="td-card-unit">°F</span>';
+        document.getElementById('humidity')!.innerHTML = parseFloat(d.humidity).toFixed(1) + '<span class="td-card-unit">%</span>';
+        document.getElementById('pressure')!.innerHTML = parseFloat(d.pressure).toFixed(1) + '<span class="td-card-unit" style="font-size:12px;">hPa</span>';
+      }
+    } catch(e) {}
+  });
+</script>
