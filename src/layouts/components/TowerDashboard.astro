@@ -148,6 +148,36 @@
 
   .td-bar.active { background: #639922; }
 
+  .td-no-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 3rem 1rem;
+    background: #f7f7f5;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .td-no-data-icon {
+    font-size: 28px;
+    opacity: 0.6;
+  }
+
+  .td-no-data-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .td-no-data-sub {
+    font-size: 12px;
+    color: #666;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
   .td-footer {
     margin-top: 1.2rem;
     padding-top: 0.8rem;
@@ -182,47 +212,55 @@
     </div>
   </div>
 
-  <div class="td-section-label">System</div>
-  <div class="td-grid td-grid-3">
-    <div class="td-card">
-      <div class="td-card-label">Pi Uptime</div>
-      <div class="td-card-value" id="uptime">—<span class="td-card-unit">hrs</span></div>
-      <div class="td-card-sub" id="lastSeen">Last heartbeat: —</div>
-    </div>
-    <div class="td-card">
-      <div class="td-card-label">Operator</div>
-      <div class="td-card-value" id="operator" style="font-size:16px;padding-top:4px;">—</div>
-      <div class="td-card-sub" id="accessTech">Access: —</div>
-    </div>
-    <div class="td-card">
-      <div class="td-card-label">Signal</div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:2px;">
-        <div class="td-card-value" id="signal">—<span class="td-card-unit">%</span></div>
-        <div class="td-signal-bar">
-          <div class="td-bar" id="b1" style="height:4px"></div>
-          <div class="td-bar" id="b2" style="height:7px"></div>
-          <div class="td-bar" id="b3" style="height:10px"></div>
-          <div class="td-bar" id="b4" style="height:13px"></div>
-          <div class="td-bar" id="b5" style="height:16px"></div>
-        </div>
-      </div>
-      <div class="td-card-sub" id="cellState">State: —</div>
-    </div>
+  <div id="noData" class="td-no-data">
+    <div class="td-no-data-icon">📡</div>
+    <div class="td-no-data-title" id="noDataTitle">Connecting to tower…</div>
+    <div class="td-no-data-sub" id="noDataSub">Waiting for heartbeat</div>
   </div>
 
-  <div class="td-section-label">Environment</div>
-  <div class="td-grid td-grid-3">
-    <div class="td-card">
-      <div class="td-card-label">Temperature</div>
-      <div class="td-card-value" id="temp">—<span class="td-card-unit">°F</span></div>
+  <div id="statsContent" style="display:none">
+    <div class="td-section-label">System</div>
+    <div class="td-grid td-grid-3">
+      <div class="td-card">
+        <div class="td-card-label">Pi Uptime</div>
+        <div class="td-card-value" id="uptime">—<span class="td-card-unit">hrs</span></div>
+        <div class="td-card-sub" id="lastSeen">Last heartbeat: —</div>
+      </div>
+      <div class="td-card">
+        <div class="td-card-label">Operator</div>
+        <div class="td-card-value" id="operator" style="font-size:16px;padding-top:4px;">—</div>
+        <div class="td-card-sub" id="accessTech">Access: —</div>
+      </div>
+      <div class="td-card">
+        <div class="td-card-label">Signal</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:2px;">
+          <div class="td-card-value" id="signal">—<span class="td-card-unit">%</span></div>
+          <div class="td-signal-bar">
+            <div class="td-bar" id="b1" style="height:4px"></div>
+            <div class="td-bar" id="b2" style="height:7px"></div>
+            <div class="td-bar" id="b3" style="height:10px"></div>
+            <div class="td-bar" id="b4" style="height:13px"></div>
+            <div class="td-bar" id="b5" style="height:16px"></div>
+          </div>
+        </div>
+        <div class="td-card-sub" id="cellState">State: —</div>
+      </div>
     </div>
-    <div class="td-card">
-      <div class="td-card-label">Humidity</div>
-      <div class="td-card-value" id="humidity">—<span class="td-card-unit">%</span></div>
-    </div>
-    <div class="td-card">
-      <div class="td-card-label">Pressure</div>
-      <div class="td-card-value" id="pressure" style="font-size:18px;padding-top:4px;">—<span class="td-card-unit" style="font-size:12px;">hPa</span></div>
+
+    <div class="td-section-label">Environment</div>
+    <div class="td-grid td-grid-3">
+      <div class="td-card">
+        <div class="td-card-label">Temperature</div>
+        <div class="td-card-value" id="temp">—<span class="td-card-unit">°F</span></div>
+      </div>
+      <div class="td-card">
+        <div class="td-card-label">Humidity</div>
+        <div class="td-card-value" id="humidity">—<span class="td-card-unit">%</span></div>
+      </div>
+      <div class="td-card">
+        <div class="td-card-label">Pressure</div>
+        <div class="td-card-value" id="pressure" style="font-size:18px;padding-top:4px;">—<span class="td-card-unit" style="font-size:12px;">hPa</span></div>
+      </div>
     </div>
   </div>
 
@@ -238,6 +276,9 @@
   const BROKER = 'wss://mqtt.jclab.xyz/mqtt';
   const USER = 'karc-public-dashboard';
   const PASS = '146970';
+  const HEARTBEAT_TIMEOUT_MS = 30 * 60 * 1000;
+
+  let lastHeartbeatTime: number | null = null;
 
   function setStatus(state: string) {
     const badge = document.getElementById('statusBadge')!;
@@ -247,6 +288,25 @@
     dot.className = 'td-dot' + (state === 'online' ? ' pulse' : '');
     text.textContent = state.charAt(0).toUpperCase() + state.slice(1);
   }
+
+  function setStatsVisible(visible: boolean, reason: 'connecting' | 'offline' = 'connecting') {
+    document.getElementById('statsContent')!.style.display = visible ? '' : 'none';
+    const noData = document.getElementById('noData')!;
+    noData.style.display = visible ? 'none' : 'flex';
+    if (!visible) {
+      document.getElementById('noDataTitle')!.textContent =
+        reason === 'offline' ? 'Tower offline' : 'Connecting to tower…';
+      document.getElementById('noDataSub')!.textContent =
+        reason === 'offline' ? 'No heartbeat received in 30+ minutes' : 'Waiting for heartbeat';
+    }
+  }
+
+  setInterval(() => {
+    if (lastHeartbeatTime !== null && Date.now() - lastHeartbeatTime > HEARTBEAT_TIMEOUT_MS) {
+      setStatus('offline');
+      setStatsVisible(false, 'offline');
+    }
+  }, 60_000);
 
   function updateSignalBars(pct: number) {
     const bars = ['b1','b2','b3','b4','b5'];
@@ -282,6 +342,14 @@
     try {
       const d = JSON.parse(payload.toString());
       if (topic === 'tower/heartbeat') {
+        lastHeartbeatTime = new Date(d.timestamp).getTime();
+        const stale = Date.now() - lastHeartbeatTime > HEARTBEAT_TIMEOUT_MS;
+        if (stale) {
+          setStatus('offline');
+          setStatsVisible(false, 'offline');
+          return;
+        }
+        setStatsVisible(true);
         setStatus(d.status || 'online');
         document.getElementById('uptime')!.innerHTML = parseFloat(d.uptime_hours || 0).toFixed(1) + '<span class="td-card-unit">hrs</span>';
         document.getElementById('lastSeen')!.textContent = 'Last heartbeat: ' + formatTime(d.timestamp);
