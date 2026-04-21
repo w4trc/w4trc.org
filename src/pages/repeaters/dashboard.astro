@@ -1,7 +1,8 @@
 ---
+import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import TowerDashboard from '../../layouts/components/TowerDashboard.astro';
-const heroImage = "/images/history/RPT07-scaled.jpg";
+const heroImage = "/images/KARC-SEOImage.png";
 ---
 <Base
   title="Repeater Dashboard"
@@ -9,5 +10,26 @@ const heroImage = "/images/history/RPT07-scaled.jpg";
   description="Live Stats and Information about the KARC Repeaters"
   image={heroImage}
 >
+
+<section class="hero-heroimg relative">
+    <div aria-hidden="true" class="absolute inset-0 -z-10">
+      <ImageMod
+        src={heroImage}
+        alt="Club radio gear"
+        width={1600}
+        height={600}
+        format="webp"
+        class="w-full h-full object-cover opacity-50"
+      />
+      <div class="absolute inset-0 bg-linear-to-b from-black/60 via-black/55 to-black/70"></div>
+    </div>
+
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-4">Tower Site Dashboard</h1>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto">
+        Information from our tower monitoring systems, including live stats, weather data, and more.
+      </p>
+    </div>
+  </section>
 
 <TowerDashboard />
