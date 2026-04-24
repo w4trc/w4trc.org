@@ -2,30 +2,23 @@
 import Base from "@/layouts/Base.astro";
 import ImageMod from "@/components/ImageMod.astro";
 import { getCollection } from "astro:content";
+import {
+  parseFloatingIso,
+  formatFloatingDate,
+  formatFloatingTime,
+  getEasternNow,
+} from "@/lib/utils/floatingDate";
 
 const allMeetings = await getCollection("meetings");
-const now = new Date();
+const now = getEasternNow();
 
 const upcoming = allMeetings
-  .filter((m) => new Date(m.data.datetime) >= now)
-  .sort((a, b) => new Date(a.data.datetime).getTime() - new Date(b.data.datetime).getTime())
+  .filter((m) => (parseFloatingIso(m.data.datetime)?.getTime() ?? 0) >= now.getTime())
+  .sort((a, b) => (parseFloatingIso(a.data.datetime)?.getTime() ?? 0) - (parseFloatingIso(b.data.datetime)?.getTime() ?? 0))
   .slice(0, 6);
 
-const fmtDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "America/New_York",
-  });
-
-const fmtTime = (iso: string) =>
-  new Date(iso).toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    timeZone: "America/New_York",
-  });
+const fmtDate = (iso: string) => formatFloatingDate(iso);
+const fmtTime = (iso: string) => formatFloatingTime(iso);
 ---
 
 <Base
