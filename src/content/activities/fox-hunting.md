@@ -16,7 +16,7 @@ foxhunts:
       time_local: "3:00 PM"
     - date: "2026-04-18"
       time_local: "3:00 PM"
-    - date: "2026-05-16"
+    - date: "2026-05-23"
       time_local: "3:00 PM"
     - date: "2026-06-20"
       time_local: "3:00 PM"
