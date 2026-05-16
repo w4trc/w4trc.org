@@ -1,0 +1,109 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const all = await getCollection("presentations", ({ data }) => !data.draft);
+
+const presentations = all.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const fmtDate = (iso: string) =>
+  new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<Base
+  title="Presentations"
+  meta_title="KARC - Presentations Archive"
+  description="Archive of presentations given at Knoxville Amateur Radio Club meetings."
+>
+  <!-- HERO -->
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-3">Presentations Archive</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        Slides and videos from presentations given at our club meetings.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRESENTATION LIST -->
+  <section class="section-md">
+    <div class="max-w-[1200px] mx-auto px-6 space-y-8">
+      {presentations.length === 0 ? (
+        <div class="w4-card p-8 text-center">
+          <p class="text-white/60">No presentations have been posted yet. Check back soon!</p>
+        </div>
+      ) : (
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {presentations.map((pres) => {
+            const hasVideo  = !!pres.data.youtubeId;
+            const hasSlides = !!(pres.data.slidesUrl || pres.data.slidesEmbed);
+            return (
+              <article class="w4-card p-6 flex flex-col gap-3">
+                <!-- date + badges -->
+                <div class="flex items-center gap-2 flex-wrap">
+                  <time
+                    datetime={pres.data.date}
+                    class="text-xs text-white/50 font-mono"
+                  >
+                    {fmtDate(pres.data.date)}
+                  </time>
+                  {hasVideo && (
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-red-700/70 text-white">
+                      Video
+                    </span>
+                  )}
+                  {hasSlides && (
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-700/70 text-white">
+                      Slides
+                    </span>
+                  )}
+                </div>
+
+                <h2 class="text-xl font-bold text-white leading-snug">
+                  {pres.data.title}
+                </h2>
+
+                <p class="text-sm text-[var(--w4-accent)] font-medium">
+                  {pres.data.presenter}
+                </p>
+
+                {pres.data.description && (
+                  <p class="text-sm text-white/75 line-clamp-3">
+                    {pres.data.description}
+                  </p>
+                )}
+
+                <a
+                  class="inline-flex items-center gap-2 text-[var(--w4-accent)] font-semibold mt-auto hover:underline underline-offset-4"
+                  href={`/presentations/${pres.slug}/`}
+                >
+                  View presentation
+                  <span aria-hidden="true">→</span>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      )}
+
+      <div class="w4-card p-6 text-center">
+        <h3 class="text-xl font-semibold mb-2 text-white">Have a presentation to share?</h3>
+        <p class="text-white/70 text-sm">
+          Given a talk at a club meeting? Send your slides or video link to the club officers and we'll add it to the archive.
+        </p>
+        <a
+          class="button inline-flex items-center justify-center px-4 py-2 mt-4 text-sm font-semibold"
+          href="/contact/"
+        >
+          Contact the club
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

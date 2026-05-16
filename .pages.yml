@@ -76,6 +76,29 @@ content:
       - { name: description, label: Description, type: string }
       - { name: obituaryUrl, label: Obituary URL, type: string }
 
+  - name: presentations
+    label: Presentations
+    type: collection
+    path: src/content/presentations
+    view:
+      fields: [ title, date, presenter ]
+      sort:
+        - { field: date, order: desc }
+    default:
+      sort:
+        - { field: date, order: desc }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: date, label: Date, type: date, required: true }
+      - { name: presenter, label: Presenter, type: string, required: true }
+      - { name: description, label: Description, type: string }
+      - { name: youtubeId, label: YouTube Video ID, type: string }
+      - { name: slidesUrl, label: Slides URL, type: string }
+      - { name: slidesEmbed, label: Slides Embed URL, type: string }
+      - { name: cover, label: Cover Image, type: string }
+      - { name: draft, label: Draft, type: boolean }
+      - { name: body, label: Notes, type: rich-text }
+
   - name: officers
     label: Officers
     type: collection

@@ -249,6 +249,21 @@ const activities = defineCollection({
   }),
 });
 
+const presentations = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),           // YYYY-MM-DD (ET wall date)
+    presenter: z.string(),
+    description: z.string().optional(),
+    youtubeId: z.string().optional(),   // YouTube video ID (e.g. dQw4w9WgXcQ)
+    slidesUrl: z.string().optional(),   // link to slides (Canva, Google Slides, PowerPoint, etc.)
+    slidesEmbed: z.string().optional(), // iframe-embeddable URL for slides
+    cover: z.string().optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -264,6 +279,7 @@ export const collections = {
   projects: projects,
   meetings: meetings,
   silentKeys: silentKeys,
+  presentations: presentations,
 
   // sections
   ctaSection: ctaSectionCollection,

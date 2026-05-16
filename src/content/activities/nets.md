@@ -5,73 +5,33 @@ meta_title: "KARC - Weekly Nets"
 draft: false
 image: "/images/ic-705.jpg"
 
-nets:
-  - name: "KARC Weekly Net"
-    day: "Tuesday"
-    time_local: "8:00 PM"
-    frequency: "146.970 (-) PL 123.0"
-  - name: "Simplex Social"
-    day: "Thursday"
-    time_local: "7:30 PM"
-    frequency: "146.520 Simplex"
-
-net_rules:
-  - rule: "1st Sunday"
-    name: "ARES Training Net"
-    time_local: "8:30 PM"
-    frequency: "146.970 (-) PL 123.0"
-  - rule: "2nd Sunday"
-    name: "Digital Mode Net"
-    time_local: "8:30 PM"
-    frequency: "146.970 (-) PL 123.0"
-  - rule: "3rd Sunday"
-    name: "Elmer/Tech Net"
-    time_local: "8:30 PM"
-    frequency: "146.970 (-) PL 123.0"
-  - rule: "4th Sunday"
-    name: "New Operators Net"
-    time_local: "8:30 PM"
-    frequency: "146.970 (-) PL 123.0"
-
-scripts:
-  - label: "KARC Net Script (PDF)"
-    url: "/downloads/nets/karc-net-script.pdf"
 ---
 
-## Sunday Evening Net
-
-**Time:** Sundays at **8:30 PM** EST 
-**Repeater:** **W4TRC 146.970 MHz** (Analog)  
-**Offset:** **–600 kHz**  
-**PL Tone:** **123.0 Hz**
-
-We host an informational net covering:
-- Club news & activities  
-- General announcements and quick informals  
-- Local VE test sessions  
-- Area swap shops & hamfest listings
-
-> **First-Sunday Simplex Net:**  
-> After the regular repeater net on the **first Sunday**, we hold a brief **2-meter simplex net**. The frequency is announced at the end of the repeater net.
-
-For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
+<div class="my-8 rounded-2xl border-2 border-amber-400 dark:border-amber-500 bg-amber-50 dark:bg-amber-900/30 p-8">
+  <p class="text-2xl font-bold mb-2">Net Schedule Change</p>
+  <p class="text-base mb-4">Our Sunday night net is moving to <strong>Wednesday nights at 8:00 PM</strong> on <strong>146.970 (-) PL 123.0</strong>.</p>
+  <p class="text-base mb-4">We are currently taking suggestions for net times — let us know what works best for you!</p>
+  <a
+    href="https://forms.w4trc.org/2m-net-suggestions"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn btn-primary text-base px-6 py-3 rounded-xl font-bold shadow hover:opacity-90"
+  >
+    Submit Net Time Suggestions &rarr;
+  </a>
+</div>
 
 ---
 
-## Net Control Rotation
+## Wednesday Evening Net
 
-| Week of Month | Callsign | Name           |
-| :-- | :----------: | ----------: |
-| 1st Sunday    |  |      |
-| 2nd Sunday    |   |  |
-| 3rd Sunday    |  |   |
-| 4th Sunday    |   |    |
-| 5th Sunday    |  |      |
+The Wednesday Evening Net meets every Wednesday night at **8:00 PM** on **146.970 (-) PL 123.0**.
 
-**Net Control Coordinator**: Position Vacant
+---
 
-> **Net Control Operators:** Please submit your weekly net logs here:  
-> 📝 **[Net Log Submission Form](https://nets.w4trc.org/submit)**
+## Volunteer as Net Control
+
+We need **Primary** and **Backup Net Control Operators** for each Wednesday night. Net control is a great way to build confidence on the air and contribute to the club.
 
 ---
 
@@ -81,14 +41,6 @@ For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
 - Keep transmissions concise; let NCS manage the roster.  
 - If you have an announcement, indicate “with traffic” when checking in.  
 - New hams and visitors are always welcome!
-
----
-
-## First-Sunday Simplex Tips
-
-- Bring your **simplex-ready** settings (low/med power to start, adjust as needed).  
-- Use a **good 2m antenna** (mobile or base) and note your **signal reports** to gauge local coverage.  
-- The simplex frequency will be announced by NCS before net close.
 
 ---
 
@@ -102,6 +54,4 @@ For repeater details and coverage, see our **[Repeaters page](/repeaters/)**.
 
 ## Contact / Updates
 
-If you spot an error in the schedule or would like to volunteer as NCS, please **contact a club officer** or email the site team at **contact@w4trc.org**.
-
-See you on **146.970 MHz** this Sunday at **8:30 PM**!
+If you spot an error in the schedule or would like to volunteer as NCS, please **contact a club officer** or email the site team at **[contact@w4trc.org](mailto:contact@w4trc.org)**.

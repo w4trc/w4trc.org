@@ -14,6 +14,10 @@
       "hasChildren": true,
       "children": [
         {
+          "name": "Meetings",
+          "url": "/meetings/"
+        },
+        {
           "name": "Parks on the Air (POTA)",
           "url": "/activities/pota/"
         },
@@ -71,6 +75,10 @@
         {
           "name": "Member Articles & Bios",
           "url": "/resources/articles/"
+        },
+        {
+          "name": "Presentations",
+          "url": "/presentations/"
         }
       ]
     },
@@ -79,14 +87,18 @@
       "url": "https://gallery.w4trc.org/"
     },
     {
+      "name": "Join",
+      "url": "/join/"
+    },
+    {
       "name": "Contact",
       "url": "/contact/"
     }
   ],
   "footer": [
     {
-      "name": "Join / Contact",
-      "url": "/contact/"
+      "name": "Join",
+      "url": "/join/"
     },
     {
       "name": "Meshtastic",
