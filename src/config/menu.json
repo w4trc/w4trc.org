@@ -32,6 +32,10 @@
         {
           "name": "Nets",
           "url": "/activities/nets/"
+        },
+        {
+          "name": "Digital Experimentation Net",
+          "url": "/activities/digital-net/"
         }
       ]
     },
