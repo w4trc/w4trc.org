@@ -2,8 +2,8 @@
 title: W1AW/4 Special Event Station
 date: "2026-06-13T12:00:00"
 endDate: "2026-06-13T18:00:00"
-location: Warriors' Path State Park, Kingsport, TN
-summary: KARC will operate as W1AW/Portable from Warriors' Path as part of the ARRL America250 Worked All States event. Sign up for an operating slot!
+location: Mount Carmel City Park (201 Willow Street)
+summary: KARC will operate as W1AW/Portable as part of the ARRL America250 Worked All States event. Sign up for an operating slot!
 cover: /images/250am.png
 featured: true
 rsvpUrl: https://forms.w4trc.org/w1aw
@@ -34,7 +34,7 @@ W1AW/Portable stations will activate all 50 states during the year. Hunters cont
 - Contact ARRL Affiliated Club stations in all 50 states
 - Work all 50 states on CW, Phone, *and* Digital (Triple Play)
 
-When we operate from Warriors' Path, **every QSO we make puts Tennessee in the log** for hunters all over the country working toward their America250 WAS.
+When we operate, **every QSO we make puts Tennessee in the log** for hunters all over the country working toward their America250 WAS.
 
 ## What to Expect On Site
 
