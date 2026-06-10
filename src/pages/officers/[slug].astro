@@ -1,12 +1,12 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
   const officers = await getCollection("officers");
-  return officers.map((officer) => ({ params: { slug: officer.slug } }));
+  return officers.map((officer) => ({ params: { slug: officer.id } }));
 }
 
 const { slug } = Astro.params;
@@ -21,7 +21,7 @@ try {
 if (!officer) return Astro.redirect("/404");
 
 const { data } = officer;
-const { Content } = await officer.render();
+const { Content } = await render(officer);
 ---
 
 <Base

@@ -1,16 +1,14 @@
 ---
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
-import { getListPage } from "@/lib/contentParser.astro";
 import ImageMod from "@/components/ImageMod.astro";
 
-const contactIndex = await getListPage("contact", "-index");
-const { contact_form_action }: { contact_form_action: string } = config.params;
-const { title, description, meta_title, image } = contactIndex.data;
+const title = "Contact Us";
+const meta_title = "Contact - Kingsport Amateur Radio Club";
+const description = "Get in touch with the Kingsport Amateur Radio Club (W4TRC).";
+const image = "";
 
-if (contactIndex.data.draft) {
-  return Astro.redirect("/404");
-}
+const { contact_form_action }: { contact_form_action: string } = config.params;
 ---
 
 <Base
