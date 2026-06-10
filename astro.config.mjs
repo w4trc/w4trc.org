@@ -8,6 +8,7 @@ import config from "./src/config/config.json";
 import mdx from "@astrojs/mdx";
 import keystatic from '@keystatic/astro';
 import cloudflare from '@astrojs/cloudflare';
+import markdoc from '@astrojs/markdoc';
 
 export default defineConfig({
   adapter: cloudflare(),
@@ -19,6 +20,7 @@ export default defineConfig({
     react(),
     sitemap(),
     mdx(),
+    markdoc(),
     keystatic(),
   ],
   markdown: {
