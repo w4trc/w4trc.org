@@ -7,6 +7,8 @@ import remarkToc from "remark-toc";
 import sharp from "sharp";
 import config from "./src/config/config.json";
 import mdx from "@astrojs/mdx";
+import keystatic from '@keystatic/astro';
+import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,6 +21,7 @@ export default defineConfig({
     react(),
     sitemap(),
     mdx(),
+    keystatic(),
   ],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
