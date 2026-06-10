@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const pages = await getCollection("activities");
   return pages
     .filter((p) => !p.data.draft)
-    .map((p) => ({ params: { slug: p.slug } }));
+    .map((p) => ({ params: { slug: p.id } }));
 }
 
 // 2) Load the requested entry (same as you had)

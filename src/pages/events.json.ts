@@ -20,7 +20,7 @@ export async function GET() {
       endDate: e.data.endDate ?? null,
       location: e.data.location ?? null,
       summary: e.data.summary ?? null,
-      url: `${BASE}/events/${e.slug}/`,
+      url: `${BASE}/events/${e.id}/`,
       rsvpUrl: e.data.rsvpUrl ?? null,
     }));
 

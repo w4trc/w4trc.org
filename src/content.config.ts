@@ -1,172 +1,45 @@
-import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
-
-const commonFields = {
-  title: z.string(),
-  description: z.string(),
-  meta_title: z.string().optional(),
-  date: z.date().optional(),
-  image: z.string().optional(),
-  draft: z.boolean(),
-};
-
-// Post collection schema
-const blogCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/blog" }),
-  schema: z.object({
-    title: z.string(),
-    meta_title: z.string().optional(),
-    description: z.string().optional(),
-    date: z.date().optional(),
-    image: z.string().optional(),
-    author: z.string().default("Admin"),
-    categories: z.array(z.string()).default(["others"]),
-    tags: z.array(z.string()).default(["others"]),
-    draft: z.boolean().optional(),
-  }),
-});
-
-// Author collection schema
-const authorsCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/authors" }),
-  schema: z.object({
-    ...commonFields,
-    social: z
-      .array(
-        z
-          .object({
-            name: z.string().optional(),
-            icon: z.string().optional(),
-            link: z.string().optional(),
-          })
-          .optional(),
-      )
-      .optional(),
-    draft: z.boolean().optional(),
-  }),
-});
-
-// Pages collection schema
-const pagesCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/pages" }),
-  schema: z.object({
-    ...commonFields,
-  }),
-});
-
-// about collection schema
-const aboutCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/about" }),
-  schema: z.object({
-    ...commonFields,
-  }),
-});
-
-// contact collection schema
-const contactCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/contact" }),
-  schema: z.object({
-    ...commonFields,
-  }),
-});
-
-// Homepage collection schema
-const homepageCollection = defineCollection({
-  loader: glob({ pattern: "**/-*.{md,mdx}", base: "src/content/homepage" }),
-  schema: z.object({
-    banner: z.object({
-      title: z.string(),
-      content: z.string(),
-      image: z.string(),
-      button: z.object({
-        enable: z.boolean(),
-        label: z.string(),
-        link: z.string(),
-      }),
-    }),
-    features: z.array(
-      z.object({
-        title: z.string(),
-        image: z.string(),
-        content: z.string(),
-        bulletpoints: z.array(z.string()),
-        button: z.object({
-          enable: z.boolean(),
-          label: z.string(),
-          link: z.string(),
-        }),
-      }),
-    ),
-  }),
-});
-
-// Call to Action collection schema
-const ctaSectionCollection = defineCollection({
-  loader: glob({
-    pattern: "call-to-action.{md,mdx}",
-    base: "src/content/sections",
-  }),
-  schema: z.object({
-    enable: z.boolean(),
-    title: z.string(),
-    description: z.string(),
-    image: z.string(),
-    button: z.object({
-      enable: z.boolean(),
-      label: z.string(),
-      link: z.string(),
-    }),
-  }),
-});
-
-// Testimonials Section collection schema
-const testimonialSectionCollection = defineCollection({
-  loader: glob({
-    pattern: "testimonial.{md,mdx}",
-    base: "src/content/sections",
-  }),
-  schema: z.object({
-    enable: z.boolean(),
-    title: z.string(),
-    description: z.string(),
-    testimonials: z.array(
-      z.object({
-        name: z.string(),
-        avatar: z.string(),
-        designation: z.string(),
-        content: z.string(),
-      }),
-    ),
-  }),
-});
+import { glob } from "astro/loaders";
 
 const events = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/events" }),
   schema: z.object({
     title: z.string(),
-    date: z.string(),     // start (ET wall time; keep quoted)
+    date: z.string(),
     endDate: z.string().optional(),
     location: z.string().optional(),
     summary: z.string().optional(),
     cover: z.string().optional(),
     url: z.string().optional(),
     rsvpUrl: z.string().optional(),
+    featured: z.boolean().optional(),
+  }),
+});
+
+const officers = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/officers" }),
+  schema: z.object({
+    title: z.string(),
+    position: z.string(),
+    callsign: z.string().optional(),
+    photo: z.string().optional(),
+    photo_alt: z.string().optional(),
+    weight: z.number().optional(),
   }),
 });
 
 const projects = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(),
     summary: z.string().optional(),
     image: z.string().optional(),
     weight: z.number().optional(),
-    draft: z.boolean().optional(),
   }),
 });
 
 const silentKeys = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/silentKeys" }),
   schema: z.object({
     name: z.string(),
     callsign: z.string().optional(),
@@ -174,15 +47,14 @@ const silentKeys = defineCollection({
     description: z.string().optional(),
     obituaryUrl: z.string().url().optional(),
     weight: z.number().optional(),
-    draft: z.boolean().optional(),
   }),
 });
 
 const meetings = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/meetings" }),
   schema: z.object({
     title: z.string(),
-    datetime: z.string(), // ET wall time; keep quoted
+    datetime: z.string(),
     location: z.string().optional(),
     topic: z.string().optional(),
     desc: z.string().optional(),
@@ -191,97 +63,34 @@ const meetings = defineCollection({
   }),
 });
 
-export const officers = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),                 // Officer name (used as page title too)
-    position: z.string().optional(),   // President, VP, etc.
-    callsign: z.string().optional(),
-    photo: z.string().optional(),
-    photo_alt: z.string().optional(),
-    weight: z.number().default(0),     // sort asc
-    draft: z.boolean().optional(),
-  }),
-});
-
-const activities = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    meta_title: z.string().optional(),
-    image: z.string().optional(),
-    draft: z.boolean().default(false),
-
-    // Optional sections used by some activities (rendered conditionally)
-    // Nets (simple rows)
-    nets: z.array(z.object({
-      name: z.string(),
-      day: z.string(),          // e.g., "Tuesday"
-      time_local: z.string(),   // e.g., "8:00 PM"
-      frequency: z.string(),    // e.g., "146.970 (-) PL 123.0"
-    })).optional(),
-
-    // Nets (ordinal rules, e.g., "1st Sunday: XYZ")
-    net_rules: z.array(z.object({
-      rule: z.string(),         // e.g., "1st Sunday"
-      name: z.string(),         // e.g., "Ares Training Net"
-      time_local: z.string(),   // e.g., "8:00 PM"
-      frequency: z.string(),    // e.g., "146.970 (-) PL 123.0"
-    })).optional(),
-
-    // Net scripts / downloads
-    scripts: z.array(z.object({
-      label: z.string(),
-      url: z.string(),
-    })).optional(),
-
-    // Fox Hunt yearly schedule
-    foxhunts: z.object({
-      year: z.number(),
-      events: z.array(z.object({
-        date: z.string(),        // ISO (YYYY-MM-DD) recommended
-        time_local: z.string(),  // e.g., "10:00 AM"
-        location: z.string().optional(),
-        notes: z.string().optional(),
-      }))
-    }).optional(),
-  }),
-});
-
 const presentations = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/presentations" }),
   schema: z.object({
     title: z.string(),
-    date: z.string(),           // YYYY-MM-DD (ET wall date)
+    date: z.string(),
     presenter: z.string(),
     description: z.string().optional(),
-    youtubeId: z.string().optional(),   // YouTube video ID (e.g. dQw4w9WgXcQ)
-    slidesUrl: z.string().optional(),   // link to slides (Canva, Google Slides, PowerPoint, etc.)
-    slidesEmbed: z.string().optional(), // iframe-embeddable URL for slides
+    youtubeId: z.string().optional(),
+    slidesUrl: z.string().optional(),
+    slidesEmbed: z.string().optional(),
     cover: z.string().optional(),
     draft: z.boolean().optional(),
   }),
 });
 
-// Export collections
-export const collections = {
-  // Pages
-  homepage: homepageCollection,
-  blog: blogCollection,
-  authors: authorsCollection,
-  pages: pagesCollection,
-  about: aboutCollection,
-  contact: contactCollection,
-  events: events,
-  officers: officers,
-  activities: activities,
-  projects: projects,
-  meetings: meetings,
-  silentKeys: silentKeys,
-  presentations: presentations,
+const activities = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/activities" }),
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+    draft: z.boolean().optional(),
+    nets: z.array(z.any()).optional(),
+    net_rules: z.array(z.any()).optional(),
+    scripts: z.array(z.any()).optional(),
+    foxhunts: z.any().optional(),
+  }),
+});
 
-  // sections
-  ctaSection: ctaSectionCollection,
-  testimonialSection: testimonialSectionCollection,
-};
+export const collections = { events, officers, projects, meetings, silentKeys, presentations, activities };
