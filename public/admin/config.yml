@@ -20,7 +20,7 @@ collections:
   - name: silentKeys
     label: Silent Keys
     label_singular: Silent Key
-    folder: /content/silentKeys
+    folder: /src/content/silentKeys
     fields:
       - { label: Name, name: name, widget: string, required: true }
       - { label: Callsign, name: callsign, widget: string, required: true }
