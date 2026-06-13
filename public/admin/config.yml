@@ -3,6 +3,7 @@
 backend:
   name: github
   repo: w4trc/w4trc.org
+  base_url: https://sveltia-cms-auth.joshuahcarmack.workers.dev/
 
 media_folder: /public/images
 public_folder: /images
