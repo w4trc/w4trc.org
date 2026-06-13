@@ -21,6 +21,7 @@ collections:
     label: Silent Keys
     label_singular: Silent Key
     folder: /src/content/silentKeys
+    slug: "{{callsign}}-{{name}}"
     fields:
       - { label: Name, name: name, widget: string, required: true }
       - { label: Callsign, name: callsign, widget: string, required: true }
