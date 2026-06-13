@@ -17,3 +17,16 @@ collections:
       - { label: Title, name: title, widget: string }
       - { label: Date, name: date, widget: datetime, type: date }
       - { label: Body, name: body, widget: richtext }
+  - name: silentKeys
+    label: Silent Keys
+    label_singular: Silent Key
+    folder: /content/silentKeys
+    fields:
+      - { label: Name, name: name, widget: string, required: true }
+      - { label: Callsign, name: callsign, widget: string, required: true }
+      - { label: Years, name: years, widget: string, required: true }
+      - { label: Description, name: description, widget: string }
+      - { label: Obituary URL, name: obituaryUrl, widget: string, type: url }
+
+
+  
