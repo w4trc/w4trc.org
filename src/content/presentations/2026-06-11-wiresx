@@ -1,0 +1,76 @@
+---
+title: "Wires-X"
+date: "2026-06-11"
+presenter: "Todd Malone (KE4CCB)"
+description: "Todd Malone (KE4CCB) gives a hands-on walkthrough of Yaesu's Wires-X — covering nodes vs. rooms, the HRI-200 and portable digital nodes, operating modes, and live demos linking repeaters and stations across the internet."
+youtubeId: "K3xntPUpask"
+slidesUrl: ""
+slidesEmbed: ""
+draft: false
+---
+
+## Overview
+
+In this presentation to the Kingsport Amateur Radio Club, Todd Malone (KE4CCB) breaks down Yaesu's Wires-X — the Wide-coverage Internet Repeater Enhancement System used with C4FM / System Fusion digital radios. Drawing on a lifelong career in electronics and years of running repeaters in the region, Todd explains how Wires-X ties radios, repeaters, and nodes together over the internet, then backs it up with live demonstrations of connecting to rooms, routing between them, and controlling a remote node from a handheld. Along the way he shares how his own network is configured, the lessons learned from years of trial and error, and a standing offer to help local clubs with their repeater work.
+
+## Key Topics
+
+### What Wires-X Is
+
+Wires-X is a wide-coverage internet repeater enhancement system that takes a Fusion or analog repeater — or a portable digital node — and links it over the internet so operators can connect to nodes and rooms across the country and around the world. Todd emphasized a key takeaway: when you key up a digital contact on a local repeater, that audio may be traveling worldwide over the internet without you ever realizing it.
+
+### Nodes vs. Rooms
+
+A node is a single Wires-X-capable radio or repeater connected to the internet via the Wires-X software. A room is hosted on an HRI-200 and acts as a hub that lets more than two nodes connect at once — like a digital party line. Two nodes can connect directly to each other, but only one at a time; to bring multiple stations together, you need a room.
+
+### HRI-200 vs. Portable Digital Node (PDN)
+
+The HRI-200 is Yaesu's internet interface kit. It's required to host a room and needs a robust, properly configured (non-NAT) internet connection with port forwarding. A Portable Digital Node, by contrast, runs the radio directly off a PC with no HRI-200 and no fixed or dynamic global IP required — making it far simpler to run from home. Todd runs all of his linking gear from his house as portable digital nodes and sends the signal up to his mountain repeaters.
+
+### Operating Modes: Access Point vs. Direct
+
+Todd walked through the two ways to operate a node radio. In **access point** mode the node radio transmits RF on a simplex frequency, so other local radios can talk into it and out across the internet. In **direct** mode the node radio transmits no RF at all — the microphone and speaker route straight through the PC and the internet. He noted direct mode is what he uses while mobile, since it draws far less battery than transmitting RF.
+
+### Portable HRI Mode vs. Digital Node Mode
+
+A portable digital node can run in digital-node mode (digital C4FM nodes and rooms only) or portable HRI mode (both digital and analog). Todd noted that if a room is set up for mixed or analog operation, a plain PDN won't connect to it — you need HRI mode for that.
+
+### Live Demonstrations
+
+With help from Ben, Todd demonstrated connecting to his own room (number 08311), remotely routing a connected radio over to the Kansas City Wide room and watching it automatically return after the timer expired, and controlling a node radio over RF from a separate handheld. He also showed the software logs that record who connected, what room they moved to, and when.
+
+### DGID and GPS Data
+
+Todd touched on DGID groups, which let linked repeaters be split off to run separate nets and then rejoined — both radios have to share the same DGID to talk. He also highlighted the GPS feature: in Wires-X mode, capable radios can display the distance and bearing to the station you're talking with.
+
+### Todd's Holston Mountain Network
+
+Todd described his repeater network on Holston Mountain, including the **443.800** UHF machine (running AMS / automatic mode select for Fusion, with limited analog backup capability) and the **442.200** analog machine (an MTR 3000, which also carries DMR with Tennessee Statewide and Brandmeister talk groups on both time slots). The **145.290** VHF machine is also tied into the network. He runs the linked repeaters at medium power for duty-cycle reliability and feeds the site over Starlink.
+
+### Power and Backup
+
+Todd runs his home node equipment and his mountain site on battery-and-inverter backup, allowing the system to ride through power outages — he's seen it run for days on a single battery setup during extended outages.
+
+### Helping Local Clubs
+
+Todd closed with a standing offer: he's glad to help area clubs with repeater work — duplexer tuning, antenna work, troubleshooting, and spare DR2 repeaters on the shelf — at no charge to hams.
+
+## Gear Mentioned
+
+- **Yaesu HRI-200** — internet interface kit required to host a Wires-X room; needs a robust, properly configured internet connection.
+- **Portable Digital Node (PDN)** — Todd runs small micro Dell PCs as portable nodes, avoiding the need for an HRI-200.
+- **Yaesu FTM-300 / FTM-510** — mobile radios Todd uses as node stations (one FTM-300 has been on the air linking to the mountain for 2.5–3 years on 5 watts).
+- **Yaesu FT5D** — handheld used as a node/travel radio during the demo.
+- **Yaesu FT-70** — noted as lacking the option to connect to a PDN.
+- **Yaesu FTM-400** — noted as requiring a firmware update for node operation.
+- **DR-1 / DR-2 / DR-3 repeaters** — Yaesu Fusion repeaters; the DR-3 is the newest model.
+- **Pi-Star hotspots** — discussed during Q&A; these connect through reflectors rather than directly to a Yaesu room.
+- **Aims 300W power inverter + battery** — Todd's home backup power setup running his computers and link radios.
+- **Verizon portable hotspot / cell phone** — used for internet while mobile.
+
+## Resources Referenced
+
+- **Wires-X** — Yaesu's C4FM digital linking system (yaesu.com).
+- **Brandmeister** — DMR network Todd connects his 442.200 DMR machine into.
+- **Popular rooms** — America KC Wide, America Link, and Southeast Link were referenced as widely used Wires-X rooms.
+- **EchoLink / DMR** — mentioned in the context of multi-mode rooms and reflector connections.
