@@ -1,7 +1,6 @@
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import AutoImport from "astro-auto-import";
 import { defineConfig } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
@@ -19,23 +18,11 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap(),
-    AutoImport({
-      imports: [
-        "@/shortcodes/Button",
-        "@/shortcodes/Accordion",
-        "@/shortcodes/Notice",
-        "@/shortcodes/Video",
-        "@/shortcodes/Youtube",
-        "@/shortcodes/Tabs",
-        "@/shortcodes/Tab",
-      ],
-    }),
     mdx(),
   ],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
     shikiConfig: { theme: "one-dark-pro", wrap: true },
-    extendDefaultPlugins: true,
   },
   redirects: {
     '/nets': '/activities/nets/',  // handles both /nets and /nets/

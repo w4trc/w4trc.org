@@ -2,19 +2,15 @@
 import config from "@/config/config.json";
 import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
-import { getListPage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import OfficersGrid from "@/components/OfficersGrid.astro";
-import { render } from "astro:content";  
 
-const aboutIndex = await getListPage("about", "-index");
-const { Content } = await render(aboutIndex); 
-const { title, description, meta_title, image, draft } = aboutIndex.data;
+const title = "About KARC";
+const meta_title = "About - Kingsport Amateur Radio Club";
+const description = "Learn about the Kingsport Amateur Radio Club (W4TRC), our officers, history, and how to get involved.";
+const image = "";
+
 const { contact_form_action }: { contact_form_action: string } = config.params;
-
-if (draft) {
-  return Astro.redirect("/404");
-}
 ---
 
 <Base
@@ -47,7 +43,7 @@ if (draft) {
   <section class="section-md">
     <div class="max-w-[1100px] mx-auto px-6">
       <div class="prose max-w-none content mb-0">
-        <Content />
+        
       </div>
 
       <!-- Officers Section -->

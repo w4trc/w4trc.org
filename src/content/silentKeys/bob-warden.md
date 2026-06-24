@@ -6,4 +6,3 @@ description: "Over 40 years on the air; awards in SOTA, POTA, WAS, WAC; EME atte
 obituaryUrl: "https://www.hamlettdobson.com/obituaries/robert-warren"
 ---
 
-Add obituary link and further memories as desired.

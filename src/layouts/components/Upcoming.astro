@@ -94,7 +94,7 @@ const upcoming = coll
           const cover = (ev.data as any).cover as string | undefined;
           const location = (ev.data as any).location as string | undefined;
           const summary = (ev.data as any).summary as string | undefined;
-          const url = (ev.data as any).url ?? `/${ev.collection}/${ev.slug}/`;
+          const url = (ev.data as any).url ?? `/${ev.collection}/${ev.id}/`;
           const rsvpUrl = (ev.data as any).rsvpUrl as string | undefined;
           return (
             <div class="w4-card block">

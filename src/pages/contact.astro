@@ -1,16 +1,14 @@
 ---
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
-import { getListPage } from "@/lib/contentParser.astro";
 import ImageMod from "@/components/ImageMod.astro";
 
-const contactIndex = await getListPage("contact", "-index");
-const { contact_form_action }: { contact_form_action: string } = config.params;
-const { title, description, meta_title, image } = contactIndex.data;
+const title = "Contact Us";
+const meta_title = "Contact - Kingsport Amateur Radio Club";
+const description = "Get in touch with the Kingsport Amateur Radio Club (W4TRC).";
+const image = "";
 
-if (contactIndex.data.draft) {
-  return Astro.redirect("/404");
-}
+const { contact_form_action }: { contact_form_action: string } = config.params;
 ---
 
 <Base
@@ -37,51 +35,119 @@ if (contactIndex.data.draft) {
       {description && <p class="text-lg max-w-2xl mx-auto">{description}</p>}
     </div>
   </section>
+
   <section class="section-sm">
     <div class="container">
-      <div class="row">
-        <div class="mx-auto md:col-10 lg:col-6">
-          <form action={contact_form_action} method="POST">
-            <div class="mb-6">
-              <label for="name" class="form-label">
-                Full Name <span class="text-red-500">*</span>
-              </label>
-              <input
-                id="name"
-                name="name"
-                class="form-input"
-                placeholder="John Doe"
-                type="text"
-                required
-              />
+      <div class="mx-auto max-w-5xl">
+
+        <!-- Anonymous comments callout -->
+        <div class="w4-card mb-10 flex items-center gap-4 justify-center text-center" style="background: linear-gradient(135deg, rgba(43,108,176,.12), rgba(17,26,44,1)), var(--w4-surface); border-color: rgba(43,108,176,.35);">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--w4-accent)">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <p style="color: var(--w4-ink-muted); margin: 0;">
+            Have comments or suggestions for the board?{" "}
+            <a href="https://forms.w4trc.org/comments" class="font-semibold" style="color: var(--w4-ink) !important;">
+              Submit them anonymously at forms.w4trc.org/comments
+            </a>
+          </p>
+        </div>
+
+        <div class="grid gap-8 lg:grid-cols-5">
+
+          <!-- Contact options sidebar -->
+          <aside class="lg:col-span-2 flex flex-col gap-6">
+
+            <div class="w4-card">
+              <h2 class="text-lg font-bold mb-5" style="color:#f3f4f6">Ways to Reach Us</h2>
+
+              <!-- Email -->
+              <div class="flex items-start gap-4 mb-6">
+                <div class="shrink-0 rounded-lg p-2.5 mt-0.5" style="background: rgba(43,108,176,.18);">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--w4-accent)">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-sm mb-1" style="color:#f3f4f6">Email</p>
+                  <a href="mailto:contact@w4trc.org" class="text-sm break-all" style="color: var(--w4-ink-muted) !important;">
+                    contact@w4trc.org
+                  </a>
+                </div>
+              </div>
+
+              <div class="border-t mb-6" style="border-color: var(--w4-border);"></div>
+
+              <!-- Anonymous form -->
+              <div class="flex items-start gap-4">
+                <div class="shrink-0 rounded-lg p-2.5 mt-0.5" style="background: rgba(43,108,176,.18);">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--w4-accent)">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-sm mb-1" style="color:#f3f4f6">Anonymous Board Feedback</p>
+                  <p class="text-sm mb-2" style="color: var(--w4-ink-muted);">Submit suggestions or concerns to the board privately.</p>
+                  <a href="https://forms.w4trc.org/comments" class="text-sm font-medium" style="color: var(--w4-ink-muted) !important;">
+                    forms.w4trc.org/comments &rarr;
+                  </a>
+                </div>
+              </div>
             </div>
-            <div class="mb-6">
-              <label for="email" class="form-label">
-                Email Address <span class="text-red-500">*</span>
-              </label>
-              <input
-                id="email"
-                name="email"
-                class="form-input"
-                placeholder="john.doe@email.com"
-                type="email"
-                required
-              />
+
+          </aside>
+
+          <!-- Contact form -->
+          <div class="lg:col-span-3">
+            <div class="w4-card">
+              <h2 class="text-lg font-bold mb-6" style="color:#f3f4f6">Send a Message</h2>
+              <form action={contact_form_action} method="POST">
+                <div class="grid gap-6 sm:grid-cols-2 mb-6">
+                  <div>
+                    <label for="name" class="form-label">
+                      Full Name <span class="text-red-400">*</span>
+                    </label>
+                    <input
+                      id="name"
+                      name="name"
+                      class="form-input"
+                      placeholder="John Doe"
+                      type="text"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="email" class="form-label">
+                      Email Address <span class="text-red-400">*</span>
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      class="form-input"
+                      placeholder="john.doe@email.com"
+                      type="email"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="mb-8">
+                  <label for="message" class="form-label">
+                    Message <span class="text-red-400">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    class="form-input"
+                    placeholder="How can we help?"
+                    required
+                    rows="7"></textarea>
+                </div>
+                <button type="submit" class="cta-big cta-primary w-full text-center">Send Message</button>
+              </form>
             </div>
-            <div class="mb-6">
-              <label for="message" class="form-label">
-                Message <span class="text-red-500">*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                class="form-input"
-                placeholder="Message goes here..."
-                required
-                rows="8"></textarea>
-            </div>
-            <button type="submit" class="btn btn-white">Submit</button>
-          </form>
+          </div>
+
         </div>
       </div>
     </div>

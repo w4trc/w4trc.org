@@ -2,8 +2,8 @@
 title: W1AW/4 Special Event Station
 date: "2026-06-13T12:00:00"
 endDate: "2026-06-13T18:00:00"
-location: Warriors' Path State Park, Kingsport, TN
-summary: KARC will operate as W1AW/Portable from Warriors' Path as part of the ARRL America250 Worked All States event. Sign up for an operating slot!
+location: Working from home
+summary: KARC will operate as W1AW/Portable as part of the ARRL America250 Worked All States event.
 cover: /images/250am.png
 featured: true
 rsvpUrl: https://forms.w4trc.org/w1aw
@@ -11,17 +11,9 @@ rsvpUrl: https://forms.w4trc.org/w1aw
 
 ## We're Activating W1AW/Portable!
 
-The **Kingsport Amateur Radio Club** will operate as **W1AW/Portable** from **Warriors' Path State Park** on June 13th as part of the **ARRL America250 Worked All States** event — a year-long on-air celebration of America's 250th anniversary.
+The **Kingsport Amateur Radio Club** will operate as **W1AW/Portable** on June 13th as part of the **ARRL America250 Worked All States** event — a year-long on-air celebration of America's 250th anniversary.
 
 This is a great opportunity to put Tennessee on the map for hunters chasing the America250 WAS award. We need operators for one-hour slots throughout the day!
-
-## Sign Up to Operate
-
-Operating slots run from **noon to 6:00 PM**. Each slot is one hour — sign up for one or grab a few back-to-back if you want more time on the air.
-
-**[Sign up at forms.w4trc.org/w1aw →](https://forms.w4trc.org/w1aw)**
-
-You can operate phone, CW, or digital — whatever you're comfortable with. Club equipment will be available on site.
 
 ## What is America250 WAS?
 
@@ -34,7 +26,7 @@ W1AW/Portable stations will activate all 50 states during the year. Hunters cont
 - Contact ARRL Affiliated Club stations in all 50 states
 - Work all 50 states on CW, Phone, *and* Digital (Triple Play)
 
-When we operate from Warriors' Path, **every QSO we make puts Tennessee in the log** for hunters all over the country working toward their America250 WAS.
+When we operate, **every QSO we make puts Tennessee in the log** for hunters all over the country working toward their America250 WAS.
 
 ## What to Expect On Site
 

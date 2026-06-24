@@ -13,8 +13,8 @@ const officers = (await getCollection("officers"))
 
     <div class="not-prose mt-6">
       <div class="grid gap-6 grid-cols-1 sm:grid-cols-2">
-        {officers.map(({ slug, data }) => {
-          const href = `/officers/${slug}/`; // assumes route at /officers/[slug]
+        {officers.map(({ id, data }) => {
+          const href = `/officers/${id}/`; // assumes route at /officers/[slug]
           const alt = data.photo_alt ?? `${data.title} photo`;
           return (
             <a class="officer-card group block rounded-lg bg-white/5 p-4 hover:bg-white/7 transition"

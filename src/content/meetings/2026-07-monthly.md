@@ -2,7 +2,7 @@
 title: July Club Meeting
 datetime: "2026-07-09T19:00"
 location: Eastman's Toy F. Reid Employee Center Room 219 (400 South Wilcox Drive, Kingsport, TN  37660)
-topic: TBD
+topic: "\"2-Meter Antennas\" by Ed Fong (WB6IQN)"
 desc: Monthly business meeting and program.
 ---
 

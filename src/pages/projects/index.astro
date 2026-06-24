@@ -7,7 +7,7 @@ const projects = (await getCollection("projects"))
     (a, b) =>
       (a.data.weight ?? Number.MAX_SAFE_INTEGER) -
         (b.data.weight ?? Number.MAX_SAFE_INTEGER) ||
-      a.slug.localeCompare(b.slug)
+      a.id.localeCompare(b.id)
   );
 ---
 
@@ -42,10 +42,10 @@ const projects = (await getCollection("projects"))
                 loading="lazy"
               />
             )}
-            {project.slug && (
+            {project.id && (
               <a
                 class="inline-flex items-center gap-2 text-[var(--w4-accent)] font-semibold mt-auto hover:underline underline-offset-4"
-                href={`/projects/${project.slug}/`}
+                href={`/projects/${project.id}/`}
               >
                 Learn more
                 <span aria-hidden="true">→</span>

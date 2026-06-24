@@ -21,7 +21,7 @@ const normalizeEvent = (e: any) => ({
   location: e.data.location ?? "",
   summary: e.data.summary ?? "",
   cover: (e.data as any).cover ?? "",
-  link: `/events/${e.slug}/`,
+  link: `/events/${e.id}/`,
 });
 
 const normalizeMeeting = (m: any) => {
