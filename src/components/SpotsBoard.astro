@@ -336,7 +336,7 @@
         const member  = esc(s.name || s.callsign);
         const call    = esc(s.callsign);
         const qrz     = "https://www.qrz.com/db/" + encodeURIComponent(s.callsign);
-        const freq    = (s.frequency / 1000).toFixed(3);
+        const freq    = Number(s.frequency).toFixed(3);
         const active  = isActive(s.rx_at);
         const badge   = SOURCE_LABELS[s.source] ?? esc(s.source);
         const spotter = esc(s.spotter || "—");
@@ -371,7 +371,7 @@
         const member  = esc(s.name || s.callsign);
         const call    = esc(s.callsign);
         const qrz     = "https://www.qrz.com/db/" + encodeURIComponent(s.callsign);
-        const freq    = (s.frequency / 1000).toFixed(3);
+        const freq    = Number(s.frequency).toFixed(3);
         const active  = isActive(s.rx_at);
         const badge   = SOURCE_LABELS[s.source] ?? esc(s.source);
         const when    = relTime(s.rx_at);
