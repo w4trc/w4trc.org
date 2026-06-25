@@ -210,7 +210,7 @@
   // every navigation, including the initial load, so this handles both
   // direct visits and View Transitions navigation correctly.
 
-  const FEED = "/api/spots";
+  const FEED = "https://spots.w4trc.org/spots.json";
   const POLL_MS = 60_000;
   let pollTimer: ReturnType<typeof setInterval> | null = null;
 

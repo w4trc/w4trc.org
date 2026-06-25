@@ -14,18 +14,7 @@ export default defineConfig({
   base: config.site.base_path ? config.site.base_path : "/",
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   image: { service: sharp() },
-  vite: {
-    plugins: [tailwindcss()],
-    server: {
-      proxy: {
-        "/api/spots": {
-          target: "https://spots.w4trc.org",
-          changeOrigin: true,
-          rewrite: () => "/spots.json",
-        },
-      },
-    },
-  },
+  vite: { plugins: [tailwindcss()] },
   integrations: [
     react(),
     sitemap(),
