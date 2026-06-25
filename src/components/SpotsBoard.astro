@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<style>
+<style is:global>
   /* ── Status states ───────────────────────────────── */
   .spots-status {
     padding: 2.5rem 1rem;
@@ -357,7 +357,7 @@
             <span class="spot-name">${member}</span>
             <a class="spot-call" href="${qrz}" target="_blank" rel="noopener noreferrer">${call}</a>
           </td>
-          <td><span class="spot-freq">${freq}&nbsp;MHz</span><span class="spot-band">${esc(s.band)}</span></td>
+          <td><span class="spot-freq">${freq}&nbsp;MHz</span> <span class="spot-band">${esc(s.band)}</span></td>
           <td>${esc(s.mode)}</td>
           <td><span class="spot-badge">${badge}</span></td>
           ${whereCell}
