@@ -81,6 +81,10 @@
           "url": "/resources/articles/"
         },
         {
+          "name": "Find an Elmer",
+          "url": "/elmer/"
+        },
+        {
           "name": "Presentations",
           "url": "/presentations/"
         }

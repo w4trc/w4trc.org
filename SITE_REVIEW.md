@@ -62,4 +62,4 @@ Top 3 to tackle next:
 
 1. **iCal feed** — immediate member utility, relatively easy to build from the existing events collection
 2. **Fix the placeholder text on the About page** — that's live right now
-3. **Elmer page** — short, low-effort, signals a welcoming club to new hams
+3. ~~**Elmer page**~~ — done (`/elmer/`)
