@@ -43,6 +43,7 @@
     "@types/react-dom": "^19.2.3",
     "astro": "6.4.5",
     "eslint": "^9.39.1",
+    "pdfkit": "^0.19.1",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.1",
