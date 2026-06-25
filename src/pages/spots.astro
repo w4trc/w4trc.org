@@ -1,0 +1,51 @@
+---
+import Base from "@/layouts/Base.astro";
+import SpotsBoard from "@/components/SpotsBoard.astro";
+
+const title = "On the Air";
+const meta_title = "On the Air — W4TRC Members";
+const description =
+  "See which W4TRC club members are currently active on the air. Live spots sourced from HamAlert, updated every minute.";
+---
+
+<Base title={title} meta_title={meta_title} description={description}>
+  <!-- HERO -->
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-4">{title}</h1>
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--w4-ink-muted);">
+        Live spots for W4TRC members from HamAlert. Rows highlighted in green
+        were heard within the last 15 minutes. Updates every 60 seconds.
+      </p>
+    </div>
+  </section>
+
+  <!-- SPOTS BOARD -->
+  <section>
+    <div class="max-w-[1100px] mx-auto px-6">
+      <h2 class="section-title">Who's on the Air</h2>
+
+      <div class="mt-8 w4-card" style="padding: 1.5rem;">
+        <SpotsBoard />
+      </div>
+
+      <p class="mt-6 text-sm" style="color: rgba(229,231,235,0.5);">
+        Spot data is sourced from
+        <a
+          href="https://hamalert.org"
+          target="_blank"
+          rel="noopener noreferrer">HamAlert</a
+        >
+        and aggregated by
+        <a
+          href="https://spots.w4trc.org"
+          target="_blank"
+          rel="noopener noreferrer">spots.w4trc.org</a
+        >. Callsign links open
+        <a href="https://www.qrz.com" target="_blank" rel="noopener noreferrer"
+          >QRZ.com</a
+        >.
+      </p>
+    </div>
+  </section>
+</Base>

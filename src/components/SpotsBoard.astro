@@ -1,0 +1,398 @@
+---
+// Client-side only — no server fetch; data changes every minute
+---
+
+<div id="spots-board" class="spots-board">
+  <div id="spots-loading" class="spots-status">Loading spots&hellip;</div>
+  <div id="spots-error" class="spots-status spots-error" hidden>
+    Could not load spots. Will retry in 60 seconds.
+  </div>
+  <div id="spots-empty" class="spots-status" hidden>
+    No members spotted on the air recently.
+  </div>
+
+  <div id="spots-wrap" hidden>
+    <div class="spots-scroll">
+      <table class="spots-table" id="spots-table">
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Freq&nbsp;/&nbsp;Band</th>
+            <th>Mode</th>
+            <th>Source</th>
+            <th class="col-where">Where</th>
+            <th class="col-heard">Heard&nbsp;by</th>
+            <th>When</th>
+          </tr>
+        </thead>
+        <tbody id="spots-body"></tbody>
+      </table>
+    </div>
+    <p id="spots-updated" class="spots-updated"></p>
+  </div>
+</div>
+
+<style>
+  .spots-board {
+    font-size: 0.95rem;
+  }
+
+  .spots-status {
+    padding: 2rem;
+    text-align: center;
+    color: rgba(229, 231, 235, 0.6);
+    font-style: italic;
+  }
+
+  .spots-error {
+    color: #f87171;
+  }
+
+  .spots-scroll {
+    overflow-x: auto;
+    border-radius: 0.75rem;
+    border: 1px solid var(--w4-border);
+  }
+
+  .spots-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+  }
+
+  .spots-table thead tr {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--w4-border);
+  }
+
+  .spots-table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(229, 231, 235, 0.6);
+    white-space: nowrap;
+  }
+
+  .spots-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--w4-border);
+    vertical-align: middle;
+    color: var(--w4-ink);
+  }
+
+  .spots-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .spots-table tbody tr {
+    transition: background 0.12s ease;
+  }
+
+  .spots-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  /* Active row — spotted within 15 min */
+  .spots-table tbody tr.spot-active {
+    background: rgba(34, 197, 94, 0.07);
+  }
+  .spots-table tbody tr.spot-active:hover {
+    background: rgba(34, 197, 94, 0.11);
+  }
+
+  /* Active dot indicator */
+  .spot-active-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    margin-right: 6px;
+    vertical-align: middle;
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  .spot-name {
+    display: block;
+    font-weight: 600;
+    color: #f3f4f6;
+  }
+
+  .spot-call {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-family: monospace;
+    color: var(--w4-accent) !important;
+    text-decoration: none;
+    margin-top: 1px;
+  }
+  .spot-call:hover {
+    text-decoration: underline;
+  }
+
+  .spot-freq {
+    font-family: monospace;
+    font-size: 0.93rem;
+    color: #f3f4f6;
+  }
+
+  .spot-band {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: rgba(43, 108, 176, 0.35);
+    border: 1px solid rgba(43, 108, 176, 0.5);
+    color: #93c5fd;
+    border-radius: 4px;
+    padding: 1px 5px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .spot-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: var(--w4-accent);
+    border-radius: 4px;
+    padding: 1px 6px;
+    white-space: nowrap;
+  }
+
+  .spot-muted {
+    color: rgba(229, 231, 235, 0.5);
+    font-size: 0.88rem;
+  }
+
+  .spot-active-time {
+    color: #4ade80;
+    font-weight: 600;
+  }
+
+  .spot-where {
+    font-size: 0.87rem;
+    color: rgba(229, 231, 235, 0.75);
+  }
+  .spot-where a {
+    color: var(--w4-accent) !important;
+    text-decoration: none;
+  }
+  .spot-where a:hover {
+    text-decoration: underline;
+  }
+
+  .spots-updated {
+    margin-top: 0.75rem;
+    font-size: 0.78rem;
+    color: rgba(229, 231, 235, 0.4);
+    text-align: right;
+  }
+
+  @media (max-width: 640px) {
+    .col-heard {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const FEED = "https://spots.w4trc.org/spots.json";
+    const POLL_MS = 60_000;
+    let pollTimer = null;
+
+    const elLoading = document.getElementById("spots-loading");
+    const elError = document.getElementById("spots-error");
+    const elEmpty = document.getElementById("spots-empty");
+    const elWrap = document.getElementById("spots-wrap");
+    const elBody = document.getElementById("spots-body");
+    const elUpdated = document.getElementById("spots-updated");
+    const elTable = document.getElementById("spots-table");
+
+    function relTime(epochSec) {
+      const diff = Math.floor(Date.now() / 1000) - epochSec;
+      if (diff < 60) return "just now";
+      if (diff < 3600) return Math.floor(diff / 60) + "m ago";
+      if (diff < 86400) return Math.floor(diff / 3600) + "h ago";
+      return Math.floor(diff / 86400) + "d ago";
+    }
+
+    function isActive(epochSec) {
+      return Date.now() / 1000 - epochSec < 900;
+    }
+
+    const SOURCE_LABELS = {
+      cluster: "Cluster",
+      rbn: "RBN",
+      pota: "POTA",
+      sota: "SOTA",
+      wwff: "WWFF",
+      pskreporter: "PSKr",
+    };
+
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function render(spots) {
+      elLoading.hidden = true;
+      elError.hidden = true;
+
+      if (!spots.length) {
+        elEmpty.hidden = false;
+        elWrap.hidden = true;
+        return;
+      }
+
+      elEmpty.hidden = true;
+      elWrap.hidden = false;
+
+      const hasWhere = spots.some(function (s) {
+        return s.ref_type;
+      });
+
+      // Show/hide Where column header
+      elTable.querySelectorAll(".col-where").forEach(function (el) {
+        el.hidden = !hasWhere;
+      });
+
+      elBody.innerHTML = spots
+        .map(function (s) {
+          const member = escHtml(s.name || s.callsign);
+          const call = escHtml(s.callsign);
+          const qrz =
+            "https://www.qrz.com/db/" + encodeURIComponent(s.callsign);
+          const freq = (s.frequency / 1000).toFixed(3);
+          const active = isActive(s.rx_at);
+          const badge = SOURCE_LABELS[s.source] || escHtml(s.source);
+          const spotter = s.spotter ? escHtml(s.spotter) : "—";
+
+          let whereCell = "";
+          if (hasWhere) {
+            if (s.ref_type && s.ref) {
+              const refText = s.ref_name
+                ? escHtml(s.ref) + " &middot; " + escHtml(s.ref_name)
+                : escHtml(s.ref);
+              const poraUrl =
+                s.ref_type === "pota"
+                  ? "https://pota.app/#/park/" + encodeURIComponent(s.ref)
+                  : s.ref_type === "sota"
+                    ? "https://sotlas.com/summit/" + encodeURIComponent(s.ref)
+                    : null;
+              whereCell =
+                '<td class="col-where spot-where">' +
+                (poraUrl
+                  ? '<a href="' +
+                    poraUrl +
+                    '" target="_blank" rel="noopener noreferrer">' +
+                    refText +
+                    "</a>"
+                  : refText) +
+                "</td>";
+            } else {
+              whereCell = '<td class="col-where spot-where">—</td>';
+            }
+          }
+
+          return (
+            '<tr class="' +
+            (active ? "spot-active" : "") +
+            '">' +
+            "<td>" +
+            (active ? '<span class="spot-active-dot"></span>' : "") +
+            '<span class="spot-name">' +
+            member +
+            "</span>" +
+            (s.name && s.name !== s.callsign
+              ? '<a class="spot-call" href="' +
+                qrz +
+                '" target="_blank" rel="noopener noreferrer">' +
+                call +
+                "</a>"
+              : '<a class="spot-call" href="' +
+                qrz +
+                '" target="_blank" rel="noopener noreferrer">' +
+                call +
+                "</a>") +
+            "</td>" +
+            "<td>" +
+            '<span class="spot-freq">' +
+            freq +
+            " MHz</span>" +
+            ' <span class="spot-band">' +
+            escHtml(s.band) +
+            "</span>" +
+            "</td>" +
+            "<td>" +
+            escHtml(s.mode) +
+            "</td>" +
+            "<td>" +
+            '<span class="spot-badge">' +
+            badge +
+            "</span>" +
+            "</td>" +
+            whereCell +
+            '<td class="col-heard spot-muted">' +
+            spotter +
+            "</td>" +
+            '<td class="' +
+            (active ? "spot-active-time" : "spot-muted") +
+            '">' +
+            relTime(s.rx_at) +
+            "</td>" +
+            "</tr>"
+          );
+        })
+        .join("");
+
+      const now = new Date();
+      elUpdated.textContent =
+        "Updated " +
+        now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    }
+
+    async function load() {
+      try {
+        const res = await fetch(FEED);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        render(Array.isArray(data) ? data : []);
+      } catch (_) {
+        elLoading.hidden = true;
+        if (!elWrap.hidden) return; // keep showing stale data, just don't show error
+        elError.hidden = false;
+      }
+    }
+
+    function start() {
+      load();
+      pollTimer = setInterval(load, POLL_MS);
+    }
+
+    function stop() {
+      if (pollTimer) {
+        clearInterval(pollTimer);
+        pollTimer = null;
+      }
+    }
+
+    // Clean up polling when navigating away (Astro View Transitions)
+    document.addEventListener("astro:before-swap", stop, { once: true });
+
+    start();
+  })();
+</script>
