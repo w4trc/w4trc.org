@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(npx astro:*)",
-      "Bash(yarn build *)"
+      "Bash(yarn build *)",
+      "Bash(git -C /Users/joshuacarmack/Documents/Code/w4trc.org diff --stat HEAD)",
+      "Bash(git *)"
     ]
   }
 }

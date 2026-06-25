@@ -334,7 +334,7 @@
 
         render(spots);
       } catch (err) {
-        console.error("[SpotsBoard] fetch failed:", err);
+        console.error("[SpotsBoard] fetch failed:", FEED, err);
         elLoading.hidden = true;
         elError.hidden = false;
       }
