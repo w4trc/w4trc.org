@@ -1,0 +1,266 @@
+<!-- KARC / W4TRC - QRZ Bio (full block, inline CSS, site colors) -->
+<div style="
+  --w4-brand:#2b6cb0;      /* brand blue */
+  --w4-accent:#f59e0b;     /* warm amber accent */
+  --w4-ink:#e5e7eb;        /* light text */
+  --w4-ink-muted:rgba(229,231,235,.85);
+  --w4-bg:#0b1220;         /* page background */
+  --w4-surface:#111a2c;    /* primary card surface */
+  --w4-surface-2:#0e1728;  /* secondary surface */
+  --w4-border:rgba(255,255,255,.12);
+  --w4-shadow:0 16px 36px rgba(0,0,0,.35);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  color:var(--w4-ink);
+  background:var(--w4-bg);
+  line-height:1.6;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:var(--w4-shadow);
+">
+
+  <!-- HEADER / HERO -->
+  <div style="
+    position:relative; min-height:260px; display:flex; align-items:flex-end;
+    background-image:
+      linear-gradient(rgba(7,12,22,.35), rgba(7,12,22,.75)),
+      url('https://w4trc.org/images/hero-mountains.jpg');
+    background-size:cover; background-position:center;
+  ">
+    <div style="padding:28px 28px 22px; width:100%;">
+      <div style="display:flex; gap:16px; align-items:center;">
+        <!-- Circle emblem -->
+        <div style="
+          flex:0 0 auto; width:72px; height:72px; border-radius:999px;
+          background:rgba(0,0,0,.35); display:grid; place-items:center;
+          border:1px solid var(--w4-border);
+        ">
+          <span style="font-weight:800; letter-spacing:.5px;">W4TRC</span>
+        </div>
+
+        <div style="flex:1 1 auto;">
+          <h1 style="margin:0; font-size:clamp(22px,4vw,34px); font-weight:800;">
+            Kingsport Amateur Radio Club
+          </h1>
+          <p style="margin:4px 0 0; font-size:clamp(14px,2vw,16px); color:var(--w4-ink-muted);">
+            Serving the greater Kingsport, Tennessee area since 1947 • Callsign: <strong>W4TRC</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div style="padding:22px;">
+
+    <!-- INTRO -->
+    <div style="max-width:900px; margin:0 auto;">
+      <p style="margin:0 0 14px;">
+        The <strong>Kingsport Amateur Radio Club (KARC)</strong> is a community of radio enthusiasts dedicated to learning, service, and on-air fun.
+        From public-service communications and emergency readiness to contesting, portable ops, and mentoring, we welcome hams of all experience levels--
+        and anyone curious about getting licensed.
+      </p>
+    </div>
+
+    <!-- QUICK FACTS -->
+    <div style="
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:14px; max-width:1100px; margin:18px auto 6px;
+    ">
+      
+      <div style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:10px; padding:16px;">
+        <h3 style="margin:0 0 6px; font-size:18px; color:var(--w4-brand);">Website</h3>
+        <a href="https://w4trc.org" style="color:var(--w4-ink); text-decoration:underline;">w4trc.org</a>
+      </div>
+      <div style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:10px; padding:16px;">
+        <h3 style="margin:0 0 6px; font-size:18px; color:var(--w4-brand);">Region & Focus</h3>
+        <div>Tri-Cities area • Public service • Education • Portable ops</div>
+      </div>
+      <div style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:10px; padding:16px;">
+        <h3 style="margin:0 0 6px; font-size:18px; color:var(--w4-brand);">Get Involved</h3>
+        <div>Visitors welcome at meetings, events, and nets</div>
+      </div>
+    </div>
+
+    <!-- OFFICERS -->
+    <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:22px auto;">
+      <h2 style="margin:0 0 12px; font-size:22px; border-left:4px solid var(--w4-accent); padding-left:10px;">Club Officers</h2>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px;">
+        <!-- Officer card (duplicate and edit as needed) -->
+        <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px; text-align:center;">
+          <img src="https://w4trc.org/images/officers/KD4FTN.jpeg" alt="President" style="width:90px; height:90px; border-radius:999px; object-fit:cover; margin-bottom:8px; border:2px solid rgba(255,255,255,.08);">
+          <div style="font-weight:700;">Larry Dale</div>
+          <div style="color:var(--w4-ink-muted); font-size:15px;">KD4FTN</div>
+          <div style="font-size:14px; color:var(--w4-ink-muted); margin-top:2px;">President</div>
+        </div>
+
+        <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px; text-align:center;">
+          <img src="https://w4trc.org/images/officers/ko4dcd.png" alt="Vice President" style="width:90px; height:90px; border-radius:999px; object-fit:cover; margin-bottom:8px; border:2px solid rgba(255,255,255,.08);">
+          <div style="font-weight:700;">Justin Compton</div>
+          <div style="color:var(--w4-ink-muted); font-size:15px;">KO4DCD</div>
+          <div style="font-size:14px; color:var(--w4-ink-muted); margin-top:2px;">Vice President</div>
+        </div>
+
+        <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px; text-align:center;">
+          <img src="https://w4trc.org/images/officers/kq4cdm.png" alt="Secretary" style="width:90px; height:90px; border-radius:999px; object-fit:cover; margin-bottom:8px; border:2px solid rgba(255,255,255,.08);">
+          <div style="font-weight:700;">Christina Compton</div>
+          <div style="color:var(--w4-ink-muted); font-size:15px;">KQ4CDM</div>
+          <div style="font-size:14px; color:var(--w4-ink-muted); margin-top:2px;">Secretary</div>
+        </div>
+
+        <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px; text-align:center;">
+          <img src="https://w4trc.org/images/officers/w4bxl.png" alt="Treasurer" style="width:90px; height:90px; border-radius:999px; object-fit:cover; margin-bottom:8px; border:2px solid rgba(255,255,255,.08);">
+          <div style="font-weight:700;">Rick Curtis</div>
+          <div style="color:var(--w4-ink-muted); font-size:15px;">W4BXL</div>
+          <div style="font-size:14px; color:var(--w4-ink-muted); margin-top:2px;">Treasurer</div>
+        </div>
+        
+        <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px; text-align:center;">
+          <img src="https://w4trc.org/images/officers/n4jhc.jpg" alt="Repeater Trustee/Webmaster" style="width:90px; height:90px; border-radius:999px; object-fit:cover; margin-bottom:8px; border:2px solid rgba(255,255,255,.08);">
+          <div style="font-weight:700;">Joshua Carmack</div>
+          <div style="color:var(--w4-ink-muted); font-size:15px;">N4JHC</div>
+          <div style="font-size:14px; color:var(--w4-ink-muted); margin-top:2px;">Repeater Trustee/Webmaster</div>
+        </div>
+
+        <!-- Add more cards as needed (e.g., Activities, Repeater Trustee, Webmaster) -->
+      </div>
+      <!-- Optional note under officers -->
+      <p style="margin:12px 0 0; color:var(--w4-ink-muted); font-size:14px;">
+        See <a href="https://w4trc.org" style="color:var(--w4-ink); text-decoration:underline;">w4trc.org</a> for the most up-to-date roster.
+      </p>
+    </section>
+
+    <!-- WEEKLY NETS -->
+    <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:16px auto;">
+      <h2 style="margin:0 0 8px; font-size:22px; border-left:4px solid var(--w4-accent); padding-left:10px;">Weekly Nets</h2>
+      <p style="margin:0 0 10px;">
+        <strong>Sunday Evening Net</strong> -- 8:30 p.m. local on the <strong>W4TRC 146.970 MHz</strong> repeater (−600 kHz, <strong>123.0 Hz</strong> tone).
+        Announcements include club news and activities, test sessions, swap info, and more.
+        First Sundays often include a 2-meter simplex net afterward (frequency announced on-air).
+      </p>
+    </section>
+
+    <!-- MEETINGS -->
+    <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:16px auto;">
+      <h2 style="margin:0 0 8px; font-size:22px; border-left:4px solid var(--w4-accent); padding-left:10px;">Club Meetings</h2>
+      <p style="margin:0;">
+        We meet regularly in Kingsport, TN. Prospective members and visitors are encouraged to attend.
+        For the current schedule and location, visit <a href="https://w4trc.org" style="color:var(--w4-ink); text-decoration:underline;">w4trc.org</a>.
+      </p>
+    </section>
+
+    <!-- REPEATERS -->
+    <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:16px auto;">
+      <h2 style="margin:0 0 8px; font-size:22px; border-left:4px solid var(--w4-accent); padding-left:10px;">Repeaters</h2>
+      <ul style="margin:0; padding-left:18px;">
+        <li><strong>146.970 MHz</strong> (−0.600 MHz, 123.0 Hz tone) -- Primary club repeater • Sunday net</li>
+        <li><strong>443.325 MHz</strong> (+5.0 MHz, 123.0 Hz tone)</li>
+        
+      </ul>
+    </section>
+
+    <!-- ACTIVITIES -->
+    <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:16px auto;">
+      <h2 style="margin:0 0 8px; font-size:22px; border-left:4px solid var(--w4-accent); padding-left:10px;">Activities & Events</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+        <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px;">
+          <h3 style="margin:0 0 6px; font-size:18px; color:var(--w4-brand);">POTA / SOTA</h3>
+          <p style="margin:0;">Portable outings across regional parks and summits--great for new operators and veterans alike.</p>
+        </div>
+        <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px;">
+          <h3 style="margin:0 0 6px; font-size:18px; color:var(--w4-brand);">Fox Hunts</h3>
+          <p style="margin:0;">Hands-on RF direction finding that builds practical skills--family-friendly and fun.</p>
+          <p style="margin:8px 0 0;"><a href="https://w4trc.org/fox-hunting" style="color:var(--w4-ink); text-decoration:underline;">More about Fox Hunting →</a></p>
+        </div>
+        <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px;">
+          <h3 style="margin:0 0 6px; font-size:18px; color:var(--w4-brand);">Field Day</h3>
+          <p style="margin:0;">Operating outdoors, public outreach, and emergency preparedness practice.</p>
+        </div>
+        <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px;">
+          <h3 style="margin:0 0 6px; font-size:18px; color:var(--w4-brand);">Special Events</h3>
+          <p style="margin:0;">Historic-site activations and community showcases highlighting radio’s past, present, and future.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LICENSING -->
+    <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:16px auto;">
+      <h2 style="margin:0 0 8px; font-size:22px; border-left:4px solid var(--w4-accent); padding-left:10px;">Licensing, Mentoring & Education</h2>
+      <p style="margin:0 0 8px;">
+        Interested in earning your license or upgrading? Our members can help with study resources, on-air practice, and equipment advice.
+        We announce local test sessions during our nets and on the club website.
+      </p>
+      <p style="margin:0;">Check <a href="https://w4trc.org" style="color:var(--w4-ink); text-decoration:underline;">w4trc.org</a> for upcoming sessions and learning opportunities.</p>
+    </section>
+
+    <!-- JOIN / CONTACT -->
+    <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:16px auto;">
+      <h2 style="margin:0 0 8px; font-size:22px; border-left:4px solid var(--w4-accent); padding-left:10px;">Join Us</h2>
+      <p style="margin:0 0 8px;">
+        Whether you’re brand new or Extra-class, there’s a place for you at KARC. Come to a meeting, check in to a net, or stop by a portable event to say hello.
+      </p>
+      <ul style="margin:0; padding-left:18px;">
+        <li>Website: <a href="https://w4trc.org" style="color:var(--w4-ink); text-decoration:underline;">w4trc.org</a></li>
+        <li>Events & news: See our homepage and social links</li>
+        <li>Questions: Reach out via the contact form on our website</li>
+      </ul>
+    </section>
+
+    <!-- GALLERY SECTION (drop-in ready) -->
+    <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:22px auto;">
+      <h2 style="margin:0 0 12px; border-left:4px solid var(--w4-accent); padding-left:10px;">Photo Gallery</h2>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+        
+        <!-- GALLERY ITEM -->
+        <label style="cursor:pointer; position:relative;">
+          <input type="checkbox" style="display:none;">
+          <img src="https://w4trc.org/images/fieldday2023.jpg" alt="Field Day" style="width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid var(--w4-border); display:block;">
+          <figcaption style="padding:6px 4px; font-size:14px; color:var(--w4-ink-muted); text-align:center;">Field Day setup at Warriors Path State Park</figcaption>
+          <div style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.85); justify-content:center; align-items:center; z-index:999;">
+            <img src="https://w4trc.org/images/fieldday2023.jpg" alt="Field Day Large" style="max-width:90%; max-height:85%; border-radius:8px; box-shadow:0 0 20px rgba(0,0,0,.6);">
+          </div>
+        </label>
+
+        <!-- Duplicate items as needed -->
+        <label style="cursor:pointer; position:relative;">
+          <input type="checkbox" style="display:none;">
+          <img src="https://w4trc.org/images/activities/fox-hunting/20220320_154046_hu_e6975830e6efc8b2.jpg" alt="Fox Hunt" style="width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid var(--w4-border); display:block;">
+          <figcaption style="padding:6px 4px; font-size:14px; color:var(--w4-ink-muted); text-align:center;">Fox Hunt crew tracking the hidden transmitter</figcaption>
+          <div style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.85); justify-content:center; align-items:center; z-index:999;">
+            <img src="https://w4trc.org/images/activities/fox-hunting/20220320_154046_hu_e6975830e6efc8b2.jpg" alt="Fox Hunt Large" style="max-width:90%; max-height:85%; border-radius:8px; box-shadow:0 0 20px rgba(0,0,0,.6);">
+          </div>
+        </label>
+
+        <label style="cursor:pointer; position:relative;">
+          <input type="checkbox" style="display:none;">
+          <img src="https://w4trc.org/images/activities/special-events/netherlandinn2025-01.jpeg" alt="Special Event" style="width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid var(--w4-border); display:block;">
+          <figcaption style="padding:6px 4px; font-size:14px; color:var(--w4-ink-muted); text-align:center;">Operating N4I at the Historic Netherland Inn</figcaption>
+          <div style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.85); justify-content:center; align-items:center; z-index:999;">
+            <img src="https://w4trc.org/images/activities/special-events/netherlandinn2025-01.jpeg" alt="Special Event Large" style="max-width:90%; max-height:85%; border-radius:8px; box-shadow:0 0 20px rgba(0,0,0,.6);">
+          </div>
+        </label>
+
+      </div>
+
+      <p style="margin-top:10px; font-size:14px; color:var(--w4-ink-muted); text-align:center;">
+        More photos available at <a href="https://w4trc.org/gallery" style="color:var(--w4-ink); text-decoration:underline;">w4trc.org/gallery</a>
+      </p>
+
+      <!-- INLINE LIGHTBOX BEHAVIOR -->
+      <style>
+        /* QRZ-safe inline expansion */
+        input[type="checkbox"]:checked + img + figcaption + div {
+          display:flex !important;
+        }
+      </style>
+    </section>
+
+
+    <!-- FOOTER -->
+    <div style="text-align:center; color:var(--w4-ink-muted); font-size:13px; padding:8px 4px;">
+      © 2026 Kingsport Amateur Radio Club • W4TRC • Kingsport, Tennessee
+    </div>
+
+  </div>
+</div>
