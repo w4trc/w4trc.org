@@ -43,15 +43,6 @@ There's a JSON events feed (`/events.json`) but no `.ics` export. Members want t
 ### APRS Embed
 A live APRS.fi map showing W4TRC or club members on the air during events (Field Day, POTA activations) would be a great live element alongside the spots board.
 
-### VE Session Calendar / Next Test Date
-The license testing page says "on demand" and "regularly before meetings" but never shows an actual next test date. A simple upcoming sessions list (even static) would help people plan.
-
-### Photo Upload Route is Broken
-```
-src/pages/index.astro:162 — <a class="btn btn-primary" href="/upload">Upload photos</a>
-```
-`/upload` doesn't appear to be a real route in the pages directory.
-
 ---
 
 ## Nice-to-Haves
