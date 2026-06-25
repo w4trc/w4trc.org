@@ -47,12 +47,12 @@ A live APRS.fi map showing W4TRC or club members on the air during events (Field
 
 ## Nice-to-Haves
 
-- **Member spotlight / ham of the month** section on the home page or in the newsletter
-- **Hamfest calendar** — local hamfests the club attends or hosts
-- **Quick-reference card** — printable PDF (or page) with repeater tones, net times, EchoLink node — the thing you hand new members
-- **Club station photos** — photos of the Bays Mountain repeater site, club shack if any
-- **Grid square reference** — local grid square for VHF/UHF contesting (EM86 area?)
-- **Bylaws / constitution** in the Downloads section (if not already there)
+- **Member spotlight / ham of the month** — coming soon
+- **Hamfest calendar** — will be added as events
+- ~~**Quick-reference card**~~ — done (printable PDFs in Downloads)
+- ~~**Club station photos**~~ — already on the Repeaters page
+- ~~**Grid square reference**~~ — done, added to Repeaters page (EM86)
+- ~~**Bylaws / constitution**~~ — already in Downloads
 
 ---
 
