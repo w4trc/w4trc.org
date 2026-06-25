@@ -24,7 +24,7 @@
 
   "announcement": {
     "enable": true,
-    "content": "<span class='text-center block'>We are still working on power issues at our repeater site. Our 2m repeater is online on solar backup power only.  <a href='https://uptime.n4jhc.com/status/w4trc' class='underline font-semibold' target='_blank' rel='noopener noreferrer'>Visit our status page for up to date info &rarr;</a></span>",
+    "content": "<span class='text-center block'>We are still working on replacing some wiring and power equipment at our repeater site &mdash; all repeaters are online.  <a href='https://uptime.n4jhc.com/status/w4trc' class='underline font-semibold' target='_blank' rel='noopener noreferrer'>Visit our status page for up to date info &rarr;</a></span>",
     "expire_days": 7
   },
 
