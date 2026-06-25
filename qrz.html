@@ -162,7 +162,7 @@
     <!-- ACTIVITIES -->
     <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:16px auto;">
       <h2 style="margin:0 0 8px; font-size:22px; border-left:4px solid var(--w4-accent); padding-left:10px;">Activities & Events</h2>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; align-items:start;">
         <div style="background:var(--w4-surface-2); border:1px solid var(--w4-border); border-radius:10px; padding:14px;">
           <h3 style="margin:0 0 6px; font-size:18px; color:var(--w4-brand);">POTA / SOTA</h3>
           <p style="margin:0;">Portable outings across regional parks and summits--great for new operators and veterans alike.</p>
@@ -208,38 +208,26 @@
 
     <!-- GALLERY SECTION (drop-in ready) -->
     <section style="background:var(--w4-surface); border:1px solid var(--w4-border); border-radius:12px; padding:18px; max-width:1100px; margin:22px auto;">
-      <h2 style="margin:0 0 12px; border-left:4px solid var(--w4-accent); padding-left:10px;">Photo Gallery</h2>
+      <h2 style="margin:0 0 12px; border-left:4px solid #f59e0b; padding-left:10px;">Photo Gallery</h2>
 
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
-        
-        <!-- GALLERY ITEM -->
-        <label style="cursor:pointer; position:relative;">
-          <input type="checkbox" style="display:none;">
-          <img src="https://w4trc.org/images/fieldday2023.jpg" alt="Field Day" style="width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid var(--w4-border); display:block;">
-          <figcaption style="padding:6px 4px; font-size:14px; color:var(--w4-ink-muted); text-align:center;">Field Day setup at Warriors Path State Park</figcaption>
-          <div style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.85); justify-content:center; align-items:center; z-index:999;">
-            <img src="https://w4trc.org/images/fieldday2023.jpg" alt="Field Day Large" style="max-width:90%; max-height:85%; border-radius:8px; box-shadow:0 0 20px rgba(0,0,0,.6);">
-          </div>
-        </label>
+      <div class="w4-gallery" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; background:#111a2c; border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:14px;">
 
-        <!-- Duplicate items as needed -->
-        <label style="cursor:pointer; position:relative;">
-          <input type="checkbox" style="display:none;">
-          <img src="https://w4trc.org/images/activities/fox-hunting/20220320_154046_hu_e6975830e6efc8b2.jpg" alt="Fox Hunt" style="width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid var(--w4-border); display:block;">
-          <figcaption style="padding:6px 4px; font-size:14px; color:var(--w4-ink-muted); text-align:center;">Fox Hunt crew tracking the hidden transmitter</figcaption>
-          <div style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.85); justify-content:center; align-items:center; z-index:999;">
-            <img src="https://w4trc.org/images/activities/fox-hunting/20220320_154046_hu_e6975830e6efc8b2.jpg" alt="Fox Hunt Large" style="max-width:90%; max-height:85%; border-radius:8px; box-shadow:0 0 20px rgba(0,0,0,.6);">
-          </div>
-        </label>
+        <!-- GALLERY ITEM - simple inline thumbnail linking to full image -->
+        <a href="https://w4trc.org/images/fieldday2023.jpg" target="_blank" style="display:block; cursor:pointer; text-decoration:none;">
+          <img src="https://w4trc.org/images/fieldday2023.jpg" alt="Field Day" style="width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,.12); display:block;">
+          <figcaption style="padding:6px 4px; font-size:14px; color:rgba(229,231,235,.85); text-align:center;">Field Day setup at Warriors Path State Park</figcaption>
+        </a>
 
-        <label style="cursor:pointer; position:relative;">
-          <input type="checkbox" style="display:none;">
-          <img src="https://w4trc.org/images/activities/special-events/netherlandinn2025-01.jpeg" alt="Special Event" style="width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid var(--w4-border); display:block;">
-          <figcaption style="padding:6px 4px; font-size:14px; color:var(--w4-ink-muted); text-align:center;">Operating N4I at the Historic Netherland Inn</figcaption>
-          <div style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.85); justify-content:center; align-items:center; z-index:999;">
-            <img src="https://w4trc.org/images/activities/special-events/netherlandinn2025-01.jpeg" alt="Special Event Large" style="max-width:90%; max-height:85%; border-radius:8px; box-shadow:0 0 20px rgba(0,0,0,.6);">
-          </div>
-        </label>
+        <!-- Duplicate items as needed - each thumbnail opens the full image in new tab -->
+        <a href="https://w4trc.org/images/activities/fox-hunting/20220320_154046_hu_e6975830e6efc8b2.jpg" target="_blank" style="display:block; cursor:pointer; text-decoration:none;">
+          <img src="https://w4trc.org/images/activities/fox-hunting/20220320_154046_hu_e6975830e6efc8b2.jpg" alt="Fox Hunt" style="width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,.12); display:block;">
+          <figcaption style="padding:6px 4px; font-size:14px; color:rgba(229,231,235,.85); text-align:center;">Fox Hunt crew tracking the hidden transmitter</figcaption>
+        </a>
+
+        <a href="https://w4trc.org/images/activities/special-events/netherlandinn2025-01.jpeg" target="_blank" style="display:block; cursor:pointer; text-decoration:none;">
+          <img src="https://w4trc.org/images/activities/special-events/netherlandinn2025-01.jpeg" alt="Special Event" style="width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,.12); display:block;">
+          <figcaption style="padding:6px 4px; font-size:14px; color:rgba(229,231,235,.85); text-align:center;">Operating N4I at the Historic Netherland Inn</figcaption>
+        </a>
 
       </div>
 
@@ -247,13 +235,7 @@
         More photos available at <a href="https://w4trc.org/gallery" style="color:var(--w4-ink); text-decoration:underline;">w4trc.org/gallery</a>
       </p>
 
-      <!-- INLINE LIGHTBOX BEHAVIOR -->
-      <style>
-        /* QRZ-safe inline expansion */
-        input[type="checkbox"]:checked + img + figcaption + div {
-          display:flex !important;
-        }
-      </style>
+      <!-- INLINE LIGHTBOX BEHAVIOR removed: thumbnails now open full image in new tab (QRZ-safe, inline-only) -->
     </section>
 
 
