@@ -77,6 +77,14 @@
   ],
   "areaNets": [
     {
+      "name": "Coffee Net",
+      "day": "Sunday",
+      "time_local": "07:00",
+      "frequency": "KD4HZN - 147.315 MHz (+0.6 MHz offset) PL 114.8 Hz",
+      "mode": "FM",
+      "notes": ""
+    },
+    {
       "name": "Boone Trail ARES/RACES Net",
       "day": "Monday",
       "time_local": "20:30",
@@ -85,10 +93,18 @@
       "notes": ""
     },
     {
+      "name": "Bible Net",
+      "day": "Monday",
+      "time_local": "20:30",
+      "frequency": "K4OTL - 147.120 MHz (+0.6 MHz offset) PL 100 Hz",
+      "mode": "FM",
+      "notes": ""
+    },
+    {
       "name": "Lunch Bunch Net",
       "day": "Monday - Friday",
       "time_local": "12:00 - 14:00",
-      "frequency": "145.410 MHz (-0.6 MHz offset) PL 127.3 Hz",
+      "frequency": "W4KEV - 145.410 MHz (-0.6 MHz offset) PL 127.3 Hz",
       "mode": "FM",
       "notes": "On the W4KEV repeater system."
     },
@@ -96,7 +112,7 @@
       "name": "Dixie Traders Net",
       "day": "Friday",
       "time_local": "20:00",
-      "frequency": "145.410 MHz (-0.6 MHz offset) PL 127.3 Hz",
+      "frequency": "W4KEV - 145.410 MHz (-0.6 MHz offset) PL 127.3 Hz",
       "mode": "FM",
       "notes": "On the W4KEV repeater system."
     }
