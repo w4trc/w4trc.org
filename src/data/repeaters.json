@@ -91,6 +91,14 @@
       "frequency": "145.410 MHz (-0.6 MHz offset) PL 127.3 Hz",
       "mode": "FM",
       "notes": "On the W4KEV repeater system."
+    },
+    {
+      "name": "Dixie Traders Net",
+      "day": "Friday",
+      "time_local": "20:00",
+      "frequency": "145.390 MHz",
+      "mode": "FM",
+      "notes": "On the W4KEV repeater system."
     }
   ],
   "siteMapImage": "/images/mapimage.jpg"
