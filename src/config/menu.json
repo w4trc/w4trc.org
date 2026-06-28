@@ -48,6 +48,10 @@
       "url": "/events/"
     },
     {
+      "name": "Posts",
+      "url": "/posts/"
+    },
+    {
       "name": "Resources",
       "url": "",
       "hasChildren": true,
