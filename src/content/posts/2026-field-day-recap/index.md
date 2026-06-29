@@ -4,6 +4,7 @@ date: "2026-06-27"
 author: "N4JHC"
 summary: "KARC had a fantastic showing at this year's ARRL Field Day. Here's a look at how the weekend went."
 tags: ["event-recap", "field-day"]
+image: "/images/posts/FieldDay2026.jpg"
 ---
 
 ### W4TRC Wraps Up Field Day 2026
