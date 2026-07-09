@@ -1,8 +1,7 @@
 ---
 title: Club Picnic
-datetime: "2026-08-13T19:00"
+datetime: "2026-08-13T18:00"
 location: Eastman's Bays Mountain Recreation Center (Eastman Cabins) (406 Bays Mountain Park Road, Kingsport, TN  37660)
 topic: N/A
-desc: Club potluck picnic and fellowship. 
+desc: Club potluck picnic and fellowship. Bring a dish and come join us, members and non-members are invited.
 ---
-
