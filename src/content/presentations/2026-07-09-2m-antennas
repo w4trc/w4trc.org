@@ -1,0 +1,66 @@
+---
+title: "The Dual-Band J-Pole: Design, History, and How It Works"
+date: "2026-07-09"
+presenter: "Ed Fong - WB6IQN"
+description: "Ed Fong, WB6IQN, walks through the design and 20-year history of his popular dual-band J-pole antenna, explaining why J-poles outperform ground planes and how a simple stub extends a VHF J-pole to work well on UHF."
+youtubeId: "eoQx-5Wct9Q"
+slidesUrl: ""
+slidesEmbed: ""
+draft: true
+---
+
+## Overview
+
+Ed Fong, WB6IQN, an RF wireless and antenna design instructor at UC Santa Cruz, presented remotely to the club on the design and history of the dual-band J-pole antenna he co-developed roughly 20 years ago. The design was published in QST and later included in the ARRL Antenna Handbook and Antenna Compendium. Fong covered why the J-pole outperforms a traditional ground plane, the theory behind the antenna's matching section, how a small added stub allows a VHF J-pole to also perform well on UHF, and how he and his students at UC Santa Cruz test and build these antennas. He also discussed a tri-band (2m/220/440) version developed for FEMA and took audience questions afterward.
+
+## Key Topics
+
+### Why a J-Pole?
+
+Fong explained that he began experimenting with J-poles in the early 2000s after noticing they required no ground radials and no lightning arrestor, since the design is DC-shorted at the base. Compared to a quarter-wave ground plane, a J-pole radiates at a lower angle toward the horizon, giving it a measurable but modest gain advantage — about 1.5 to 1.6 dB. He noted that radials, being horizontal, are prone to failure outdoors over time, while an all-vertical J-pole design avoids that mechanical weak point.
+
+### History of the Dual-Band Design
+
+Fong first encountered the J-pole concept in the late 1990s from a friend, Danny Monticelli, who built one out of ribbon cable. Fong adapted the idea into a PVC-housed base station antenna and, with demand for dual-band coverage growing as hams began buying dual-band radios, developed the dual-band version discussed in this talk. The design was never patented — Fong said that at the time he considered it simply a ham radio project. After other sellers began copying and reselling the design, he and his university's patent attorney began patenting subsequent antenna designs, including a collinear gain antenna and a tri-band (2m/220/440) design.
+
+### How the Matching Works
+
+Fong walked through the electrical theory behind the J-pole's matching section without heavy math, explaining how a quarter-wave shorted stub transforms a short circuit into a high impedance point, allowing the antenna to be fed from the bottom rather than the center. He noted that the physical length of a quarter wavelength differs depending on the transmission line used (twin-lead, coax, or air) due to differences in velocity factor, which is why building dimensions vary depending on materials.
+
+### Solving the UHF Problem
+
+A standard VHF J-pole performs poorly at UHF — about 75% of the signal radiates upward into the sky rather than toward the horizon, resulting in roughly 6 dB of loss. Fong explained that adding a small quarter-wave stub, cut to the correct length for UHF, corrects this by stopping the current from continuing out of phase up the antenna. This simple addition recovers most of the lost performance, allowing a single antenna to perform well on both bands.
+
+### Construction Details
+
+Fong emphasized that construction materials matter as much as the electrical design. All conductive elements should be copper or copper-coated, and twin-lead should be a heavier gauge (16-18 AWG) for durability and performance. The base station version is housed in three-quarter-inch PVC pipe, which slightly changes the antenna's resonant dimensions due to velocity factor and requires readjustment. A portable roll-up version, built from a single continuous piece with a BNC connector, is designed for use in open air rather than inside PVC pipe, so its dimensions differ slightly from the base station version.
+
+### Measurement & Testing
+
+Fong and his graduate students test antennas following a methodology based on National Institute of Standards and Technology (NIST) recommendations, taking multiple measurements across different weather conditions. In range testing at roughly 50 yards using a spectrum analyzer, the dual-band J-pole performed comparably to a standard J-pole at VHF, while the added UHF stub recovered approximately 6 dB compared to an unmodified VHF J-pole used at UHF.
+
+### Tri-Band and Custom Antennas
+
+Fong described a tri-band (2m/220/440) antenna his lab originally developed for FEMA as a lower-cost, radial-free alternative to commercial options. He also builds custom antennas for frequencies between roughly 1 MHz and 500 MHz, including single, dual, and tri-band configurations, and semi-custom collinear designs for repeater use.
+
+### Supporting the Lab
+
+Fong explained that antenna sales help fund research assistantships for his graduate students at UC Santa Cruz, particularly since federal grant funding has recently been reduced. Proceeds from ham radio antenna sales go toward student stipends and lab equipment. He offered club members a discount on antennas ordered as a group through the club.
+
+## Gear Mentioned
+
+- **NanoVNA** — A low-cost (roughly $80-100) vector network analyzer Fong recommended for measuring and tuning antennas.
+- **Dual-band J-pole base antenna** — PVC-housed base station version; club discount pricing was offered, with retail listed around $55.
+- **Dual-band J-pole roll-up antenna** — Portable version built as a single piece with a BNC connector; retail listed around $60.
+- **Tri-band (2m/220/440) antenna** — Retail listed around $95; originally developed for FEMA.
+- **GMRS gain collinear antenna** — Retail listed around $65.
+- **uSDX QRP radio** — An 80-10 meter all-mode HF radio (around $150) built by the Northern California QRP Club, featuring a switching RF power amplifier design, CW decode, and a built-in lithium-ion battery. Fong uses it in his RF communications class to teach SSB/IQ modulation concepts.
+
+## Resources Referenced
+
+- **QST Magazine** — Original publication of the dual-band J-pole design.
+- **ARRL Antenna Handbook** and **ARRL Antenna Compendium** — Include the dual-band J-pole design.
+- **ARRL** — Tested samples of Fong's antennas.
+- **Foothill Amateur Radio Society** — Fong's home club in California.
+- **Northern California QRP Club** — Developed the USDX radio kit Fong discussed.
+- Ed Fong's antenna website (no URL provided during the talk; club members can contact him directly for a current listing and group order pricing).
