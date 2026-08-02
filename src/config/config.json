@@ -24,7 +24,7 @@
 
   "announcement": {
     "enable": true,
-    "content": "<span class='text-center block'>Our Sunday Evening Net is back! Join us starting <strong>July 5th at 8:30 PM</strong> on 146.970 (-) PL 123.0. <a href='/activities/nets/' class='underline font-semibold'>Learn more &rarr;</a></span>",
+    "content": "<span class='text-center block'>Our picnic has moved. On <strong>August 13 @ 6:00 PM</strong> we will be at Netherland Inn <a href='https://forms.w4trc.org/picnic' class='underline font-semibold'>RSVP to let us know you are coming &rarr;</a></span>",
     "expire_days": 7
   },
 
