@@ -103,6 +103,7 @@ const posts = defineCollection({
     image: z.string().optional(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().optional(),
+    externalUrl: z.string().optional(),
   }),
 });
 
