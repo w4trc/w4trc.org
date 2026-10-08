@@ -2,7 +2,7 @@
 title: Netherland Inn Special Event Station - N4I
 date: "2026-10-17T09:00:00"
 endDate: "2026-10-17T17:00:00"
-location: Kingsport, TN
+location: Netherland Inn (2140 Netherland Inn Rd, Kingsport, TN 37660)
 summary: Special event station, come join us!
 cover: /images/activities/special-events/netherland_inn.webp
 featured: false
