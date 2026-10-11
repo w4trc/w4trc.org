@@ -24,8 +24,10 @@
 
   "announcement": {
     "enable": true,
-    "content": "<span class='text-center block'>Due to power issuew, our repeaters are currently offline and nets are on hold.</span>",
-    "expire_days": 7
+    "content": "<span class='text-center block'>Due to power issues, our repeaters are currently offline and nets are on hold.</span>",
+    "expire_days": 7,
+    "background_color": "red",
+    "text_color": "white"
   },
 
   "params": {
