@@ -182,6 +182,13 @@ h2.section-title::after {
   border-color: rgba(255,255,255,.18);
 }
 
+/* Cards that hold content rather than link somewhere: no hover lift */
+.w4-card.w4-card-static:hover {
+  transform: none;
+  box-shadow: var(--w4-shadow);
+  border-color: var(--w4-border);
+}
+
 /* QUICK LINK cards */
 .quicklink-card,
 .w4-card { padding: 1.75rem; }

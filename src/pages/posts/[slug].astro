@@ -67,7 +67,7 @@ const galleryImages = Object.entries(allGalleryModules)
     <div class="max-w-[800px] mx-auto px-6 space-y-8">
 
       {d.image && (
-        <div class="w4-card overflow-hidden">
+        <div class="w4-card w4-card-static overflow-hidden">
           <img
             src={d.image}
             alt={d.title}
@@ -77,14 +77,14 @@ const galleryImages = Object.entries(allGalleryModules)
         </div>
       )}
 
-      <article class="w4-card p-6">
+      <article class="w4-card w4-card-static p-6">
         <div class="prose prose-invert max-w-none">
           <Content />
         </div>
       </article>
 
       {galleryImages.length > 0 && (
-        <div class="w4-card p-6 space-y-4">
+        <div class="w4-card w4-card-static p-6 space-y-4">
           <h2 class="text-xl font-bold text-white">Photos</h2>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {galleryImages.map((img, i) => (
