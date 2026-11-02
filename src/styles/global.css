@@ -1,13 +1,6 @@
-/* Tailwind layers */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind is loaded once, in main.css. Don't add @tailwind lines here:
+   in Tailwind v4 they emit a second, unlayered copy of the utilities that
+   overrides responsive variants (e.g. "flex-col" beating "md:flex-row"). */
 
-/* Your site overrides (NO @tailwind here) */
+/* Site overrides */
 @import "./custom.css";
-
-/* Guard: ensure desktop nav is always visible */
-@media (min-width: 1024px) {
-  #nav-menu { display: flex !important; }
-  #nav-menu.hidden { display: flex !important; }
-}

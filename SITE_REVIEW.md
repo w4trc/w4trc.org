@@ -60,7 +60,7 @@ A live APRS.fi map showing W4TRC or club members on the air during events (Field
 
 ### Worth doing
 
-1. **Fix the duplicate Tailwind CSS** — `src/styles/global.css` re-imports Tailwind with old v3 `@tailwind` lines, emitting a second, unlayered copy of the utilities. That copy overrides responsive variants site-wide (e.g. `flex-col` beats `md:flex-row` at every width). Remove the 3 lines, then fix layouts built around the bug — the header nav overlaps the club name without it. Until then, new layouts must avoid mixing a base utility with a responsive one for the same property (use `max-md:flex-col md:flex-row`).
+1. ~~**Fix the duplicate Tailwind CSS**~~ — done; responsive layouts now work as written, desktop dropdown menus open again, and the nav workarounds were removed
 2. **iCal feed (.ics)** — immediate member utility; members subscribe once in Google/Apple Calendar. Build from the existing events and meetings collections, so no extra upkeep.
 3. **Shrink post images** — the 3 post cards on the homepage load ~4 MB (`KARC-N4I-2026.jpg` 2.3 MB, `FieldDay2026.jpg` 1.6 MB, `GeorgeDeVault.png` 1 MB). Use `ImageMod` in `src/layouts/components/PostCard.astro` to fix site-wide.
 4. **One switch for repeater outages** — the red banner (`src/config/config.json` → `announcement`) and repeater status (`src/data/repeaters.json` → `status.onAir`) are set separately. Drive the banner from the repeater status so one change updates the whole site.
