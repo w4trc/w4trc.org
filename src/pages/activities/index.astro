@@ -1,0 +1,67 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+// Preferred display order; anything not listed falls to the end alphabetically.
+const ORDER = ["pota", "sota", "fox-hunting", "nets"];
+const rank = (id: string) => {
+  const i = ORDER.indexOf(id);
+  return i === -1 ? ORDER.length : i;
+};
+
+const activities = (await getCollection("activities", ({ data }) => !data.draft)).sort(
+  (a, b) => rank(a.id) - rank(b.id) || a.data.title.localeCompare(b.data.title),
+);
+---
+
+<Base
+  title="Activities"
+  meta_title="KARC - Activities"
+  description="Parks on the Air, Summits on the Air, fox hunting, weekly nets, and more with the Kingsport Amateur Radio Club."
+>
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-3">Club Activities</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        Ways to get on the air with W4TRC, from park and summit activations to monthly fox hunts.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-md">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="grid gap-6 md:grid-cols-2">
+        {activities.map((a) => (
+          <a href={`/activities/${a.id}/`} class="w4-card group flex flex-col overflow-hidden">
+            {a.data.image && (
+              <ImageMod
+                src={a.data.image}
+                alt=""
+                width={800}
+                height={450}
+                format="webp"
+                class="w-full h-56 object-cover rounded-xl mb-5"
+              />
+            )}
+            <h2 class="text-2xl font-bold text-white leading-snug group-hover:text-(--w4-accent)">
+              {a.data.title} <span aria-hidden="true">→</span>
+            </h2>
+            {a.data.description && <p class="mt-2">{a.data.description}</p>}
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <a href="/meetings/" class="quicklink-card">
+          <p class="text-lg font-semibold text-white!">Monthly Meetings</p>
+          <p>Programs, business meetings, and fellowship.</p>
+        </a>
+        <a href="/spots/" class="quicklink-card">
+          <p class="text-lg font-semibold text-white!">Live Spots</p>
+          <p>See which club members are on the air right now.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

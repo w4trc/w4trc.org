@@ -183,7 +183,8 @@ h2.section-title::after {
 }
 
 /* Cards that hold content rather than link somewhere: no hover lift */
-.w4-card.w4-card-static:hover {
+.w4-card.w4-card-static:hover,
+.meeting-box:hover {
   transform: none;
   box-shadow: var(--w4-shadow);
   border-color: var(--w4-border);
@@ -325,4 +326,15 @@ strong {
 
 th {
   color: #ffffff;
+}
+
+/* Call sign eyebrow above the homepage hero title */
+.hero-heroimg p.hero-callsign {
+  margin-top: 0;
+  margin-bottom: .25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .3em;
+  color: var(--w4-accent);
 }

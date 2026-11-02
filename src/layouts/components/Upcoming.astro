@@ -16,6 +16,9 @@ interface Props {
   showCalendarCta?: boolean;
   calendarHref?: string;
   containerClass?: string;
+  /** Render without the outer section/container so a parent layout can place it. */
+  embedded?: boolean;
+  gridClass?: string;
 }
 
 const {
@@ -24,7 +27,12 @@ const {
   showCalendarCta = true,
   calendarHref = "/calendar/",
   containerClass = "container px-6 max-w-[1400px] mx-auto",
+  embedded = false,
+  gridClass = "grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6",
 } = Astro.props;
+
+const Wrapper = embedded ? "div" : "section";
+const innerClass = embedded ? "flex flex-col h-full" : containerClass;
 
 // Load all events from the content collection
 const coll: EventEntry[] = await getCollection("events");
@@ -77,9 +85,9 @@ const upcoming = coll
   .slice(0, limit);
 ---
 
-{upcoming.length > 0 && (
-  <section>
-    <div class={containerClass}>
+{(upcoming.length > 0 || embedded) && (
+  <Wrapper>
+    <div class={innerClass}>
       <div class="flex items-end justify-between gap-4">
         <h2 class="section-title">{title}</h2>
         {showCalendarCta && (
@@ -89,7 +97,12 @@ const upcoming = coll
         )}
       </div>
 
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
+      {upcoming.length === 0 && (
+        <div class="w4-card w4-card-static mt-6 flex-1">
+          <p>No events scheduled right now. Check the <a class="underline" href={calendarHref}>events page</a> for updates.</p>
+        </div>
+      )}
+      <div class={gridClass}>
         {upcoming.map((ev) => {
           const cover = (ev.data as any).cover as string | undefined;
           const location = (ev.data as any).location as string | undefined;
@@ -97,15 +110,17 @@ const upcoming = coll
           const url = (ev.data as any).url ?? `/${ev.collection}/${ev.id}/`;
           const rsvpUrl = (ev.data as any).rsvpUrl as string | undefined;
           return (
-            <div class="w4-card block">
+            <div class:list={["w4-card w4-card-static", embedded ? "sm:flex sm:gap-5 sm:items-start" : "block"]}>
               {cover && (
                 <img
                   src={cover}
                   alt=""
-                  class="mb-3 rounded-lg"
+                  class:list={["mb-3 rounded-lg", embedded && "sm:mb-0 sm:w-40 sm:shrink-0"]}
                   style="aspect-ratio:16/9;object-fit:cover;"
+                  loading="lazy"
                 />
               )}
+              <div>
               <div class="text-sm text-white/60 mb-1">{fmtRange(ev)}</div>
               <h3 class="text-white font-semibold text-lg leading-snug">{ev.data.title}</h3>
               {location && (
@@ -130,10 +145,11 @@ const upcoming = coll
                   More info
                 </a>
               </div>
+              </div>
             </div>
           );
         })}
       </div>
     </div>
-  </section>
+  </Wrapper>
 )}

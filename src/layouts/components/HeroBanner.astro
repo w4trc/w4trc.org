@@ -1,8 +1,9 @@
 ---
 const hero = {
-  background: "/images/hero-mountains.jpg",
-  logo: "/images/KARC-LOGO-AlphaBG.png",
-  title: "Welcome to Kingsport Amateur Radio Club",
+  background: "/images/home/hero-mountains.webp",
+  logo: "/images/home/karc-logo.webp",
+  title: "Kingsport Amateur Radio Club",
+  callsign: "W4TRC",
   subtitle:
     "ARRL-affiliated amateur radio club serving the Tri-Cities (Kingsport • Johnson City • Bristol). Public service, education, emergency comms, and plenty of fun on the air.",
   buttons: [
@@ -18,11 +19,12 @@ const hero = {
   class="hero-heroimg relative w-full bg-cover bg-center"
   style={`background-image:linear-gradient(rgba(4,12,18,.35),rgba(4,12,18,.65)),url('${hero.background}')`}
 >
-  <div class="w-full max-w-[1400px] mx-auto px-6 py-10">
+  <div class="w-full max-w-[1400px] mx-auto px-6 pt-10 pb-20">
     <div class="flex justify-center mb-6">
-      <img src={hero.logo} alt="W4TRC" class="hero-logo-big" />
+      <img src={hero.logo} alt="Kingsport Amateur Radio Club logo" class="hero-logo-big" width="180" height="180" fetchpriority="high" />
     </div>
 
+    <p class="hero-callsign">{hero.callsign}</p>
     <h1>{hero.title}</h1>
     <p>{hero.subtitle}</p>
 
