@@ -121,7 +121,7 @@ const quickLinks = [
             href={l.href}
             {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
-            <p class="text-lg font-semibold text-white!">{l.title}</p>
+            <p class="text-lg font-semibold">{l.title}</p>
             <p>{l.text}</p>
           </a>
         ))}
@@ -132,7 +132,7 @@ const quickLinks = [
   <!-- ABOUT THE CLUB -->
   <section>
     <div class="container max-w-[1400px] px-6 mx-auto grid gap-10 lg:grid-cols-2 items-center">
-      <div class="w4-card w4-card-static p-8">
+      <div class="w4-card p-8">
         <h2 class="section-title">About the Club</h2>
         <p class="text-text-light mb-4">
           Kingsport Amateur Radio Club was affiliated on October 2, 1947. Local veterans who were
@@ -150,7 +150,7 @@ const quickLinks = [
         </div>
       </div>
 
-      <div class="w4-card w4-card-static p-4">
+      <div class="w4-card p-4">
         <img
           src="/images/home/about-field-day-2026.webp"
           alt="Club members operating under the pavilion at Field Day 2026"
@@ -166,7 +166,7 @@ const quickLinks = [
   <!-- PHOTO UPLOAD CTA -->
   <section>
     <div class="container max-w-[1400px] px-6 mx-auto">
-      <div class="w4-card w4-card-static p-6 md:p-8 flex max-md:flex-col max-md:items-start md:items-center justify-between max-md:gap-4 md:gap-6">
+      <div class="w4-card p-6 md:p-8 flex max-md:flex-col max-md:items-start md:items-center justify-between max-md:gap-4 md:gap-6">
         <div class="space-y-2">
           <p class="text-xs uppercase tracking-wide text-white/60">Share your shots</p>
           <h2 class="text-2xl font-semibold text-white">Have photos from an event?</h2>
@@ -185,7 +185,7 @@ const quickLinks = [
       <h2 class="section-title">Conditions</h2>
 
       <div class="grid gap-8 lg:grid-cols-2 mt-6 items-start">
-        <div class="rounded-2xl bg-white/5 p-6 text-center w4-card w4-card-static">
+        <div class="rounded-2xl bg-white/5 p-6 text-center w4-card">
           <a
             href="https://www.hamqsl.com/solar.html"
             class="inline-block"
@@ -204,7 +204,7 @@ const quickLinks = [
           </p>
         </div>
 
-        <div class="rounded-2xl bg-white/5 p-6 text-center w4-card w4-card-static">
+        <div class="rounded-2xl bg-white/5 p-6 text-center w4-card">
           <WeatherWidget />
         </div>
       </div>

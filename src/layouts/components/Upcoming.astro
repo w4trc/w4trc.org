@@ -98,7 +98,7 @@ const upcoming = coll
       </div>
 
       {upcoming.length === 0 && (
-        <div class="w4-card w4-card-static mt-6 flex-1">
+        <div class="w4-card mt-6 flex-1">
           <p>No events scheduled right now. Check the <a class="underline" href={calendarHref}>events page</a> for updates.</p>
         </div>
       )}
@@ -110,7 +110,7 @@ const upcoming = coll
           const url = (ev.data as any).url ?? `/${ev.collection}/${ev.id}/`;
           const rsvpUrl = (ev.data as any).rsvpUrl as string | undefined;
           return (
-            <div class:list={["w4-card w4-card-static", embedded ? "sm:flex sm:gap-5 sm:items-start" : "block"]}>
+            <div class:list={["w4-card", embedded ? "sm:flex sm:gap-5 sm:items-start" : "block"]}>
               {cover && (
                 <img
                   src={cover}
