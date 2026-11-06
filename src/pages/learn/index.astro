@@ -1,0 +1,65 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const pages = await getCollection("learn");
+
+const sorted = pages.sort((a, b) => {
+  const wa = a.data.weight ?? 999;
+  const wb = b.data.weight ?? 999;
+  if (wa !== wb) return wa - wb;
+  return a.data.title.localeCompare(b.data.title);
+});
+---
+
+<Base
+  title="Learn About Amateur Radio"
+  meta_title="KARC - Learn About Amateur Radio"
+  description="Beginner-friendly guides to amateur radio — what it is, how it works, and how to get started."
+>
+  <section class="hero-heroimg relative">
+    <div aria-hidden="true" class="absolute inset-0 -z-10">
+      <img
+        src="https://images.unsplash.com/photo-1617994452722-4145e196248b?w=1600&h=600&fit=crop"
+        alt=""
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-linear-to-b from-black/55 via-black/60 to-black/75"></div>
+    </div>
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-4">Learn About Amateur Radio</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        New to ham radio? Start here. Short guides that explain the basics — no experience needed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-md">
+    <div class="max-w-[1100px] mx-auto px-6">
+      <div class="grid gap-6 md:grid-cols-2">
+        {sorted.map((page) => (
+          <a href={`/learn/${page.id}/`} class="w4-card p-6 hover:bg-white/5 transition-colors group">
+            <h2 class="text-xl font-bold text-white mb-2 group-hover:text-(--w4-accent) transition-colors">
+              {page.data.title}
+            </h2>
+            {page.data.description && (
+              <p class="text-sm text-white/70">{page.data.description}</p>
+            )}
+          </a>
+        ))}
+      </div>
+
+      <div class="w4-card p-6 md:p-8 mt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <h2 class="text-xl font-bold text-white">Ready to see it in person?</h2>
+          <p class="text-sm text-white/75">Come to a club meeting — no license needed, and everyone is welcome.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a class="btn btn-primary" href="/meetings/">Club Meetings</a>
+          <a class="btn btn-outline" href="/contact/">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
