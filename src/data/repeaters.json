@@ -1,4 +1,8 @@
 {
+  "status": {
+    "onAir": false,
+    "message": "Repeaters offline due to power issues. Nets are on hold."
+  },
   "clubOnAir": [
     {
       "name": "Bays Mountain VHF (Primary)",

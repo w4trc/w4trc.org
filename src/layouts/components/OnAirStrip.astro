@@ -1,0 +1,55 @@
+---
+import repeaters from "@/data/repeaters.json";
+
+// Repeater status lives in src/data/repeaters.json so this strip and the
+// Repeaters page stay in sync. Flip status.onAir back to true when they return.
+const isOnAir = repeaters.status?.onAir !== false;
+const statusMessage = repeaters.status?.message ?? "";
+
+const items = [
+  { label: "Club Repeater", value: "146.970 (−) PL 123.0" },
+  { label: "Sunday Net", value: isOnAir ? "8:30 PM" : "On hold" },
+  { label: "EchoLink", value: "W4TRC-R" },
+  { label: "Grid", value: "EM86" },
+];
+---
+
+<div class="relative z-10 -mt-12 container max-w-[1400px] px-6 mx-auto">
+  <div class="w4-card p-5!">
+    <div class="flex max-lg:flex-col lg:items-center max-lg:gap-5 lg:gap-8">
+      <div class="flex items-center gap-3 lg:min-w-[220px]">
+        <span
+          class:list={[
+            "inline-block h-3 w-3 rounded-full shrink-0",
+            isOnAir ? "bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.8)]" : "bg-red-500",
+          ]}
+          aria-hidden="true"
+        ></span>
+        <div>
+          <p class="text-white font-semibold leading-tight">
+            {isOnAir ? "On the Air" : "Repeaters Offline"}
+          </p>
+          {!isOnAir && statusMessage && (
+            <p class="text-xs text-white/60! mt-0.5">{statusMessage}</p>
+          )}
+        </div>
+      </div>
+
+      <dl class="flex flex-wrap gap-x-10 gap-y-4 flex-1">
+        {items.map((item) => (
+          <div>
+            <dt class="text-[11px] uppercase tracking-wider text-white/50">{item.label}</dt>
+            <dd class="text-white font-mono font-semibold mt-0.5 whitespace-nowrap">{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <a
+        href="/repeaters/"
+        class="text-(--w4-accent) font-semibold text-sm whitespace-nowrap underline underline-offset-4"
+      >
+        Repeater details →
+      </a>
+    </div>
+  </div>
+</div>

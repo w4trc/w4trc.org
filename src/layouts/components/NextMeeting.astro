@@ -18,7 +18,6 @@ interface Meeting {
 
 interface Props {
   meeting?: Meeting;   // optional override
-  containerClass?: string; // optional: override container wrapper classes
 }
 
 // If a meeting prop is passed, use it; otherwise pull the next meeting from the collection.
@@ -54,8 +53,8 @@ if (!source) {
 // Helpers
 const title = source?.title || "Club Meeting";
 const location = source?.location || "TBD";
-const hasTopic = !!source?.topic;
-const hasDesc = !!source?.desc;
+const topic = source?.topic;
+const desc = source?.desc;
 
 function formatDate(dt?: string | Date) {
   if (!dt) return "TBD";
@@ -64,36 +63,64 @@ function formatDate(dt?: string | Date) {
 
 const when = formatDate(source?.datetime);
 const signupUrl = source?.signupUrl;
-const containerClass = Astro.props.containerClass ?? "container px-6 max-w-[1400px] mx-auto";
+
+// "Venue Name (123 Street, City, ST 00000)" -> venue + address
+const locMatch = /^(.*?)\s*\((.+)\)\s*$/.exec(location);
+const venue = locMatch ? locMatch[1] : location;
+const address = locMatch ? locMatch[2].replace(/\s+/g, " ") : "";
+const mapUrl =
+  location !== "TBD"
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address || location)}`
+    : undefined;
+
+// Google Calendar link. Meeting times are floating Eastern times, so pass the
+// wall-clock fields with ctz rather than converting to UTC. Assumes 2 hours.
+const start = parseFloatingIso(source?.datetime);
+let calendarUrl: string | undefined;
+if (start) {
+  const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+  const fmt = (d: Date) => d.toISOString().replace(/[-:]/g, "").slice(0, 15);
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: `KARC ${title}`,
+    dates: `${fmt(start)}/${fmt(end)}`,
+    ctz: "America/New_York",
+    details: [topic && `Program: ${topic}`, desc, "https://w4trc.org/meetings/"].filter(Boolean).join("\n"),
+    location,
+  });
+  calendarUrl = `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+const btn = "px-4 py-2 rounded-xl border border-white/20 text-white/90 text-sm hover:border-white/40";
 ---
 
-<section>
-  <div class={containerClass}>
-    <h2 class="section-title">Next Meeting</h2>
-    <div class="meeting-box mt-6">
-      <p class="text-xl font-semibold text-white">{title}</p>
-      <p class="text-white/80">{when}</p>
+<div>
+  <h2 class="section-title">Next Meeting</h2>
+  <div class="meeting-box mt-6">
+    <p class="text-sm uppercase tracking-wider text-(--w4-accent) font-semibold">{when}</p>
+    <p class="text-white/70! mt-1">{title}</p>
 
-      <p class="mt-1 text-white/90">
-        <strong>Location:</strong> <span>{location}</span>
-      </p>
+    {topic && <p class="text-2xl font-bold text-white! leading-snug mt-3">{topic}</p>}
+    {desc && <p class="text-white/70! mt-2">{desc}</p>}
 
-      {hasTopic && <p class="text-white/80">Topic: {source!.topic}</p>}
-      {hasDesc && <p class="text-white/80 mt-1">{source!.desc}</p>}
+    <div class="mt-5 text-white/85!">
+      <p class="font-semibold text-white!">{venue}</p>
+      {address && <p class="text-white/70! text-sm">{address}</p>}
+    </div>
 
-      <div class="flex flex-wrap gap-3 mt-4">
-        {signupUrl && (
-          <a
-            class="px-4 py-2 rounded-xl border border-white/20 text-white/90"
-            href={signupUrl}
-          >
-            RSVP
-          </a>
-        )}
-        <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90" href="/meetings/">
-          Meeting Information
-        </a>
-      </div>
+    <p class="mt-4 inline-block rounded-lg bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 text-sm text-emerald-200!">
+      Visitors welcome. No license needed.
+    </p>
+
+    <div class="flex flex-wrap gap-3 mt-5">
+      {signupUrl && <a class={btn} href={signupUrl}>RSVP</a>}
+      {calendarUrl && (
+        <a class={btn} href={calendarUrl} target="_blank" rel="noopener noreferrer">Add to Calendar</a>
+      )}
+      {mapUrl && (
+        <a class={btn} href={mapUrl} target="_blank" rel="noopener noreferrer">Directions</a>
+      )}
+      <a class={btn} href="/meetings/">Meeting Info</a>
     </div>
   </div>
-</section>
+</div>

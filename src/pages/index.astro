@@ -1,21 +1,54 @@
 ---
 import Base from "@/layouts/Base.astro";
 import HeroBanner from "@/components/HeroBanner.astro";
-import WeatherWidget from "@/layouts/components/WeatherWidget.astro";
-
+import OnAirStrip from "@/layouts/components/OnAirStrip.astro";
 import NextMeeting from "@/components/NextMeeting.astro";
-
 import Upcoming from "@/layouts/components/Upcoming.astro";
+import PostCard from "@/layouts/components/PostCard.astro";
+import WeatherWidget from "@/layouts/components/WeatherWidget.astro";
 import { getCollection } from "astro:content";
 
-// News (still included for future work)
-//let newsPosts = [];
-//try {
-//  const blog = await getCollection("blog");
-//  newsPosts = [...blog]
-//    .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date))
-//    .slice(0, 3);
-//} catch {}
+const latestPosts = (await getCollection("posts", ({ data }) => !data.draft))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+
+const programs = [
+  {
+    title: "Meetings",
+    text: "Monthly club gatherings with a program from a member or guest.",
+    href: "/meetings/",
+    image: "/images/home/card-meetings.webp",
+    alt: "Members at a monthly club meeting",
+  },
+  {
+    title: "Weekly Nets",
+    text: "Check in on the Sunday evening net on the club repeater.",
+    href: "/activities/nets/",
+    image: "/images/home/card-nets.webp",
+    alt: "Icom IC-705 transceiver",
+  },
+  {
+    title: "Special Events",
+    text: "Field Day, N4I at the Netherland Inn, and public service.",
+    href: "/events/",
+    image: "/images/home/card-special-events.webp",
+    alt: "Members operating a special event station",
+  },
+  {
+    title: "On-Air Activities",
+    text: "Parks on the Air, Summits on the Air, and monthly fox hunts.",
+    href: "/activities/",
+    image: "/images/home/card-activities.webp",
+    alt: "A member operating a Parks on the Air activation",
+  },
+];
+
+const quickLinks = [
+  { title: "Find an Elmer", text: "New to the hobby? Get paired with a mentor.", href: "/elmer/" },
+  { title: "Photo Gallery", text: "Photos from club events.", href: "https://gallery.w4trc.org", external: true },
+  { title: "Zero-Beat Newsletter", text: "Club news and member articles.", href: "/resources/newsletter/" },
+  { title: "Live Spots", text: "See who's on the air right now.", href: "/spots/" },
+];
 ---
 
 <Base
@@ -24,134 +57,116 @@ import { getCollection } from "astro:content";
   description="Kingsport Amateur Radio Club (W4TRC) - repeaters, meetings, events, and resources for hams across the Tri-Cities."
   image="/images/KARC-SEOImage.png"
 >
-
   <HeroBanner />
+  <OnAirStrip />
 
-  <!-- ================================= -->
-  <!-- ABOUT THE CLUB -->
-  <!-- ================================= -->
+  <!-- NEXT MEETING + UPCOMING EVENTS -->
   <section>
-  <div class="container max-w-[1400px] px-6 mx-auto grid gap-10 lg:grid-cols-2 items-center">
-
-    <!-- Left column (copy) wrapped in card -->
-    <div class="w4-card p-8">
-      <h2 class="section-title">About the Club</h2>
-      <p class="text-text-light mb-4">
-        Kingsport Amateur Radio Club was affiliated on 2 October 1947. The club was formed out of a desire of local veterans, who were amateur radio operators, to establish a organization where all were welcome to come, fellowship together and advance in the art of radio. 
-      </p>
-      <p class="text-text-muted">
-        Today the club has over 70  members from all over the Tri-Cities area in Eastern Tennessee. The club is involved in many activities in the area and has regular events for Parks on the Air (POTA), Summits on the Air (SOTA), Fox Hunting, Winter and summer Field Days, CW and much more.
-      </p>
-    </div>
-
-    <!-- Right column (image) wrapped in card for consistency -->
-    <div class="w4-card p-4">
-      <img 
-        src="/images/fieldday2023.jpg"
-        alt="Club Meeting"
-        class="rounded-xl w-full object-cover"
+    <div class="container max-w-[1400px] px-6 mx-auto grid gap-10 lg:grid-cols-2 items-start">
+      <NextMeeting />
+      <Upcoming
+        embedded
+        limit={2}
+        title="Upcoming Events"
+        showCalendarCta={true}
+        calendarHref="/events/"
+        gridClass="grid gap-6 mt-6"
       />
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- LATEST POSTS -->
+  {latestPosts.length > 0 && (
+    <section>
+      <div class="container max-w-[1400px] px-6 mx-auto">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="section-title">Latest from the Club</h2>
+          <a class="px-3 py-2 rounded-lg border border-white/20 text-white/90" href="/posts/">All Posts</a>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mt-6">
+          {latestPosts.map((post) => <PostCard post={post} headingLevel="h3" />)}
+        </div>
+      </div>
+    </section>
+  )}
 
-
-  <!-- ================================= -->
-  <!-- NEXT MEETING -->
-  <!-- ================================= -->
-  <NextMeeting />
-
-  <!-- ================================= -->
-  <!-- UPCOMING EVENTS -->
-  <!-- ================================= -->
-  <Upcoming 
-    limit={4}
-    title="Upcoming Events"
-    showCalendarCta={true}
-    calendarHref="/events/"
-  />
-
-  <!-- ================================= -->
-  <!-- WHAT WE DO (4 CARDS) -->
-  <!-- ================================= -->
+  <!-- GET INVOLVED -->
   <section>
     <div class="container max-w-[1400px] px-6 mx-auto">
-      <h2 class="section-title">What We Do</h2>
+      <h2 class="section-title">Get Involved</h2>
 
       <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mt-8">
+        {programs.map((p) => (
+          <a class="w4-card group block" href={p.href}>
+            <img
+              src={p.image}
+              alt={p.alt}
+              class="rounded-xl mb-4 object-cover w-full h-40"
+              width="800"
+              height="500"
+              loading="lazy"
+            />
+            <h3 class="text-xl font-semibold text-white mb-1 group-hover:text-(--w4-accent)">
+              {p.title} <span aria-hidden="true">→</span>
+            </h3>
+            <p class="text-sm">{p.text}</p>
+          </a>
+        ))}
+      </div>
 
-        <!-- Meetings -->
-        <div class="w4-card">
-          <img src="/images/clubmeetings2025.jpg" class="rounded-xl mb-4 object-cover w-full h-40" alt="" />
-          <h3 class="text-xl font-semibold text-white mb-1">Meetings</h3>
-          <p class="text-sm text-text-muted">Monthly club gatherings and presentations.</p>
-        </div>
-
-        <!-- Nets -->
-        <div class="w4-card">
-          <img src="/images/ic-705.jpg" class="rounded-xl mb-4 object-cover w-full h-40" alt="" />
-          <h3 class="text-xl font-semibold text-white mb-1">Nets</h3>
-          <p class="text-sm text-text-muted">Weekly nets across our repeaters.</p>
-        </div>
-
-        <!-- Special Events -->
-        <div class="w4-card">
-          <img src="/images/activities/special-events/netherlandinn2025-01.jpeg" class="rounded-xl mb-4 object-cover w-full h-40" alt="" />
-          <h3 class="text-xl font-semibold text-white mb-1">Special Events</h3>
-          <p class="text-sm text-text-muted">Field Day, POTA, public service, and more.</p>
-        </div>
-
-        <!-- Activities -->
-        <div class="w4-card">
-          <img src="/images/ben-mullins-oXV3bzR7jxI-unsplash.jpg" class="rounded-xl mb-4 object-cover w-full h-40" alt="" />
-          <h3 class="text-xl font-semibold text-white mb-1">Activities</h3>
-          <p class="text-sm text-text-muted">Hands-on workshops, antenna builds, and testing sessions.</p>
-        </div>
-
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-8">
+        {quickLinks.map((l) => (
+          <a
+            class="quicklink-card"
+            href={l.href}
+            {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >
+            <p class="text-lg font-semibold">{l.title}</p>
+            <p>{l.text}</p>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ================================= -->
-  <!-- QUICK LINKS -->
-  <!-- ================================= -->
+  <!-- ABOUT THE CLUB -->
   <section>
-    <div class="container max-w-[1400px] px-6 mx-auto">
-      <h2 class="section-title">Quick Links</h2>
+    <div class="container max-w-[1400px] px-6 mx-auto grid gap-10 lg:grid-cols-2 items-center">
+      <div class="w4-card p-8">
+        <h2 class="section-title">About the Club</h2>
+        <p class="text-text-light mb-4">
+          Kingsport Amateur Radio Club was affiliated on October 2, 1947. Local veterans who were
+          amateur radio operators formed the club so that everyone would have a place to gather,
+          enjoy fellowship, and advance in the art of radio.
+        </p>
+        <p class="text-text-muted mb-6">
+          Today the club has over 70 members from across the Tri-Cities area of East Tennessee. We run
+          regular events for Parks on the Air (POTA), Summits on the Air (SOTA), fox hunting, winter
+          and summer Field Day, CW, and much more. Newcomers and visitors are always welcome.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a class="btn btn-primary" href="/join/">Join the Club</a>
+          <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90 self-center" href="/about/">Our History</a>
+        </div>
+      </div>
 
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
-
-        <a class="quicklink-card" href="/repeaters/">
-          <p class="text-lg font-semibold text-white">Club Repeaters</p>
-          <p>Frequencies, tones, coverage notes.</p>
-        </a>
-
-        <a class="quicklink-card" href="/activities/nets/">
-          <p class="text-lg font-semibold text-white">Weekly Nets</p>
-          <p>Schedules and scripts.</p>
-        </a>
-
-        <a class="quicklink-card" href="/resources/license-testing/">
-          <p class="text-lg font-semibold text-white">Get Licensed / Upgrade</p>
-          <p>Study materials and test sessions.</p>
-        </a>
-
-        <a class="quicklink-card" href="https://gallery.w4trc.org" target="_blank" rel="noopener noreferrer">
-          <p class="text-lg font-semibold text-white">Gallery</p>
-          <p>Photos from club events.</p>
-        </a>
-
+      <div class="w4-card p-4">
+        <img
+          src="/images/home/about-field-day-2026.webp"
+          alt="Club members operating under the pavilion at Field Day 2026"
+          class="rounded-xl w-full object-cover"
+          width="1200"
+          height="676"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
 
-  <!-- ================================= -->
   <!-- PHOTO UPLOAD CTA -->
-  <!-- ================================= -->
   <section>
     <div class="container max-w-[1400px] px-6 mx-auto">
-      <div class="w4-card p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
+      <div class="w4-card p-6 md:p-8 flex max-md:flex-col max-md:items-start md:items-center justify-between max-md:gap-4 md:gap-6">
         <div class="space-y-2">
           <p class="text-xs uppercase tracking-wide text-white/60">Share your shots</p>
           <h2 class="text-2xl font-semibold text-white">Have photos from an event?</h2>
@@ -159,30 +174,26 @@ import { getCollection } from "astro:content";
             Send us your POTA, Field Day, or meeting pictures so we can feature them in the gallery and newsletter.
           </p>
         </div>
-        <a class="btn btn-primary" href="/upload">Upload photos</a>
+        <a class="btn btn-primary shrink-0" href="/upload">Upload Photos</a>
       </div>
     </div>
   </section>
 
-  <!-- ================================= -->
   <!-- CONDITIONS -->
-  <!-- ================================= -->
   <section>
     <div class="container max-w-[1400px] px-6 mx-auto">
       <h2 class="section-title">Conditions</h2>
 
       <div class="grid gap-8 lg:grid-cols-2 mt-6 items-start">
-
-        <!-- Solar -->
         <div class="rounded-2xl bg-white/5 p-6 text-center w4-card">
           <a
             href="https://www.hamqsl.com/solar.html"
             class="inline-block"
             aria-label="View detailed solar conditions from N0NBH"
           >
-            <img 
-              src="https://www.hamqsl.com/solar101pic.php" 
-              alt="Solar Data"
+            <img
+              src="https://www.hamqsl.com/solar101pic.php"
+              alt="Current solar and band conditions"
               class="mx-auto"
               loading="lazy"
             />
@@ -193,13 +204,10 @@ import { getCollection } from "astro:content";
           </p>
         </div>
 
-        <!-- Weather -->
         <div class="rounded-2xl bg-white/5 p-6 text-center w4-card">
           <WeatherWidget />
         </div>
-
       </div>
     </div>
   </section>
-
 </Base>

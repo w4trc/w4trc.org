@@ -173,20 +173,16 @@ h2.section-title::after {
   box-shadow: var(--w4-shadow);
   transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
-.w4-card:hover,
-.quicklink-card:hover,
-.news-card:hover,
-.meeting-box:hover {
+/* Hover lift only on cards that are clickable: the card is a link itself,
+   or opts in with .w4-card-link (e.g. a card with a stretched inner link).
+   Content-only cards stay still. */
+a.w4-card:hover,
+a.quicklink-card:hover,
+a.news-card:hover,
+.w4-card-link:hover {
   transform: translateY(-2px);
   box-shadow: var(--w4-shadow-lg);
   border-color: rgba(255,255,255,.18);
-}
-
-/* Cards that hold content rather than link somewhere: no hover lift */
-.w4-card.w4-card-static:hover {
-  transform: none;
-  box-shadow: var(--w4-shadow);
-  border-color: var(--w4-border);
 }
 
 /* QUICK LINK cards */
@@ -194,6 +190,13 @@ h2.section-title::after {
 .w4-card { padding: 1.75rem; }
 .w4-card p,
 .quicklink-card p { color: var(--w4-ink-muted); }
+
+/* Quick link title: white, accent on hover (matches the photo cards) */
+.quicklink-card > p:first-child {
+  color: #fff;
+  transition: color .16s ease;
+}
+a.quicklink-card:hover > p:first-child { color: var(--w4-accent); }
 
 /* NEXT MEETING box (slight brand tint) */
 .meeting-box {
@@ -304,11 +307,6 @@ h2.section-title::after {
   border-bottom: 1px solid var(--w4-border);
 }
 
-@media (min-width: 1024px) {
-  /* force-hide the mobile toggler on desktop */
-  label[for="nav-toggle"] { display: none !important; }
-}
-
 a,
 a:visited {
   color: #ffffff !important;
@@ -325,4 +323,15 @@ strong {
 
 th {
   color: #ffffff;
+}
+
+/* Call sign eyebrow above the homepage hero title */
+.hero-heroimg p.hero-callsign {
+  margin-top: 0;
+  margin-bottom: .25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .3em;
+  color: var(--w4-accent);
 }

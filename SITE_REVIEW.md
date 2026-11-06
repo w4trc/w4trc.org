@@ -31,7 +31,7 @@ src/pages/about.astro:101 — "How to join, renew membership, volunteer, or lear
 ```
 This is visible to visitors right now.
 
-**Blog/News is commented out on the home page** (`src/pages/index.astro:12-17`) — if you ever want a news feed this is already scaffolded but dead.
+~~**Blog/News is commented out on the home page**~~ — done; the homepage now shows the 3 latest posts.
 
 ---
 
@@ -58,8 +58,28 @@ A live APRS.fi map showing W4TRC or club members on the air during events (Field
 
 ## Priority Order
 
-Top 3 to tackle next:
+### Worth doing
 
-1. **iCal feed** — immediate member utility, relatively easy to build from the existing events collection
-2. **Fix the placeholder text on the About page** — that's live right now
-3. ~~**Elmer page**~~ — done (`/elmer/`)
+1. ~~**Fix the duplicate Tailwind CSS**~~ — done; responsive layouts now work as written, desktop dropdown menus open again, and the nav workarounds were removed
+2. **iCal feed (.ics)** — immediate member utility; members subscribe once in Google/Apple Calendar. Build from the existing events and meetings collections, so no extra upkeep.
+3. **Shrink post images** — the 3 post cards on the homepage load ~4 MB (`KARC-N4I-2026.jpg` 2.3 MB, `FieldDay2026.jpg` 1.6 MB, `GeorgeDeVault.png` 1 MB). Use `ImageMod` in `src/layouts/components/PostCard.astro` to fix site-wide.
+4. **One switch for repeater outages** — the red banner (`src/config/config.json` → `announcement`) and repeater status (`src/data/repeaters.json` → `status.onAir`) are set separately. Drive the banner from the repeater status so one change updates the whole site.
+
+### Smaller
+
+5. **Event structured data** — add JSON-LD `Event` markup to event pages so Google lists fox hunts, Field Day, and N4I in event search results.
+6. **Post card padding** — `PostCard` cards are padded twice (`.w4-card` padding plus inner `p-6`), so images sit indented instead of filling the card edge to edge.
+7. **Check light mode** — many components hard-code `text-white`; verify nothing is unreadable with the theme switcher set to light.
+
+### Content (needs input, not just code)
+
+8. **EchoLink connection guide** — see Missing Pages #5
+9. **Meshtastic page** — see Missing Pages #6
+10. **Contesting page** — see Missing Pages #3
+11. **Buy/Sell/Trade classifieds** — see Missing Pages #4
+
+### Done
+
+- ~~**Fix the placeholder text on the About page**~~ — done
+- ~~**Elmer page**~~ — done (`/elmer/`)
+- ~~**Homepage redesign**~~ — done (on-air strip, meeting + events side by side, latest posts, linked Get Involved cards, WebP images, `/activities/` index)

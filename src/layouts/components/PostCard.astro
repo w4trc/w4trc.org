@@ -1,0 +1,84 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+  headingLevel?: "h2" | "h3";
+}
+
+const { post, headingLevel = "h2" } = Astro.props;
+const Heading = headingLevel;
+
+const href = post.data.externalUrl ?? `/posts/${post.id.replace(/\/index$/, "")}/`;
+const isExternal = !!post.data.externalUrl;
+
+const fmtDate = (iso: string) =>
+  new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<article class="group w4-card w4-card-link relative flex flex-col overflow-hidden">
+  {post.data.image && (
+    <img
+      src={post.data.image}
+      alt={post.data.title}
+      class="w-full h-48 object-cover"
+      loading="lazy"
+    />
+  )}
+  <div class="p-6 flex flex-col gap-3 flex-1">
+  <div class="flex items-center gap-2 flex-wrap">
+    <time
+      datetime={post.data.date}
+      class="text-xs text-white/50 font-mono"
+    >
+      {fmtDate(post.data.date)}
+    </time>
+    {post.data.tags?.map((tag) => (
+      <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--w4-accent)]/20 text-[var(--w4-accent)]">
+        {tag.replace(/-/g, " ")}
+      </span>
+    ))}
+  </div>
+
+  <Heading class="text-xl font-bold text-white leading-snug">
+    <a
+      href={href}
+      class="hover:text-[var(--w4-accent)] focus:outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:ring-2 focus-visible:after:ring-[var(--w4-accent)] focus-visible:after:rounded-2xl"
+      {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
+    >
+      {post.data.title}
+    </a>
+  </Heading>
+
+  {post.data.author && (
+    <p class="text-sm text-[var(--w4-accent)] font-medium">
+      {post.data.author}
+    </p>
+  )}
+
+  {post.data.summary && (
+    <p class="text-sm text-white/75 line-clamp-3">
+      {post.data.summary}
+    </p>
+  )}
+
+  <span
+    class="inline-flex items-center gap-2 text-[var(--w4-accent)] font-semibold mt-auto group-hover:underline underline-offset-4"
+    aria-hidden="true"
+  >
+    Read more
+    {isExternal ? (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5" aria-hidden="true">
+        <path d="M12.5 3a.75.75 0 000 1.5h2.19l-6.72 6.72a.75.75 0 101.06 1.06l6.72-6.72v2.19a.75.75 0 001.5 0v-4a.75.75 0 00-.75-.75h-4z" />
+        <path d="M4.75 5.5A1.25 1.25 0 003.5 6.75v8A1.25 1.25 0 004.75 16h8a1.25 1.25 0 001.25-1.25v-3.5a.75.75 0 00-1.5 0v3.5H5v-8h3.5a.75.75 0 000-1.5h-3.75z" />
+      </svg>
+    ) : (
+      <span>→</span>
+    )}
+  </span>
+  </div>
+</article>
