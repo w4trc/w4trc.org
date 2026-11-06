@@ -1,7 +1,7 @@
 ---
 title: What Is a Net?
 description: The scheduled on-air gatherings where hams check in, share news, and keep their skills sharp — and how you can listen in.
-image: https://images.unsplash.com/photo-1732732693066-1c3137484d3f?w=1600&h=600&fit=crop
+image: https://images.unsplash.com/photo-1628709518251-47c3c6878b5d?w=1600&h=600&fit=crop
 ---
 
 ## Radio's version of a meeting
