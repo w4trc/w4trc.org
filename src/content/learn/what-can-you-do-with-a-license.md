@@ -1,6 +1,7 @@
 ---
 title: What Can You Do With a License?
 description: From local chat to bouncing signals off satellites — an overview of what amateur radio makes possible.
+image: https://images.unsplash.com/photo-1703429426338-bbba30fe2737?w=1600&h=600&fit=crop
 ---
 
 ## A license opens the door

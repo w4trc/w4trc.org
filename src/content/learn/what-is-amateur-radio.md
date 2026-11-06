@@ -1,6 +1,7 @@
 ---
 title: What Is Amateur Radio?
 description: A friendly introduction to ham radio — what it is, what people do with it, and how to get started.
+image: https://images.unsplash.com/photo-1740155640124-33142ee89ab4?w=1600&h=600&fit=crop
 ---
 
 ## It starts with a radio

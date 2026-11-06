@@ -1,6 +1,7 @@
 ---
 title: What Is a Repeater?
 description: How a radio on a tower helps hams talk across town — and why repeaters are the backbone of local amateur radio.
+image: https://images.unsplash.com/photo-1730479130956-91aebc242fdf?w=1600&h=600&fit=crop
 ---
 
 ## More than a tower with an antenna
