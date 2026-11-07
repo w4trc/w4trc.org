@@ -107,4 +107,14 @@ const posts = defineCollection({
   }),
 });
 
-export const collections = { events, officers, projects, meetings, silentKeys, presentations, activities, posts };
+const learn = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/learn" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+    weight: z.number().optional(),
+  }),
+});
+
+export const collections = { events, officers, projects, meetings, silentKeys, presentations, activities, posts, learn };
