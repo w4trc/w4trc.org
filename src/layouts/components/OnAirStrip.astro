@@ -2,7 +2,9 @@
 import repeaters from "@/data/repeaters.json";
 
 // Repeater status lives in src/data/repeaters.json so this strip and the
-// Repeaters page stay in sync. Flip status.onAir back to true when they return.
+// Repeaters page stay in sync. status.onAir tracks the primary 2m machine (and
+// the Sunday net); each clubOnAir entry has its own onAir flag for its badge.
+// status.message is shown whenever it is set, so clear it once all are back.
 const isOnAir = repeaters.status?.onAir !== false;
 const statusMessage = repeaters.status?.message ?? "";
 
@@ -29,7 +31,7 @@ const items = [
           <p class="text-white font-semibold leading-tight">
             {isOnAir ? "On the Air" : "Repeaters Offline"}
           </p>
-          {!isOnAir && statusMessage && (
+          {statusMessage && (
             <p class="text-xs text-white/60! mt-0.5">{statusMessage}</p>
           )}
         </div>

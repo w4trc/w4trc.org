@@ -24,7 +24,7 @@
 
   "announcement": {
     "enable": true,
-    "content": "<span class='text-center block'>Due to power issues, our repeaters are currently offline and nets are on hold.</span>",
+    "content": "<span class='text-center block'>The 146.970 repeater is back on the air. Our UHF repeaters remain offline due to power issues.</span>",
     "expire_days": 7,
     "background_color": "red",
     "text_color": "white"

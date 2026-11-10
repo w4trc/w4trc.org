@@ -1,10 +1,11 @@
 {
   "status": {
-    "onAir": false,
-    "message": "Repeaters offline due to power issues. Nets are on hold."
+    "onAir": true,
+    "message": "146.970 is back on the air. UHF repeaters remain offline."
   },
   "clubOnAir": [
     {
+      "onAir": true,
       "name": "Bays Mountain VHF (Primary)",
       "callsign": "W4TRC",
       "frequency": "146.970 MHz (-0.6 MHz offset) PL 123.0 Hz PL Tone",
@@ -18,6 +19,7 @@
       "notes": "Coverage across the whole Tri-Cities area, including Kingsport, Johnson City, and Bristol. Supports both analog FM and Yaesu System Fusion (C4FM) digital modes as input, will only output analog FM."
     },
     {
+      "onAir": false,
       "name": "UHF #1",
       "callsign": "W4TRC",
       "frequency": "443.325 MHz (+5.0 MHz offset) PL 123.0 Hz PL Tone",
@@ -30,6 +32,7 @@
       "notes": ""
     },
     {
+      "onAir": false,
       "name": "UHF #2",
       "callsign": "W4TRC",
       "frequency": "443.175 MHz (+5.0 MHz offset)",
