@@ -1,7 +1,7 @@
 {
   "status": {
     "onAir": true,
-    "message": "146.970 is back on the air. UHF repeaters remain offline."
+    "message": ""
   },
   "clubOnAir": [
     {
@@ -19,7 +19,7 @@
       "notes": "Coverage across the whole Tri-Cities area, including Kingsport, Johnson City, and Bristol. Supports both analog FM and Yaesu System Fusion (C4FM) digital modes as input, will only output analog FM."
     },
     {
-      "onAir": false,
+      "onAir": true,
       "name": "UHF #1",
       "callsign": "W4TRC",
       "frequency": "443.325 MHz (+5.0 MHz offset) PL 123.0 Hz PL Tone",
@@ -32,7 +32,7 @@
       "notes": ""
     },
     {
-      "onAir": false,
+      "onAir": true,
       "name": "UHF #2",
       "callsign": "W4TRC",
       "frequency": "443.175 MHz (+5.0 MHz offset)",
