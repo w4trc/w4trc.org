@@ -1,7 +1,7 @@
 {
   "status": {
     "onAir": true,
-    "message": ""
+    "message": "UHF #2 (443.175) is currently offline"
   },
   "clubOnAir": [
     {
@@ -32,7 +32,7 @@
       "notes": ""
     },
     {
-      "onAir": true,
+      "onAir": false,
       "name": "UHF #2",
       "callsign": "W4TRC",
       "frequency": "443.175 MHz (+5.0 MHz offset)",
