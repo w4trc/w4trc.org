@@ -74,7 +74,12 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 31. **Unused images** — removed the template stock images (`avatar*.png`, `image-placeholder.png`, an unused 3 MB unsplash photo). **Needs a decision** — these club images aren't used on the site, but might be linked from elsewhere (emails, Facebook, QRZ) or wanted later:
     - `VETESTING.png`, `activities/Nets_Logo.png`, `activities/SOTA_Logo.png`, `arrl-badge.png`, `cdn/NetControl_SignUp.jpg`, `officers/km4nwh.png`, `officers/placeholder.png`, `posts/KARC-N4I-2026.jpg` (2.2 MB), `winterfieldday.png` (1.9 MB)
     - ~~Compress the big PDFs~~ — done; Portable Digital 18 MB → 2.8 MB, Fox Hunting 48 MB → 6.5 MB. Photos were resampled to ~110 dpi (about 2200 px across a slide), which looks the same full-screen; text is unchanged. **For future slide decks:** in PowerPoint, File → Compress Pictures → 150 ppi before exporting to PDF keeps them small.
-32. **Commit a lockfile** — `package-lock.json` and `yarn.lock` are both in `.gitignore`, so every Cloudflare build installs whatever versions match the `^` ranges that day, and a new package release can change or break the site without any commit (Tailwind already had to be pinned by hand). Committing `package-lock.json` makes builds repeatable; Cloudflare will then use `npm ci`.
+32. ~~**Commit a lockfile**~~ — done; `package-lock.json` is committed (removed from `.gitignore`), so Cloudflare installs exactly the tested versions. Before committing, `npm audit fix` cleared 24 of 29 known package issues and Astro went 6.4.5 → 6.4.8. **When you change packages:** run `npm install`, then commit `package-lock.json` with `package.json`.
+33. **Remaining package advisories (need major upgrades)** — low real risk for a static site whose content is all written by the club, but worth a planned upgrade:
+    - **Astro 6 → 7** (fixes an XSS advisory in attribute spreading; also brings `@astrojs/mdx` 8). Follow the Astro 7 upgrade guide and test the whole site.
+    - **sharp 0.34 → 0.35** (libvips image-decoding CVEs; only matters for untrusted images, and every image here is the club’s own).
+    - `@tailwindcss/typography` / `postcss-selector-parser` (build-time only; npm’s suggested “fix” is an older version, so ignore it until typography ships an update).
+    - `esbuild` (dev server on Windows only; goes away with Astro 7).
 
 ---
 
