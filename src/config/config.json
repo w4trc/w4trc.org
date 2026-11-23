@@ -26,7 +26,9 @@
   },
   "params": {
     "contact_form_action": "https://formsubmit.co/67552c86ece16b0102a97f534d457e45",
-    "copyright": "© 2026 Kingsport Amateur Radio Club. All rights reserved."
+    "copyright": "© {year} Kingsport Amateur Radio Club. All rights reserved.",
+    "contact_email": "contact@w4trc.org",
+    "meeting_schedule": "Second Thursday of each month, 7:00 PM"
   },
   "navigation_button": {
     "enable": false,

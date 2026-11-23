@@ -5,8 +5,24 @@ import config from "@/config/config.json";
 import menu from "@/config/menu.json";
 import social from "@/config/social.json";
 import { markdownify } from "@/lib/utils/textConverter";
+import { getCollection } from "astro:content";
 
 const { footer }: { footer: { name: string; url: string }[] } = menu;
+const { copyright, contact_email, meeting_schedule } = config.params;
+
+// The year comes from the build, so the daily rebuild rolls it over on Jan 1.
+const copyrightText = copyright.replace("{year}", String(new Date().getFullYear()));
+
+// Meeting place: taken from the most recent meeting that has a location, so it
+// follows the meeting files instead of being typed here. Locations are written
+// "Venue (street, city, ST zip)".
+const meetings = (await getCollection("meetings"))
+  .filter((m) => !m.data.draft && m.data.location)
+  .sort((a, b) => b.data.datetime.localeCompare(a.data.datetime));
+const rawLocation = meetings[0]?.data.location ?? "";
+const locationMatch = rawLocation.match(/^(.*?)\s*\((.*)\)\s*$/);
+const venue = (locationMatch ? locationMatch[1] : rawLocation).trim();
+const address = locationMatch ? locationMatch[2].replace(/\s+/g, " ").trim() : "";
 ---
 
 <footer class="bg-light dark:bg-darkmode-light">
@@ -38,7 +54,16 @@ const { footer }: { footer: { name: string; url: string }[] } = menu;
     <div
       class="container text-center text-text-light dark:text-darkmode-text-light"
     >
-      <p set:html={markdownify(config.params.copyright)} />
+      <p class="mb-2 text-sm">
+        <a href="/meetings/" class="font-semibold">Monthly meetings:</a>
+        {[meeting_schedule, venue].filter(Boolean).join(", ")}{address && (
+          <span class="block sm:inline"><span class="hidden sm:inline">, </span>{address}</span>
+        )}
+      </p>
+      <p class="mb-4 text-sm">
+        Contact: <a href={`mailto:${contact_email}`}>{contact_email}</a>
+      </p>
+      <p set:html={markdownify(copyrightText)} />
     </div>
   </div>
 </footer>
