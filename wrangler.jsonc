@@ -1,0 +1,15 @@
+// Cloudflare Workers config for the static site.
+// The name must match the Worker in the Cloudflare dashboard.
+// `previews` is required for `npx wrangler preview`, which Cloudflare runs
+// for non-production branches. It can stay empty.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "w4trc-org",
+  "compatibility_date": "2026-11-23",
+  "assets": {
+    "directory": "./dist",
+    // Serve dist/404.html (with a 404 status) for missing pages
+    "not_found_handling": "404-page"
+  },
+  "previews": {}
+}
