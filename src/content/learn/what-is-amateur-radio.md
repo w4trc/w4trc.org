@@ -46,5 +46,5 @@ When you're ready, studying for the entry-level Technician license takes
 most people a few weeks. KARC holds regular license exam sessions.
 
 - [Club meetings](/meetings)
-- [How to get licensed](/learn/how-to-get-licensed)
+- [How to get licensed](/resources/license-testing/)
 - [Contact us](/contact)

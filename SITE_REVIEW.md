@@ -8,10 +8,10 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 ## Fix Soon
 
 1. **Write a real privacy policy** — the club will be running ads, and every page already loads the Google Ads tag (`AW-17728556033` in `src/layouts/Base.astro`), Rybbit analytics, and forms that collect email addresses. `src/content/pages/privacy-policy.md` is still template lorem ipsum (it isn't published right now). Cover: Google Ads / cookies, Rybbit analytics, FormSubmit contact forms, membership system (members.w4trc.org), and how to request removal. Publish it and link it from the footer.
-2. **Fix broken links**
-   - `/learn/how-to-get-licensed` doesn't exist — linked from `src/content/learn/what-is-amateur-radio.md` and `what-is-a-repeater.md`. Create the page or point to `/resources/license-testing/`.
-   - The Fox Hunting PDF linked on `/resources/downloads/` (`/files/presentations/KARC Presentation - Fox Hunting.pdf`) is missing from `public/files/presentations/`.
-   - All 3 project pages and `/projects/` use `placeholder-*.jpg` images that don't exist, and their content is "tbd". Hide Projects until there's real content, or fill them in.
+2. ~~**Fix broken links**~~ — done
+   - `/learn/how-to-get-licensed` links now point to `/resources/license-testing/`.
+   - The missing Fox Hunting PDF link was removed from `/resources/downloads/`. **To bring it back:** the original (48 MB, commit `2040ee2`) is over Cloudflare's 25 MB file limit. Compress it under 25 MB, add it back to `public/files/presentations/`, and restore the link.
+   - All 3 projects are marked `draft: true` and the placeholder images were removed. `/projects/` shows a "coming soon" note, is `noindex`, and is left out of the sitemap until a project is published. **To publish one:** fill in its content and real photos, then delete `draft: true`.
 3. **Settle the founding date** — the homepage and `src/content/about/-index.md` say "affiliated October 2, 1947"; `src/pages/about.astro:93` says "founded in 1948".
 4. **Shrink the POTA/SOTA galleries** — `Gallery.astro` serves original files with no resizing: 46 MB in `public/images/activities/pota/`, 5.5 MB in `sota/`, single files of 2–3.5 MB. Alt text is the filename (e.g. `20230204_122439-scaled.jpg`). Run them through `astro:assets`/`ImageMod` and add real captions.
 5. **Shrink homepage post-card images** — `PostCard.astro` uses a plain `<img>`, so the homepage loads `GeorgeDeVault.png` (1 MB) and `FoxHunt.png` (755 KB) at full size. Use `ImageMod` to fix it site-wide.

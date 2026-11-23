@@ -2,7 +2,7 @@
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
 
-const projects = (await getCollection("projects"))
+const projects = (await getCollection("projects", ({ data }) => !data.draft))
   .sort(
     (a, b) =>
       (a.data.weight ?? Number.MAX_SAFE_INTEGER) -
@@ -15,6 +15,7 @@ const projects = (await getCollection("projects"))
   title="Projects"
   meta_title="KARC - Projects"
   description="Antenna builds, baluns, and other how-to projects from Kingsport Amateur Radio Club workshops, with parts lists and step-by-step guides."
+  noindex={projects.length === 0}
 >
   <!-- HERO -->
   <section class="hero-heroimg relative">
@@ -29,6 +30,9 @@ const projects = (await getCollection("projects"))
   <!-- PROJECT LIST -->
   <section class="section-md">
     <div class="max-w-[1200px] mx-auto px-6 space-y-8">
+      {projects.length === 0 && (
+        <p class="text-center text-white/75">Project write-ups are on the way. Check back soon.</p>
+      )}
       <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project) => (
           <article class="w4-card p-6 flex flex-col gap-3">

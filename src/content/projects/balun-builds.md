@@ -1,8 +1,8 @@
 ---
 title: "Balun & Choke Builds"
 summary: "Club-built current baluns and common-mode chokes to quiet noise and balance feedlines."
-image: "/images/projects/placeholder-balun-1.jpg"
 weight: 3
+draft: true
 ---
 
 ## Bill of Materials
@@ -12,5 +12,4 @@ weight: 3
 1. tbd
 
 ## Photos
-- /images/projects/placeholder-balun-1.jpg
-- /images/projects/placeholder-balun-2.jpg
+- tbd

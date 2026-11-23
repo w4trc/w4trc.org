@@ -36,6 +36,7 @@ const projects = defineCollection({
     summary: z.string().optional(),
     image: z.string().optional(),
     weight: z.number().optional(),
+    draft: z.boolean().optional(),
   }),
 });
 

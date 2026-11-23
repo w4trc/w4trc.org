@@ -49,4 +49,4 @@ license.
 
 - [Club repeaters and frequencies](/repeaters)
 - [What is a net?](/learn/what-is-a-net)
-- [How to get licensed](/learn/how-to-get-licensed)
+- [How to get licensed](/resources/license-testing/)

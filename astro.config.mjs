@@ -19,6 +19,14 @@ const noindexPaths = fs
   .filter((f) => matter(fs.readFileSync(path.join(eventsDir, f), "utf8")).data.noindex === true)
   .map((f) => `/events/${f.replace(/\.mdx?$/, "")}/`);
 
+// The projects index is noindex while every project is a draft, so leave it out too.
+const projectsDir = "./src/content/projects";
+const hasPublishedProjects = fs
+  .readdirSync(projectsDir)
+  .filter((f) => /\.mdx?$/.test(f))
+  .some((f) => matter(fs.readFileSync(path.join(projectsDir, f), "utf8")).data.draft !== true);
+if (!hasPublishedProjects) noindexPaths.push("/projects/");
+
 // https://astro.build/config
 export default defineConfig({
   site: config.site.base_url ? config.site.base_url : "http://examplesite.com",
