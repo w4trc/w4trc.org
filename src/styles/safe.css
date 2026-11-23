@@ -1,24 +1,34 @@
-/* nav dropdown: show when peer checkbox is checked at desktop width.
-   Must be OUTSIDE any @layer so it beats @layer utilities (lg:invisible,
-   lg:opacity-0). Unlayered CSS always wins over layered CSS in Tailwind v4. */
-@media (min-width: 1024px) {
-  .peer:checked ~ .nav-dropdown-list {
-    visibility: visible;
-    opacity: 1;
-  }
+/* Nav dropdown: shown when its button has aria-expanded="true" (set by the
+   script in Header.astro). Must be OUTSIDE any @layer so it beats @layer
+   utilities (hidden, lg:invisible, lg:opacity-0). Unlayered CSS always wins
+   over layered CSS in Tailwind v4. */
+.nav-dropdown-toggle[aria-expanded="true"] + .nav-dropdown-list {
+  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
-/* navbar toggler */
-input#nav-toggle:checked + label #show-button {
-  @apply hidden;
+.nav-dropdown-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
 }
 
-input#nav-toggle:checked + label #hide-button {
-  @apply block;
+/* Mobile menu button: swap hamburger / close icons */
+.nav-toggle .nav-icon-close,
+.nav-toggle[aria-expanded="true"] .nav-icon-open {
+  display: none;
 }
 
-input#nav-toggle:checked ~ #nav-menu {
-  @apply max-lg:block;
+.nav-toggle[aria-expanded="true"] .nav-icon-close {
+  display: block;
+}
+
+/* Visible keyboard focus for menu controls */
+.nav-toggle:focus-visible,
+.nav-link:focus-visible,
+.nav-dropdown-link:focus-visible {
+  outline: 2px solid var(--w4-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* swiper pagination */

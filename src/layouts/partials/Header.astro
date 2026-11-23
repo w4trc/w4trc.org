@@ -20,36 +20,38 @@ export interface NavigationLink {
 const { main }: { main: NavigationLink[] } = menu;
 const { navigation_button, settings } = config;
 const { pathname } = Astro.url;
+
+const isActive = (url: string) => pathname === url || pathname === `${url}/`;
+const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 ---
 
 <header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
-  <nav class="navbar container">
+  <nav class="navbar container" aria-label="Main">
     <!-- logo -->
     <div class="order-0">
       <Logo />
     </div>
 
-    <!-- mobile nav toggler (hidden on desktop) -->
-    <input id="nav-toggle" type="checkbox" class="hidden" />
-    <label
-      for="nav-toggle"
-      class="order-3 cursor-pointer flex items-center text-text-dark dark:text-white lg:hidden"
-      aria-label="Toggle navigation"
+    <!-- mobile menu button (hidden on desktop) -->
+    <button
+      id="nav-toggle"
+      type="button"
+      class="nav-toggle order-3 cursor-pointer flex items-center text-text-dark dark:text-white lg:hidden"
+      aria-controls="nav-menu"
+      aria-expanded="false"
+      aria-label="Menu"
     >
-      <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
-        <title>Menu Open</title>
+      <svg class="nav-icon-open h-6 fill-current" viewBox="0 0 20 20" aria-hidden="true">
         <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
       </svg>
-      <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
-        <title>Menu Close</title>
+      <svg class="nav-icon-close h-6 fill-current" viewBox="0 0 20 20" aria-hidden="true">
         <polygon
           points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
           transform="rotate(45 10 10)"></polygon>
       </svg>
-    </label>
-    <!-- /toggler -->
+    </button>
 
-    <!-- nav links -->
+    <!-- nav links: collapsible on mobile, always shown on desktop -->
     <ul
       id="nav-menu"
       class="navbar-nav order-3 hidden w-full pb-6
@@ -60,28 +62,23 @@ const { pathname } = Astro.url;
           <>
             {menu.hasChildren ? (
               <li class="nav-item nav-dropdown group relative">
-                <!-- mobile submenu toggler (checkbox hack) -->
-                <input
-                  type="checkbox"
-                  id={`submenu-${menu.name}`}
-                  class="peer hidden lg:hidden"
-                />
-                <label
-                  for={`submenu-${menu.name}`}
-                  class={`nav-link inline-flex items-center ${
-                    menu.children?.map(({ url }) => url).includes(pathname) ||
-                    menu.children?.map(({ url }) => `${url}/`).includes(pathname)
-                      ? "active"
-                      : ""
-                  }`}
+                <button
+                  type="button"
+                  class:list={[
+                    "nav-link nav-dropdown-toggle inline-flex items-center",
+                    menu.children?.some(({ url }) => isActive(url)) && "active",
+                  ]}
+                  aria-expanded="false"
+                  aria-controls={`submenu-${slug(menu.name)}`}
                 >
                   {menu.name}
-                  <svg class="h-4 w-4 fill-current ml-1" viewBox="0 0 20 20">
+                  <svg class="h-4 w-4 fill-current ml-1" viewBox="0 0 20 20" aria-hidden="true">
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                   </svg>
-                </label>
+                </button>
                 <ul
-                  class="nav-dropdown-list hidden peer-checked:block
+                  id={`submenu-${slug(menu.name)}`}
+                  class="nav-dropdown-list hidden
                          lg:invisible lg:absolute lg:block lg:opacity-0
                          lg:group-hover:visible lg:group-hover:opacity-100"
                 >
@@ -89,10 +86,8 @@ const { pathname } = Astro.url;
                     <li class="nav-dropdown-item">
                       <a
                         href={child.url}
-                        aria-label={child.name}
-                        class={`nav-dropdown-link block ${
-                          (pathname === `${child.url}/` || pathname === child.url) && "active"
-                        }`}
+                        class:list={["nav-dropdown-link block", isActive(child.url) && "active"]}
+                        aria-current={isActive(child.url) ? "page" : undefined}
                       >
                         {child.name}
                       </a>
@@ -104,9 +99,8 @@ const { pathname } = Astro.url;
               <li class="nav-item">
                 <a
                   href={menu.url}
-                  class={`nav-link block ${
-                    (pathname === `${menu.url}/` || pathname === menu.url) && "active"
-                  }`}
+                  class:list={["nav-link block", isActive(menu.url) && "active"]}
+                  aria-current={isActive(menu.url) ? "page" : undefined}
                 >
                   {menu.name}
                 </a>
@@ -149,67 +143,100 @@ const { pathname } = Astro.url;
       )}
     </div>
   </nav>
+</header>
 
-  <!-- small helper to keep checkbox + icons + menu state in sync -->
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const cb = document.getElementById("nav-toggle");
-      const menu = document.getElementById("nav-menu");
-      const show = document.getElementById("show-button");
-      const hide = document.getElementById("hide-button");
-      if (!cb || !menu) return;
-      const sync = () => {
-        const open = cb.checked;
-        menu.classList.toggle("hidden", !open);
-        if (show && hide) {
-          show.classList.toggle("hidden", open);
-          hide.classList.toggle("hidden", !open);
-        }
-      };
-      cb.addEventListener("change", sync);
-      // ensure correct initial state on load + respect desktop layout
-      const mql = window.matchMedia("(min-width: 1024px)");
-      const applyDesktop = () => {
-        if (mql.matches) {
-          // always show on desktop, regardless of checkbox
-          menu.classList.remove("hidden");
-          if (show && hide) { show.classList.remove("hidden"); hide.classList.add("hidden"); }
-        } else {
-          sync();
-        }
-      };
-      mql.addEventListener?.("change", applyDesktop);
-      applyDesktop();
+<script>
+  // Menu behaviour (disclosure pattern):
+  // - The mobile menu button and each dropdown button toggle aria-expanded.
+  //   CSS in safe.css shows the menu / dropdown from that attribute.
+  // - Mouse users still get hover dropdowns on desktop (lg:group-hover).
+  // - Escape closes an open dropdown (or the mobile menu) and returns focus to
+  //   its button; moving focus or clicking outside a dropdown closes it.
+  // The header is replaced on every View Transition, so element listeners are
+  // bound now (this module runs once the DOM is parsed) and again after each
+  // swap. Not astro:page-load: on first visit that waits for every image and
+  // widget to finish loading, leaving the menu dead until then. Document
+  // listeners are bound once.
 
-      // Dropdown handling for touch devices (e.g. iPad) in desktop layout.
-      //
-      // Root cause: iOS/iPadOS tap does NOT propagate :hover to the parent .group
-      // li, so `lg:group-hover:visible` never fires on touch. The fix lives in CSS:
-      // `.peer:checked ~ .nav-dropdown-list` in navigation.css overrides
-      // lg:invisible/lg:opacity-0 so the existing checkbox-hack works at desktop
-      // width too. All we need from JS is cleanup: uncheck the boxes when the
-      // user moves away (mouse) or taps outside (touch).
+  const desktop = window.matchMedia("(min-width: 1024px)");
 
-      const closeSubmenus = () => {
-        document.querySelectorAll(".nav-dropdown input[type='checkbox']").forEach((cb) => {
-          cb.checked = false;
-        });
-      };
+  const dropdownButtons = () =>
+    document.querySelectorAll<HTMLButtonElement>(".nav-dropdown-toggle");
 
-      // Mouse users: CSS :hover still shows the dropdown; unchecking on mouseleave
-      // ensures any checkbox toggled by clicking the label doesn't keep it open
-      // after the cursor leaves.
-      document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
-        dropdown.addEventListener("mouseleave", closeSubmenus);
+  const setExpanded = (btn: HTMLElement, open: boolean) =>
+    btn.setAttribute("aria-expanded", String(open));
+
+  const closeDropdowns = (except?: Element) =>
+    dropdownButtons().forEach((btn) => {
+      if (btn !== except) setExpanded(btn, false);
+    });
+
+  const setMenuOpen = (open: boolean) => {
+    const toggle = document.getElementById("nav-toggle");
+    const menu = document.getElementById("nav-menu");
+    if (!toggle || !menu) return;
+    setExpanded(toggle, open);
+    menu.classList.toggle("hidden", !open);
+  };
+
+  const bindMenu = () => {
+    const navToggle = document.getElementById("nav-toggle");
+    if (!navToggle || navToggle.dataset.bound) return;
+    navToggle.dataset.bound = "true";
+
+    navToggle.addEventListener("click", (e) => {
+      const btn = e.currentTarget as HTMLElement;
+      setMenuOpen(btn.getAttribute("aria-expanded") !== "true");
+    });
+
+    dropdownButtons().forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const open = btn.getAttribute("aria-expanded") !== "true";
+        closeDropdowns(btn);
+        setExpanded(btn, open);
       });
 
-      // Touch: close dropdowns when the user taps outside any nav-dropdown
-      document.addEventListener("touchstart", (e) => {
-        if (!e.target.closest(".nav-dropdown")) closeSubmenus();
-      }, { passive: true });
-
-      // Close on layout change (e.g. orientation change crosses the lg breakpoint)
-      mql.addEventListener?.("change", closeSubmenus);
+      const item = btn.closest(".nav-dropdown");
+      // Close when focus leaves the dropdown (e.g. tabbing past the last link)
+      item?.addEventListener("focusout", (e) => {
+        const next = (e as FocusEvent).relatedTarget as Node | null;
+        if (next && !item.contains(next)) setExpanded(btn, false);
+      });
+      // Mouse users: don't leave a clicked-open dropdown stuck after hovering away
+      item?.addEventListener("mouseleave", () => {
+        if (desktop.matches && !item.contains(document.activeElement)) setExpanded(btn, false);
+      });
     });
-  </script>
-</header>
+  };
+
+  bindMenu();
+  document.addEventListener("astro:after-swap", bindMenu);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    const openBtn = [...dropdownButtons()].find(
+      (b) => b.getAttribute("aria-expanded") === "true"
+    );
+    if (openBtn) {
+      setExpanded(openBtn, false);
+      openBtn.focus();
+      return;
+    }
+    const toggle = document.getElementById("nav-toggle");
+    if (toggle?.getAttribute("aria-expanded") === "true") {
+      setMenuOpen(false);
+      toggle.focus();
+    }
+  });
+
+  // Click or tap outside any dropdown closes it
+  document.addEventListener("click", (e) => {
+    if (!(e.target as Element).closest?.(".nav-dropdown")) closeDropdowns();
+  });
+
+  // Crossing the desktop breakpoint resets everything
+  desktop.addEventListener("change", () => {
+    closeDropdowns();
+    setMenuOpen(false);
+  });
+</script>
