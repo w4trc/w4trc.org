@@ -23,31 +23,22 @@ interface Props {
 // If a meeting prop is passed, use it; otherwise pull the next meeting from the collection.
 let source: Meeting | undefined = Astro.props.meeting;
 if (!source) {
-  try {
-    const meetings = await getCollection("meetings");
-    const parsed = meetings
-      .filter((m) => !m.data.draft && m.data.datetime)
-      .map((m) => {
-        return { ...m.data, datetime: m.data.datetime };
-      })
-      .filter((m) => !!parseFloatingIso(m.datetime))
-      .sort((a, b) => {
-        const da = parseFloatingIso(a.datetime)?.getTime() ?? 0;
-        const db = parseFloatingIso(b.datetime)?.getTime() ?? 0;
-        return da - db;
-      });
+  const meetings = await getCollection("meetings");
+  const parsed = meetings
+    .filter((m) => !m.data.draft && m.data.datetime)
+    .map((m) => {
+      return { ...m.data, datetime: m.data.datetime };
+    })
+    .filter((m) => !!parseFloatingIso(m.datetime))
+    .sort((a, b) => {
+      const da = parseFloatingIso(a.datetime)?.getTime() ?? 0;
+      const db = parseFloatingIso(b.datetime)?.getTime() ?? 0;
+      return da - db;
+    });
 
-    const now = getEasternNow().getTime();
-    const upcoming = parsed.find((m) => (parseFloatingIso(m.datetime)?.getTime() ?? 0) >= now);
-    source = upcoming || parsed[parsed.length - 1];
-  } catch (e) {
-    try {
-      const m = await import("@/data/meetings.json");
-      source = (m.default || m) as Meeting;
-    } catch {
-      source = {};
-    }
-  }
+  const now = getEasternNow().getTime();
+  const upcoming = parsed.find((m) => (parseFloatingIso(m.datetime)?.getTime() ?? 0) >= now);
+  source = upcoming || parsed[parsed.length - 1] || {};
 }
 
 // Helpers

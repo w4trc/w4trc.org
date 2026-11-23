@@ -1,8 +1,9 @@
 {
-  "name": "astroplate",
+  "name": "w4trc-org",
   "version": "5.8.0",
-  "description": "Astro and Tailwindcss boilerplate",
-  "author": "zeon.studio",
+  "private": true,
+  "description": "Website for the Kingsport Amateur Radio Club (W4TRC), built with Astro",
+  "author": "Kingsport Amateur Radio Club",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -10,27 +11,21 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "format": "prettier -w ./src",
-    "remove-darkmode": "node scripts/removeDarkmode.js && npm run format"
+    "format": "prettier -w ./src"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
     "@astrojs/mdx": "6.0.3",
     "@astrojs/sitemap": "3.7.3",
-    "@justinribeiro/lite-youtube": "^1.9.0",
     "astro-font": "^1.1.0",
-    "date-fns": "^4.1.0",
-    "disqus-react": "^1.1.7",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "marked": "^16.4.1",
-    "prop-types": "^15.8.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
-    "swiper": "^12.0.3",
     "vite": "^7.1.12"
   },
   "devDependencies": {

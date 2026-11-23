@@ -1,25 +1,27 @@
 media:
   input: public/images
-  output: /
+  output: /images
 
+# Field lists mirror the schemas in src/content.config.ts.
 content:
   - name: posts
     label: Posts
     type: collection
-    path: src/content/blog
+    # Each post is a folder with an index.md (images can sit in a gallery/ subfolder).
+    path: src/content/posts
     view:
-      fields: [ title, draft, date ]
+      fields: [ title, date, draft ]
+      sort:
+        - { field: date, order: desc }
     fields:
-      - { name: author, label: Author, type: string }
-      - { name: pubDatetime, label: Date, type: date }
-      - { name: modDatetime, label: Date, type: date }
       - { name: title, label: Title, type: string, required: true }
-      - { name: ogImage, label: Title, type: string }
-      - { name: slug, label: Slug, type: string }
-      - { name: featured, label: Featured, type: boolean }
-      - { name: draft, label: Draft, type: boolean }
+      - { name: date, label: Date, type: date, required: true }
+      - { name: author, label: Author, type: string }
+      - { name: summary, label: "Summary (shown on cards and in search results, ~155 characters max)", type: text }
+      - { name: image, label: Cover Image, type: image }
       - { name: tags, label: Tags, type: string, list: true }
-      - { name: description, label: Description, type: string }
+      - { name: externalUrl, label: External Article URL (card links here instead), type: string }
+      - { name: draft, label: Draft, type: boolean }
       - { name: body, label: Body, type: rich-text }
 
   - name: events
@@ -27,18 +29,20 @@ content:
     type: collection
     path: src/content/events
     view:
-      fields: [ title, draft, date ]
+      fields: [ title, date, location ]
+      sort:
+        - { field: date, order: desc }
     fields:
-      - { name: author, label: Author, type: string }
-      - { name: pubDatetime, label: Date, type: date }
-      - { name: modDatetime, label: Date, type: date }
       - { name: title, label: Title, type: string, required: true }
-      - { name: ogImage, label: Title, type: string }
-      - { name: slug, label: Slug, type: string }
+      - { name: date, label: Start, type: date, required: true, options: { time: true } }
+      - { name: endDate, label: End, type: date, options: { time: true } }
+      - { name: location, label: "Location — Venue (street, city, ST zip)", type: string }
+      - { name: summary, label: Summary, type: text }
+      - { name: cover, label: Cover Image, type: image }
+      - { name: url, label: Link to another page instead (optional), type: string }
+      - { name: rsvpUrl, label: RSVP URL, type: string }
       - { name: featured, label: Featured, type: boolean }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: tags, label: Tags, type: string, list: true }
-      - { name: description, label: Description, type: string }
+      - { name: noindex, label: Hide from search engines, type: boolean }
       - { name: body, label: Body, type: rich-text }
 
   - name: meetings
@@ -92,6 +96,7 @@ content:
       - { name: date, label: Date, type: date, required: true }
       - { name: presenter, label: Presenter, type: string, required: true }
       - { name: description, label: Description, type: string }
+      - { name: meta_description, label: "Search Description (optional, ~155 characters max)", type: string }
       - { name: youtubeId, label: YouTube Video ID, type: string }
       - { name: slidesUrl, label: Slides URL, type: string }
       - { name: slidesEmbed, label: Slides Embed URL, type: string }

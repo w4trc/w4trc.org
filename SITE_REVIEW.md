@@ -63,14 +63,18 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 
 ## Cleanup
 
-28. **Template and old-hosting leftovers**
-    - `package.json` name is `astroplate`; every page has `<meta name="theme-name" content="astroplate">`.
-    - `netlify.toml` (also says `yarn`), `Dockerfile`, `config/nginx/`, `public/.htaccess` — site is hosted on Cloudflare.
-    - `config.json`: `disqus`, `google_tag_manager`, `navigation_button` still hold template values.
-    - `src/content/pages/elements.mdx`, `qrz.html` (repo root), `public/js/next-meeting.js`, `src/data/meetings.json` (has an `example.com` RSVP link).
-29. **`.pages.yml` (Pages CMS) is broken for posts** — points to `src/content/blog` (posts live in `src/content/posts`), and the post/event fields (`pubDatetime`, `ogImage`, …) don't match the real schema. Fix or delete.
-30. **Unused code** — `Testimonial.astro`, `Disqus.tsx`, `useTheme.ts`, `similarItems.ts`; packages `disqus-react`, `swiper`, `prop-types`. Confirm nothing imports them, then remove.
-31. **Unused images** — `public/images` is 117 MB. About 15 files outside the galleries aren't referenced (unsplash stock photos, `avatar*.png`, `arrl-badge.png`, `fieldday2023.jpg`, …). Also compress the 18 MB "KARC Presentation - Portable Digital.pdf".
+28. ~~**Template and old-hosting leftovers**~~ — done
+    - `package.json` is now `w4trc-org` (private, club as author); the `remove-darkmode` script is gone. The `theme-name` meta tag is removed.
+    - Removed `netlify.toml`, `Dockerfile`, `.dockerignore`, `config/nginx/`, `public/.htaccess`.
+    - `config.json`: removed `disqus`, `google_tag_manager`, and unused `settings` keys; `navigation_button` (still off) now points to `/join/` instead of the template's GitHub.
+    - Removed the template demo page (`elements.mdx`) and the `[regular].astro` route that was meant to render it (this also clears the "pages collection does not exist" build warning), plus `public/js/next-meeting.js` and `src/data/meetings.json`. `NextMeeting` no longer falls back to that stale 2025 file.
+    - **Kept `qrz.html`** — it's the club's QRZ bio source and is still maintained.
+29. ~~**`.pages.yml` (Pages CMS)**~~ — done; Posts now point to `src/content/posts` and Posts/Events fields match the real schemas (cover image pickers, start/end with time, RSVP, noindex). Presentations gained the `meta_description` field. Media output fixed to `/images` (it was `/`, which would have produced broken image paths). **Check in Pages CMS** that the Posts list shows the folder-per-post entries (`<post>/index.md`).
+30. ~~**Unused code**~~ — done; removed 30 unused template files (post layout, sidebar, blog card, share, breadcrumbs, pagination, testimonial slider, Disqus, all 7 shortcodes, taxonomy/sort/reading-time helpers, `useTheme`) and the packages `disqus-react`, `swiper`, `prop-types`, `date-fns`, `@justinribeiro/lite-youtube`. Also fixed the Officer Responsibilities page, whose search description still read "Replace placeholders with official descriptions", and a typo ("Obersee").
+31. **Unused images** — removed the template stock images (`avatar*.png`, `image-placeholder.png`, an unused 3 MB unsplash photo). **Needs a decision** — these club images aren't used on the site, but might be linked from elsewhere (emails, Facebook, QRZ) or wanted later:
+    - `VETESTING.png`, `activities/Nets_Logo.png`, `activities/SOTA_Logo.png`, `arrl-badge.png`, `cdn/NetControl_SignUp.jpg`, `officers/km4nwh.png`, `officers/placeholder.png`, `posts/KARC-N4I-2026.jpg` (2.2 MB), `winterfieldday.png` (1.9 MB)
+    - Still to do: compress the 18 MB "KARC Presentation - Portable Digital.pdf" (and the 48 MB Fox Hunting PDF from item 2) to well under Cloudflare's 25 MB limit.
+32. **Commit a lockfile** — `package-lock.json` and `yarn.lock` are both in `.gitignore`, so every Cloudflare build installs whatever versions match the `^` ranges that day, and a new package release can change or break the site without any commit (Tailwind already had to be pinned by hand). Committing `package-lock.json` makes builds repeatable; Cloudflare will then use `npm ci`.
 
 ---
 

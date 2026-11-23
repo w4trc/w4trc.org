@@ -11,17 +11,12 @@
     "logo_height": "30",
     "logo_text": "Kingsport Amateur Radio Club"
   },
-
   "settings": {
     "search": false,
     "sticky_header": true,
     "theme_switcher": false,
-    "default_theme": "dark",
-    "pagination": 2,
-    "summary_length": 200,
-    "blog_folder": "blog"
+    "default_theme": "dark"
   },
-
   "announcement": {
     "enable": true,
     "content": "<span class='text-center block'>RSVP for our Christmas Party at <a href='https://forms.w4trc.org/christmas-party'>https://forms.w4trc.org/christmas-party</a></span>",
@@ -29,33 +24,18 @@
     "background_color": "darkgreen",
     "text_color": "white"
   },
-
   "params": {
     "contact_form_action": "https://formsubmit.co/67552c86ece16b0102a97f534d457e45",
     "copyright": "© 2026 Kingsport Amateur Radio Club. All rights reserved."
   },
-
   "navigation_button": {
     "enable": false,
-    "label": "Get Started",
-    "link": "https://github.com/zeon-studio/astroplate"
+    "label": "Join",
+    "link": "/join/"
   },
-
-  "google_tag_manager": {
-    "enable": false,
-    "gtm_id": "GTM-XXXXXX"
-  },
-
-  "disqus": {
-    "enable": false,
-    "shortname": "themefisher-template",
-    "settings": {}
-  },
-
   "metadata": {
     "meta_author": "Kingsport Amateur Radio Club",
     "meta_image": "/images/KARC-SEOImage.png",
     "meta_description": "Amateur Radio Club in Kingsport, TN"
   }
 }
-
