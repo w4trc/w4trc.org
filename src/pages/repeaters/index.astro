@@ -73,7 +73,12 @@ const historyImage = "/images/history/RPT06-scaled.jpg";
                 {Array.isArray(r.features) && r.features.length > 0 && (
                   <ul class="mt-2 space-y-1 text-sm text-white/70 list-disc list-inside">
                     {r.features.map((item) => (
-                      <li>{item}</li>
+                      <li>
+                        {item}
+                        {/EchoLink/.test(item) && (
+                          <> (<a class="underline" href="/repeaters/echolink/">how to connect</a>)</>
+                        )}
+                      </li>
                     ))}
                   </ul>
                 )}

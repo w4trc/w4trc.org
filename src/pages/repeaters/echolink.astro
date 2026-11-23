@@ -1,0 +1,129 @@
+---
+import Base from "@/layouts/Base.astro";
+
+const node = "W4TRC-R";
+const nodeNumber = "874789";
+---
+
+<Base
+  title="EchoLink"
+  meta_title="KARC - EchoLink"
+  description="Connect to the W4TRC 146.970 repeater from anywhere with EchoLink node W4TRC-R (#874789): setup, connecting, and operating tips."
+>
+  <section class="hero-heroimg relative">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl font-extrabold mb-4">EchoLink</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        Talk on the club's 146.970 repeater from anywhere with an internet connection, using
+        node <strong class="text-white font-mono">{node}</strong> (node number
+        <strong class="text-white font-mono">{nodeNumber}</strong>).
+      </p>
+    </div>
+  </section>
+
+  <section class="section-md">
+    <div class="max-w-[1000px] mx-auto px-6 space-y-8">
+
+      <article class="w4-card p-6 space-y-3">
+        <h2 class="text-xl font-bold text-white">What is EchoLink?</h2>
+        <p class="text-sm text-white/75">
+          EchoLink is free software that links amateur radio stations over the internet. The club's
+          EchoLink node, <strong class="text-white">{node}</strong>, is connected to the Bays Mountain
+          repeater on <strong class="text-white">146.970 MHz</strong>. When you talk through EchoLink, you
+          go out over the repeater, and you hear everyone on the repeater in the app.
+        </p>
+        <p class="text-sm text-white/75">
+          That makes it handy when you're traveling, out of range, or don't have a radio with you. It's
+          also a way to check in to the Sunday net from out of town.
+        </p>
+      </article>
+
+      <article class="w4-card p-6 space-y-3">
+        <h2 class="text-xl font-bold text-white">Before you start</h2>
+        <ul class="list-disc list-inside text-sm text-white/80 space-y-2">
+          <li>EchoLink is for <strong class="text-white">licensed amateur radio operators</strong> only.</li>
+          <li>The first time you sign up, EchoLink checks that your callsign is licensed. Follow the steps the app or website gives you; your account works once that's done.</li>
+          <li>You'll need an internet connection: home Wi-Fi or cell data both work.</li>
+        </ul>
+      </article>
+
+      <article class="w4-card p-6 space-y-3">
+        <h2 class="text-xl font-bold text-white">Connect in five steps</h2>
+        <ol class="list-decimal list-inside text-sm text-white/80 space-y-2">
+          <li>
+            <strong class="text-white">Get the app.</strong> Search for "EchoLink" in the App Store
+            (iPhone/iPad) or Google Play (Android), or download the Windows version from
+            <a class="underline" href="https://www.echolink.org/" target="_blank" rel="noopener noreferrer">echolink.org</a>.
+          </li>
+          <li><strong class="text-white">Register</strong> with your callsign and finish the license check.</li>
+          <li>
+            <strong class="text-white">Find the node.</strong> Search the station list for
+            <strong class="text-white font-mono">{node}</strong>, or enter node number
+            <strong class="text-white font-mono">{nodeNumber}</strong>. Add it to your favorites so it's
+            easy to find next time.
+          </li>
+          <li><strong class="text-white">Connect.</strong> Wait for the app to show you're connected before you talk.</li>
+          <li><strong class="text-white">Key up and identify.</strong> Press the transmit button, give your callsign, and you're on the repeater.</li>
+        </ol>
+      </article>
+
+      <article class="w4-card p-6 space-y-3">
+        <h2 class="text-xl font-bold text-white">Operating tips</h2>
+        <ul class="list-disc list-inside text-sm text-white/80 space-y-2">
+          <li>
+            <strong class="text-white">Pause before you talk.</strong> There's a short delay over the
+            internet. Wait a second after pressing transmit before speaking, so your first words aren't
+            cut off.
+          </li>
+          <li>
+            <strong class="text-white">Leave gaps.</strong> Wait a moment after someone else finishes
+            before you reply, so people on radios and on EchoLink both get a chance to break in.
+          </li>
+          <li><strong class="text-white">Keep transmissions short</strong>, and identify with your callsign as you would on the air.</li>
+          <li>
+            <strong class="text-white">It's the same repeater.</strong> Everything you say goes out over
+            146.970, so normal repeater courtesy and FCC rules apply.
+          </li>
+          <li><strong class="text-white">Disconnect when you're done</strong> so the node is free for the next person.</li>
+        </ul>
+      </article>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <article class="w4-card p-6 space-y-3">
+          <h2 class="text-xl font-bold text-white">Sunday net</h2>
+          <p class="text-sm text-white/75">
+            The club net meets <strong class="text-white">Sundays at 8:30 PM</strong> on 146.970, and you
+            can check in through EchoLink. Connect a few minutes early and wait for net control to call
+            for check-ins.
+          </p>
+          <a class="text-(--w4-accent) font-semibold text-sm underline underline-offset-4" href="/activities/nets/">Net details →</a>
+        </article>
+
+        <article class="w4-card p-6 space-y-3">
+          <h2 class="text-xl font-bold text-white">Is the node up?</h2>
+          <p class="text-sm text-white/75">
+            Check the live status page before connecting. If the node shows down, or you can connect
+            but hear nothing, let us know.
+          </p>
+          <p>
+            <a href="https://status.w4trc.org/" target="_blank" rel="noopener noreferrer">
+              <img src="https://status.w4trc.org/badge/mon_d1412c18-3385-45e9-ae86-8b4c9ae442db/status" alt="EchoLink node status" height="20" />
+            </a>
+          </p>
+        </article>
+      </div>
+
+      <article class="w4-card p-6 space-y-3 text-center">
+        <h2 class="text-xl font-bold text-white">Need help getting set up?</h2>
+        <p class="text-sm text-white/75">
+          A club member can walk you through it. Ask on the Sunday net, or get in touch.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+          <a class="btn btn-primary" href="/contact/">Contact the Club</a>
+          <a class="btn btn-outline-primary" href="/elmer/">Find an Elmer</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</Base>

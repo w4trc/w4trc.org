@@ -14,7 +14,7 @@
       "features": [
         "Primary club machine for meetings and the Sunday net",
         "Emergency power backup (solar and battery)",
-        "EchoLink node W4TRC-R"
+        "EchoLink node W4TRC-R (node number 874789)"
       ],
       "notes": "Coverage across the whole Tri-Cities area, including Kingsport, Johnson City, and Bristol. Supports both analog FM and Yaesu System Fusion (C4FM) digital modes as input, will only output analog FM."
     },

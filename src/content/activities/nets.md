@@ -27,6 +27,8 @@ image: "/images/ic-705.jpg"
 
 The Sunday Evening Net meets every Sunday night at **8:30 PM** on **146.970 (-) PL 123.0**.
 
+Out of range or traveling? You can check in through EchoLink node **W4TRC-R** (node number 874789). See [how to connect](/repeaters/echolink/).
+
 ---
 
 ## Volunteer as Net Control

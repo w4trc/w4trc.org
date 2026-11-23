@@ -11,7 +11,7 @@ const statusMessage = repeaters.status?.message ?? "";
 const items = [
   { label: "Club Repeater", value: "146.970 (−) PL 123.0" },
   { label: "Sunday Net", value: isOnAir ? "8:30 PM" : "On hold" },
-  { label: "EchoLink", value: "W4TRC-R" },
+  { label: "EchoLink", value: "W4TRC-R", href: "/repeaters/echolink/" },
   { label: "Grid", value: "EM86" },
 ];
 ---
@@ -41,7 +41,13 @@ const items = [
         {items.map((item) => (
           <div>
             <dt class="text-[11px] uppercase tracking-wider text-white/50">{item.label}</dt>
-            <dd class="text-white font-mono font-semibold mt-0.5 whitespace-nowrap">{item.value}</dd>
+            <dd class="text-white font-mono font-semibold mt-0.5 whitespace-nowrap">
+              {item.href ? (
+                <a class="underline underline-offset-4 decoration-white/30" href={item.href}>{item.value}</a>
+              ) : (
+                item.value
+              )}
+            </dd>
           </div>
         ))}
       </dl>

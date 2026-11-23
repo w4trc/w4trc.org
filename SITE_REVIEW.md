@@ -54,7 +54,7 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 ## New Features
 
 21. ~~**iCal (.ics) feed**~~ — done; `https://w4trc.org/calendar.ics` (`src/pages/calendar.ics.ts`) lists every event and meeting, built from the same content as the site, so there's nothing extra to maintain. A "Subscribe to the club calendar" box on `/events/` and `/meetings/` has Google Calendar, Apple/Outlook, and Copy link buttons. Meetings are listed as 2 hours since they have no end time. Calendar apps re-check the feed every 12–24 hours, so changes can take up to a day to appear. **After deploy:** subscribe from your phone once to confirm.
-22. **EchoLink connection guide** — the repeater data mentions `W4TRC-R` but nothing explains how to connect.
+22. ~~**EchoLink connection guide**~~ — done; `/repeaters/echolink/` covers what EchoLink is, the license check, connecting in five steps (search for `W4TRC-R` in the app), operating tips, checking into the Sunday net, and the live node status. Linked from the Repeaters page, the homepage on-air strip, and the Nets page. Node number 874789 is shown on the guide, the Repeaters page, and the Nets page.
 23. **Meshtastic page** — `tricitiesmesh.net` is in the footer but there's no page explaining the local mesh or how to join.
 24. **Contesting page** — contests the club does as a group, past results, ARRL Club Competition standings.
 25. **Buy/Sell/Trade classifieds** — even a simple "email the club to list gear" page.
