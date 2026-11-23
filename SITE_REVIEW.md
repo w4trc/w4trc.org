@@ -21,7 +21,7 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 ## Accessibility
 
 6. ~~**Keyboard users can't use the menu**~~ — done; the menu button and dropdowns are now real `<button aria-expanded>` controls. Enter/Space opens, Escape closes and returns focus, and tabbing or clicking away closes. Mouse hover still works on desktop, and the menu now works as soon as the page appears instead of after every image finishes loading. Original note: the mobile menu and dropdowns are driven by checkboxes hidden with `display:none`, which can't take keyboard focus. On desktop, dropdowns open on hover only. Switch to `<button aria-expanded>` controls and add `focus-within` styles (`src/layouts/partials/Header.astro`, `src/styles/safe.css`).
-7. **Missing alt text** — 4 images on `/activities/`, 1 on `/spots/`. The footer status badge alt reads "EchoLink Node Status status".
+7. ~~**Missing alt text**~~ — done; the footer badge now reads "EchoLink node status". The images flagged on `/activities/` and `/spots/` turned out to have `alt=""` (correct for decorative images next to their own heading), so they were left alone. A full scan of the built site found no images missing alt text.
 8. **Check light mode** — many components hard-code `text-white`. Only matters if the theme switcher is turned on (`settings.theme_switcher` is currently `false`).
 
 ## SEO & Metadata
