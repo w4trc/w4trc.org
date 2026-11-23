@@ -47,7 +47,7 @@ const silentKeys = defineCollection({
     callsign: z.string().optional(),
     years: z.string().optional(),
     description: z.string().optional(),
-    obituaryUrl: z.string().url().optional(),
+    obituaryUrl: z.url().optional(),
     weight: z.number().optional(),
   }),
 });
