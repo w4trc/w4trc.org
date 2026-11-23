@@ -1,0 +1,49 @@
+---
+// Links to subscribe to the club calendar feed (src/pages/calendar.ics.ts).
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+const feedUrl = "https://w4trc.org/calendar.ics";
+const webcalUrl = feedUrl.replace(/^https:/, "webcal:");
+const googleUrl = `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcalUrl)}`;
+const btn =
+  "inline-flex items-center justify-center rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white/90 hover:border-[var(--w4-accent)]";
+---
+
+<div class:list={["w4-card p-5 text-left", className]} data-calendar-subscribe>
+  <p class="font-semibold text-white">Subscribe to the club calendar</p>
+  <p class="text-sm text-white/75 mt-1">
+    Meetings and events show up in your own calendar and update automatically.
+  </p>
+  <div class="mt-4 flex flex-wrap gap-3">
+    <a class={btn} href={googleUrl} target="_blank" rel="noopener noreferrer">Google Calendar</a>
+    <a class={btn} href={webcalUrl}>Apple / Outlook</a>
+    <button type="button" class={btn} data-copy={feedUrl}>Copy link</button>
+  </div>
+  <p class="text-xs text-white/60 mt-3">
+    Other apps: subscribe by URL using <code class="select-all">{feedUrl}</code>
+  </p>
+</div>
+
+<script>
+  // Copy the feed URL; bound on each page view (the button is replaced on View Transitions).
+  const bind = () => {
+    document.querySelectorAll<HTMLButtonElement>("[data-calendar-subscribe] [data-copy]").forEach((btn) => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "true";
+      btn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(btn.dataset.copy!);
+          btn.textContent = "Copied!";
+        } catch {
+          btn.textContent = "Copy the link below";
+        }
+        setTimeout(() => (btn.textContent = "Copy link"), 2500);
+      });
+    });
+  };
+  bind();
+  document.addEventListener("astro:after-swap", bind);
+</script>

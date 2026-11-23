@@ -53,7 +53,7 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 
 ## New Features
 
-21. **iCal (.ics) feed** — build from the events and meetings collections so members can subscribe in Google/Apple Calendar.
+21. ~~**iCal (.ics) feed**~~ — done; `https://w4trc.org/calendar.ics` (`src/pages/calendar.ics.ts`) lists every event and meeting, built from the same content as the site, so there's nothing extra to maintain. A "Subscribe to the club calendar" box on `/events/` and `/meetings/` has Google Calendar, Apple/Outlook, and Copy link buttons. Meetings are listed as 2 hours since they have no end time. Calendar apps re-check the feed every 12–24 hours, so changes can take up to a day to appear. **After deploy:** subscribe from your phone once to confirm.
 22. **EchoLink connection guide** — the repeater data mentions `W4TRC-R` but nothing explains how to connect.
 23. **Meshtastic page** — `tricitiesmesh.net` is in the footer but there's no page explaining the local mesh or how to join.
 24. **Contesting page** — contests the club does as a group, past results, ARRL Club Competition standings.
