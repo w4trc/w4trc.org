@@ -75,11 +75,12 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
     - `VETESTING.png`, `activities/Nets_Logo.png`, `activities/SOTA_Logo.png`, `arrl-badge.png`, `cdn/NetControl_SignUp.jpg`, `officers/km4nwh.png`, `officers/placeholder.png`, `posts/KARC-N4I-2026.jpg` (2.2 MB), `winterfieldday.png` (1.9 MB)
     - ~~Compress the big PDFs~~ — done; Portable Digital 18 MB → 2.8 MB, Fox Hunting 48 MB → 6.5 MB. Photos were resampled to ~110 dpi (about 2200 px across a slide), which looks the same full-screen; text is unchanged. **For future slide decks:** in PowerPoint, File → Compress Pictures → 150 ppi before exporting to PDF keeps them small.
 32. ~~**Commit a lockfile**~~ — done; `package-lock.json` is committed (removed from `.gitignore`), so Cloudflare installs exactly the tested versions. Before committing, `npm audit fix` cleared 24 of 29 known package issues and Astro went 6.4.5 → 6.4.8. **When you change packages:** run `npm install`, then commit `package-lock.json` with `package.json`.
-33. **Remaining package advisories (need major upgrades)** — low real risk for a static site whose content is all written by the club, but worth a planned upgrade:
-    - **Astro 6 → 7** (fixes an XSS advisory in attribute spreading; also brings `@astrojs/mdx` 8). Follow the Astro 7 upgrade guide and test the whole site.
-    - **sharp 0.34 → 0.35** (libvips image-decoding CVEs; only matters for untrusted images, and every image here is the club’s own).
-    - `@tailwindcss/typography` / `postcss-selector-parser` (build-time only; npm’s suggested “fix” is an older version, so ignore it until typography ships an update).
-    - `esbuild` (dev server on Windows only; goes away with Astro 7).
+33. **Astro 7 upgrade** — done on the `astro-7-upgrade` branch (Astro 7.4.13, Vite 8, `@astrojs/mdx` 8, `@astrojs/react` 7, Tailwind 4.3.5, sharp 0.35.5). Known package advisories went from 6 to 2.
+    - Config: `compressHTML: true` keeps Astro 6's whitespace handling (Astro 7's new default can drop spaces between inline elements). Removed the `remark-toc` / `remark-collapse` plugins and `shikiConfig` (no page uses a table of contents or code blocks), so Markdown uses Astro 7's built-in processor. Removed a no-op `image.service` line.
+    - Fixed for the stricter compiler: `repeaters/dashboard.astro` never closed `<Base>`, and two HTML comments in `Header.astro` sat inside `{…}` expressions.
+    - `.node-version` pins Node 24.22.3 for Cloudflare builds (Astro 7 needs 22.23.4+). **If the Cloudflare project has a `NODE_VERSION` environment variable set, it overrides this file — update or remove it.**
+    - Tested: all 298 output files match the Astro 6 build in visible text, links, images, metadata and structured data; 30 before/after screenshots match (only invisible re-encoding noise in photos); keyboard menu tests pass.
+    - Still open: `@tailwindcss/typography` / `postcss-selector-parser` (moderate, build-time only; npm's suggested "fix" is an older version, so wait for a typography update). `astro check` reports 8 older type errors (implicit `any`, and a `draft` filter on Silent Keys that the schema doesn't define), none from the upgrade.
 
 ---
 

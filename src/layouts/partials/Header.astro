@@ -110,8 +110,8 @@ const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
         ))
       }
 
+      <!-- mobile-only CTA inside the collapsible list -->
       {navigation_button.enable && (
-        <!-- mobile-only CTA inside the collapsible list -->
         <li class="mt-4 inline-block lg:hidden">
           <a class="btn btn-outline-primary btn-sm" href={navigation_button.link}>
             {navigation_button.label}
@@ -132,8 +132,8 @@ const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
         </button>
       )}
       <ThemeSwitcher className="mr-5" />
+      <!-- desktop CTA (visible on lg+) -->
       {navigation_button.enable && (
-        <!-- desktop CTA (visible on lg+) -->
         <a
           class="btn btn-outline-primary hidden lg:inline-flex lg:px-4 lg:py-2"
           href={navigation_button.link}
