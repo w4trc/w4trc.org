@@ -1,6 +1,6 @@
 ---
 title: "NVIS Antenna Build"
-summary: "Low-slung HF dipole for regional coverage and emergency comms."
+summary: "Build a low-slung NVIS HF dipole for reliable regional coverage and emergency communications, as built by the Kingsport Amateur Radio Club."
 image: "/images/projects/placeholder-nvis-1.jpg"
 weight: 2
 ---

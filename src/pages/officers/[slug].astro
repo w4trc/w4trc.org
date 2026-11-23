@@ -27,7 +27,7 @@ const { Content } = await render(officer);
 <Base
   title={`${data.position}: ${data.title}`}
   meta_title={`KARC - ${data.position}: ${data.title}`}
-  description={data.callsign ? `${data.callsign} - ${data.position}` : data.position}
+  description={`${data.title}${data.callsign ? ` (${data.callsign})` : ""}, ${data.position} of the Kingsport Amateur Radio Club (W4TRC) in Kingsport, TN.`}
   image={data.photo}
 >
   <section class="section-md">

@@ -2,7 +2,7 @@
 title: "2026 N4I Special Event Station"
 date: "2026-10-17"
 author: "W4TRC"
-summary: "KARC set up for the annual Netherland Inn Special Event Station"
+summary: "KARC set up for the annual Netherland Inn Special Event Station, operating as N4I on HF from the historic Netherland Inn in Kingsport, TN."
 tags: ["event-recap", "special-event"]
 image: "/images/posts/Netherland_Inn.jpg"
 ---

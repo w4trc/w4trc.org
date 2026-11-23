@@ -3,7 +3,7 @@ title: Winter Field Day
 date: "2026-01-24T11:00:00"
 endDate: "2026-01-25T17:00:00"
 location: N/A
-summary: Canceled due to weather.
+summary: Canceled due to weather. The club did not set up or operate a group station for Winter Field Day 2026 for the safety of our members.
 cover: /images/winterfieldday-canceled.png
 featured: true
 ---

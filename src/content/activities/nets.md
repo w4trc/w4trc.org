@@ -1,6 +1,6 @@
 ---
 title: "Weekly Nets"
-description: "Times, frequencies, and scripts for our on-air nets."
+description: "Times, frequencies, and scripts for the weekly on-air nets run by the Kingsport Amateur Radio Club. Every licensed ham is welcome to check in."
 meta_title: "KARC - Weekly Nets"
 draft: false
 image: "/images/ic-705.jpg"

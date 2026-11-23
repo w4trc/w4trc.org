@@ -1,6 +1,6 @@
 ---
 title: "Tape-Measure Yagi"
-summary: "Portable 2m direction-finding antenna for fox hunts, POTA, and SOTA."
+summary: "Build a portable 2m tape measure Yagi for direction finding on fox hunts, plus POTA and SOTA activations. Cheap, light, and easy to make."
 image: "/images/projects/placeholder-yagi-1.jpg"
 weight: 1
 ---
