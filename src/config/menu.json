@@ -123,6 +123,10 @@
     {
       "name": "Facebook",
       "url": "https://www.facebook.com/profile.php?id=100063796735718"
+    },
+    {
+      "name": "Privacy Policy",
+      "url": "/privacy-policy/"
     }
   ]
 }

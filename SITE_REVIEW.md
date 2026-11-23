@@ -7,7 +7,7 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 
 ## Fix Soon
 
-1. **Write a real privacy policy** — the club will be running ads, and every page already loads the Google Ads tag (`AW-17728556033` in `src/layouts/Base.astro`), Rybbit analytics, and forms that collect email addresses. `src/content/pages/privacy-policy.md` is still template lorem ipsum (it isn't published right now). Cover: Google Ads / cookies, Rybbit analytics, FormSubmit contact forms, membership system (members.w4trc.org), and how to request removal. Publish it and link it from the footer.
+1. ~~**Write a real privacy policy**~~ — done; `/privacy-policy/` (`src/pages/privacy-policy.astro`), linked in the footer. Covers Google Search ads, Rybbit, FormSubmit, Stripe, embedded services, forms.w4trc.org and members.w4trc.org; requests go to contact@w4trc.org. Update the "Last updated" date when it changes. Original note: the club will be running ads, and every page already loads the Google Ads tag (`AW-17728556033` in `src/layouts/Base.astro`), Rybbit analytics, and forms that collect email addresses. `src/content/pages/privacy-policy.md` is still template lorem ipsum (it isn't published right now). Cover: Google Ads / cookies, Rybbit analytics, FormSubmit contact forms, membership system (members.w4trc.org), and how to request removal. Publish it and link it from the footer.
 2. ~~**Fix broken links**~~ — done
    - `/learn/how-to-get-licensed` links now point to `/resources/license-testing/`.
    - The missing Fox Hunting PDF link was removed from `/resources/downloads/`. **To bring it back:** the original (48 MB, commit `2040ee2`) is over Cloudflare's 25 MB file limit. Compress it under 25 MB, add it back to `public/files/presentations/`, and restore the link.
