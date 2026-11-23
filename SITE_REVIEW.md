@@ -13,8 +13,10 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
    - The missing Fox Hunting PDF link was removed from `/resources/downloads/`. **To bring it back:** the original (48 MB, commit `2040ee2`) is over Cloudflare's 25 MB file limit. Compress it under 25 MB, add it back to `public/files/presentations/`, and restore the link.
    - All 3 projects are marked `draft: true` and the placeholder images were removed. `/projects/` shows a "coming soon" note, is `noindex`, and is left out of the sitemap until a project is published. **To publish one:** fill in its content and real photos, then delete `draft: true`.
 3. ~~**Settle the founding date**~~ — done; the About page now uses the ARRL affiliation date (October 2, 1947), matching the homepage.
-4. **Shrink the POTA/SOTA galleries** — `Gallery.astro` serves original files with no resizing: 46 MB in `public/images/activities/pota/`, 5.5 MB in `sota/`, single files of 2–3.5 MB. Alt text is the filename (e.g. `20230204_122439-scaled.jpg`). Run them through `astro:assets`/`ImageMod` and add real captions.
-5. **Shrink homepage post-card images** — `PostCard.astro` uses a plain `<img>`, so the homepage loads `GeorgeDeVault.png` (1 MB) and `FoxHunt.png` (755 KB) at full size. Use `ImageMod` to fix it site-wide.
+4. ~~**Shrink the POTA/SOTA galleries**~~ — done; `Gallery.astro` now builds 600px WebP thumbnails (about 100 KB each instead of 2–3.5 MB) and links each one to a 1600px version. Alt text is now "Parks on the Air activation photo 1" etc. instead of the filename.
+   - **Still to do: real captions.** Pass a `captions` map to the gallery in `pota.mdx` / `sota.mdx`, keyed by filename. Each caption becomes the alt text and shows under the photo:
+     `<Gallery dir="images/activities/pota" label="Parks on the Air activation" captions={{ "Tim-scaled.jpg": "Who is in the photo, and which park" }} ... />`
+5. ~~**Shrink homepage post-card images**~~ — done; post cards and event covers (homepage, `/events/`, event pages) now use `ImageMod`, which outputs resized WebP. The homepage's images dropped from about 2.6 MB to about 660 KB.
 
 ## Accessibility
 

@@ -1,5 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
+import ImageMod from "@/components/ImageMod.astro";
 import { getCollection } from "astro:content";
 import {
   formatFloatingDate,
@@ -93,8 +94,11 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
               {item.type === "Event" ? (
                 <a href={item.link} class="block p-6 h-full">
                   {item.cover && (
-                    <img
+                    <ImageMod
                       src={item.cover}
+                      width={800}
+                      height={450}
+                      format="webp"
                       alt={item.title}
                       class="rounded-md mb-4 w-full aspect-video object-cover"
                       loading="lazy"
@@ -122,8 +126,11 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
               ) : (
                 <div class="block p-6 h-full">
                   {item.cover && (
-                    <img
+                    <ImageMod
                       src={item.cover}
+                      width={800}
+                      height={450}
+                      format="webp"
                       alt={item.title}
                       class="rounded-md mb-4 w-full aspect-video object-cover"
                       loading="lazy"
@@ -164,8 +171,11 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
                 {item.type === "Event" ? (
                   <a href={item.link} class="block p-6 h-full">
                     {item.cover && (
-                      <img
+                      <ImageMod
                         src={item.cover}
+                        width={800}
+                        height={450}
+                        format="webp"
                         alt={item.title}
                         class="rounded-md mb-4 w-full aspect-video object-cover opacity-80"
                         loading="lazy"
@@ -189,8 +199,11 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
                 ) : (
                   <div class="block p-6 h-full">
                     {item.cover && (
-                      <img
+                      <ImageMod
                         src={item.cover}
+                        width={800}
+                        height={450}
+                        format="webp"
                         alt={item.title}
                         class="rounded-md mb-4 w-full aspect-video object-cover opacity-80"
                         loading="lazy"

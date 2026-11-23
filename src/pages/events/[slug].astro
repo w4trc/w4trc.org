@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import Base from "@/layouts/Base.astro";
+import ImageMod from "@/components/ImageMod.astro";
 import {
   formatFloatingDate,
   formatFloatingTime,
@@ -55,8 +56,10 @@ const dateLine = endDate
 <section class="section-md">
   <div class="max-w-[900px] mx-auto px-6 text-center">
     {data.cover && (
-      <img
+      <ImageMod
         src={data.cover}
+        width={768}
+        format="webp"
         alt={data.title}
         class="max-w-sm w-full mx-auto rounded-lg shadow mb-6"
         loading="eager"

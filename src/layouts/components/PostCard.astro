@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import ImageMod from "@/components/ImageMod.astro";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -22,9 +23,12 @@ const fmtDate = (iso: string) =>
 
 <article class="group w4-card w4-card-link relative flex flex-col overflow-hidden">
   {post.data.image && (
-    <img
+    <ImageMod
       src={post.data.image}
       alt={post.data.title}
+      width={800}
+      height={384}
+      format="webp"
       class="w-full h-48 object-cover"
       loading="lazy"
     />

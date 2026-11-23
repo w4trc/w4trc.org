@@ -1,42 +1,74 @@
 ---
-import fs from "node:fs";
-import path from "node:path";
+import type { ImageMetadata } from "astro";
+import { getImage } from "astro:assets";
+
+interface Props {
+  /** Folder under /public, e.g. "images/activities/pota" */
+  dir?: string;
+  /** Thumbnail size in px (square crop) */
+  height?: number;
+  width?: number;
+  zoomable?: boolean;
+  /** Used for alt text when a photo has no caption, e.g. "Parks on the Air activation" */
+  label?: string;
+  /** Optional captions keyed by filename; used as alt text and shown under the photo */
+  captions?: Record<string, string>;
+}
 
 const {
   dir = "images/activities/pota",
   height = 400,
   width = 400,
   zoomable = true,
+  label = "Club activity",
+  captions = {},
 } = Astro.props;
 
-// Correctly point to your public directory
-const publicDir = path.join(process.cwd(), "public", dir);
+// Vite needs a literal glob; filter to the requested folder below.
+const all = import.meta.glob<{ default: ImageMetadata }>(
+  "/public/images/**/*.{jpeg,jpg,JPG,JPEG,png,webp}"
+);
+const prefix = `/public/${dir.replace(/^\/+|\/+$/g, "")}/`;
 
-let files: string[] = [];
-try {
-  files = fs.readdirSync(publicDir)
-    .filter((f) => /\.(jpe?g|png|webp|gif)$/i.test(f))
-    .sort((a, b) => a.localeCompare(b));
-} catch (e) {
-  console.error("Gallery directory not found:", publicDir);
-  files = [];
-}
+const entries = Object.keys(all)
+  .filter((p) => p.startsWith(prefix) && !p.slice(prefix.length).includes("/"))
+  .sort((a, b) => a.localeCompare(b));
+
+// Grid cells are at most ~300px wide, so 1.5x the nominal size covers
+// high-DPI screens; the link opens a resized full photo instead of the
+// multi-MB original.
+const photos = await Promise.all(
+  entries.map(async (p, i) => {
+    const src = (await all[p]()).default;
+    const file = p.slice(prefix.length);
+    const [thumb, full] = await Promise.all([
+      getImage({ src, width: Math.round(width * 1.5), height: Math.round(height * 1.5), format: "webp", quality: 70 }),
+      getImage({ src, width: Math.min(src.width, 1600), format: "webp", quality: 80 }),
+    ]);
+    const caption = captions[file];
+    return { thumb, full, caption, alt: caption ?? `${label} photo ${i + 1}` };
+  })
+);
 ---
 
 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-  {files.map((file) => (
-    <div class="overflow-hidden rounded-lg shadow-md">
-      <img
-        src={`/${dir}/${file}`}
-        alt={file}
-        width={width}
-        height={height}
-        class:list={[
-          "object-cover w-full h-auto transition-transform duration-200",
-          zoomable && "hover:scale-105"
-        ]}
-        loading="lazy"
-      />
-    </div>
+  {photos.map(({ thumb, full, caption, alt }) => (
+    <figure class="overflow-hidden rounded-lg shadow-md m-0">
+      <a href={full.src} target="_blank" rel="noopener">
+        <img
+          src={thumb.src}
+          alt={alt}
+          width={width}
+          height={height}
+          class:list={[
+            "object-cover w-full h-auto transition-transform duration-200 m-0",
+            zoomable && "hover:scale-105",
+          ]}
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      {caption && <figcaption class="px-2 py-1 text-xs text-white/70">{caption}</figcaption>}
+    </figure>
   ))}
 </div>

@@ -1,5 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
+import ImageMod from "@/components/ImageMod.astro";
 import {
   formatFloatingDateTime,
   formatFloatingMonthDay,
@@ -112,8 +113,11 @@ const upcoming = coll
           return (
             <div class:list={["w4-card", embedded ? "sm:flex sm:gap-5 sm:items-start" : "block"]}>
               {cover && (
-                <img
+                <ImageMod
                   src={cover}
+                  width={640}
+                  height={360}
+                  format="webp"
                   alt=""
                   class:list={["mb-3 rounded-lg", embedded && "sm:mb-0 sm:w-40 sm:shrink-0"]}
                   style="aspect-ratio:16/9;object-fit:cover;"
