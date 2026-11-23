@@ -1,16 +1,13 @@
 ---
-import config from "@/config/config.json";
 import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
-import { markdownify } from "@/lib/utils/textConverter";
 import OfficersGrid from "@/components/OfficersGrid.astro";
 
 const title = "About KARC";
-const meta_title = "About - Kingsport Amateur Radio Club";
+const meta_title = "KARC - About";
 const description = "Learn about the Kingsport Amateur Radio Club (W4TRC), our officers, history, and how to get involved.";
 const image = "";
 
-const { contact_form_action }: { contact_form_action: string } = config.params;
 ---
 
 <Base
@@ -42,10 +39,6 @@ const { contact_form_action }: { contact_form_action: string } = config.params;
   <!-- ABOUT CONTENT -->
   <section class="section-md">
     <div class="max-w-[1100px] mx-auto px-6">
-      <div class="prose max-w-none content mb-0">
-        
-      </div>
-
       <!-- Officers Section -->
       <div class="mt-10">
         <OfficersGrid />
@@ -116,51 +109,12 @@ const { contact_form_action }: { contact_form_action: string } = config.params;
       <!-- Contact -->
       <section class="mt-6">
         <h2 id="contact" class="section-title">Contact</h2>
-        <div class="row">
-          <div class="mx-auto md:col-10 lg:col-6">
-            <form action={contact_form_action} method="POST">
-              <div class="mb-6">
-                <label for="name" class="form-label">
-                  Full Name <span class="text-red-500">*</span>
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  class="form-input"
-                  placeholder="John Doe"
-                  type="text"
-                  required
-                />
-              </div>
-              <div class="mb-6">
-                <label for="email" class="form-label">
-                  Email Address <span class="text-red-500">*</span>
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  class="form-input"
-                  placeholder="john.doe@email.com"
-                  type="email"
-                  required
-                />
-              </div>
-              <div class="mb-6">
-                <label for="message" class="form-label">
-                  Message <span class="text-red-500">*</span>
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  class="form-input"
-                  placeholder="Message goes here..."
-                  required
-                  rows="8"></textarea>
-              </div>
-              <button type="submit" class="btn btn-white">Submit</button>
-            </form>
-          </div>
+        <div class="prose max-w-none mt-1 content">
+          <p>
+            Questions about the club, membership, or getting licensed? Send us a message and an officer will get back to you.
+          </p>
         </div>
+        <a class="btn btn-primary mt-2" href="/contact/">Contact the Club</a>
       </section>
     </div>
   </section>
@@ -174,11 +128,11 @@ const { contact_form_action }: { contact_form_action: string } = config.params;
           <p class="text-lg font-semibold text-white">Club Repeaters</p>
           <p>Frequencies, tones, coverage notes.</p>
         </a>
-        <a class="quicklink-card" href="/nets/">
+        <a class="quicklink-card" href="/activities/nets/">
           <p class="text-lg font-semibold text-white">Weekly Nets</p>
           <p>Schedules and scripts.</p>
         </a>
-        <a class="quicklink-card" href="/license/">
+        <a class="quicklink-card" href="/resources/license-testing/">
           <p class="text-lg font-semibold text-white">Get Licensed / Upgrade</p>
           <p>Study materials and test sessions.</p>
         </a>

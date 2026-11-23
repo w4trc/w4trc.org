@@ -5,6 +5,15 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 
 ---
 
+## To Do (outside the code)
+
+- [ ] **Run Google's Rich Results Test** on the homepage and the Field Day event page: <https://search.google.com/test/rich-results>. It should find an Organization on the homepage and an Event on the Field Day page with no errors.
+- [ ] **Submit the sitemap in Google Search Console**: add `https://w4trc.org/sitemap-index.xml` under Sitemaps (set up the w4trc.org property first if it isn't there).
+- [ ] **Add 2027 meetings and events** before December 10, so the homepage "Next Meeting" box doesn't fall back to the Christmas party. Write event locations as `Venue (street, city, ST zip)`.
+- [ ] **Gallery captions** for the POTA/SOTA photos — see item 4.
+
+---
+
 ## Fix Soon
 
 1. ~~**Write a real privacy policy**~~ — done; `/privacy-policy/` (`src/pages/privacy-policy.astro`), linked in the footer. Covers Google Search ads, Rybbit, FormSubmit, Stripe, embedded services, forms.w4trc.org and members.w4trc.org; requests go to contact@w4trc.org. Update the "Last updated" date when it changes. Original note: the club will be running ads, and every page already loads the Google Ads tag (`AW-17728556033` in `src/layouts/Base.astro`), Rybbit analytics, and forms that collect email addresses. `src/content/pages/privacy-policy.md` is still template lorem ipsum (it isn't published right now). Cover: Google Ads / cookies, Rybbit analytics, FormSubmit contact forms, membership system (members.w4trc.org), and how to request removal. Publish it and link it from the footer.
@@ -35,9 +44,9 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 
 ## Content & UX
 
-15. **About page** — includes a full copy of the contact form; replace it with a link to `/contact/`. Also remove the empty `<div class="prose">` near the top.
+15. ~~**About page**~~ — done; the duplicate contact form is replaced by a short note and a "Contact the Club" button to `/contact/`, the empty block is gone, the title is "KARC - About", and the Nets / Get Licensed quick links point straight to their pages instead of through redirects.
 16. **Footer** — copyright year is hard-coded "© 2026" (use the build year); add meeting location and a contact email; add the privacy policy link; consider a custom Facebook page URL instead of `profile.php?id=`.
-17. **Announcement banner** — closing it sets one cookie for 7 days, so closing one announcement also hides the next one. Key the cookie to the announcement text (`src/layouts/helpers/Announcement.tsx`).
+17. **Announcement banner** _(skipped for now)_ — closing it sets one cookie for 7 days, so closing one announcement also hides the next one. Key the cookie to the announcement text (`src/layouts/helpers/Announcement.tsx`).
 18. **One switch for repeater outages** — the banner (`config.json` → `announcement`) and repeater status (`src/data/repeaters.json` → `status`) are set separately. Drive one from the other.
 19. **Net Coordinator vacancy** — turn "Position Vacant" on the About page into a short volunteer call to action.
 20. **"Coming soon" repeaters** — the 6 m and 900 MHz entries are all TBD. Keep only if actually planned.
