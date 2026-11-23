@@ -12,7 +12,7 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
    - `/learn/how-to-get-licensed` links now point to `/resources/license-testing/`.
    - The missing Fox Hunting PDF link was removed from `/resources/downloads/`. **To bring it back:** the original (48 MB, commit `2040ee2`) is over Cloudflare's 25 MB file limit. Compress it under 25 MB, add it back to `public/files/presentations/`, and restore the link.
    - All 3 projects are marked `draft: true` and the placeholder images were removed. `/projects/` shows a "coming soon" note, is `noindex`, and is left out of the sitemap until a project is published. **To publish one:** fill in its content and real photos, then delete `draft: true`.
-3. **Settle the founding date** — the homepage and `src/content/about/-index.md` say "affiliated October 2, 1947"; `src/pages/about.astro:93` says "founded in 1948".
+3. ~~**Settle the founding date**~~ — done; the About page now uses the ARRL affiliation date (October 2, 1947), matching the homepage.
 4. **Shrink the POTA/SOTA galleries** — `Gallery.astro` serves original files with no resizing: 46 MB in `public/images/activities/pota/`, 5.5 MB in `sota/`, single files of 2–3.5 MB. Alt text is the filename (e.g. `20230204_122439-scaled.jpg`). Run them through `astro:assets`/`ImageMod` and add real captions.
 5. **Shrink homepage post-card images** — `PostCard.astro` uses a plain `<img>`, so the homepage loads `GeorgeDeVault.png` (1 MB) and `FoxHunt.png` (755 KB) at full size. Use `ImageMod` to fix it site-wide.
 
