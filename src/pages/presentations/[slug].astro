@@ -33,7 +33,7 @@ const hasSlides = !!(d.slidesUrl || d.slidesEmbed);
 <Base
   title={d.title}
   meta_title={`KARC - ${d.title}`}
-  description={d.description}
+  description={d.meta_description ?? d.description}
   image={d.cover ?? "/images/KARC-SEOImage.png"}
 >
   <!-- HERO -->

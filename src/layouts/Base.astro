@@ -35,16 +35,40 @@ export interface Props {
   image?: string;
   noindex?: boolean;
   canonical?: string;
+  /** Open Graph type: "article" for posts, "website" otherwise */
+  ogType?: "website" | "article";
+  /** schema.org structured data, rendered as JSON-LD */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 // destructure frontmatter
-const { title, meta_title, description, image, noindex, canonical } =
-  Astro.props;
+const {
+  title,
+  meta_title,
+  description,
+  image,
+  noindex,
+  canonical,
+  ogType = "website",
+  jsonLd,
+} = Astro.props;
+
+// Every indexable page gets a canonical URL; pages can still override it.
+const pageUrl = new URL(Astro.url.pathname, config.site.base_url).href;
+const canonicalUrl = canonical ?? (noindex ? undefined : pageUrl);
+
+const absolute = (src: string) =>
+  /^https?:\/\//.test(src) ? src : `${config.site.base_url}${src}`;
+const ogImage = absolute(image ? image : config.metadata.meta_image);
+
+// Escape "<" so content can never close the script tag early.
+const jsonLdHtml = jsonLd ? JSON.stringify(jsonLd).replace(/</g, "\\u003c") : undefined;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17728556033"></script>
     <script is:inline>
@@ -72,7 +96,6 @@ const { title, meta_title, description, image, noindex, canonical } =
       content="#000"
     />
     <meta name="generator" content={Astro.generator} />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <!-- google font css -->
     <AstroFont
@@ -110,7 +133,7 @@ const { title, meta_title, description, image, noindex, canonical } =
     </title>
 
     <!-- canonical url -->
-    {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
     <!-- noindex robots -->
     {noindex && <meta name="robots" content="noindex,follow" />}
@@ -143,11 +166,8 @@ const { title, meta_title, description, image, noindex, canonical } =
         description ? description : config.metadata.meta_description
       )}
     />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
-    />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl ?? pageUrl} />
 
     <!-- twitter-title -->
     <meta
@@ -166,21 +186,14 @@ const { title, meta_title, description, image, noindex, canonical } =
     />
 
     <!-- og-image -->
-    <meta
-      property="og:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
+    <meta property="og:image" content={ogImage} />
 
     <!-- twitter-image -->
-    <meta
-      name="twitter:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- structured data -->
+    {jsonLdHtml && <script type="application/ld+json" set:html={jsonLdHtml} />}
 
     <!-- Joshua Rybbit Analytics  -->
     <script    

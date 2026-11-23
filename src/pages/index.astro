@@ -49,11 +49,34 @@ const quickLinks = [
   { title: "Zero-Beat Newsletter", text: "Club news and member articles.", href: "/resources/newsletter/" },
   { title: "Live Spots", text: "See who's on the air right now.", href: "/spots/" },
 ];
+
+// Club details for search engines (schema.org Organization)
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Kingsport Amateur Radio Club",
+  alternateName: ["KARC", "W4TRC"],
+  url: "https://w4trc.org/",
+  logo: "https://w4trc.org/images/KARC-LOGO.png",
+  email: "contact@w4trc.org",
+  foundingDate: "1947-10-02",
+  description:
+    "Amateur radio club serving Kingsport and the Tri-Cities area of East Tennessee: repeaters, monthly meetings, nets, Field Day, and license testing.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Kingsport",
+    addressRegion: "TN",
+    addressCountry: "US",
+  },
+  areaServed: "Tri-Cities, Tennessee",
+  sameAs: ["https://www.facebook.com/profile.php?id=100063796735718"],
+};
 ---
 
 <Base
   title="Kingsport Amateur Radio Club"
-  meta_title="KARC - Home"
+  meta_title="Kingsport Amateur Radio Club (W4TRC) | Kingsport, TN"
+  jsonLd={organization}
   description="Kingsport Amateur Radio Club (W4TRC) - repeaters, meetings, events, and resources for hams across the Tri-Cities."
   image="/images/KARC-SEOImage.png"
 >

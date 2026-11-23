@@ -72,6 +72,8 @@ const presentations = defineCollection({
     date: z.string(),
     presenter: z.string(),
     description: z.string().optional(),
+    /** Shorter description for search results (about 155 characters max); falls back to description */
+    meta_description: z.string().optional(),
     youtubeId: z.string().optional(),
     slidesUrl: z.string().optional(),
     slidesEmbed: z.string().optional(),

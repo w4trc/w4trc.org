@@ -7,6 +7,7 @@ import {
   formatFloatingTime,
   isSameFloatingDay,
   parseFloatingIso,
+  toEasternIso,
 } from "@/lib/utils/floatingDate";
 
 export const prerender = true;
@@ -34,6 +35,37 @@ const dateLine = endDate
     ? `${fmtDate(data.date)} | ${fmtTime(data.date)}-${fmtTime(data.endDate)}`
     : `${fmtDate(data.date)} ${fmtTime(data.date)}–${fmtDate(data.endDate)} ${fmtTime(data.endDate)}`
   : `${fmtDate(data.date)} | ${fmtTime(data.date)}`;
+
+// schema.org Event data so Google can list the event. Only for indexed events
+// held at a real place: Google requires a physical location, so events like
+// "Working from home" or "N/A" are skipped.
+// "Venue Name (123 Street, City, ST 00000)" -> venue + address
+const locMatch = /^(.*?)\s*\((.+)\)\s*$/.exec(data.location ?? "");
+const hasPlace = !!data.location && !/^(n\/a|tbd|working from home|online)$/i.test(data.location.trim());
+const eventJsonLd =
+  !data.noindex && hasPlace
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        name: data.title,
+        startDate: toEasternIso(data.date),
+        ...(data.endDate ? { endDate: toEasternIso(data.endDate) } : {}),
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        eventStatus: "https://schema.org/EventScheduled",
+        location: {
+          "@type": "Place",
+          name: locMatch ? locMatch[1] : data.location,
+          address: locMatch ? locMatch[2].replace(/\s+/g, " ") : data.location,
+        },
+        ...(data.summary ? { description: data.summary } : {}),
+        ...(data.cover ? { image: [new URL(data.cover, Astro.site).href] } : {}),
+        organizer: {
+          "@type": "Organization",
+          name: "Kingsport Amateur Radio Club",
+          url: "https://w4trc.org/",
+        },
+      }
+    : undefined;
 ---
 
 <Base
@@ -42,6 +74,7 @@ const dateLine = endDate
   description={data.summary}
   image={data.cover}
   noindex={data.noindex}
+  jsonLd={eventJsonLd}
 >
   <!-- Breadcrumb -->
 <nav class="py-4">

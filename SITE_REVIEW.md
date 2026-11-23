@@ -26,12 +26,12 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 
 ## SEO & Metadata
 
-9. **Homepage title is "KARC - Home"** — use something like "Kingsport Amateur Radio Club (W4TRC) – Kingsport, TN". Titles also mix "W4TRC -" (posts) and "KARC -" (everything else); pick one.
-10. **Long descriptions** — the George DeVault post title is ALL CAPS with a 258-character description. Six presentation descriptions are 180–230 characters; search results cut off around 160.
-11. **Base.astro defaults** — add a canonical URL by default (currently only when a page passes one); use `og:type` `article` for posts; add Organization JSON-LD.
-12. **Charset** — put `<meta charset="utf-8">` first in `<head>`. Today the `http-equiv` version comes after the gtag scripts.
-13. **robots.txt** — add `Sitemap: https://w4trc.org/sitemap-index.xml`; remove `Disallow: /api/*` (matches nothing).
-14. **Event structured data** — add JSON-LD `Event` markup to event pages so Google lists Field Day, N4I, etc. in event search.
+9. ~~**Homepage title / title prefixes**~~ — done; the homepage is "Kingsport Amateur Radio Club (W4TRC) | Kingsport, TN" and posts now use "KARC -" like every other page.
+10. ~~**Long descriptions**~~ — done; the DeVault post title is title case with a 152-character summary. Presentations have a new optional `meta_description` field (used for search results; the longer `description` still shows on the page), filled in for the six long ones. Use it on future presentations when the description runs past ~155 characters.
+11. ~~**Base.astro defaults**~~ — done; every indexed page gets a canonical URL (pages can still override), `og:url` matches it, posts use `og:type` `article`, image URLs that are already absolute aren't doubled, and pages can pass `jsonLd`. The homepage has Organization data (name, KARC/W4TRC, logo, email, founding date, Kingsport TN, Facebook). The 404 page is now `noindex`.
+12. ~~**Charset**~~ — done; `<meta charset="utf-8">` is the first tag in `<head>`.
+13. ~~**robots.txt**~~ — done; sitemap added, unused `Disallow` removed.
+14. ~~**Event structured data**~~ — done; event pages output schema.org Event data with correct Eastern-time offsets. Skipped for `noindex` events (fox hunts) and events without a physical place ("N/A", "Working from home"), since Google requires one. **Tip:** write locations as `Venue (street, city, ST zip)` so the address is picked up; the January POTA outing only says "Natural Tunnel State Park".
 
 ## Content & UX
 

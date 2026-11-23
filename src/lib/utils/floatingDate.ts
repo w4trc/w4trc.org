@@ -119,3 +119,21 @@ export function getEasternNow(): Date {
     ),
   );
 }
+
+/**
+ * Floating Eastern wall-clock time -> ISO 8601 with the correct Eastern
+ * offset for that date, e.g. "2026-06-27T11:00:00" -> "2026-06-27T11:00:00-04:00".
+ * Used for structured data, which needs a real point in time.
+ */
+export function toEasternIso(value: FloatingInput): string | null {
+  const wall = parseFloatingIso(value);
+  if (!wall) return null;
+  // The wall time read as UTC is within a few hours of the real instant,
+  // close enough to pick the right offset (DST changes at 2 AM).
+  const offsetName =
+    new Intl.DateTimeFormat("en-US", { timeZone: EASTERN_TIME_ZONE, timeZoneName: "longOffset" })
+      .formatToParts(new Date(wall.getTime() + 5 * 3600_000))
+      .find((p) => p.type === "timeZoneName")?.value ?? "GMT-05:00";
+  const offset = offsetName.replace("GMT", "") || "+00:00";
+  return wall.toISOString().replace(/\.\d{3}Z$/, offset);
+}
