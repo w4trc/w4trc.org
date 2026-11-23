@@ -135,7 +135,7 @@ repeaters.forEach((r, idx) => {
 // EchoLink footnote
 ly += 5;
 doc.font("Helvetica").fontSize(6.5).fillColor(MUTED)
-  .text("Primary (146.970) supports EchoLink node W4TRC-R", PAD, ly, { width: TBL_W });
+  .text("EchoLink: W4TRC-R (node 874789) on the 146.970 primary", PAD, ly, { width: TBL_W, lineBreak: false });
 ly += 12;
 
 // ─────────────────────────────────────────────
