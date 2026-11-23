@@ -13,6 +13,7 @@ const events = defineCollection({
     url: z.string().optional(),
     rsvpUrl: z.string().optional(),
     featured: z.boolean().optional(),
+    noindex: z.boolean().optional(),
   }),
 });
 

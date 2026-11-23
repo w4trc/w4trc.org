@@ -7,6 +7,17 @@ import remarkToc from "remark-toc";
 import sharp from "sharp";
 import config from "./src/config/config.json";
 import mdx from "@astrojs/mdx";
+import fs from "node:fs";
+import path from "node:path";
+import matter from "gray-matter";
+
+// Event pages flagged `noindex: true` in frontmatter are left out of the sitemap.
+const eventsDir = "./src/content/events";
+const noindexPaths = fs
+  .readdirSync(eventsDir)
+  .filter((f) => /\.mdx?$/.test(f))
+  .filter((f) => matter(fs.readFileSync(path.join(eventsDir, f), "utf8")).data.noindex === true)
+  .map((f) => `/events/${f.replace(/\.mdx?$/, "")}/`);
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,7 +28,9 @@ export default defineConfig({
   vite: { plugins: [tailwindcss()] },
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !noindexPaths.some((p) => new URL(page).pathname === p),
+    }),
     mdx(),
   ],
   markdown: {
