@@ -4,7 +4,7 @@
 
 /* navbar items */
 .navbar {
-  @apply relative flex flex-wrap items-center justify-between gap-x-6;
+  @apply relative flex flex-wrap items-center justify-between gap-x-6 lg:flex-nowrap lg:gap-x-4 xl:gap-x-6;
 }
 
 .navbar-brand {
