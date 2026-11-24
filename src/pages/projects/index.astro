@@ -1,4 +1,5 @@
 ---
+import PageHero from "@/components/PageHero.astro";
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
 
@@ -17,15 +18,11 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft))
   description="Antenna builds, baluns, and other how-to projects from Kingsport Amateur Radio Club workshops, with parts lists and step-by-step guides."
   noindex={projects.length === 0}
 >
-  <!-- HERO -->
-  <section class="hero-heroimg relative">
-    <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl font-extrabold mb-3">Club Projects</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        Builds we have tackled together—direction-finding antennas, NVIS experiments, and balun/choke kits.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Builds & experiments"
+    title="Club Projects"
+    subtitle="Builds we have tackled together—direction-finding antennas, NVIS experiments, and balun/choke kits."
+  />
 
   <!-- PROJECT LIST -->
   <section class="section-md">

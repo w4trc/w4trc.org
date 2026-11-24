@@ -1,6 +1,6 @@
 ---
+import PageHero from "@/components/PageHero.astro";
 import Base from "@/layouts/Base.astro";
-import ImageMod from "@/components/ImageMod.astro";
 import { getCollection } from "astro:content";
 
 const entries = (await getCollection("silentKeys"))
@@ -13,25 +13,12 @@ const entries = (await getCollection("silentKeys"))
   meta_title="KARC - Silent Keys"
   description="Honoring members and friends of the Kingsport Amateur Radio Club (W4TRC) who have become silent keys. We remember their contributions."
 >
-  <section class="hero-heroimg relative">
-    <div aria-hidden="true" class="absolute inset-0 -z-10">
-      <ImageMod
-        src="/images/david-tomaseti-AaZlf5FgUws-unsplash.jpg"
-        alt="Silent Keys memorial"
-        width={1600}
-        height={600}
-        format="webp"
-        class="w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-linear-to-b from-black/60 via-black/55 to-black/70"></div>
-    </div>
-    <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl font-extrabold mb-4">Silent Keys</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        Remembering the hams who shaped our club. Their legacies live on in our hearts and airwaves.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="In memoriam"
+    title="Silent Keys"
+    subtitle="Remembering the hams who shaped our club. Their legacies live on in our hearts and airwaves."
+    image="/images/david-tomaseti-AaZlf5FgUws-unsplash.jpg"
+  />
 
   <section class="section-md">
     <div class="max-w-[1000px] mx-auto px-6">

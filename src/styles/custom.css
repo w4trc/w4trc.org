@@ -148,6 +148,13 @@
     margin-right: auto;
     color: var(--w4-ink-muted);
   }
+  /* who/what line under a page title: presenter, author, editor */
+  .hero-heroimg p.hero-byline {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--w4-accent-soft);
+  }
 
   /* homepage hero: taller, photo-led */
   .hero-home {

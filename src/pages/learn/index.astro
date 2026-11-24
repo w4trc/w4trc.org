@@ -1,4 +1,5 @@
 ---
+import PageHero from "@/components/PageHero.astro";
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
 
@@ -17,23 +18,12 @@ const sorted = pages.sort((a, b) => {
   meta_title="KARC - Learn About Amateur Radio"
   description="Beginner-friendly guides to amateur radio — what it is, how it works, and how to get started."
 >
-  <section class="hero-heroimg relative">
-    <div aria-hidden="true" class="absolute inset-0 -z-10">
-      <img
-        src="https://images.unsplash.com/photo-1617994452722-4145e196248b?w=1600&h=600&fit=crop"
-        alt=""
-        class="w-full h-full object-cover"
-        loading="eager"
-      />
-      <div class="absolute inset-0 bg-linear-to-b from-black/55 via-black/60 to-black/75"></div>
-    </div>
-    <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl font-extrabold mb-4">Learn About Amateur Radio</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        New to ham radio? Start here. Short guides that explain the basics — no experience needed.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="New to ham radio"
+    title="Learn About Amateur Radio"
+    subtitle="New to ham radio? Start here. Short guides that explain the basics — no experience needed."
+    image="https://images.unsplash.com/photo-1617994452722-4145e196248b?w=1600&h=600&fit=crop"
+  />
 
   <section class="section-md">
     <div class="max-w-[1100px] mx-auto px-6">

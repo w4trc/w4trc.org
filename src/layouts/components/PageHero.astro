@@ -1,6 +1,7 @@
 ---
-// Page header used across inner pages. Same look as the .hero-heroimg
-// sections written inline on older pages; prefer this for new pages.
+// Page header used by every inner page (the homepage uses HeroBanner).
+// Pass `subtitle` for plain text, or put richer markup (bold text, extra
+// paragraphs, badges) in the default slot instead.
 import ImageMod from "@/components/ImageMod.astro";
 
 interface Props {
@@ -8,26 +9,32 @@ interface Props {
   subtitle?: string;
   /** Small mono label above the title (a date, category, etc.) */
   eyebrow?: string;
-  /** Optional background photo from /public, darkened behind the text */
+  /** Optional background photo, darkened behind the text. A /public path is
+   *  optimized; a full URL is used as-is. */
   image?: string;
   back?: { href: string; label: string };
 }
 
 const { title, subtitle, eyebrow, image, back } = Astro.props;
+const isRemote = image ? /^https?:\/\//.test(image) : false;
 ---
 
 <section class="hero-heroimg relative">
   {image && (
     <div aria-hidden="true" class="absolute inset-0 -z-10">
-      <ImageMod
-        src={image}
-        alt=""
-        width={1600}
-        height={600}
-        format="webp"
-        class="w-full h-full object-cover opacity-45"
-        loading="eager"
-      />
+      {isRemote ? (
+        <img src={image} alt="" class="w-full h-full object-cover opacity-45" loading="eager" />
+      ) : (
+        <ImageMod
+          src={image}
+          alt=""
+          width={1600}
+          height={600}
+          format="webp"
+          class="w-full h-full object-cover opacity-45"
+          loading="eager"
+        />
+      )}
       <div class="absolute inset-0 bg-linear-to-b from-black/60 via-black/55 to-black/75"></div>
     </div>
   )}

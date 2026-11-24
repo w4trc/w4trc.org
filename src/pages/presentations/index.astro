@@ -1,4 +1,5 @@
 ---
+import PageHero from "@/components/PageHero.astro";
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
 
@@ -21,15 +22,11 @@ const fmtDate = (iso: string) =>
   meta_title="KARC - Presentations Archive"
   description="Archive of presentations given at Kingsport Amateur Radio Club meetings."
 >
-  <!-- HERO -->
-  <section class="hero-heroimg relative">
-    <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl font-extrabold mb-3">Presentations Archive</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        Slides and videos from presentations given at our club meetings.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="From our meetings"
+    title="Presentations Archive"
+    subtitle="Slides and videos from presentations given at our club meetings."
+  />
 
   <!-- PRESENTATION LIST -->
   <section class="section-md">

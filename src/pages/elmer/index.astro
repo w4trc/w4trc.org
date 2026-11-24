@@ -1,6 +1,6 @@
 ---
+import PageHero from "@/components/PageHero.astro";
 import Base from "@/layouts/Base.astro";
-import ImageMod from "@/components/ImageMod.astro";
 ---
 
 <Base
@@ -8,14 +8,11 @@ import ImageMod from "@/components/ImageMod.astro";
   meta_title="KARC - Find an Elmer"
   description="New to amateur radio? KARC members are happy to mentor any skill level across VHF/UHF, HF, digital modes, and more."
 >
-  <section class="hero-heroimg relative">
-    <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl font-extrabold mb-4">Find an Elmer</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        An "Elmer" is a ham who mentors other operators — helping them get on the air, learn new modes, or tackle their next project.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Mentoring"
+    title="Find an Elmer"
+    subtitle={"An \"Elmer\" is a ham who mentors other operators — helping them get on the air, learn new modes, or tackle their next project."}
+  />
 
   <section class="section-md">
     <div class="max-w-[1000px] mx-auto px-6 space-y-8">

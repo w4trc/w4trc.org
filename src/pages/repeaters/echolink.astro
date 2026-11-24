@@ -1,4 +1,5 @@
 ---
+import PageHero from "@/components/PageHero.astro";
 import Base from "@/layouts/Base.astro";
 
 const node = "W4TRC-R";
@@ -10,16 +11,17 @@ const nodeNumber = "874789";
   meta_title="KARC - EchoLink"
   description="Connect to the W4TRC 146.970 repeater from anywhere with EchoLink node W4TRC-R (#874789): setup, connecting, and operating tips."
 >
-  <section class="hero-heroimg relative">
-    <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl font-extrabold mb-4">EchoLink</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        Talk on the club's 146.970 repeater from anywhere with an internet connection, using
-        node <strong class="text-white font-mono">{node}</strong> (node number
-        <strong class="text-white font-mono">{nodeNumber}</strong>).
-      </p>
-    </div>
-  </section>
+  <PageHero
+    back={{ href: "/repeaters/", label: "Repeaters" }}
+    eyebrow="Repeater access"
+    title="EchoLink"
+  >
+    <p>
+      Talk on the club's 146.970 repeater from anywhere with an internet connection, using
+      node <strong class="text-white font-mono">{node}</strong> (node number
+      <strong class="text-white font-mono">{nodeNumber}</strong>).
+    </p>
+  </PageHero>
 
   <section class="section-md">
     <div class="max-w-[1000px] mx-auto px-6 space-y-8">

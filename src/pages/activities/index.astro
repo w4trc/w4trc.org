@@ -1,4 +1,5 @@
 ---
+import PageHero from "@/components/PageHero.astro";
 import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
@@ -20,14 +21,11 @@ const activities = (await getCollection("activities", ({ data }) => !data.draft)
   meta_title="KARC - Activities"
   description="Parks on the Air, Summits on the Air, fox hunting, weekly nets, and more with the Kingsport Amateur Radio Club."
 >
-  <section class="hero-heroimg relative">
-    <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl font-extrabold mb-3">Club Activities</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        Ways to get on the air with W4TRC, from park and summit activations to monthly fox hunts.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Get on the air"
+    title="Club Activities"
+    subtitle="Ways to get on the air with W4TRC, from park and summit activations to monthly fox hunts."
+  />
 
   <section class="section-md">
     <div class="max-w-[1200px] mx-auto px-6">

@@ -1,6 +1,6 @@
 ---
+import PageHero from "@/components/PageHero.astro";
 import Base from "@/layouts/Base.astro";
-import ImageMod from "@/components/ImageMod.astro";
 import CalendarSubscribe from "@/components/CalendarSubscribe.astro";
 import { getCollection } from "astro:content";
 import {
@@ -28,27 +28,16 @@ const fmtTime = (iso: string) => formatFloatingTime(iso);
   description="Kingsport Amateur Radio Club meets the second Thursday of every month at Eastman's Toy F. Reid Employee Center in Kingsport, TN."
   image="/images/clubmeetings2025.jpg"
 >
-  <!-- HERO -->
-  <section class="hero-heroimg relative">
-    <div aria-hidden="true" class="absolute inset-0 -z-10">
-      <ImageMod
-        src="/images/clubmeetings2025.jpg"
-        alt="KARC club meeting"
-        width={1600}
-        height={600}
-        format="webp"
-        class="w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-linear-to-b from-black/55 via-black/55 to-black/70"></div>
-    </div>
-    <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl font-extrabold mb-4">Club Meetings</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        We meet the <strong class="text-white">second Thursday of every month</strong> at 7:00 PM.
-        All licensed amateurs and interested guests are welcome.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Second Thursday · 7:00 PM"
+    title="Club Meetings"
+    image="/images/clubmeetings2025.jpg"
+  >
+    <p>
+      We meet the <strong class="text-white">second Thursday of every month</strong> at 7:00 PM.
+      All licensed amateurs and interested guests are welcome.
+    </p>
+  </PageHero>
 
   <section class="section-md">
     <div class="max-w-[1100px] mx-auto px-6 space-y-12">
