@@ -48,8 +48,8 @@ Strike items through (`~~like this~~`) and add "— done" when finished.
 16. ~~**Footer**~~ — done; the copyright year comes from the build (`{year}` in `config.json` → `params.copyright`), so the daily rebuild rolls it to 2027 on January 1. Added a "Monthly meetings" line linking to `/meetings/` and a contact@w4trc.org link. The schedule text is `params.meeting_schedule` in `config.json`; the place is read from the newest meeting file's `location`, so it follows the meeting files. The privacy policy link was added with item 1. Facebook still uses the `profile.php?id=` link; swap it in `menu.json` and the homepage `sameAs` (`src/pages/index.astro`) if the page gets a short name.
 17. **Announcement banner** _(skipped for now)_ — closing it sets one cookie for 7 days, so closing one announcement also hides the next one. Key the cookie to the announcement text (`src/layouts/helpers/Announcement.tsx`).
 18. **One switch for repeater outages** — the banner (`config.json` → `announcement`) and repeater status (`src/data/repeaters.json` → `status`) are set separately. Drive one from the other.
-19. **Net Coordinator vacancy** — turn "Position Vacant" on the About page into a short volunteer call to action.
-20. **"Coming soon" repeaters** — the 6 m and 900 MHz entries are all TBD. Keep only if actually planned.
+19. ~~**Net Coordinator vacancy**~~ — done; the About page now says "Open, volunteer wanted" with a line on what the job involves (lining up net control operators, keeping the net script current) and a link to `/contact/`. Replace it with the volunteer's name once the spot is filled.
+20. ~~**"Coming soon" repeaters**~~ — removed for now; `comingSoon` in `src/data/repeaters.json` is empty, and the Repeaters page hides the section when it is. To bring them back (maybe next year), add the entries back to that list (name, callsign, frequency, mode, location, notes).
 
 ## New Features
 

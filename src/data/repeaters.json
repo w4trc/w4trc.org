@@ -41,24 +41,7 @@
       "notes": "This repeater will be used for digital including Wires-X coming soon."
     }
   ],
-  "comingSoon": [
-    {
-      "name": "6 Meter (50 MHz) Repeater",
-      "callsign": "W4TRC",
-      "frequency": "TBD",
-      "mode": "TBD",
-      "location": "TBD",
-      "notes": "Coming Soon"
-    },
-    {
-      "name": "33 Centimeter (900 MHz) Repeater",
-      "callsign": "W4TRC",
-      "frequency": "TBD",
-      "mode": "TBD",
-      "location": "TBD",
-      "notes": "Coming Soon"
-    }
-  ],
+  "comingSoon": [],
   "areaRepeaters": [
     {
       "location": "Bristol, TN - Holston Mountain",
