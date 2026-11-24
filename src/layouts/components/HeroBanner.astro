@@ -1,4 +1,5 @@
 ---
+import ImageMod from "@/components/ImageMod.astro";
 import repeaters from "@/data/repeaters.json";
 
 const isOnAir = repeaters.status?.onAir !== false;
@@ -23,12 +24,15 @@ const hero = {
   style={`background-image:url('${hero.background}')`}
 >
   <div class="w-full max-w-[1400px] mx-auto px-6">
-    <img
+    {/* 208px file shown at 104px, sharp on high-DPI screens */}
+    <ImageMod
       src={hero.logo}
       alt="Kingsport Amateur Radio Club logo"
       class="hero-logo-big mx-auto mb-8"
-      width="104"
-      height="104"
+      width={208}
+      height={208}
+      format="webp"
+      loading="eager"
       fetchpriority="high"
     />
 

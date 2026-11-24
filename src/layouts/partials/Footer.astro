@@ -61,7 +61,7 @@ const address = locationMatch ? locationMatch[2].replace(/\s+/g, " ").trim() : "
         { heading: "Resources", links: resources },
       ].map((col) => (
         <nav class="lg:col-span-2" aria-label={col.heading}>
-          <p class="eyebrow text-white/40!">{col.heading}</p>
+          <p class="eyebrow text-white/55!">{col.heading}</p>
           <ul class="mt-4 space-y-2.5 text-sm">
             {col.links.map((l) => (
               <li>
@@ -79,7 +79,7 @@ const address = locationMatch ? locationMatch[2].replace(/\s+/g, " ").trim() : "
       ))}
 
       <nav class="lg:col-span-2" aria-label="Links">
-        <p class="eyebrow text-white/40!">Links</p>
+        <p class="eyebrow text-white/55!">Links</p>
         <ul class="mt-4 space-y-2.5 text-sm">
           {footer.map((l) => (
             <li>
@@ -94,13 +94,13 @@ const address = locationMatch ? locationMatch[2].replace(/\s+/g, " ").trim() : "
           ))}
         </ul>
         <a href="https://status.w4trc.org/" class="mt-6 inline-block opacity-80 hover:opacity-100">
-          <img src="https://status.w4trc.org/badge/mon_d1412c18-3385-45e9-ae86-8b4c9ae442db/status" alt="EchoLink node status" height="20" />
+          <img src="https://status.w4trc.org/badge/mon_d1412c18-3385-45e9-ae86-8b4c9ae442db/status" alt="EchoLink node status" width="194" height="20" loading="lazy" />
         </a>
       </nav>
     </div>
   </div>
   <div class="border-t border-white/[.07]">
-    <div class="container max-w-[1400px] px-6 py-6 flex flex-col gap-2 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
+    <div class="container max-w-[1400px] px-6 py-6 flex flex-col gap-2 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
       <p set:html={markdownify(copyrightText)} />
       <p class="font-mono tracking-wider">73 de W4TRC</p>
     </div>

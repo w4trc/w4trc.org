@@ -72,13 +72,12 @@ const byYear = years.map((year) => ({
                       target="_blank"
                       rel="noreferrer"
                       class="flex flex-col rounded-xl border border-white/10 bg-white/[.03] px-3 py-3 transition hover:-translate-y-0.5 hover:border-(--w4-accent) hover:bg-white/[.06]"
-                      aria-label={`${issue.title ?? month(issue.date, "long") + " " + year} (PDF)`}
                     >
-                      <span class="font-medium text-white">{month(issue.date, "short")}</span>
-                      <span class="font-mono text-[11px] text-white/45">PDF ↓</span>
+                      <span class="font-medium text-white">{month(issue.date, "short")}<span class="sr-only"> {year} Zero-Beat</span></span>
+                      <span class="font-mono text-[11px] text-white/60">PDF <span aria-hidden="true">↓</span></span>
                     </a>
                   ) : (
-                    <span class="flex flex-col rounded-xl border border-dashed border-white/10 px-3 py-3 text-white/40">
+                    <span class="flex flex-col rounded-xl border border-dashed border-white/10 px-3 py-3 text-white/55">
                       {month(issue.date, "short")}
                       <span class="font-mono text-[11px]">missing</span>
                     </span>

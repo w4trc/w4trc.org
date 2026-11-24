@@ -56,11 +56,13 @@ const { theme_switcher }: { theme_switcher: boolean } = config.settings;
       </>
     ) : (
       <>
-        <img
+        {/* 80px file shown at 40px, sharp on high-DPI screens */}
+        <ImageMod
           src="/images/home/karc-logo.webp"
           alt=""
-          width="40"
-          height="40"
+          width={80}
+          height={80}
+          format="webp"
           class="h-10 w-10 shrink-0 rounded-full ring-1 ring-white/15"
         />
         <span class="flex flex-col leading-none">

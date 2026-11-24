@@ -76,12 +76,11 @@ const label = (title: string) =>
                       target="_blank"
                       rel="noreferrer"
                       class="absolute right-4 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/12 px-3 py-1.5 text-xs font-semibold text-white/80 transition hover:border-(--w4-accent) hover:text-white"
-                      aria-label={`${item.title} (PDF)`}
                     >
                       <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path d="M10 13.5 5.5 9l1.4-1.4L9 9.7V3h2v6.7l2.1-2.1L14.5 9zM4 15h12v2H4z" />
                       </svg>
-                      PDF
+                      PDF<span class="sr-only">: {item.title}</span>
                     </a>
                   )}
                 </li>

@@ -32,7 +32,7 @@
     --w4-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px -12px rgba(0, 0, 0, 0.6);
     --w4-shadow-lg: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 24px 48px -16px rgba(0, 0, 0, 0.7);
 
-    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, SFMono-Regular, Menlo, monospace;
 
     color-scheme: dark;
   }
@@ -548,4 +548,41 @@
   .live-dot::after {
     animation: none !important;
   }
+}
+
+/* Font fallbacks sized to match the web fonts, so text doesn't reflow (and
+   the page doesn't shift) when the fonts finish loading. astro-font
+   generates its own, but its numbers were off (Inter at 100% of Arial,
+   Space Grotesk at 111%). These ratios were measured in the browser:
+   Inter 400 is 107% of Arial's width, Space Grotesk 101%, JetBrains Mono
+   100% of Courier New. Ascent/descent come from each font's own metrics,
+   divided by size-adjust. Unlayered and html:root so they win over the
+   variables AstroFont sets inline. */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  size-adjust: 107%;
+  ascent-override: 90.5%;
+  descent-override: 22.5%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial");
+  size-adjust: 101.3%;
+  ascent-override: 97.1%;
+  descent-override: 28.8%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local("Courier New");
+  size-adjust: 100%;
+  ascent-override: 102%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+html:root {
+  --font-primary: "Inter", "Inter Fallback", sans-serif;
+  --font-secondary: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
 }

@@ -69,9 +69,12 @@ const galleryImages = Object.entries(allGalleryModules)
           src={d.image}
           alt={d.title}
           width={1600}
+          widths={[480, 800, 1200, 1600]}
+          sizes="(min-width: 1000px) 952px, calc(100vw - 48px)"
           format="webp"
           class="aspect-[2/1] w-full rounded-[var(--w4-radius)] border border-white/10 object-cover shadow-[0_30px_60px_-20px_rgba(0,0,0,.8)]"
           loading="eager"
+          fetchpriority="high"
         />
       </div>
     )}
