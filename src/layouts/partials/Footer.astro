@@ -1,13 +1,20 @@
 ---
 import Logo from "@/components/Logo.astro";
-import Social from "@/components/Social.astro";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
-import social from "@/config/social.json";
 import { markdownify } from "@/lib/utils/textConverter";
 import { getCollection } from "astro:content";
 
-const { footer }: { footer: { name: string; url: string }[] } = menu;
+const { footer, main } = menu as {
+  footer: { name: string; url: string }[];
+  main: { name: string; url: string; children?: { name: string; url: string }[] }[];
+};
+
+// Footer columns are taken from the main menu so they stay in sync with it.
+const explore = main.filter((m) => m.url && !m.children);
+const activities = main.find((m) => m.name === "Activities")?.children ?? [];
+const resources = (main.find((m) => m.name === "Resources")?.children ?? []).slice(0, 6);
+const isExternal = (url: string) => /^https?:\/\//.test(url);
 const { copyright, contact_email, meeting_schedule } = config.params;
 
 // The year comes from the build, so the daily rebuild rolls it over on Jan 1.
@@ -25,45 +32,77 @@ const venue = (locationMatch ? locationMatch[1] : rawLocation).trim();
 const address = locationMatch ? locationMatch[2].replace(/\s+/g, " ").trim() : "";
 ---
 
-<footer class="bg-light dark:bg-darkmode-light">
-  <div class="container">
-    <div class="row items-center py-10">
-      <div class="mb-8 text-center lg:col-3 lg:mb-0 lg:text-left">
+<footer class="relative mt-16 border-t border-white/[.07] bg-[#05080f]">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-(--w4-accent)/50 to-transparent"
+  ></div>
+  <div class="container max-w-[1400px] px-6 py-16">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-4">
         <Logo />
+        <p class="mt-5 max-w-sm text-sm leading-relaxed text-white/55">
+          ARRL-affiliated amateur radio club serving Kingsport and the Tri-Cities of East Tennessee since 1947.
+        </p>
+        <div class="mt-6 space-y-3 text-sm">
+          <p class="text-white/55">
+            <a href="/meetings/" class="font-semibold text-white">Monthly meetings</a><br />
+            {[meeting_schedule, venue].filter(Boolean).join(", ")}{address && <><br />{address}</>}
+          </p>
+          <p>
+            <a href={`mailto:${contact_email}`} class="font-medium text-(--w4-accent) hover:text-(--w4-accent-soft)">{contact_email}</a>
+          </p>
+        </div>
       </div>
-      <div class="mb-8 text-center lg:col-6 lg:mb-0">
-        <ul>
-          {
-            footer.map((menu) => (
-              <li class="m-3 inline-block">
-                <a href={menu.url}>{menu.name}</a>
+
+      {[
+        { heading: "Explore", links: explore },
+        { heading: "Activities", links: activities },
+        { heading: "Resources", links: resources },
+      ].map((col) => (
+        <nav class="lg:col-span-2" aria-label={col.heading}>
+          <p class="eyebrow text-white/40!">{col.heading}</p>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            {col.links.map((l) => (
+              <li>
+                <a
+                  href={l.url}
+                  class="text-white/65 hover:text-white"
+                  {...(isExternal(l.url) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {l.name}
+                </a>
               </li>
-            ))
-          }
+            ))}
+          </ul>
+        </nav>
+      ))}
+
+      <nav class="lg:col-span-2" aria-label="Links">
+        <p class="eyebrow text-white/40!">Links</p>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          {footer.map((l) => (
+            <li>
+              <a
+                href={l.url}
+                class="text-white/65 hover:text-white"
+                {...(isExternal(l.url) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {l.name}
+              </a>
+            </li>
+          ))}
         </ul>
-      </div>
-      <div class="mb-8 text-center lg:col-3 lg:mb-0 lg:mt-0 lg:text-right">
-        <Social source={social.main} className="social-icons" />
-      </div>
+        <a href="https://status.w4trc.org/" class="mt-6 inline-block opacity-80 hover:opacity-100">
+          <img src="https://status.w4trc.org/badge/mon_d1412c18-3385-45e9-ae86-8b4c9ae442db/status" alt="EchoLink node status" height="20" />
+        </a>
+      </nav>
     </div>
   </div>
-  <div class="container flex justify-center pb-6">
-    <a href="https://status.w4trc.org/"><img src="https://status.w4trc.org/badge/mon_d1412c18-3385-45e9-ae86-8b4c9ae442db/status" alt="EchoLink node status" height="20"></a>
-  </div>
-  <div class="border-t border-border py-7 dark:border-darkmode-border">
-    <div
-      class="container text-center text-text-light dark:text-darkmode-text-light"
-    >
-      <p class="mb-2 text-sm">
-        <a href="/meetings/" class="font-semibold">Monthly meetings:</a>
-        {[meeting_schedule, venue].filter(Boolean).join(", ")}{address && (
-          <span class="block sm:inline"><span class="hidden sm:inline">, </span>{address}</span>
-        )}
-      </p>
-      <p class="mb-4 text-sm">
-        Contact: <a href={`mailto:${contact_email}`}>{contact_email}</a>
-      </p>
+  <div class="border-t border-white/[.07]">
+    <div class="container max-w-[1400px] px-6 py-6 flex flex-col gap-2 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
       <p set:html={markdownify(copyrightText)} />
+      <p class="font-mono tracking-wider">73 de W4TRC</p>
     </div>
   </div>
 </footer>

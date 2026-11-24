@@ -2,6 +2,7 @@
 import { getCollection, getEntry, render } from "astro:content";
 import Base from "@/layouts/Base.astro";
 import ImageMod from "@/components/ImageMod.astro";
+import PageHero from "@/components/PageHero.astro";
 import {
   formatFloatingDate,
   formatFloatingTime,
@@ -32,9 +33,25 @@ const endDate = data.endDate ? parseFloatingIso(data.endDate) : null;
 const sameDay = startDate && endDate ? isSameFloatingDay(startDate, endDate) : false;
 const dateLine = endDate
   ? sameDay
-    ? `${fmtDate(data.date)} | ${fmtTime(data.date)}-${fmtTime(data.endDate)}`
+    ? `${fmtDate(data.date)} · ${fmtTime(data.date)}–${fmtTime(data.endDate)}`
     : `${fmtDate(data.date)} ${fmtTime(data.date)}–${fmtDate(data.endDate)} ${fmtTime(data.endDate)}`
-  : `${fmtDate(data.date)} | ${fmtTime(data.date)}`;
+  : `${fmtDate(data.date)} · ${fmtTime(data.date)}`;
+
+// Google Calendar link for this event. Times are floating Eastern, so pass the
+// wall-clock fields with ctz rather than converting to UTC. Default 2 hours.
+let calendarUrl: string | undefined;
+if (startDate) {
+  const end = endDate ?? new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
+  const fmt = (d: Date) => d.toISOString().replace(/[-:]/g, "").slice(0, 15);
+  calendarUrl = `https://calendar.google.com/calendar/render?${new URLSearchParams({
+    action: "TEMPLATE",
+    text: `KARC ${data.title}`,
+    dates: `${fmt(startDate)}/${fmt(end)}`,
+    ctz: "America/New_York",
+    details: [data.summary, new URL(Astro.url.pathname, "https://w4trc.org").href].filter(Boolean).join("\n"),
+    location: data.location ?? "",
+  })}`;
+}
 
 // schema.org Event data so Google can list the event. Only for indexed events
 // held at a real place: Google requires a physical location, so events like
@@ -76,83 +93,65 @@ const eventJsonLd =
   noindex={data.noindex}
   jsonLd={eventJsonLd}
 >
-  <!-- Breadcrumb -->
-<nav class="py-4">
-  <div class="max-w-[1100px] mx-auto px-6 text-sm">
-    <a href="/events/" class="text-gray-300 hover:text-white underline underline-offset-4">
-      &larr; Back to Events
-    </a>
-  </div>
-</nav>
+  <PageHero
+    back={{ href: "/events/", label: "All events" }}
+    eyebrow={dateLine}
+    title={data.title}
+    subtitle={data.summary}
+  />
 
-<!-- Single outer section to avoid alternating backgrounds -->
-<section class="section-md">
-  <div class="max-w-[900px] mx-auto px-6 text-center">
-    {data.cover && (
-      <ImageMod
-        src={data.cover}
-        width={768}
-        format="webp"
-        alt={data.title}
-        class="max-w-sm w-full mx-auto rounded-lg shadow mb-6"
-        loading="eager"
-        decoding="async"
-      />
-    )}
-
-    <h1 class="text-4xl font-extrabold mb-2">{data.title}</h1>
-    {data.summary && (
-      <p class="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">{data.summary}</p>
-    )}
-
-    <!-- Centered divider -->
-    <div class="relative flex justify-center mb-8">
-      <span class="inline-block h-1 w-12 bg-[var(--w4-accent)] rounded-full"></span>
-    </div>
-
-    <!-- Keep ONLY this details block -->
-    <div class="text-left mb-10">
-      <h2 class="text-2xl font-bold text-center mb-6 text-white">Event Details</h2>
-      <ul class="space-y-3 text-gray-200 text-base leading-relaxed">
-        <li>
-          <strong class="text-white font-semibold">When:</strong> {dateLine}
-        </li>
-        {data.location && (
-          <li>
-            <strong class="text-white font-semibold">Location:</strong> {data.location}
-          </li>
+  <section class="section-md">
+    <div class="max-w-[1100px] mx-auto px-6 grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px] items-start">
+      <aside class="w4-card p-3! lg:order-2 lg:sticky lg:top-28">
+        {data.cover && (
+          <ImageMod
+            src={data.cover}
+            width={768}
+            format="webp"
+            alt={data.title}
+            class="w-full rounded-[0.9rem] mb-2"
+            loading="eager"
+            decoding="async"
+          />
         )}
-      </ul>
-      {data.rsvpUrl && (
-        <div class="mt-6 flex flex-wrap gap-3 justify-center">
-          <a
-            class="px-4 py-2 rounded-xl border border-white/20 text-white/90"
-            href={data.rsvpUrl}
-          >
-            RSVP
-          </a>
+        <dl class="space-y-4 p-4 text-sm">
+          <div>
+            <dt class="eyebrow text-white/45!">When</dt>
+            <dd class="mt-1 font-medium text-white">{dateLine}</dd>
+          </div>
+          {data.location && (
+            <div>
+              <dt class="eyebrow text-white/45!">Where</dt>
+              <dd class="mt-1 font-medium text-white">{data.location}</dd>
+            </div>
+          )}
+        </dl>
+        <div class="flex flex-wrap gap-2 px-4 pb-4">
+          {data.rsvpUrl && (
+            <a class="btn btn-primary btn-sm" href={data.rsvpUrl}>RSVP</a>
+          )}
+          {calendarUrl && (
+            <a class="btn-ghost" href={calendarUrl} target="_blank" rel="noopener noreferrer">Add to Calendar</a>
+          )}
         </div>
-      )}
-    </div>
+      </aside>
 
-    <!-- Markdown Content (no box) -->
-    <div class="text-left">
-      <div class="prose prose-invert max-w-none event-body">
+      <div class="content event-body lg:order-1">
         <Content />
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <style>
-  /* Improve readability */
-  .event-body { color: var(--w4-ink); font-size: 1.05rem; line-height: 1.75; }
-  .event-body p { color: rgba(255,255,255,.9); }
-  .event-body a { color: var(--w4-accent); text-decoration: underline; }
-
+  .event-body {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
   /* Ensure no card-like panels leak into markdown */
-  .event-body :where(.w4-card,.meeting-box,.quicklink-card,.news-card,blockquote,pre,code){
-    background: transparent !important; border: 0 !important; box-shadow: none !important;
+  .event-body :global(:where(.w4-card, .meeting-box, .quicklink-card, .news-card, pre, code)) {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
 </style>
 

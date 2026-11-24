@@ -16,34 +16,28 @@ const items = [
 ];
 ---
 
-<div class="relative z-10 -mt-12 container max-w-[1400px] px-6 mx-auto">
-  <div class="w4-card p-5!">
-    <div class="flex max-lg:flex-col lg:items-center max-lg:gap-5 lg:gap-8">
-      <div class="flex items-center gap-3 lg:min-w-[220px]">
-        <span
-          class:list={[
-            "inline-block h-3 w-3 rounded-full shrink-0",
-            isOnAir ? "bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.8)]" : "bg-red-500",
-          ]}
-          aria-hidden="true"
-        ></span>
+<div class="relative z-10 -mt-20 container max-w-[1400px] px-6 mx-auto">
+  <div class="w4-card p-5! lg:px-7! backdrop-blur-xl bg-[#0d1321]/80!">
+    <div class="flex max-lg:flex-col lg:items-center max-lg:gap-5 lg:gap-10">
+      <div class="flex items-center gap-3 lg:min-w-[230px] lg:border-r lg:border-white/10 lg:pr-8">
+        <span class:list={["live-dot", !isOnAir && "is-off"]} aria-hidden="true"></span>
         <div>
-          <p class="text-white font-semibold leading-tight">
+          <p class="font-secondary text-white font-semibold leading-tight">
             {isOnAir ? "On the Air" : "Repeaters Offline"}
           </p>
           {statusMessage && (
-            <p class="text-xs text-white/60! mt-0.5">{statusMessage}</p>
+            <p class="text-xs text-white/55! mt-1">{statusMessage}</p>
           )}
         </div>
       </div>
 
-      <dl class="flex flex-wrap gap-x-10 gap-y-4 flex-1">
+      <dl class="grid grid-cols-2 sm:flex sm:flex-wrap gap-x-10 gap-y-4 flex-1">
         {items.map((item) => (
           <div>
-            <dt class="text-[11px] uppercase tracking-wider text-white/50">{item.label}</dt>
-            <dd class="text-white font-mono font-semibold mt-0.5 whitespace-nowrap">
+            <dt class="font-mono text-[10px] uppercase tracking-[.16em] text-white/45">{item.label}</dt>
+            <dd class="text-white font-mono font-medium mt-1 whitespace-nowrap">
               {item.href ? (
-                <a class="underline underline-offset-4 decoration-white/30" href={item.href}>{item.value}</a>
+                <a class="underline underline-offset-4 decoration-white/25 hover:decoration-current" href={item.href}>{item.value}</a>
               ) : (
                 item.value
               )}
@@ -52,11 +46,8 @@ const items = [
         ))}
       </dl>
 
-      <a
-        href="/repeaters/"
-        class="text-(--w4-accent) font-semibold text-sm whitespace-nowrap underline underline-offset-4"
-      >
-        Repeater details →
+      <a href="/repeaters/" class="btn-ghost whitespace-nowrap self-start lg:self-auto">
+        Repeater details <span aria-hidden="true">→</span>
       </a>
     </div>
   </div>

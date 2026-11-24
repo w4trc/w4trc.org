@@ -72,15 +72,15 @@ const Announcement: React.FC = () => {
 
   return (
     <div
-      className="relative z-999 [&_a]:text-inherit [&_strong]:text-inherit shadow-[1px_0_10px_7px_rgba(154,154,154,0.11)] px-4 py-4 pr-12 md:text-lg transition-all duration-300"
-      style={{ backgroundColor: background_color, color: text_color }}
+      className="relative z-999 border-b border-white/10 [&_a]:font-semibold [&_a]:text-inherit [&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-current/40 [&_strong]:text-inherit px-4 py-2.5 pr-12 text-sm md:text-[15px] transition-all duration-300"
+      style={{ background: background_color, color: text_color }}
     >
       <p
         dangerouslySetInnerHTML={{ __html: markdownify(content) }}
       />
       <button
         onClick={handleClose}
-        className="absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer flex items-center justify-center w-7 h-7 border border-current/40 rounded-full text-xl text-inherit transition-colors duration-200"
+        className="absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer flex items-center justify-center w-6 h-6 rounded-full text-lg opacity-70 hover:opacity-100 hover:bg-white/10 text-inherit transition-colors duration-200"
         aria-label="Close announcement"
       >
         &times;

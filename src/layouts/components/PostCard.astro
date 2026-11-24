@@ -23,35 +23,37 @@ const fmtDate = (iso: string) =>
 
 <article class="group w4-card w4-card-link relative flex flex-col overflow-hidden">
   {post.data.image && (
+    <div class="overflow-hidden">
     <ImageMod
       src={post.data.image}
       alt={post.data.title}
       width={800}
       height={384}
       format="webp"
-      class="w-full h-48 object-cover"
+      class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-[1.04]"
       loading="lazy"
     />
+    </div>
   )}
   <div class="p-6 flex flex-col gap-3 flex-1">
   <div class="flex items-center gap-2 flex-wrap">
     <time
       datetime={post.data.date}
-      class="text-xs text-white/50 font-mono"
+      class="text-xs text-white/45 font-mono tracking-wide"
     >
       {fmtDate(post.data.date)}
     </time>
     {post.data.tags?.map((tag) => (
-      <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--w4-accent)]/20 text-[var(--w4-accent)]">
+      <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/10 bg-white/5 text-white/70">
         {tag.replace(/-/g, " ")}
       </span>
     ))}
   </div>
 
-  <Heading class="text-xl font-bold text-white leading-snug">
+  <Heading class="text-xl font-semibold text-white leading-snug group-hover:text-(--w4-accent) transition-colors">
     <a
       href={href}
-      class="hover:text-[var(--w4-accent)] focus:outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:ring-2 focus-visible:after:ring-[var(--w4-accent)] focus-visible:after:rounded-2xl"
+      class="focus:outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:ring-2 focus-visible:after:ring-[var(--w4-accent)] focus-visible:after:rounded-2xl"
       {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
     >
       {post.data.title}
@@ -59,19 +61,19 @@ const fmtDate = (iso: string) =>
   </Heading>
 
   {post.data.author && (
-    <p class="text-sm text-[var(--w4-accent)] font-medium">
+    <p class="text-sm text-white/55! font-medium">
       {post.data.author}
     </p>
   )}
 
   {post.data.summary && (
-    <p class="text-sm text-white/75 line-clamp-3">
+    <p class="text-sm text-white/70! line-clamp-3">
       {post.data.summary}
     </p>
   )}
 
   <span
-    class="inline-flex items-center gap-2 text-[var(--w4-accent)] font-semibold mt-auto group-hover:underline underline-offset-4"
+    class="link-arrow mt-auto pt-1"
     aria-hidden="true"
   >
     Read more

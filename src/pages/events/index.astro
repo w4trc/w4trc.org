@@ -1,5 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
+import PageHero from "@/components/PageHero.astro";
 import ImageMod from "@/components/ImageMod.astro";
 import CalendarSubscribe from "@/components/CalendarSubscribe.astro";
 import { getCollection } from "astro:content";
@@ -75,25 +76,20 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
   description="Upcoming Kingsport Amateur Radio Club events: monthly meetings, license test sessions, Field Day, special event stations, and more."
   image={undefined}
 >
-  <!-- Single outer section to avoid alternating backgrounds from global CSS -->
+  <PageHero
+    eyebrow="Club calendar"
+    title="Upcoming Events"
+    subtitle="Club meetings, test sessions, and special activities."
+  />
+
   <section class="section-md">
     <div class="max-w-[1100px] mx-auto px-6 text-center">
-      <h1 class="text-4xl font-extrabold mb-4">Upcoming Events</h1>
-      <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-        Club meetings, test sessions, and special activities.
-      </p>
-
-      <!-- Centered divider to match single page -->
-      <div class="relative flex justify-center mb-10">
-        <span class="inline-block h-1 w-12 bg-[var(--w4-accent)] rounded-full"></span>
-      </div>
-
       <CalendarSubscribe class="max-w-2xl mx-auto mb-10" />
 
       {upcoming.length > 0 ? (
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 text-left">
           {upcoming.map((item) => (
-            <li class="w4-card hover:translate-y-[-2px] transition-transform">
+            <li class="w4-card w4-card-link overflow-hidden p-0!">
               {item.type === "Event" ? (
                 <a href={item.link} class="block p-6 h-full">
                   {item.cover && (
@@ -114,8 +110,8 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
                   </h2>
 
                   <p class="text-gray-400 text-sm mb-3">
-                    {fmtDate(item.date)}  {fmtTime(item.date)}
-                    {item.location ? `  ${item.location}` : ""}
+                    {fmtDate(item.date)}  ·  {fmtTime(item.date)}
+                    {item.location ? `  ·  ${item.location}` : ""}
                   </p>
 
                   {item.summary && (
@@ -146,8 +142,8 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
                   </h2>
 
                   <p class="text-gray-400 text-sm mb-3">
-                    {fmtDate(item.date)}  {fmtTime(item.date)}
-                    {item.location ? `  ${item.location}` : ""}
+                    {fmtDate(item.date)}  ·  {fmtTime(item.date)}
+                    {item.location ? `  ·  ${item.location}` : ""}
                   </p>
 
                   {item.summary && (
@@ -164,13 +160,13 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
 
       {past.length > 0 && (
         <>
-          <div class="relative flex justify-center my-12">
-            <span class="inline-block h-1 w-12 bg-[var(--w4-accent)] rounded-full"></span>
+          <div class="mt-20 mb-8 text-left">
+            <div class="eyebrow mb-2">Looking back</div>
+            <h2 class="section-title mb-0! before:hidden">Past Events</h2>
           </div>
-          <h2 class="text-2xl font-bold text-white mb-6">Past Events</h2>
           <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 text-left">
             {past.map((item) => (
-              <li class="w4-card hover:translate-y-[-2px] transition-transform">
+              <li class="w4-card w4-card-link overflow-hidden p-0!">
                 {item.type === "Event" ? (
                   <a href={item.link} class="block p-6 h-full">
                     {item.cover && (
@@ -191,8 +187,8 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
                     </h3>
 
                     <p class="text-gray-400 text-sm mb-3">
-                      {fmtDate(item.date)}  {fmtTime(item.date)}
-                      {item.location ? `  ${item.location}` : ""}
+                      {fmtDate(item.date)}  ·  {fmtTime(item.date)}
+                      {item.location ? `  ·  ${item.location}` : ""}
                     </p>
 
                     <span class="inline-flex items-center gap-1 text-(--w4-accent) font-semibold text-sm">
@@ -219,8 +215,8 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
                     </h3>
 
                     <p class="text-gray-400 text-sm">
-                      {fmtDate(item.date)}  {fmtTime(item.date)}
-                      {item.location ? `  ${item.location}` : ""}
+                      {fmtDate(item.date)}  ·  {fmtTime(item.date)}
+                      {item.location ? `  ·  ${item.location}` : ""}
                     </p>
                   </div>
                 )}
@@ -232,18 +228,3 @@ const fmtTime = (value: string | Date) => formatFloatingTime(value);
     </div>
   </section>
 </Base>
-
-<style>
-  /* Card polish (mirrors your theme tokens) */
-  .w4-card {
-    background: var(--w4-surface);
-    border: 1px solid var(--w4-border);
-    border-radius: 1rem;
-    box-shadow: var(--w4-shadow);
-    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-  }
-  .w4-card:hover {
-    box-shadow: var(--w4-shadow-lg);
-    border-color: rgba(255,255,255,.18);
-  }
-</style>

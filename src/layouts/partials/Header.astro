@@ -36,15 +36,15 @@ const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     <button
       id="nav-toggle"
       type="button"
-      class="nav-toggle order-3 cursor-pointer flex items-center text-text-dark dark:text-white lg:hidden"
+      class="nav-toggle order-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/15 text-white lg:hidden"
       aria-controls="nav-menu"
       aria-expanded="false"
       aria-label="Menu"
     >
-      <svg class="nav-icon-open h-6 fill-current" viewBox="0 0 20 20" aria-hidden="true">
+      <svg class="nav-icon-open h-5 fill-current" viewBox="0 0 20 20" aria-hidden="true">
         <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
       </svg>
-      <svg class="nav-icon-close h-6 fill-current" viewBox="0 0 20 20" aria-hidden="true">
+      <svg class="nav-icon-close h-5 fill-current" viewBox="0 0 20 20" aria-hidden="true">
         <polygon
           points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
           transform="rotate(45 10 10)"></polygon>
@@ -54,8 +54,8 @@ const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     <!-- nav links: collapsible on mobile, always shown on desktop -->
     <ul
       id="nav-menu"
-      class="navbar-nav order-3 hidden w-full pb-6
-             lg:flex lg:justify-center lg:space-x-2 lg:pb-0 xl:space-x-8"
+      class="navbar-nav order-3 hidden w-full border-t border-white/10 pt-3 pb-5 mt-3
+             lg:order-1 lg:mt-0 lg:flex lg:w-auto lg:flex-1 lg:items-center lg:justify-center lg:gap-0.5 lg:border-0 lg:p-0 xl:gap-1"
     >
       {
         main.map((menu) => (
@@ -72,7 +72,7 @@ const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
                   aria-controls={`submenu-${slug(menu.name)}`}
                 >
                   {menu.name}
-                  <svg class="h-4 w-4 fill-current ml-1" viewBox="0 0 20 20" aria-hidden="true">
+                  <svg class="h-4 w-4 fill-current ml-0.5 opacity-60 transition-transform" viewBox="0 0 20 20" aria-hidden="true">
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                   </svg>
                 </button>
@@ -112,8 +112,8 @@ const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
       <!-- mobile-only CTA inside the collapsible list -->
       {navigation_button.enable && (
-        <li class="mt-4 inline-block lg:hidden">
-          <a class="btn btn-outline-primary btn-sm" href={navigation_button.link}>
+        <li class="mt-4 lg:hidden">
+          <a class="btn btn-primary w-full" href={navigation_button.link}>
             {navigation_button.label}
           </a>
         </li>
@@ -121,7 +121,7 @@ const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     </ul>
 
     <!-- right-side actions -->
-    <div class="order-1 ml-auto flex items-center md:order-2">
+    <div class="order-1 ml-auto flex items-center gap-3 lg:order-2 lg:ml-0">
       {settings.search && (
         <button
           class="border-border text-text-dark hover:text-primary dark:border-darkmode-border mr-5 inline-block border-r pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
@@ -131,11 +131,11 @@ const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
           <IoSearch />
         </button>
       )}
-      <ThemeSwitcher className="mr-5" />
+      <ThemeSwitcher />
       <!-- desktop CTA (visible on lg+) -->
       {navigation_button.enable && (
         <a
-          class="btn btn-outline-primary hidden lg:inline-flex lg:px-4 lg:py-2"
+          class="btn btn-primary btn-sm hidden lg:inline-flex"
           href={navigation_button.link}
         >
           {navigation_button.label}

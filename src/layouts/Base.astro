@@ -83,17 +83,8 @@ const jsonLdHtml = jsonLd ? JSON.stringify(jsonLd).replace(/</g, "\\u003c") : un
     <!-- favicon -->
     <link rel="shortcut icon" href={config.site.favicon} />
     <!-- theme meta -->
-    <meta name="msapplication-TileColor" content="#000000" />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#fff"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#000"
-    />
+    <meta name="msapplication-TileColor" content="#070b14" />
+    <meta name="theme-color" content="#070b14" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- google font css -->
@@ -116,6 +107,15 @@ const jsonLdHtml = jsonLd ? JSON.stringify(jsonLd).replace(/</g, "\\u003c") : un
           fallback: "sans-serif",
           cssVariable: "font-secondary",
           googleFontsURL: `https://fonts.googleapis.com/css2?family=${sf}&display=swap`,
+        },
+        {
+          src: [],
+          preload: false,
+          display: "swap",
+          name: "JetBrains Mono",
+          fallback: "monospace",
+          cssVariable: "font-mono-face",
+          googleFontsURL: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap",
         },
       ]}
     />

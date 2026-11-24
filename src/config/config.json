@@ -21,7 +21,7 @@
     "enable": true,
     "content": "<span class='text-center block'>RSVP for our Christmas Party at <a href='https://forms.w4trc.org/christmas-party'>https://forms.w4trc.org/christmas-party</a></span>",
     "expire_days": 7,
-    "background_color": "darkgreen",
+    "background_color": "linear-gradient(90deg, #065f46, #047857 50%, #065f46)",
     "text_color": "white"
   },
   "params": {
@@ -31,8 +31,8 @@
     "meeting_schedule": "Second Thursday of each month, 7:00 PM"
   },
   "navigation_button": {
-    "enable": false,
-    "label": "Join",
+    "enable": true,
+    "label": "Join the Club",
     "link": "/join/"
   },
   "metadata": {

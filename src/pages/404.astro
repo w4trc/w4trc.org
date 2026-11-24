@@ -1,34 +1,17 @@
 ---
 import Base from "@/layouts/Base.astro";
+import PageHero from "@/components/PageHero.astro";
 ---
 
 <Base title="Page Not Found" description="Sorry, that page could not be found on the Kingsport Amateur Radio Club (W4TRC) website." noindex>
-  <section class="section-sm text-center">
-    <div class="container">
-      <div class="row justify-center">
-        <div class="sm:col-10 md:col-8 lg:col-6">
-          <span
-            class="text-[8rem] block font-bold text-text-dark dark:text-darkmode-text-dark"
-          >
-            404
-          </span>
-          <h1 class="h2 mb-4">Off Frequency</h1>
-          <div class="content space-y-4">
-            <p>
-              We tried to tune this page, but all we got was static. It might have
-              moved, changed its call sign, or is taking a coffee break.
-            </p>
-            <p>
-              Try spinning the dial back to the homepage or drop us a line so we can
-              help you make contact.
-            </p>
-          </div>
-          <div class="mt-8 flex items-center justify-center gap-3">
-            <a href="/" class="btn btn-outline-light">Back to home</a>
-            <a href="/contact/" class="btn btn-outline-primary">Contact us</a>
-          </div>
-        </div>
-      </div>
+  <PageHero
+    eyebrow="Error 404"
+    title="Off Frequency"
+    subtitle="We tried to tune this page, but all we got was static. It might have moved, changed its call sign, or is taking a coffee break."
+  >
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a href="/" class="btn btn-primary">Back to home</a>
+      <a href="/contact/" class="btn btn-outline-primary">Contact us</a>
     </div>
-  </section>
+  </PageHero>
 </Base>

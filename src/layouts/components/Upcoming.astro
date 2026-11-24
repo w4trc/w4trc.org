@@ -90,10 +90,13 @@ const upcoming = coll
   <Wrapper>
     <div class={innerClass}>
       <div class="flex items-end justify-between gap-4">
-        <h2 class="section-title">{title}</h2>
+        <div>
+          <p class="eyebrow mb-2">On the calendar</p>
+          <h2 class="section-title mb-0! before:hidden">{title}</h2>
+        </div>
         {showCalendarCta && (
-          <a class="px-3 py-2 rounded-lg border border-white/20 text-white/90" href={calendarHref}>
-            View All Upcoming Events
+          <a class="btn-ghost shrink-0" href={calendarHref}>
+            All events <span aria-hidden="true">→</span>
           </a>
         )}
       </div>
@@ -111,7 +114,7 @@ const upcoming = coll
           const url = (ev.data as any).url ?? `/${ev.collection}/${ev.id}/`;
           const rsvpUrl = (ev.data as any).rsvpUrl as string | undefined;
           return (
-            <div class:list={["w4-card", embedded ? "sm:flex sm:gap-5 sm:items-start" : "block"]}>
+            <div class:list={["w4-card w4-card-link relative", embedded ? "sm:flex sm:gap-5 sm:items-start p-4!" : "block"]}>
               {cover && (
                 <ImageMod
                   src={cover}
@@ -119,34 +122,32 @@ const upcoming = coll
                   height={360}
                   format="webp"
                   alt=""
-                  class:list={["mb-3 rounded-lg", embedded && "sm:mb-0 sm:w-40 sm:shrink-0"]}
+                  class:list={["mb-3 rounded-xl", embedded && "sm:mb-0 sm:w-44 sm:shrink-0"]}
                   style="aspect-ratio:16/9;object-fit:cover;"
                   loading="lazy"
                 />
               )}
               <div>
-              <div class="text-sm text-white/60 mb-1">{fmtRange(ev)}</div>
+              <div class="font-mono text-xs uppercase tracking-wider text-(--w4-accent) mb-1.5">{fmtRange(ev)}</div>
               <h3 class="text-white font-semibold text-lg leading-snug">{ev.data.title}</h3>
               {location && (
-                <p class="mt-1 text-white/80">
-                  <strong>Location: </strong> {location}
-                </p>
+                <p class="mt-1 text-sm text-white/55!">{location}</p>
               )}
-              {summary && <p class="mt-2 text-white/80">{summary}</p>}
+              {summary && <p class="mt-2 text-sm text-white/75!">{summary}</p>}
               <div class="mt-3 flex flex-wrap gap-3">
                 {rsvpUrl && (
                   <a
-                    class="inline-flex items-center gap-1 text-(--w4-accent) font-semibold text-sm underline underline-offset-4"
+                    class="link-arrow relative z-10"
                     href={rsvpUrl}
                   >
                     RSVP
                   </a>
                 )}
                 <a
-                  class="inline-flex items-center gap-1 text-(--w4-accent) font-semibold text-sm underline underline-offset-4"
+                  class="link-arrow after:absolute after:inset-0 after:content-['']"
                   href={url}
                 >
-                  More info
+                  More info <span aria-hidden="true">→</span>
                 </a>
               </div>
               </div>
