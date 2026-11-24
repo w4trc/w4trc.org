@@ -1,4 +1,5 @@
 ---
+import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
@@ -69,9 +70,11 @@ const galleryImages = Object.entries(allGalleryModules)
 
       {d.image && (
         <div class="w4-card overflow-hidden">
-          <img
+          <ImageMod
             src={d.image}
             alt={d.title}
+            width={1600}
+            format="webp"
             class="w-full h-64 object-cover"
             loading="lazy"
           />
