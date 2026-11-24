@@ -18,6 +18,7 @@ const { enable, content, expire_days, background_color, text_color } =
     style={{ background: background_color, color: text_color }}
     data-expire-days={expire_days}
     transition:persist
+    transition:animate="none"
   >
     <p set:html={markdownify(content)} />
     <button
