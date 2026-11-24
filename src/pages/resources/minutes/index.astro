@@ -7,12 +7,17 @@ const entries = [...minutes].sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 );
 
-const fmtDate = (iso: string) =>
-  new Date(iso + (iso.includes("T") ? "" : "T00:00:00")).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+// Group by year, newest first
+const years = [...new Set(entries.map((m) => m.date.slice(0, 4)))];
+const byYear = years.map((year) => ({
+  year,
+  items: entries.filter((m) => m.date.startsWith(year)),
+}));
+
+// Titles read "November 12, 2026 Meeting Minutes" (or "November 2025 ...");
+// the year heading already gives the year, so show just the month and day.
+const label = (title: string) =>
+  title.replace(/\s*Meeting Minutes$/i, "").replace(/,?\s*\d{4}$/, "");
 ---
 
 <Base
@@ -23,35 +28,73 @@ const fmtDate = (iso: string) =>
   <PageHero
     eyebrow="Resources"
     title="Meeting Minutes"
-    subtitle="Browse recent club meeting minutes."
+    subtitle={`Minutes from ${entries.length} club meetings since ${years.at(-1)}. Open a meeting for a quick summary, or grab the PDF.`}
     image="/images/anastassia-anufrieva-ecHGTPfjNfA-unsplash.jpg"
   />
 
   <section class="section-md">
-    <div class="max-w-[1100px] mx-auto px-6">
-      <div class="grid gap-6 md:grid-cols-2">
-        {entries.map((item) => (
-          <article class="w4-card p-6 flex flex-col gap-3">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <p class="text-xs uppercase tracking-wide text-white/60">Meeting</p>
-                <h2 class="text-xl font-bold text-white leading-snug">{item.title}</h2>
-              </div>
-              <span class="text-xs px-3 py-1 rounded-full bg-white/10 text-white/80 border border-white/15 whitespace-nowrap shrink-0">
-                {fmtDate(item.date)}
-              </span>
-            </div>
-            {item.summary && <p class="text-sm text-white/75">{item.summary}</p>}
-            {item.link ? (
-              <a class="button inline-flex items-center justify-center px-3 py-2 text-sm font-semibold mt-auto underline" href={item.link} target="_blank" rel="noreferrer">
-                View Minutes
-              </a>
-            ) : (
-              <p class="text-xs text-white/50 mt-auto">Add a link for this entry in minutes.json</p>
-            )}
-          </article>
+    <div class="mx-auto max-w-[1000px] px-6">
+      <nav aria-label="Jump to year" class="mb-12 flex flex-wrap items-center justify-center gap-2">
+        {byYear.map(({ year, items }) => (
+          <a
+            href={`#y${year}`}
+            class="rounded-full border border-white/12 bg-white/[.04] px-4 py-1.5 font-mono text-sm text-white/75 transition hover:border-(--w4-accent) hover:text-white"
+          >
+            {year} <span class="text-white/40">· {items.length}</span>
+          </a>
+        ))}
+      </nav>
+
+      <div class="space-y-14">
+        {byYear.map(({ year, items }, yi) => (
+          <section id={`y${year}`} class="scroll-mt-28 py-0! grid gap-4 md:grid-cols-[120px_minmax(0,1fr)]">
+            <h2 class="font-secondary text-3xl font-bold text-white md:sticky md:top-28 md:self-start">
+              {year}
+            </h2>
+            <ul class="w4-card divide-y divide-white/[.07] p-0! overflow-hidden">
+              {items.map((item, i) => (
+                <li class="minutes-row relative">
+                  <details open={yi === 0 && i === 0}>
+                    <summary class="flex cursor-pointer list-none items-center gap-4 py-4 pl-5 pr-36 transition hover:bg-white/[.03]">
+                      <svg class="chev h-4 w-4 shrink-0 text-white/40 transition-transform" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M7.05 4.05 12.99 10l-5.94 5.95-1.41-1.42L10.17 10 5.64 5.46z" />
+                      </svg>
+                      <span class="font-medium text-white">{label(item.title)}</span>
+                      {yi === 0 && i === 0 && (
+                        <span class="rounded-full bg-(--w4-accent)/15 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-(--w4-accent)">
+                          Latest
+                        </span>
+                      )}
+                    </summary>
+                    {item.summary && (
+                      <p class="pr-5 pb-5 pl-13 text-[15px] leading-relaxed text-white/70">{item.summary}</p>
+                    )}
+                  </details>
+                  {item.link && (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="absolute right-4 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/12 px-3 py-1.5 text-xs font-semibold text-white/80 transition hover:border-(--w4-accent) hover:text-white"
+                      aria-label={`${item.title} (PDF)`}
+                    >
+                      <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M10 13.5 5.5 9l1.4-1.4L9 9.7V3h2v6.7l2.1-2.1L14.5 9zM4 15h12v2H4z" />
+                      </svg>
+                      PDF
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
       </div>
     </div>
   </section>
+
+<style>
+  summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(90deg); color: var(--w4-accent); }
+</style>
 </Base>

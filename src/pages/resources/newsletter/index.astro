@@ -7,11 +7,16 @@ const issues = [...newsletters].sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 );
 
-const fmtDate = (iso: string) =>
-  new Date(iso + (iso.includes("T") ? "" : "T00:00:00")).toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric",
-  });
+const toDate = (iso: string) => new Date(iso + (iso.includes("T") ? "" : "T00:00:00"));
+const month = (iso: string, style: "long" | "short") =>
+  toDate(iso).toLocaleDateString("en-US", { month: style });
+
+const latest = issues[0];
+const years = [...new Set(issues.map((i) => i.date.slice(0, 4)))];
+const byYear = years.map((year) => ({
+  year,
+  items: issues.filter((i) => i.date.startsWith(year)),
+}));
 ---
 
 <Base
@@ -29,27 +34,59 @@ const fmtDate = (iso: string) =>
   </PageHero>
 
   <section class="section-md">
-    <div class="max-w-[1100px] mx-auto px-6">
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {issues.map((issue) => (
-          <article class="w4-card p-6 flex flex-col gap-3">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <h2 class="text-xl font-bold text-white leading-snug">
-                  {issue.title ?? fmtDate(issue.date)}
-                </h2>
-              </div>
-              
+    <div class="mx-auto max-w-[1000px] px-6 space-y-14">
+      {latest?.link && (
+        <a
+          href={latest.link}
+          target="_blank"
+          rel="noreferrer"
+          class="w4-card w4-card-link group relative flex flex-col items-start gap-6 overflow-hidden p-8 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div class="flex items-center gap-6">
+            <div class="flex h-20 w-16 shrink-0 flex-col items-center justify-center rounded-lg border border-white/15 bg-linear-to-b from-white/10 to-white/[.02] font-mono text-[10px] uppercase tracking-widest text-white/60 shadow-[0_12px_24px_-12px_rgba(0,0,0,.8)]">
+              <span class="text-(--w4-accent)">PDF</span>
             </div>
-            {issue.summary && <p class="text-sm text-white/75">{issue.summary}</p>}
-            {issue.link ? (
-              <a class="button inline-flex items-center justify-center px-3 py-2 text-sm font-semibold mt-auto underline" href={issue.link} target="_blank" rel="noreferrer">
-                Download PDF
-              </a>
-            ) : (
-              <p class="text-xs text-white/50 mt-auto">Add a link for this issue in newsletters.json</p>
-            )}
-          </article>
+            <div>
+              <div class="eyebrow mb-1">Latest issue</div>
+              <h2 class="font-secondary text-2xl font-bold text-white sm:text-3xl">
+                {month(latest.date, "long")} {latest.date.slice(0, 4)}
+              </h2>
+            </div>
+          </div>
+          <span class="btn btn-primary btn-sm">
+            Read it <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      )}
+
+      <div class="space-y-10">
+        {byYear.map(({ year, items }) => (
+          <section class="py-0! grid gap-4 md:grid-cols-[120px_minmax(0,1fr)]">
+            <h2 class="font-secondary text-3xl font-bold text-white">{year}</h2>
+            <ul class="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
+              {items.map((issue) => (
+                <li>
+                  {issue.link ? (
+                    <a
+                      href={issue.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="flex flex-col rounded-xl border border-white/10 bg-white/[.03] px-3 py-3 transition hover:-translate-y-0.5 hover:border-(--w4-accent) hover:bg-white/[.06]"
+                      aria-label={`${issue.title ?? month(issue.date, "long") + " " + year} (PDF)`}
+                    >
+                      <span class="font-medium text-white">{month(issue.date, "short")}</span>
+                      <span class="font-mono text-[11px] text-white/45">PDF ↓</span>
+                    </a>
+                  ) : (
+                    <span class="flex flex-col rounded-xl border border-dashed border-white/10 px-3 py-3 text-white/40">
+                      {month(issue.date, "short")}
+                      <span class="font-mono text-[11px]">missing</span>
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
       </div>
     </div>

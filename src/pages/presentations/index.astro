@@ -28,9 +28,8 @@ const fmtDate = (iso: string) =>
     subtitle="Slides and videos from presentations given at our club meetings."
   />
 
-  <!-- PRESENTATION LIST -->
   <section class="section-md">
-    <div class="max-w-[1200px] mx-auto px-6 space-y-8">
+    <div class="max-w-[1200px] mx-auto px-6 space-y-12">
       {presentations.length === 0 ? (
         <div class="w4-card p-8 text-center">
           <p class="text-white/60">No presentations have been posted yet. Check back soon!</p>
@@ -38,69 +37,90 @@ const fmtDate = (iso: string) =>
       ) : (
         <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {presentations.map((pres) => {
-            const hasVideo  = !!pres.data.youtubeId;
-            const hasSlides = !!(pres.data.slidesUrl || pres.data.slidesEmbed);
+            const { youtubeId, slidesUrl, slidesEmbed } = pres.data;
+            const hasVideo = !!youtubeId;
+            const hasSlides = !!(slidesUrl || slidesEmbed);
             return (
-              <article class="w4-card p-6 flex flex-col gap-3">
-                <!-- date + badges -->
-                <div class="flex items-center gap-2 flex-wrap">
-                  <time
-                    datetime={pres.data.date}
-                    class="text-xs text-white/50 font-mono"
-                  >
-                    {fmtDate(pres.data.date)}
-                  </time>
-                  {hasVideo && (
-                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-red-700/70 text-white">
-                      Video
-                    </span>
+              <article class="group w4-card w4-card-link relative flex flex-col overflow-hidden">
+                <div class="relative aspect-video overflow-hidden border-b border-white/[.07] bg-linear-to-br from-[#16223a] to-[#0b111d]">
+                  {hasVideo ? (
+                    <img
+                      src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
+                      alt=""
+                      width="480"
+                      height="360"
+                      loading="lazy"
+                      class="h-full w-full object-cover opacity-85 transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
+                    />
+                  ) : (
+                    <div class="flex h-full items-center justify-center">
+                      <svg class="h-12 w-12 text-white/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="12" rx="1.5" /><path d="M12 16v4M8 20h8" />
+                      </svg>
+                    </div>
                   )}
-                  {hasSlides && (
-                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-700/70 text-white">
-                      Slides
+                  {hasVideo && (
+                    <span class="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                      <span class="flex h-12 w-12 items-center justify-center rounded-full bg-black/55 ring-1 ring-white/25 backdrop-blur transition group-hover:bg-(--w4-accent) group-hover:ring-0">
+                        <svg class="ml-0.5 h-5 w-5 text-white group-hover:text-(--w4-on-accent)" viewBox="0 0 20 20" fill="currentColor"><path d="M6 4.5v11l9-5.5z" /></svg>
+                      </span>
                     </span>
                   )}
                 </div>
 
-                <h2 class="text-xl font-bold text-white leading-snug">
-                  {pres.data.title}
-                </h2>
+                <div class="flex flex-1 flex-col gap-2 p-6">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <time datetime={pres.data.date} class="font-mono text-xs tracking-wide text-white/45">
+                      {fmtDate(pres.data.date)}
+                    </time>
+                    {hasVideo && <span class="pill">Video</span>}
+                    {hasSlides && <span class="pill">Slides</span>}
+                  </div>
 
-                <p class="text-sm text-[var(--w4-accent)] font-medium">
-                  {pres.data.presenter}
-                </p>
+                  <h2 class="text-xl font-semibold leading-snug text-white transition-colors group-hover:text-(--w4-accent)">
+                    <a
+                      href={`/presentations/${pres.id}/`}
+                      class="after:absolute after:inset-0 after:content-[''] focus:outline-none focus-visible:after:rounded-2xl focus-visible:after:ring-2 focus-visible:after:ring-(--w4-accent)"
+                    >
+                      {pres.data.title}
+                    </a>
+                  </h2>
 
-                {pres.data.description && (
-                  <p class="text-sm text-white/75 line-clamp-3">
-                    {pres.data.description}
-                  </p>
-                )}
+                  <p class="text-sm font-medium text-(--w4-accent-soft)">{pres.data.presenter}</p>
 
-                <a
-                  class="inline-flex items-center gap-2 text-[var(--w4-accent)] font-semibold mt-auto hover:underline underline-offset-4"
-                  href={`/presentations/${pres.id}/`}
-                >
-                  View presentation
-                  <span aria-hidden="true">→</span>
-                </a>
+                  {pres.data.description && (
+                    <p class="line-clamp-3 text-sm text-white/65">{pres.data.description}</p>
+                  )}
+                </div>
               </article>
             );
           })}
         </div>
       )}
 
-      <div class="w4-card p-6 text-center">
-        <h3 class="text-xl font-semibold mb-2 text-white">Have a presentation to share?</h3>
-        <p class="text-white/70 text-sm">
-          Given a talk at a club meeting? Send your slides or video link to the club officers and we'll add it to the archive.
-        </p>
-        <a
-          class="button inline-flex items-center justify-center px-4 py-2 mt-4 text-sm font-semibold"
-          href="/contact/"
-        >
-          Contact the club
-        </a>
+      <div class="w4-card flex flex-col items-center gap-5 p-8 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div>
+          <h3 class="mb-1 text-xl font-semibold text-white">Have a presentation to share?</h3>
+          <p class="text-sm text-white/65">
+            Given a talk at a club meeting? Send your slides or video link to the club officers and we'll add it to the archive.
+          </p>
+        </div>
+        <a class="btn btn-outline-primary btn-sm shrink-0" href="/contact/">Contact the club</a>
       </div>
     </div>
   </section>
+
+<style>
+  .pill {
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.1rem 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+</style>
 </Base>

@@ -5,9 +5,11 @@ import ImageMod from "@/components/ImageMod.astro";
 interface Props {
   post: CollectionEntry<"posts">;
   headingLevel?: "h2" | "h3";
+  /** Large horizontal card for the newest post */
+  featured?: boolean;
 }
 
-const { post, headingLevel = "h2" } = Astro.props;
+const { post, headingLevel = "h2", featured = false } = Astro.props;
 const Heading = headingLevel;
 
 const href = post.data.externalUrl ?? `/posts/${post.id.replace(/\/index$/, "")}/`;
@@ -21,21 +23,22 @@ const fmtDate = (iso: string) =>
   });
 ---
 
-<article class="group w4-card w4-card-link relative flex flex-col overflow-hidden">
+<article class:list={["group w4-card w4-card-link relative flex flex-col overflow-hidden", featured && "lg:flex-row"]}>
   {post.data.image && (
-    <div class="overflow-hidden">
+    <div class:list={["overflow-hidden", featured && "lg:w-[58%] lg:shrink-0"]}>
     <ImageMod
       src={post.data.image}
       alt={post.data.title}
-      width={800}
-      height={384}
+      width={featured ? 1200 : 800}
+      height={featured ? 720 : 384}
       format="webp"
-      class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-      loading="lazy"
+      class={`w-full h-52 object-cover transition-transform duration-500 group-hover:scale-[1.04] ${featured ? "sm:h-72 lg:h-full lg:min-h-[360px]" : ""}`}
+      loading={featured ? "eager" : "lazy"}
     />
     </div>
   )}
-  <div class="p-6 flex flex-col gap-3 flex-1">
+  <div class:list={["p-6 flex flex-col gap-3 flex-1", featured && "lg:justify-center lg:p-10"]}>
+  {featured && <div class="eyebrow">Latest post</div>}
   <div class="flex items-center gap-2 flex-wrap">
     <time
       datetime={post.data.date}
@@ -50,7 +53,7 @@ const fmtDate = (iso: string) =>
     ))}
   </div>
 
-  <Heading class="text-xl font-semibold text-white leading-snug group-hover:text-(--w4-accent) transition-colors">
+  <Heading class:list={[featured ? "text-2xl lg:text-3xl" : "text-xl", "font-semibold text-white leading-snug group-hover:text-(--w4-accent) transition-colors"]}>
     <a
       href={href}
       class="focus:outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:ring-2 focus-visible:after:ring-[var(--w4-accent)] focus-visible:after:rounded-2xl"
@@ -67,7 +70,7 @@ const fmtDate = (iso: string) =>
   )}
 
   {post.data.summary && (
-    <p class="text-sm text-white/70! line-clamp-3">
+    <p class:list={[featured ? "text-base line-clamp-4" : "text-sm line-clamp-3", "text-white/70!"]}>
       {post.data.summary}
     </p>
   )}

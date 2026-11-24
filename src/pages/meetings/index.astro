@@ -49,7 +49,7 @@ const fmtTime = (iso: string) => formatFloatingTime(iso);
 
         <div class="w4-card p-6 space-y-4">
           <div>
-            <p class="text-xs uppercase tracking-wide text-white/60">When</p>
+            <p class="eyebrow">When</p>
             <h2 class="text-2xl font-bold text-white">Second Thursday, Monthly</h2>
           </div>
           <ul class="space-y-2 text-sm text-white/80">
@@ -64,7 +64,7 @@ const fmtTime = (iso: string) => formatFloatingTime(iso);
 
         <div class="w4-card p-6 space-y-4">
           <div>
-            <p class="text-xs uppercase tracking-wide text-white/60">Where</p>
+            <p class="eyebrow">Where</p>
             <h2 class="text-2xl font-bold text-white">Toy F. Reid Employee Center</h2>
           </div>
           <ul class="space-y-2 text-sm text-white/80">
@@ -87,22 +87,41 @@ const fmtTime = (iso: string) => formatFloatingTime(iso);
       <!-- MAP -->
       <div>
         <h2 class="section-title">Location</h2>
-        <div class="w4-card overflow-hidden p-0 rounded-2xl">
-          <iframe
-            title="Toy F. Reid Employee Center map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3208.7!2d-82.5695!3d36.5324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x885a4f7f4f0a0001%3A0x0!2s400+S+Wilcox+Dr%2C+Kingsport%2C+TN+37660!5e0!3m2!1sen!2sus!4v1700000000000"
-            width="100%"
-            height="380"
-            style="border:0;"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+        <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div class="map-frame w4-card relative overflow-hidden p-0! min-h-[340px]">
+            <!-- placeholder shown until the map loads -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-white/40" aria-hidden="true">
+              <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" />
+              </svg>
+              <span class="font-mono text-xs uppercase tracking-widest">Loading map</span>
+            </div>
+            <iframe
+              title="Map of the Toy F. Reid Employee Center, 400 South Wilcox Drive, Kingsport"
+              src="https://maps.google.com/maps?q=Toy+F.+Reid+Employee+Center,+400+South+Wilcox+Drive,+Kingsport,+TN+37660&z=16&output=embed"
+              class="absolute inset-0 h-full w-full border-0"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <div class="w4-card flex flex-col gap-4 p-6">
+            <div class="eyebrow">Finding us</div>
+            <ol class="space-y-3 text-sm text-white/75">
+              <li class="flex gap-3"><span class="step">1</span>Enter the main parking lot off South Wilcox Drive.</li>
+              <li class="flex gap-3"><span class="step">2</span>The center is the large building at the rear of the lot.</li>
+              <li class="flex gap-3"><span class="step">3</span>Room 219 is on the second floor.</li>
+            </ol>
+            <a
+              class="btn btn-primary btn-sm mt-auto self-start"
+              href="https://www.google.com/maps/dir/?api=1&destination=400+South+Wilcox+Drive,+Kingsport,+TN+37660"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get directions <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
-        <p class="text-sm text-white/60 mt-2">
-          Enter the main parking lot off South Wilcox Drive. The center is the large building at the rear of the lot.
-          Room 219 is on the second floor.
-        </p>
       </div>
 
       <!-- UPCOMING MEETINGS -->
@@ -169,23 +188,30 @@ const fmtTime = (iso: string) => formatFloatingTime(iso);
       <!-- PHOTOS -->
       <div>
         <h2 class="section-title">Meeting Photos</h2>
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div class="w4-card overflow-hidden p-0 rounded-2xl">
+        <div class="grid gap-4 md:grid-cols-3">
+          <div class="w4-card overflow-hidden p-0! md:col-span-2">
             <img
               src="/images/clubmeetings2025.jpg"
               alt="KARC club meeting 2025"
-              class="w-full h-52 object-cover"
+              class="aspect-[16/9] h-full w-full object-cover"
               loading="lazy"
             />
           </div>
           <!-- Add more meeting photos here as they become available -->
+          <a
+            href="https://gallery.w4trc.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w4-card w4-card-link group flex flex-col justify-end gap-2 bg-[radial-gradient(30rem_20rem_at_100%_0%,rgba(245,165,36,.16),transparent_60%)] p-6"
+          >
+            <svg class="mb-auto h-9 w-9 text-(--w4-accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="9" cy="10" r="1.75" /><path d="m21 16-5-5-8 8" />
+            </svg>
+            <span class="eyebrow">Club gallery</span>
+            <span class="text-xl font-semibold text-white">More photos from meetings and events</span>
+            <span class="link-arrow">gallery.w4trc.org <span aria-hidden="true">↗</span></span>
+          </a>
         </div>
-        <p class="text-sm text-white/60 mt-3">
-          More photos from club meetings and events are in the{" "}
-          <a class="underline underline-offset-4" href="https://gallery.w4trc.org" target="_blank" rel="noopener noreferrer">
-            club gallery
-          </a>.
-        </p>
       </div>
 
       <!-- CTA -->
@@ -196,10 +222,29 @@ const fmtTime = (iso: string) => formatFloatingTime(iso);
         </div>
         <div class="flex flex-wrap gap-3">
           <a class="btn btn-primary" href="/join/">Join the Club</a>
-          <a class="btn btn-outline" href="/contact/">Get in Touch</a>
+          <a class="btn btn-outline-primary" href="/contact/">Get in Touch</a>
         </div>
       </div>
 
     </div>
   </section>
+
+<style>
+  .map-frame { background: #0d1321; }
+  /* dark map to match the site */
+  .map-frame iframe { filter: invert(0.9) hue-rotate(180deg) saturate(0.6) brightness(0.95); }
+  .step {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: rgba(245, 165, 36, 0.14);
+    color: var(--w4-accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+</style>
 </Base>
