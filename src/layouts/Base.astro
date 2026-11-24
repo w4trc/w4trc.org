@@ -8,7 +8,7 @@ import Header from "@/partials/Header.astro";
 import "@/styles/main.css";
 import { AstroFont } from "astro-font";
 import { ClientRouter } from "astro:transitions";
-import Announcement from "./helpers/Announcement";
+import Announcement from "./helpers/Announcement.astro";
 import "@/styles/global.css";
 
 // font families
@@ -205,7 +205,7 @@ const jsonLdHtml = jsonLd ? JSON.stringify(jsonLd).replace(/</g, "\\u003c") : un
   <body>
    
     <TwSizeIndicator />
-    <Announcement client:load />
+    <Announcement />
     <Header />
 
     <main id="main-content">

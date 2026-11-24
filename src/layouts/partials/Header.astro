@@ -25,7 +25,7 @@ const isActive = (url: string) => pathname === url || pathname === `${url}/`;
 const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 ---
 
-<header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
+<header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`} transition:animate="none">
   <nav class="navbar container" aria-label="Main">
     <!-- logo -->
     <div class="order-0">
