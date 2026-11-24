@@ -509,10 +509,20 @@
   }
 }
 
-/* Page-to-page transitions: Astro's ClientRouter cross-fades the page; the
-   header has transition:animate="none" so it doesn't blink. Browsers slide
-   named elements from their old to their new position by default, which
-   reads as the page jumping up, so turn that off and keep a plain fade. */
+/* Page-to-page transitions (pageFade in Base.astro): a plain cross-fade of
+   the whole page; the header has transition:animate="none" so it doesn't
+   blink. Browsers slide named elements from their old to their new
+   position by default, so turn that off: opacity only. */
+@keyframes w4-page-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes w4-page-in {
+  from {
+    opacity: 0;
+  }
+}
 ::view-transition-group(*) {
   animation: none !important;
 }

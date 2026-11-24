@@ -54,6 +54,16 @@ const {
 } = Astro.props;
 
 // Every indexable page gets a canonical URL; pages can still override it.
+// Page-to-page cross-fade for the whole page (set on <html>, so nothing
+// slides). Opacity only; keyframes are in custom.css. The header keeps
+// transition:animate="none" so it stays solid. Reduced-motion users get none.
+const fadeOut = { name: "w4-page-out", duration: "160ms", easing: "ease-in", fillMode: "both" };
+const fadeIn = { name: "w4-page-in", duration: "300ms", delay: "60ms", easing: "ease-out", fillMode: "both" };
+const pageFade = {
+  forwards: { old: fadeOut, new: fadeIn },
+  backwards: { old: fadeOut, new: fadeIn },
+};
+
 const pageUrl = new URL(Astro.url.pathname, config.site.base_url).href;
 const canonicalUrl = canonical ?? (noindex ? undefined : pageUrl);
 
@@ -66,7 +76,7 @@ const jsonLdHtml = jsonLd ? JSON.stringify(jsonLd).replace(/</g, "\\u003c") : un
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:animate={pageFade}>
   <head>
     <meta charset="utf-8" />
     <!-- Google tag (gtag.js) -->
