@@ -7,7 +7,7 @@ tags: ["event-recap", "field-day"]
 image: "/images/posts/FieldDay2026.jpg"
 ---
 
-### W4TRC Wraps Up Field Day 2026
+## W4TRC Wraps Up Field Day 2026
 
 _June 28, 2026_
 
