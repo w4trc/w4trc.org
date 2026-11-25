@@ -5,6 +5,9 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "w4trc-org",
+  // The club's Cloudflare account (Webmaster@w4trc.org). Set here so Wrangler
+  // never targets a personal account when you are logged into several.
+  "account_id": "4b724b576c4285b15dfd8aa32fc83af7",
   "compatibility_date": "2026-11-23",
   "assets": {
     "directory": "./dist",
