@@ -138,7 +138,9 @@ const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
           class="btn btn-primary btn-sm hidden lg:inline-flex"
           href={navigation_button.link}
         >
-          {navigation_button.label}
+          {/* Short label on small desktops (lg–xl) so the nav fits on one row */}
+          <span class="xl:hidden">{navigation_button.label.split(" ")[0]}</span>
+          <span class="hidden xl:inline">{navigation_button.label}</span>
         </a>
       )}
     </div>

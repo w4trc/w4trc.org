@@ -4,7 +4,7 @@
 
 /* navbar items */
 .navbar {
-  @apply relative flex flex-wrap items-center justify-between gap-x-6 lg:flex-nowrap lg:gap-x-4 xl:gap-x-6;
+  @apply relative flex flex-wrap items-center justify-between gap-x-6 lg:flex-nowrap lg:gap-x-3 xl:gap-x-6;
 }
 
 .navbar-brand {
@@ -16,7 +16,7 @@
 }
 
 .nav-link {
-  @apply block cursor-pointer rounded-full px-3 py-3 text-[15px] lg:px-2.5 lg:text-sm xl:px-3.5 xl:text-[15px] font-medium text-white/75 transition hover:text-white lg:py-2 lg:hover:bg-white/[.06];
+  @apply block cursor-pointer rounded-full px-3 py-3 text-[15px] lg:px-2 lg:text-sm xl:px-3 xl:text-[15px] font-medium text-white/75 transition hover:text-white lg:py-2 lg:hover:bg-white/[.06];
 }
 
 .nav-link.active,

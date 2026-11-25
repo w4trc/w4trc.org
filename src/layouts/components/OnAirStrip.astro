@@ -9,7 +9,8 @@ const isOnAir = repeaters.status?.onAir !== false;
 const statusMessage = repeaters.status?.message ?? "";
 
 const items = [
-  { label: "Club Repeater", value: "146.970 (−) PL 123.0" },
+  // wide: gets its own row on phones (too long to share one)
+  { label: "Club Repeater", value: "146.970 (−) PL 123.0", wide: true },
   { label: "Sunday Net", value: isOnAir ? "8:30 PM" : "On hold" },
   { label: "EchoLink", value: "W4TRC-R", href: "/repeaters/echolink/" },
   { label: "Grid", value: "EM86" },
@@ -31,9 +32,9 @@ const items = [
         </div>
       </div>
 
-      <dl class="grid grid-cols-2 sm:flex sm:flex-wrap gap-x-10 gap-y-4 flex-1">
+      <dl class="grid grid-cols-3 gap-x-4 gap-y-4 sm:flex sm:flex-wrap sm:gap-x-10 flex-1">
         {items.map((item) => (
-          <div>
+          <div class:list={[item.wide && "col-span-3"]}>
             <dt class="font-mono text-[10px] uppercase tracking-[.16em] text-white/45">{item.label}</dt>
             <dd class="text-white font-mono font-medium mt-1 whitespace-nowrap">
               {item.href ? (
