@@ -45,7 +45,7 @@ const programs = [
 
 const quickLinks = [
   { title: "Find an Elmer", text: "New to the hobby? Get paired with a mentor.", href: "/elmer/" },
-  { title: "Photo Gallery", text: "Photos from club events.", href: "https://gallery.w4trc.org", external: true },
+  { title: "Photo Gallery", text: "Photos from club events.", href: "/gallery/" },
   { title: "Zero-Beat Newsletter", text: "Club news and member articles.", href: "/resources/newsletter/" },
   { title: "Live Spots", text: "See who's on the air right now.", href: "/spots/" },
 ];
@@ -151,11 +151,10 @@ const organization = {
           <a
             class="quicklink-card"
             href={l.href}
-            {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
             <p class="text-base font-semibold">
               {l.title}
-              <span aria-hidden="true" class="ml-1 text-white/40">{l.external ? "↗" : "→"}</span>
+              <span aria-hidden="true" class="ml-1 text-white/40">→</span>
             </p>
             <p class="text-sm">{l.text}</p>
           </a>

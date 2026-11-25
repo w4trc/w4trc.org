@@ -1,0 +1,94 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import Base from "@/layouts/Base.astro";
+import { photoUrl } from "@/lib/gallery";
+import { getCollection } from "astro:content";
+
+const albums = (await getCollection("albums")).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date),
+);
+
+const coverOf = (album: (typeof albums)[number]) =>
+  album.data.photos.find((p) => p.file === album.data.cover) ??
+  album.data.photos[0];
+
+const fmtDate = (iso: string) =>
+  new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+  });
+---
+
+<Base
+  title="Photo Gallery"
+  meta_title="KARC - Photo Gallery"
+  description="Photos from Kingsport Amateur Radio Club Field Days, special event stations, fox hunts and other club activities."
+>
+  <PageHero
+    eyebrow="Club photos"
+    title="Photo Gallery"
+    subtitle="Field Days, special event stations, fox hunts and more from the club over the years."
+  />
+
+  <section class="section-md">
+    <div class="max-w-[1200px] mx-auto px-6 space-y-12">
+      <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        {
+          albums.map((album) => {
+            const cover = coverOf(album);
+            return (
+              <article class="group w4-card w4-card-link relative flex flex-col overflow-hidden">
+                <div class="aspect-[4/3] overflow-hidden border-b border-white/[.07] bg-[#0b111d]">
+                  <img
+                    src={photoUrl(album.id, cover.file, "t")}
+                    alt=""
+                    width={cover.width}
+                    height={cover.height}
+                    loading="lazy"
+                    decoding="async"
+                    class="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col gap-1.5 p-5">
+                  <p class="font-mono text-xs tracking-wide text-white/45">
+                    <time datetime={album.data.date}>
+                      {fmtDate(album.data.date)}
+                    </time>
+                    <span aria-hidden="true"> · </span>
+                    {album.data.photos.length} photos
+                  </p>
+                  <h2 class="text-lg font-semibold leading-snug text-white transition-colors group-hover:text-(--w4-accent)">
+                    <a
+                      href={`/gallery/${album.id}/`}
+                      class="after:absolute after:inset-0 after:content-[''] focus:outline-none focus-visible:after:rounded-2xl focus-visible:after:ring-2 focus-visible:after:ring-(--w4-accent)"
+                    >
+                      {album.data.title}
+                    </a>
+                  </h2>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <div
+        class="w4-card flex flex-col items-center gap-5 p-8 text-center sm:flex-row sm:justify-between sm:text-left"
+      >
+        <div>
+          <h3 class="mb-1 text-xl font-semibold text-white">
+            Have photos from a club event?
+          </h3>
+          <p class="text-sm text-white/65">
+            Send us your Field Day, POTA, meeting or special event pictures and
+            we'll add them to the gallery.
+          </p>
+        </div>
+        <a
+          class="btn btn-outline-primary btn-sm shrink-0"
+          href="/gallery/submit/">Share your photos</a
+        >
+      </div>
+    </div>
+  </section>
+</Base>

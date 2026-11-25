@@ -121,4 +121,39 @@ const learn = defineCollection({
   }),
 });
 
-export const collections = { events, officers, projects, meetings, silentKeys, presentations, activities, posts, learn };
+// Photo albums, loaded from the gallery Worker (w4trc-gallery repo) when the
+// site builds. Albums and photos are managed at gallery.w4trc.org/admin; the
+// image files are in R2 (see src/lib/gallery.ts). If the API can't be
+// reached the build fails, so the last good deploy stays live.
+const GALLERY_API = (process.env.GALLERY_API ?? "https://gallery.w4trc.org").replace(/\/$/, "");
+
+const albums = defineCollection({
+  loader: async () => {
+    const res = await fetch(`${GALLERY_API}/api/gallery`);
+    if (!res.ok) throw new Error(`Gallery API ${GALLERY_API}/api/gallery returned HTTP ${res.status}`);
+    const { albums } = await res.json();
+    return albums.map(({ slug, ...album }: { slug: string }) => ({ id: slug, ...album }));
+  },
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),
+    description: z.string().optional(),
+    /** `file` of the cover photo */
+    cover: z.string(),
+    photos: z
+      .array(
+        z.object({
+          /** Key name in R2, without size folder or extension */
+          file: z.string(),
+          /** Size of the display image, so the layout can reserve space */
+          width: z.number(),
+          height: z.number(),
+          alt: z.string().optional(),
+          caption: z.string().optional(),
+        })
+      )
+      .min(1),
+  }),
+});
+
+export const collections = { albums, events, officers, projects, meetings, silentKeys, presentations, activities, posts, learn };

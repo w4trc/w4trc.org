@@ -44,5 +44,7 @@ export default defineConfig({
     '/nets': '/activities/nets/',  // handles both /nets and /nets/
     '/pota': '/activities/pota/',
     '/sota': '/activities/sota/',
+    // The photo upload form is part of the gallery Worker (w4trc-gallery repo).
+    '/gallery/submit': 'https://gallery.w4trc.org/submit',
   },
 });
