@@ -29,25 +29,25 @@ Today, KARC continues its mission with monthly meetings, on-air nets, fox hunts,
 
 ### Prerequisites
 
-- Node.js v20.10+
-- Yarn v1.22+
+- Node.js 24 (see `.node-version`)
+- npm (comes with Node)
 
 ### Install dependencies
 
 ```bash
-yarn install
+npm install
 ```
 
 ### Run the development server
 
 ```bash
-yarn dev
+npm run dev
 ```
 
 ### Build for production
 
 ```bash
-yarn build
+npm run build
 ```
 
 ---
@@ -69,25 +69,9 @@ Most site content lives in `src/content/`. Adding or editing a blog post, event,
 
 ## Contributing
 
-Contributions are welcome, especially from club members. Here are some ways to help:
+Contributions are welcome, especially from club members. You can write content (posts, events, meeting recaps), fix bugs, or improve the site.
 
-- **Write content:** Add blog posts, meeting recaps, event announcements, or project writeups in `src/content/`
-- **Fix bugs:** Open an issue or submit a pull request
-- **Improve the site:** UI improvements, accessibility fixes, new features
-
-### How to contribute
-
-1. Fork the repository and create a branch from `main`
-2. Make your changes
-3. Test locally with `yarn dev`
-4. Open a pull request with a clear description of what you changed and why
-
-### Content guidelines
-
-- Keep content relevant to amateur radio and club activities
-- Use proper Markdown formatting
-- Include a date in event/meeting filenames (e.g., `2026-06-24-field-day.md`)
-- Do not include personal contact information (phone numbers, home addresses) in public content files
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to edit content in Pages CMS or locally, the content and code guidelines, and how to submit a pull request.
 
 ---
 
