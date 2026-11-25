@@ -1,9 +1,13 @@
 ---
+import ImageMod from "@/components/ImageMod.astro";
+import repeaters from "@/data/repeaters.json";
+
+const isOnAir = repeaters.status?.onAir !== false;
+
 const hero = {
   background: "/images/home/hero-mountains.webp",
   logo: "/images/home/karc-logo.webp",
   title: "Kingsport Amateur Radio Club",
-  callsign: "W4TRC",
   subtitle:
     "ARRL-affiliated amateur radio club serving the Tri-Cities (Kingsport • Johnson City • Bristol). Public service, education, emergency comms, and plenty of fun on the air.",
   buttons: [
@@ -16,25 +20,35 @@ const hero = {
 
 <!-- HERO -->
 <section
-  class="hero-heroimg relative w-full bg-cover bg-center"
-  style={`background-image:linear-gradient(rgba(4,12,18,.35),rgba(4,12,18,.65)),url('${hero.background}')`}
+  class="hero-heroimg hero-home relative w-full bg-cover bg-center"
+  style={`background-image:url('${hero.background}')`}
 >
-  <div class="w-full max-w-[1400px] mx-auto px-6 pt-10 pb-20">
-    <div class="flex justify-center mb-6">
-      <img src={hero.logo} alt="Kingsport Amateur Radio Club logo" class="hero-logo-big" width="180" height="180" fetchpriority="high" />
-    </div>
+  <div class="w-full max-w-[1400px] mx-auto px-6">
+    {/* 208px file shown at 104px, sharp on high-DPI screens */}
+    <ImageMod
+      src={hero.logo}
+      alt="Kingsport Amateur Radio Club logo"
+      class="hero-logo-big mx-auto mb-8"
+      width={208}
+      height={208}
+      format="webp"
+      loading="eager"
+      fetchpriority="high"
+    />
 
-    <p class="hero-callsign">{hero.callsign}</p>
+    <p class="hero-eyebrow">
+      <span class:list={["live-dot", !isOnAir && "is-off"]} aria-hidden="true"></span>
+      <span><b>W4TRC</b> · Kingsport, TN · Since 1947</span>
+    </p>
+
     <h1>{hero.title}</h1>
     <p>{hero.subtitle}</p>
 
     <div class="hero-ctas">
       {hero.buttons.map((btn) => (
-        <a
-          class={`cta-big ${btn.primary ? "cta-primary" : "cta-outline"}`}
-          href={btn.link}
-        >
+        <a class={`cta-big ${btn.primary ? "cta-primary" : "cta-outline"}`} href={btn.link}>
           {btn.label}
+          {btn.primary && <span aria-hidden="true">→</span>}
         </a>
       ))}
     </div>

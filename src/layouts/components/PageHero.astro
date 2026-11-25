@@ -1,0 +1,57 @@
+---
+// Page header used by every inner page (the homepage uses HeroBanner).
+// Pass `subtitle` for plain text, or put richer markup (bold text, extra
+// paragraphs, badges) in the default slot instead.
+import ImageMod from "@/components/ImageMod.astro";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  /** Small mono label above the title (a date, category, etc.) */
+  eyebrow?: string;
+  /** Optional background photo, darkened behind the text. A /public path is
+   *  optimized; a full URL is used as-is. */
+  image?: string;
+  back?: { href: string; label: string };
+}
+
+const { title, subtitle, eyebrow, image, back } = Astro.props;
+const isRemote = image ? /^https?:\/\//.test(image) : false;
+---
+
+<section class="hero-heroimg relative">
+  {image && (
+    <div aria-hidden="true" class="absolute inset-0 -z-10">
+      {isRemote ? (
+        <img src={image} alt="" class="w-full h-full object-cover opacity-45" loading="eager" />
+      ) : (
+        <ImageMod
+          src={image}
+          alt=""
+          width={1600}
+          height={600}
+          format="webp"
+          class="w-full h-full object-cover opacity-45"
+          loading="eager"
+        />
+      )}
+      <div class="absolute inset-0 bg-linear-to-b from-black/60 via-black/55 to-black/75"></div>
+    </div>
+  )}
+
+  <div class="container mx-auto max-w-4xl px-6 text-center">
+    {back && (
+      <a
+        href={back.href}
+        class="mb-6 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/70 hover:border-white/30 hover:text-white"
+      >
+        <span aria-hidden="true">←</span> {back.label}
+      </a>
+    )}
+    <slot name="media" />
+    {eyebrow && <div class="eyebrow mb-3">{eyebrow}</div>}
+    <h1>{title}</h1>
+    {subtitle && <p>{subtitle}</p>}
+    <slot />
+  </div>
+</section>

@@ -103,8 +103,11 @@ const organization = {
     <section>
       <div class="container max-w-[1400px] px-6 mx-auto">
         <div class="flex items-end justify-between gap-4">
-          <h2 class="section-title">Latest from the Club</h2>
-          <a class="px-3 py-2 rounded-lg border border-white/20 text-white/90" href="/posts/">All Posts</a>
+          <div>
+            <p class="eyebrow mb-2">News & recaps</p>
+            <h2 class="section-title mb-0! before:hidden">Latest from the Club</h2>
+          </div>
+          <a class="btn-ghost shrink-0" href="/posts/">All posts <span aria-hidden="true">→</span></a>
         </div>
         <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mt-6">
           {latestPosts.map((post) => <PostCard post={post} headingLevel="h3" />)}
@@ -116,36 +119,45 @@ const organization = {
   <!-- GET INVOLVED -->
   <section>
     <div class="container max-w-[1400px] px-6 mx-auto">
-      <h2 class="section-title">Get Involved</h2>
+      <p class="eyebrow mb-2">Get on the air</p>
+      <h2 class="section-title before:hidden">Get Involved</h2>
 
-      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mt-8">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mt-8">
         {programs.map((p) => (
-          <a class="w4-card group block" href={p.href}>
-            <img
-              src={p.image}
-              alt={p.alt}
-              class="rounded-xl mb-4 object-cover w-full h-40"
-              width="800"
-              height="500"
-              loading="lazy"
-            />
-            <h3 class="text-xl font-semibold text-white mb-1 group-hover:text-(--w4-accent)">
-              {p.title} <span aria-hidden="true">→</span>
-            </h3>
-            <p class="text-sm">{p.text}</p>
+          <a class="w4-card group flex flex-col p-3!" href={p.href}>
+            <div class="card-media aspect-[16/10]">
+              <img
+                src={p.image}
+                alt={p.alt}
+                class="h-full w-full object-cover"
+                width="800"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <div class="px-3 pt-4 pb-3">
+              <h3 class="flex items-center justify-between text-lg font-semibold text-white mb-1 group-hover:text-(--w4-accent) transition-colors">
+                {p.title}
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+              </h3>
+              <p class="text-sm">{p.text}</p>
+            </div>
           </a>
         ))}
       </div>
 
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-8">
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 mt-6">
         {quickLinks.map((l) => (
           <a
             class="quicklink-card"
             href={l.href}
             {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
-            <p class="text-lg font-semibold">{l.title}</p>
-            <p>{l.text}</p>
+            <p class="text-base font-semibold">
+              {l.title}
+              <span aria-hidden="true" class="ml-1 text-white/40">{l.external ? "↗" : "→"}</span>
+            </p>
+            <p class="text-sm">{l.text}</p>
           </a>
         ))}
       </div>
@@ -155,29 +167,30 @@ const organization = {
   <!-- ABOUT THE CLUB -->
   <section>
     <div class="container max-w-[1400px] px-6 mx-auto grid gap-10 lg:grid-cols-2 items-center">
-      <div class="w4-card p-8">
-        <h2 class="section-title">About the Club</h2>
-        <p class="text-text-light mb-4">
+      <div class="lg:pr-6">
+        <p class="eyebrow mb-2">Since October 2, 1947</p>
+        <h2 class="section-title before:hidden">About the Club</h2>
+        <p class="text-lg text-white/80 mb-4">
           Kingsport Amateur Radio Club was affiliated on October 2, 1947. Local veterans who were
           amateur radio operators formed the club so that everyone would have a place to gather,
           enjoy fellowship, and advance in the art of radio.
         </p>
-        <p class="text-text-muted mb-6">
+        <p class="text-(--w4-ink-muted) mb-8">
           Today the club has over 70 members from across the Tri-Cities area of East Tennessee. We run
           regular events for Parks on the Air (POTA), Summits on the Air (SOTA), fox hunting, winter
           and summer Field Day, CW, and much more. Newcomers and visitors are always welcome.
         </p>
         <div class="flex flex-wrap gap-3">
           <a class="btn btn-primary" href="/join/">Join the Club</a>
-          <a class="px-4 py-2 rounded-xl border border-white/20 text-white/90 self-center" href="/about/">Our History</a>
+          <a class="btn btn-outline-primary" href="/about/">Our history</a>
         </div>
       </div>
 
-      <div class="w4-card p-4">
+      <div class="w4-card p-3! rotate-1 hover:rotate-0 transition-transform duration-500">
         <img
           src="/images/home/about-field-day-2026.webp"
           alt="Club members operating under the pavilion at Field Day 2026"
-          class="rounded-xl w-full object-cover"
+          class="rounded-[0.9rem] w-full object-cover"
           width="1200"
           height="676"
           loading="lazy"
@@ -189,11 +202,11 @@ const organization = {
   <!-- PHOTO UPLOAD CTA -->
   <section>
     <div class="container max-w-[1400px] px-6 mx-auto">
-      <div class="w4-card p-6 md:p-8 flex max-md:flex-col max-md:items-start md:items-center justify-between max-md:gap-4 md:gap-6">
+      <div class="w4-card relative overflow-hidden p-6 md:p-10 bg-[radial-gradient(40rem_16rem_at_0%_0%,rgba(245,165,36,.14),transparent_70%),radial-gradient(40rem_16rem_at_100%_100%,rgba(59,130,246,.16),transparent_70%)]! flex max-md:flex-col max-md:items-start md:items-center justify-between max-md:gap-4 md:gap-6">
         <div class="space-y-2">
-          <p class="text-xs uppercase tracking-wide text-white/60">Share your shots</p>
-          <h2 class="text-2xl font-semibold text-white">Have photos from an event?</h2>
-          <p class="text-text-light">
+          <p class="eyebrow">Share your shots</p>
+          <h2 class="text-2xl md:text-3xl font-semibold text-white">Have photos from an event?</h2>
+          <p class="text-(--w4-ink-muted)">
             Send us your POTA, Field Day, or meeting pictures so we can feature them in the gallery and newsletter.
           </p>
         </div>
@@ -205,10 +218,11 @@ const organization = {
   <!-- CONDITIONS -->
   <section>
     <div class="container max-w-[1400px] px-6 mx-auto">
-      <h2 class="section-title">Conditions</h2>
+      <p class="eyebrow mb-2">Propagation & weather</p>
+      <h2 class="section-title before:hidden">Conditions</h2>
 
       <div class="grid gap-8 lg:grid-cols-2 mt-6 items-start">
-        <div class="rounded-2xl bg-white/5 p-6 text-center w4-card">
+        <div class="p-6 text-center w4-card">
           <a
             href="https://www.hamqsl.com/solar.html"
             class="inline-block"
@@ -221,13 +235,13 @@ const organization = {
               loading="lazy"
             />
           </a>
-          <p class="mt-4 text-sm text-text-light dark:text-darkmode-text-light">
+          <p class="mt-4 text-sm text-(--w4-ink-muted)">
             Solar Weather provided by <a href="https://www.hamqsl.com/solar.html" class="underline">N0NBH</a>.{" "}
             <a href="https://www.hamqsl.com/solar2.html#glossary" class="underline">What do these numbers mean?</a>
           </p>
         </div>
 
-        <div class="rounded-2xl bg-white/5 p-6 text-center w4-card">
+        <div class="p-6 text-center w4-card">
           <WeatherWidget />
         </div>
       </div>

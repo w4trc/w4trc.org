@@ -1,13 +1,13 @@
 .btn {
-  @apply inline-block rounded border border-transparent px-5 py-2 font-semibold capitalize transition;
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-transparent px-5 py-2.5 font-semibold leading-none transition;
 }
 
 .btn-sm {
-  @apply rounded-sm px-4 py-1.5 text-sm;
+  @apply px-4 py-2 text-sm;
 }
 
 .btn-primary {
-  @apply border-primary bg-primary text-white dark:border-primary dark:bg-primary dark:text-white;
+  @apply border-(--w4-accent) bg-(--w4-accent) text-(--w4-on-accent) shadow-[0_10px_30px_-12px_rgba(245,165,36,.6)] hover:border-(--w4-accent-soft) hover:bg-(--w4-accent-soft) hover:text-(--w4-on-accent);
 }
 
 .btn-white {
@@ -15,9 +15,9 @@
 }
 
 .btn-outline-primary {
-  @apply border-dark text-text-dark hover:bg-dark dark:hover:text-text-dark bg-transparent hover:text-white dark:border-darkmode-primary dark:text-white dark:hover:bg-darkmode-primary;
+  @apply border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10 hover:text-white;
 }
 
 .btn-outline-light {
-  @apply border border-white bg-transparent text-white hover:bg-white hover:text-dark dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-darkmode-text-dark;
+  @apply border border-white/30 bg-transparent text-white hover:bg-white hover:text-dark;
 }

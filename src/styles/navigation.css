@@ -1,25 +1,27 @@
 .header {
-  @apply bg-body dark:bg-darkmode-body py-6;
+  @apply border-b border-white/[.07] bg-[#070b14]/75 py-3 backdrop-blur-xl backdrop-saturate-150;
 }
 
 /* navbar items */
 .navbar {
-  @apply relative flex flex-wrap items-center justify-between;
+  @apply relative flex flex-wrap items-center justify-between gap-x-6 lg:flex-nowrap lg:gap-x-3 xl:gap-x-6;
 }
 
 .navbar-brand {
-  @apply text-text-dark dark:text-darkmode-text-dark text-xl font-semibold;
-  image {
-    @apply max-h-full max-w-full;
-  }
+  @apply flex items-center gap-3 text-white;
 }
 
 .navbar-nav {
-  @apply text-center lg:text-left;
+  @apply text-left;
 }
 
 .nav-link {
-  @apply text-text-dark hover:text-primary dark:text-darkmode-text-dark dark:hover:text-darkmode-primary block p-3 cursor-pointer font-semibold transition lg:px-2 lg:py-3;
+  @apply block cursor-pointer rounded-full px-3 py-3 text-[15px] lg:px-2 lg:text-sm xl:px-3 xl:text-[15px] font-medium text-white/75 transition hover:text-white lg:py-2 lg:hover:bg-white/[.06];
+}
+
+.nav-link.active,
+.nav-link[aria-current="page"] {
+  @apply text-white lg:bg-white/[.08];
 }
 
 .nav-dropdown {
@@ -31,17 +33,20 @@
 }
 
 .nav-dropdown-list {
-  @apply bg-body dark:bg-darkmode-body z-10 min-w-[180px] rounded p-4 shadow-sm;
+  @apply z-10 min-w-[240px] rounded-2xl lg:before:absolute lg:before:inset-x-0 lg:before:-top-2 lg:before:h-2 lg:before:content-[''] border-white/10 p-2 lg:mt-2 lg:border lg:bg-[#0d1321]/95 lg:shadow-[0_24px_48px_-12px_rgba(0,0,0,.8)] lg:backdrop-blur-xl;
 }
 
 .nav-dropdown-item {
-  @apply [&:not(:last-child)]:mb-2;
+  @apply m-0;
 }
 
 .nav-dropdown-link {
-  @apply text-text-dark hover:text-primary dark:text-darkmode-text dark:hover:text-darkmode-primary block py-1 font-semibold transition;
+  @apply block rounded-lg px-3 py-2 text-sm font-medium text-white/70 transition hover:bg-white/[.06] hover:text-white;
 }
 
+.nav-dropdown-link.active {
+  @apply text-(--w4-accent);
+}
 
 /* theme-switcher */
 .theme-switcher {

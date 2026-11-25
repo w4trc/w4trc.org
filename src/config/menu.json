@@ -99,10 +99,6 @@
       "url": "https://gallery.w4trc.org/"
     },
     {
-      "name": "Join",
-      "url": "/join/"
-    },
-    {
       "name": "Contact",
       "url": "/contact/"
     }
@@ -113,7 +109,7 @@
       "url": "/join/"
     },
     {
-      "name": "Meshtastic",
+      "name": "MeshCore",
       "url": "https://tricitiesmesh.net"
     },
     {

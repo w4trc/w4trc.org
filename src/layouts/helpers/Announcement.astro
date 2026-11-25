@@ -1,0 +1,53 @@
+---
+// Site-wide announcement bar, set in config.json > announcement.
+// Rendered in the HTML (no React) so the page doesn't shift when it appears,
+// and kept in place across page changes with transition:persist. Closing it
+// sets a cookie for `expire_days`; an inline script hides it on later pages
+// before they paint.
+import config from "@/config/config.json";
+import { markdownify } from "@/lib/utils/textConverter";
+
+const { enable, content, expire_days, background_color, text_color } =
+  config.announcement;
+---
+
+{enable && content && (
+  <div
+    id="announcement"
+    class="relative z-999 border-b border-white/10 px-4 py-2.5 pr-12 text-sm md:text-[15px] [&_a]:font-semibold [&_a]:text-inherit [&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-current/40 [&_strong]:text-inherit"
+    style={{ background: background_color, color: text_color }}
+    data-expire-days={expire_days}
+    transition:persist
+    transition:animate="none"
+  >
+    <p set:html={markdownify(content)} />
+    <button
+      type="button"
+      data-announcement-close
+      class="absolute top-1/2 right-4 flex h-6 w-6 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-lg text-inherit opacity-70 transition-colors duration-200 hover:bg-white/10 hover:opacity-100"
+      aria-label="Close announcement"
+    >
+      &times;
+    </button>
+  </div>
+  <script is:inline>
+    if (document.cookie.split("; ").includes("announcement-close=true")) {
+      var bar = document.getElementById("announcement");
+      if (bar) bar.hidden = true;
+    }
+  </script>
+)}
+
+<script>
+  // One delegated listener, so it keeps working after page swaps
+  document.addEventListener("click", (e) => {
+    const btn = (e.target as Element).closest?.("[data-announcement-close]");
+    if (!btn) return;
+    const bar = document.getElementById("announcement");
+    if (!bar) return;
+    const days = Number(bar.dataset.expireDays) || 7;
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `announcement-close=true; path=/; expires=${expires}; SameSite=Lax`;
+    bar.hidden = true;
+  });
+</script>

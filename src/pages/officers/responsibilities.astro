@@ -1,6 +1,6 @@
 ---
+import PageHero from "@/components/PageHero.astro";
 import Base from "@/layouts/Base.astro";
-import ImageMod from "@/components/ImageMod.astro";
 
 const roles = [
   { title: "President", bullets: ["Provide overall leadership and direction for the club", "Preside over club meetings and board meetings", "Ensure the club constitution and bylaws are followed", "Appoint committees as needed, including the nominating committee", "Sign official and legal documents on behalf of the club"] },
@@ -19,27 +19,13 @@ const heroImage = "/images/hero-mountains.jpg";
   description="What each elected officer of the Kingsport Amateur Radio Club (W4TRC) does: president, vice president, secretary, treasurer, and trustee."
   image={heroImage}
 >
-  <!-- HERO -->
-  <section class="hero-heroimg relative">
-    <div class="container mx-auto px-6 py-16 text-center">
-      {heroImage && (
-        <div aria-hidden="true" class="absolute inset-0 -z-10">
-          <ImageMod
-            src={heroImage}
-            width={1200}
-            height={380}
-            alt="Smoky Mountain sunrise with radio towers"
-            format="webp"
-            class="w-full h-full object-cover opacity-60"
-          />
-        </div>
-      )}
-      <h1 class="text-4xl font-extrabold mb-3">Officer Responsibilities</h1>
-      <p class="text-lg text-white/80 max-w-2xl mx-auto">
-        What each elected officer does for the club.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    back={{ href: "/about/#club-officers", label: "Club officers" }}
+    eyebrow="Club officers"
+    title="Officer Responsibilities"
+    subtitle="What each elected officer does for the club."
+    image={heroImage}
+  />
 
   <!-- RESPONSIBILITIES -->
   <section class="section-md">

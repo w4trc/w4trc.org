@@ -23,7 +23,7 @@ const {
 const { theme_switcher }: { theme_switcher: boolean } = config.settings;
 ---
 
-<a href="/" class="navbar-brand inline-block">
+<a href="/" class="navbar-brand">
   {
     src || srcDarkmode || logo || logo_darkmode ? (
       <>
@@ -54,10 +54,30 @@ const { theme_switcher }: { theme_switcher: boolean } = config.settings;
           />
         )}
       </>
-    ) : logo_text ? (
-      logo_text
     ) : (
-      title
+      <>
+        {/* 80px file shown at 40px, sharp on high-DPI screens */}
+        <ImageMod
+          src="/images/home/karc-logo.webp"
+          alt=""
+          width={80}
+          height={80}
+          format="webp"
+          class="h-10 w-10 shrink-0 rounded-full ring-1 ring-white/15"
+        />
+        <span class="flex flex-col leading-none">
+          {/* Short name on small desktops (lg–xl) so the nav fits on one row */}
+          <span class="font-secondary text-[15px] font-semibold tracking-tight text-white sm:text-base lg:hidden xl:inline">
+            {logo_text || title}
+          </span>
+          <span class="hidden font-secondary text-base font-semibold tracking-tight text-white lg:inline xl:hidden">
+            KARC
+          </span>
+          <span class="mt-1 font-mono text-[11px] font-medium tracking-[.18em] text-(--w4-accent)">
+            W4TRC · EST. 1947
+          </span>
+        </span>
+      </>
     )
   }
 </a>

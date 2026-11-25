@@ -1,293 +1,485 @@
-/* ===== Brand tokens (updated) =====
-   Deep navy surfaces + warm accent
-   Accessible contrast across sections
-*/
-:root{
-  --w4-brand:#2b6cb0;      /* brand blue */
-  --w4-accent:#f59e0b;     /* warm amber accent */
-  --w4-ink:#e5e7eb;        /* light text */
-  --w4-ink-muted:rgba(229,231,235,.85);
+/* =====================================================================
+   W4TRC design system (2026 refresh)
+   Dark, calm surfaces; warm amber accent; brand blue for depth.
 
-  --w4-bg:#0b1220;         /* page background */
-  --w4-surface:#111a2c;    /* primary card surface */
-  --w4-surface-2:#0e1728;  /* secondary surface */
-  --w4-border:rgba(255,255,255,.10);
-  --w4-shadow:0 10px 24px rgba(0,0,0,.28);
-  --w4-shadow-lg:0 16px 36px rgba(0,0,0,.35);
+   Layering: this file loads after main.css. Element defaults go in
+   @layer base and shared classes in @layer components, so Tailwind
+   utilities on an element (text-white, p-5, etc.) always win. Only the
+   few rules at the bottom are unlayered, on purpose.
+   ===================================================================== */
+
+@layer base {
+  :root {
+    --w4-brand: #3b82f6;
+    --w4-brand-deep: #1d4ed8;
+    --w4-accent: #f5a524;
+    --w4-accent-soft: #fbbf4d;
+    --w4-on-accent: #1a1204;
+
+    --w4-ink: #e7e9ef;
+    --w4-ink-strong: #ffffff;
+    --w4-ink-muted: #a3abba;
+    --w4-ink-faint: #6f7889;
+
+    --w4-bg: #070b14;
+    --w4-surface: rgba(255, 255, 255, 0.035);
+    --w4-surface-solid: #0d1321;
+    --w4-surface-2: #0a101c;
+    --w4-border: rgba(255, 255, 255, 0.08);
+    --w4-border-strong: rgba(255, 255, 255, 0.16);
+
+    --w4-radius: 1.25rem;
+    --w4-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+    --w4-shadow-lg: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+
+    --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    color-scheme: dark;
+  }
+
+  html {
+    background-color: var(--w4-bg);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    color: var(--w4-ink);
+    background-color: var(--w4-bg);
+    /* soft glows instead of a texture: blue up top, a hint of amber lower down */
+    background-image:
+      radial-gradient(60rem 40rem at 85% -10%, rgba(59, 130, 246, 0.14), transparent 60%),
+      radial-gradient(50rem 35rem at -10% 30%, rgba(59, 130, 246, 0.07), transparent 60%),
+      radial-gradient(40rem 30rem at 100% 75%, rgba(245, 165, 36, 0.05), transparent 60%);
+    background-attachment: fixed;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--w4-ink-strong);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(245, 165, 36, 0.35);
+    color: #fff;
+  }
+
+  a {
+    color: inherit;
+    transition: color 0.15s ease;
+  }
+  a:hover {
+    color: var(--w4-accent);
+  }
+
+  strong,
+  th {
+    color: var(--w4-ink-strong);
+  }
+
+  section {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--w4-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
 }
 
-/* ===== Page background ===== */
-html,
-body {
-  background-color: var(--w4-bg);
+@layer components {
+  /* ---------- Heroes ---------- */
+  .hero-heroimg {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    isolation: isolate;
+    overflow: hidden;
+    padding-top: 5rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--w4-border);
+    background-color: var(--w4-surface-2);
+  }
+  /* blueprint grid + glow, sits behind any page photo */
+  .hero-heroimg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(40rem 20rem at 50% 0%, rgba(59, 130, 246, 0.22), transparent 70%),
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 48px 48px,
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 48px 48px;
+    mask-image: linear-gradient(180deg, #000 40%, transparent);
+  }
+  /* fade the bottom into the page */
+  .hero-heroimg::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 40%;
+    z-index: -1;
+    background: linear-gradient(180deg, transparent, var(--w4-bg));
+    pointer-events: none;
+  }
+  .hero-heroimg h1 {
+    font-size: clamp(2.25rem, 4.2vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: #fff;
+  }
+  .hero-heroimg p {
+    font-size: 1.125rem;
+    margin-top: 1rem;
+    max-width: 62ch;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--w4-ink-muted);
+  }
+  /* who/what line under a page title: presenter, author, editor */
+  .hero-heroimg p.hero-byline {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--w4-accent-soft);
+  }
 
-  /* mountain texture — darkened and blended */
-  background-image:
-    linear-gradient(180deg, rgba(8,12,22,0.80), rgba(8,12,22,0.80)),
-    url("/images/mountaintexture.png");
+  /* homepage hero: taller, photo-led */
+  .hero-home {
+    min-height: clamp(560px, 82svh, 820px);
+    padding-top: 6rem;
+    padding-bottom: 8rem;
+    border-bottom: 0;
+  }
+  .hero-home::before {
+    background:
+      linear-gradient(180deg, rgba(7, 11, 20, 0.35) 0%, rgba(7, 11, 20, 0.55) 55%, var(--w4-bg) 100%),
+      radial-gradient(50rem 30rem at 50% 35%, rgba(7, 11, 20, 0.15), rgba(7, 11, 20, 0.6));
+    mask-image: none;
+    z-index: -1;
+  }
+  .hero-home::after {
+    display: none;
+  }
+  .hero-home h1 {
+    font-size: clamp(2.75rem, 6.5vw, 5.25rem);
+    text-wrap: balance;
+  }
+  .hero-home p {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    max-width: 58ch;
+    color: rgba(231, 233, 239, 0.82);
+  }
 
-  background-size: cover;
-  background-repeat: repeat-y;
-  background-position: center top;
-  background-attachment: fixed;
+  .hero-eyebrow,
+  .hero-heroimg p.hero-eyebrow {
+    display: inline-flex;
+    max-width: none;
+    margin-top: 0;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+    padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--w4-border-strong);
+    background: rgba(7, 11, 20, 0.5);
+    backdrop-filter: blur(8px);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--w4-ink);
+  }
+  .hero-eyebrow b {
+    color: var(--w4-accent);
+    font-weight: 700;
+  }
+  .live-dot {
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: #34d399;
+    flex-shrink: 0;
+  }
+  .live-dot::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 2px solid #34d399;
+    opacity: 0;
+    animation: w4-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  .live-dot.is-off {
+    background: #f87171;
+  }
+  .live-dot.is-off::after {
+    display: none;
+  }
 
-  color: var(--w4-ink);
-}
+  .hero-logo-big {
+    height: 104px;
+    width: 104px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow:
+      0 0 0 6px rgba(255, 255, 255, 0.06),
+      0 20px 50px -10px rgba(0, 0, 0, 0.7);
+  }
 
+  .hero-ctas {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 2.25rem;
+    flex-wrap: wrap;
+  }
 
-/* --- W4TRC Homepage Overrides --- */
+  /* ---------- Section headings ---------- */
+  .section-title,
+  .content h2 {
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.25rem;
+    color: #fff;
+  }
+  .section-title::before,
+  .content h2::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 3px;
+    margin-bottom: 0.85rem;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--w4-accent), rgba(245, 165, 36, 0.2));
+  }
+  .content h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: #fff;
+  }
+  .content h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.4rem;
+    color: var(--w4-ink);
+  }
 
-/* HERO (full bleed, tall, centered) */
-.hero-heroimg {
-  position: relative;
-  min-height: 78vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  isolation: isolate;
-}
-.hero-heroimg::before{
-  /* darken busy photos for legible type */
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(8,12,22,.55), rgba(8,12,22,.75));
-  z-index:-1;
-}
-.hero-heroimg h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  letter-spacing: .2px;
-  color:#f3f4f6;
-}
-.hero-heroimg p {
-  font-size: 1.125rem;
-  margin-top: 1rem;
-  max-width: 60ch;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--w4-ink-muted);
-}
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--w4-accent);
+  }
 
-/* SECTION rhythm */
-section {
-  padding-top: 4.5rem;
-  padding-bottom: 4.5rem;
-}
-
-/* (REMOVED) section:nth-of-type(even) background so texture shows through */
-/* section:nth-of-type(even) { background: var(--w4-surface-2); } */
-
-/* SECTION TITLES with accent underline */
-.section-title,
-h2.section-title {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 1.25rem;
-  color: #f3f4f6;
-  position: relative;
-}
-.section-title::after,
-h2.section-title::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.6rem;
-  width: 48px;
-  height: 4px;
-  background: var(--w4-accent);
-  border-radius: 2px;
-}
-
-/* Ensure markdown H2s match homepage section headers */
-.content h2 {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 1.25rem;
-  color: #f3f4f6;
-  position: relative;
-}
-.content h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.6rem;
-  width: 48px;
-  height: 4px;
-  background: var(--w4-accent);
-  border-radius: 2px;
-}
-
-/* Ensure markdown H3s and H4s visually harmonize with H2s */
-.content h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-  color: #f3f4f6;
-  position: relative;
-}
-
-.content h3::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.4rem;
-  width: 36px;
-  height: 3px;
-  background: var(--w4-accent);
-  border-radius: 2px;
-  opacity: 0.9;
-}
-
-.content h4 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--w4-ink);
-  position: relative;
-}
-
-.content h4::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.35rem;
-  width: 24px;
-  height: 2px;
-  background: var(--w4-accent);
-  border-radius: 1px;
-  opacity: 0.7;
-}
-
-
-/* Universal card base */
-.w4-card,
-.quicklink-card,
-.news-card,
-.meeting-box {
-  border-radius: 1rem;
-  background: var(--w4-surface);
-  border: 1px solid var(--w4-border);
-  box-shadow: var(--w4-shadow);
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-}
-/* Hover lift only on cards that are clickable: the card is a link itself,
-   or opts in with .w4-card-link (e.g. a card with a stretched inner link).
-   Content-only cards stay still. */
-a.w4-card:hover,
-a.quicklink-card:hover,
-a.news-card:hover,
-.w4-card-link:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--w4-shadow-lg);
-  border-color: rgba(255,255,255,.18);
-}
-
-/* QUICK LINK cards */
-.quicklink-card,
-.w4-card { padding: 1.75rem; }
-.w4-card p,
-.quicklink-card p { color: var(--w4-ink-muted); }
-
-/* Quick link title: white, accent on hover (matches the photo cards) */
-.quicklink-card > p:first-child {
-  color: #fff;
-  transition: color .16s ease;
-}
-a.quicklink-card:hover > p:first-child { color: var(--w4-accent); }
-
-/* NEXT MEETING box (slight brand tint) */
-.meeting-box {
-  padding: 2rem;
-  background:
-    linear-gradient(180deg, rgba(43,108,176,.10), rgba(17,26,44,1)),
-    var(--w4-surface);
-}
-.meeting-box p { color: var(--w4-ink-muted); }
-
-/* NEWS cards */
-.news-card { padding: 1.25rem; }
-.news-card img {
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  border-radius: .75rem;
-  margin-bottom: .75rem;
-}
-.news-card h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-top: .35rem;
-  color: #f3f4f6;
-}
-.news-card p {
-  font-size: .96rem;
-  color: rgba(229,231,235,.78);
-}
-
-/* big hero CTAs */
-.hero-ctas{
-  display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap;
-}
-.cta-big{
-  display:inline-block; padding:14px 22px; border-radius:14px;
-  font-weight:700; font-size:1.02rem; line-height:1; text-decoration:none;
-  border:1px solid var(--w4-border); color:#f3f4f6; background:rgba(255,255,255,.04);
-  box-shadow: var(--w4-shadow);
-  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
-}
-.cta-big:hover{ transform:translateY(-1px); filter:brightness(1.04); border-color: rgba(255,255,255,.18); }
-
-/* Primary & outline styles (brand + warm accent on hover) */
-.cta-primary{
-  background: var(--w4-brand);
-  color: #eef6ff;
-  border-color: rgba(0,0,0,.18);
-}
-.cta-primary:hover{
-  background: #275ea6; /* slightly darker brand hover */
-}
-
-.cta-outline{
-  background: transparent;
-  border-color: rgba(255,255,255,.28);
-  color: #f3f4f6;
-}
-.cta-outline:hover{
-  background: rgba(255,255,255,.06);
-}
-
-/* optional: make hero copy a touch wider for balance with 2 buttons */
-.hero-heroimg p{ max-width: 72ch; }
-
-/* Bigger hero logo */
-.hero-logo-big {
-  height: 180px;
-  width: 180px;
-  border-radius: 50%;
-  background: none;
-  object-fit: cover;
-  object-position: center;
-  padding: 0; /* ensure full fill */
-  box-shadow: var(--w4-shadow-lg);
-}
-
-
-@media(min-width: 768px){
-  .hero-logo-big { height: 180px; }
-}
-
-/* Accessibility + motion */
-@media (prefers-reduced-motion: reduce) {
+  /* ---------- Cards ---------- */
   .w4-card,
   .quicklink-card,
   .news-card,
-  .meeting-box,
-  .cta-big { transition: none; }
+  .meeting-box {
+    border-radius: var(--w4-radius);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+      var(--w4-surface-solid);
+    border: 1px solid var(--w4-border);
+    box-shadow: var(--w4-shadow);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+  }
+  /* Hover lift only on cards that are clickable: the card is a link itself,
+     or opts in with .w4-card-link (e.g. a card with a stretched inner link). */
+  a.w4-card:hover,
+  a.quicklink-card:hover,
+  a.news-card:hover,
+  .w4-card-link:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--w4-shadow-lg);
+    border-color: rgba(245, 165, 36, 0.35);
+    color: inherit;
+  }
+
+  .quicklink-card,
+  .w4-card {
+    padding: 1.75rem;
+  }
+  .w4-card p,
+  .quicklink-card p {
+    color: var(--w4-ink-muted);
+  }
+
+  .quicklink-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.4rem 1.5rem;
+  }
+  .quicklink-card > p:first-child {
+    color: #fff;
+    font-family: var(--font-secondary);
+    transition: color 0.16s ease;
+  }
+  a.quicklink-card:hover > p:first-child {
+    color: var(--w4-accent);
+  }
+
+  .meeting-box {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+    background:
+      radial-gradient(30rem 14rem at 100% 0%, rgba(59, 130, 246, 0.16), transparent 70%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+      var(--w4-surface-solid);
+  }
+  .meeting-box p {
+    color: var(--w4-ink-muted);
+  }
+
+  .news-card {
+    padding: 1.25rem;
+  }
+  .news-card img {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .news-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-top: 0.35rem;
+    color: #fff;
+  }
+  .news-card p {
+    font-size: 0.96rem;
+    color: var(--w4-ink-muted);
+  }
+
+  /* photo card image zoom */
+  .card-media {
+    overflow: hidden;
+    border-radius: calc(var(--w4-radius) - 0.5rem);
+  }
+  .card-media img {
+    transition: transform 0.5s ease;
+  }
+  a:hover .card-media img,
+  .w4-card-link:hover .card-media img {
+    transform: scale(1.04);
+  }
+
+  /* ---------- Buttons ---------- */
+  .cta-big,
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    border: 1px solid var(--w4-border-strong);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.04);
+    transition:
+      transform 0.15s ease,
+      background 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .cta-big {
+    padding: 0.95rem 1.5rem;
+    font-size: 1rem;
+    backdrop-filter: blur(8px);
+  }
+  .btn-ghost {
+    padding: 0.6rem 1rem;
+    font-size: 0.875rem;
+  }
+  .cta-big:hover,
+  .btn-ghost:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.09);
+  }
+  .cta-big:hover {
+    transform: translateY(-1px);
+  }
+
+  .cta-primary {
+    background: var(--w4-accent);
+    border-color: var(--w4-accent);
+    color: var(--w4-on-accent);
+    box-shadow: 0 10px 30px -10px rgba(245, 165, 36, 0.6);
+  }
+  .cta-primary:hover {
+    background: var(--w4-accent-soft);
+    border-color: var(--w4-accent-soft);
+    color: var(--w4-on-accent);
+  }
+  .cta-outline {
+    background: rgba(7, 11, 20, 0.35);
+  }
+
+  /* text link with arrow */
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--w4-accent);
+  }
+  .link-arrow:hover {
+    color: var(--w4-accent-soft);
+  }
+
 }
 
-/* --- Better table alignment and spacing --- */
+/* ---------- Unlayered on purpose ---------- */
+
+/* Markdown content: unlayered so it beats @tailwindcss/typography, which
+   Tailwind v4 emits in the utilities layer. */
+.content a:not(.btn):not(.cta-big):not(.btn-ghost) {
+  color: var(--w4-accent-soft);
+  text-decoration: underline;
+  text-decoration-color: rgba(245, 165, 36, 0.4);
+  text-underline-offset: 3px;
+}
+.content a:not(.btn):not(.cta-big):not(.btn-ghost):hover {
+  text-decoration-color: currentColor;
+}
+.content blockquote {
+  border-left-width: 3px;
+  border-color: var(--w4-accent);
+  border-radius: 0 1rem 1rem 0;
+  background: var(--w4-surface);
+  font-size: 1.25rem;
+}
+
 .content table {
   margin-left: auto;
   margin-right: auto;
@@ -295,43 +487,102 @@ a.quicklink-card:hover > p:first-child { color: var(--w4-accent); }
   width: 100%;
   max-width: 800px;
 }
-
 .content table th,
 .content table td {
   padding: 0.75rem 1rem;
   text-align: left;
 }
-
 .content table thead th {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid var(--w4-border);
 }
 
-a,
-a:visited {
-  color: #ffffff !important;
+@keyframes w4-ping {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  80%,
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
 
-a:hover,
-a:focus {
-  color: var(--w4-accent) !important;
+/* Page-to-page transitions (pageFade in Base.astro): a plain cross-fade of
+   the whole page; the header has transition:animate="none" so it doesn't
+   blink. Browsers slide named elements from their old to their new
+   position by default, so turn that off: opacity only. */
+@keyframes w4-page-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes w4-page-in {
+  from {
+    opacity: 0;
+  }
+}
+::view-transition-group(*) {
+  animation: none !important;
 }
 
-strong {
-  color: #ffffff;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+  .w4-card,
+  .quicklink-card,
+  .news-card,
+  .meeting-box,
+  .cta-big,
+  .btn-ghost,
+  .card-media img {
+    transition: none !important;
+  }
+  .live-dot::after {
+    animation: none !important;
+  }
 }
 
-th {
-  color: #ffffff;
+/* Font fallbacks sized to match the web fonts, so text doesn't reflow (and
+   the page doesn't shift) when the fonts finish loading. astro-font
+   generates its own, but its numbers were off (Inter at 100% of Arial,
+   Space Grotesk at 111%). These ratios were measured in the browser:
+   Inter 400 is 107% of Arial's width, Space Grotesk 101%, JetBrains Mono
+   100% of Courier New. Ascent/descent come from each font's own metrics,
+   divided by size-adjust. Unlayered and html:root so they win over the
+   variables AstroFont sets inline. */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  size-adjust: 107%;
+  ascent-override: 90.5%;
+  descent-override: 22.5%;
+  line-gap-override: 0%;
 }
-
-/* Call sign eyebrow above the homepage hero title */
-.hero-heroimg p.hero-callsign {
-  margin-top: 0;
-  margin-bottom: .25rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: .3em;
-  color: var(--w4-accent);
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial");
+  size-adjust: 101.3%;
+  ascent-override: 97.1%;
+  descent-override: 28.8%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local("Courier New");
+  size-adjust: 100%;
+  ascent-override: 102%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+html:root {
+  --font-primary: "Inter", "Inter Fallback", sans-serif;
+  --font-secondary: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
 }
