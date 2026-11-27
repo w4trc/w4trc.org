@@ -1,4 +1,4 @@
-// Cloudflare Workers config for the static site.
+// Cloudflare Workers config for the site.
 // The name must match the Worker in the Cloudflare dashboard.
 // `previews` is required for `npx wrangler preview`, which Cloudflare runs
 // for non-production branches. It can stay empty.
@@ -9,10 +9,28 @@
   // never targets a personal account when you are logged into several.
   "account_id": "4b724b576c4285b15dfd8aa32fc83af7",
   "compatibility_date": "2026-11-23",
+  // Small Worker that handles the contact form (POST /api/contact).
+  // Everything else is served straight from the static assets.
+  "main": "./worker/index.ts",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     // Serve dist/404.html (with a 404 status) for missing pages
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // Only /api/* reaches the Worker; static pages skip it.
+    "run_worker_first": ["/api/*"]
   },
+  // Cloudflare Email Service. Locked to one recipient so the form can only
+  // ever mail the club. The sender (noreply@w4trc.org) needs w4trc.org
+  // onboarded under Email Service > Email Sending in the dashboard.
+  "send_email": [
+    { "name": "EMAIL", "destination_address": "contact@w4trc.org" }
+  ],
+  // Turnstile on the contact form. The secret is set with
+  // `wrangler secret put TURNSTILE_SECRET`; for local dev it comes from .dev.vars.
+  "vars": {
+    "TURNSTILE_HOSTNAMES": "w4trc.org,www.w4trc.org"
+  },
+  "observability": { "enabled": true },
   "previews": {}
 }

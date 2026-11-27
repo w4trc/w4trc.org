@@ -8,7 +8,8 @@ const meta_title = "Contact - Kingsport Amateur Radio Club";
 const description = "Get in touch with the Kingsport Amateur Radio Club (W4TRC) about membership, licensing, events, repeaters, or general questions.";
 const image = "";
 
-const { contact_form_action }: { contact_form_action: string } = config.params;
+const { contact_form_action, turnstile_sitekey }: { contact_form_action: string; turnstile_sitekey: string } =
+  config.params;
 ---
 
 <Base
@@ -90,7 +91,13 @@ const { contact_form_action }: { contact_form_action: string } = config.params;
           <div class="lg:col-span-3">
             <div class="w4-card">
               <h2 class="text-lg font-bold mb-6" style="color:#f3f4f6">Send a Message</h2>
-              <form action={contact_form_action} method="POST">
+              <div id="contact-status" role="status" aria-live="polite" class="hidden mb-6 rounded-lg border p-4 text-sm"></div>
+              <form id="contact-form" action={contact_form_action} method="POST">
+                <!-- Honeypot: hidden from people, bots tend to fill it in -->
+                <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
+                  <label for="website">Leave this field empty</label>
+                  <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+                </div>
                 <div class="grid gap-6 sm:grid-cols-2 mb-6">
                   <div>
                     <label for="name" class="form-label">
@@ -102,6 +109,8 @@ const { contact_form_action }: { contact_form_action: string } = config.params;
                       class="form-input"
                       placeholder="John Doe"
                       type="text"
+                      maxlength="100"
+                      autocomplete="name"
                       required
                     />
                   </div>
@@ -115,6 +124,8 @@ const { contact_form_action }: { contact_form_action: string } = config.params;
                       class="form-input"
                       placeholder="john.doe@email.com"
                       type="email"
+                      maxlength="254"
+                      autocomplete="email"
                       required
                     />
                   </div>
@@ -128,10 +139,12 @@ const { contact_form_action }: { contact_form_action: string } = config.params;
                     name="message"
                     class="form-input"
                     placeholder="How can we help?"
+                    maxlength="5000"
                     required
                     rows="7"></textarea>
                 </div>
-                <button type="submit" class="cta-big cta-primary w-full text-center">Send Message</button>
+                <div id="contact-turnstile" class="mb-6" data-sitekey={turnstile_sitekey}></div>
+                <button id="contact-submit" type="submit" class="cta-big cta-primary w-full text-center">Send Message</button>
               </form>
             </div>
           </div>
@@ -141,3 +154,76 @@ const { contact_form_action }: { contact_form_action: string } = config.params;
     </div>
   </section>
 </Base>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script>
+  type TurnstileApi = {
+    render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+    reset: (id: string) => void;
+  };
+  const tsWindow = window as unknown as { turnstile?: TurnstileApi };
+  const tsBox = document.getElementById("contact-turnstile") as HTMLDivElement | null;
+  let widgetId: string | undefined;
+
+  // Render the widget explicitly so it can be reset after each submit
+  // (tokens are single-use and the page stays open).
+  const renderTurnstile = () => {
+    if (!tsBox || widgetId || !tsWindow.turnstile) return;
+    widgetId = tsWindow.turnstile.render(tsBox, {
+      sitekey: tsBox.dataset.sitekey,
+      action: "contact",
+      theme: "dark",
+    });
+  };
+  if (tsWindow.turnstile) renderTurnstile();
+  else {
+    const timer = setInterval(() => {
+      if (tsWindow.turnstile) { clearInterval(timer); renderTurnstile(); }
+    }, 100);
+  }
+
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const statusBox = document.getElementById("contact-status") as HTMLDivElement | null;
+  const submit = document.getElementById("contact-submit") as HTMLButtonElement | null;
+
+  const show = (ok: boolean, text: string) => {
+    if (!statusBox) return;
+    statusBox.textContent = text;
+    statusBox.classList.remove("hidden");
+    statusBox.style.borderColor = ok ? "rgba(16,185,129,.5)" : "rgba(248,113,113,.5)";
+    statusBox.style.background = ok ? "rgba(16,185,129,.12)" : "rgba(248,113,113,.12)";
+    statusBox.style.color = "#f3f4f6";
+  };
+
+  const SENT = "Thanks! Your message is on its way. We'll reply by email soon.";
+  const FAILED = "Sorry, your message could not be sent. Please email contact@w4trc.org.";
+
+  // No-JS fallback lands back here with ?sent=1 or ?error=1.
+  const params = new URLSearchParams(location.search);
+  if (params.has("sent")) show(true, SENT);
+  else if (params.has("error")) show(false, FAILED);
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (submit) { submit.disabled = true; submit.textContent = "Sending…"; }
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        form.reset();
+        show(true, SENT);
+      } else {
+        show(false, data.error || FAILED);
+      }
+    } catch {
+      show(false, FAILED);
+    } finally {
+      if (submit) { submit.disabled = false; submit.textContent = "Send Message"; }
+      if (widgetId && tsWindow.turnstile) tsWindow.turnstile.reset(widgetId);
+    }
+  });
+</script>

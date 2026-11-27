@@ -25,7 +25,8 @@
     "text_color": "white"
   },
   "params": {
-    "contact_form_action": "https://formsubmit.co/67552c86ece16b0102a97f534d457e45",
+    "contact_form_action": "/api/contact",
+    "turnstile_sitekey": "0x4AAAAAAGWMAd7xxL2xwnku",
     "copyright": "© {year} Kingsport Amateur Radio Club. All rights reserved.",
     "contact_email": "contact@w4trc.org",
     "meeting_schedule": "Second Thursday of each month, 7:00 PM"
